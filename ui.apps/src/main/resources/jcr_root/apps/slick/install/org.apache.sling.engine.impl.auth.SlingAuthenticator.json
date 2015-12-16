@@ -1,0 +1,9 @@
+{
+    "jcr:primaryType": "sling:OsgiConfig",
+    "sling.auth.requirements": [
+      "/",
+      "-/etc/slick/designs",
+      "-/content/slick/publish",
+      "-/content/slick/login"
+    ]
+}

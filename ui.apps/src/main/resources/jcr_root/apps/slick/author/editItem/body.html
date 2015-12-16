@@ -1,0 +1,41 @@
+<body data-sly-use.editBlog="org.millr.slick.components.author.EditBlog">
+	<sly data-sly-include="navigation.html"></sly>
+	<div class="author-wrap">
+		<sly data-sly-include="subNavigation.html"></sly>
+		
+		<div class="content">
+			<form method="POST" action="edit.item.html" enctype="multipart/form-data">
+				<section id="title-section">
+					<input name="title" type="text" class="item-title" tabindex="1" placeholder="enter title" value="${editBlog.post.title}">
+					<a href="#" class="button square seo" id="seo-button">SEO</a>
+				</section>
+				<section id="seo-section">
+					<section class="edit-label-input basic">
+						<label>url <a href="#">Change</a></label>
+						<input name="nodeName" type="text" class="form-control" value="${editBlog.post.name}">
+					</section>
+					<section class="edit-label-input basic">
+						<label>description <a href="#">Change</a></label>
+						<input name="description" type="text" class="form-control">
+					</section>
+					<section class="edit-label-input basic">
+						<label>featured image</label>
+						<input type="file" name="image">
+					</section>
+					
+				</section>
+				<section class="content">
+					<textarea name="content" id="editor" class="editor-area" rows="32" tabindex="2" placeholder="add content">${editBlog.post.content}</textarea>
+				</section>
+				<section class="publish">
+					<input type="submit" value="Post" id="submit-item-button" class="button">
+				</section>
+				<input name="slickType" type="hidden" value="${properties.slickType}"/>
+			</form>
+			<h1>${editBlog.slickType}</h1>
+			<h1>${editBlog.path}</h1>
+			<h1>${editBlog.editPath}</h1>
+		</div>
+	</div>
+	<sly data-sly-include="scripts.html"></sly>
+</body>

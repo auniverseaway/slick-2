@@ -1,0 +1,19 @@
+{
+	"jcr:primaryType": "slick:page",
+	"sling:resourceType": "slick/author/listItem",
+	"title": "Pages",
+	"description": "A list of pages",
+	"menuOrder": 200,
+	"slickType": "pages",
+	"edit": {
+		"jcr:primaryType": "slick:page",
+		"sling:resourceType": "slick/author/editItem",
+		"title": "Edit Page",
+		"description": "Slick Page",
+		"slickType": "pages",
+		"publish": {
+			"jcr:primaryType": "slick:page",
+			"sling:resourceType": "slick/author/publish"
+		}
+	}
+}

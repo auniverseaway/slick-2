@@ -1,0 +1,7 @@
+{
+	"jcr:primaryType": "slick:page",
+	"sling:resourceType": "slick/author/home",
+	"title": "Author",
+	"description": "Welcome",
+	"content": "<p>Slick is a beautiful app to help create exceptional web content. It's highly optimized for blogging.</p>"
+}

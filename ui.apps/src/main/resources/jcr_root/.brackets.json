@@ -1,0 +1,6 @@
+{
+    "sass.options": {
+        "outputDir": "../css/",
+			  "sourceComments": false
+    }
+}

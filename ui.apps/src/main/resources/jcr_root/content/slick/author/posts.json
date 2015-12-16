@@ -1,0 +1,15 @@
+{
+	"jcr:primaryType": "slick:page",
+	"sling:resourceType": "slick/author/listItem",
+	"title": "Posts",
+	"description": "Posts",
+	"menuOrder": 100,
+	"slickType": "posts",
+	"edit": {
+		"jcr:primaryType": "slick:page",
+		"sling:resourceType": "slick/author/editItem",
+		"title": "Edit Post",
+		"description": "Slick Post",
+		"slickType": "posts"
+	}
+}

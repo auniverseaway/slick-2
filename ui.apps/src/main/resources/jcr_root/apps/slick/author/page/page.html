@@ -1,0 +1,8 @@
+<sly data-sly-include="head.html"></sly>
+<!--/* Is the admin password default? */-->
+<sly data-sly-use.login="org.millr.slick.components.author.Login" 
+	 data-sly-test="${!login.IsAdminDefault}" 
+	 data-sly-include="body.html"></sly>
+<sly data-sly-test="${login.IsAdminDefault}" 
+	 data-sly-include="login.html"></sly>
+<sly data-sly-include="footer.html"></sly>

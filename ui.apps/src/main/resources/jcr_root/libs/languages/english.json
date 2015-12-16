@@ -1,0 +1,10 @@
+{
+  "jcr:primaryType": "nt:folder",
+  "jcr:mixinTypes": ["mix:language"],
+  "jcr:language": "en",
+  "hi": {
+    "jcr:primaryType": "nt:folder",
+    "jcr:mixinTypes": ["sling:Message"],
+    "sling:message": "hello"
+  }
+}
