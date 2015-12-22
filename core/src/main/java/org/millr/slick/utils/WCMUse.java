@@ -7,6 +7,7 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.scripting.SlingBindings;
+import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.apache.sling.scripting.sightly.pojo.Use;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ public class WCMUse implements Use {
 	/**
 	 * Activate.
 	 */
-	private void activate() {
+	public void activate() {
 	}
 	
 	/**
@@ -73,6 +74,15 @@ public class WCMUse implements Use {
 	 */
 	public ValueMap getProperties() {
         return getResource().adaptTo(ValueMap.class);
+    }
+	
+	/**
+	 * Gets the script helper.
+	 *
+	 * @return the script helper.
+	 */
+	public SlingScriptHelper getSlingScriptHelper() {
+        return (SlingScriptHelper)bindings.get(SlingBindings.SLING);
     }
 	
 }

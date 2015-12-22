@@ -78,17 +78,23 @@ public class CurrentUserServiceImpl implements CurrentUserService {
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 		}
+				
+		return name;
+	}
+	
+	public String getId(ResourceResolver resourceResolver) {
 		
-		// If we can't, at least get the ID.
-		if (name == null) {
-			try {
-				name = user.getID().toString();
-			} catch (RepositoryException e) {
-				e.printStackTrace();
-			}
+		// Get the user
+		getUser(resourceResolver);
+		String id = null;
+		
+		try {
+			id = user.getID();
+		} catch (RepositoryException e) {
+			e.printStackTrace();
 		}
 		
-		return name;
+		return id;
 	}
 	
 	/**

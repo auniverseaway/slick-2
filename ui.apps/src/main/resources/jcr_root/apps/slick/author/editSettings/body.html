@@ -1,0 +1,13 @@
+<body data-sly-use.editBlog="org.millr.slick.components.author.EditBlog">
+	<sly data-sly-include="navigation.html"></sly>
+	<div class="author-wrap">
+		<sly data-sly-include="subNavigation.html"></sly>
+		<div class="content" data-sly-use.settings="org.millr.slick.components.common.Settings">
+		<form action="settings.edit.json" method="POST">
+			<input type="text" name="blogName" value="${settings.blogName}"/>
+			<input type="submit" value="Save" class="button"/>
+		</form>
+		</div>
+	</div>
+	<sly data-sly-include="scripts.html"></sly>
+</body>

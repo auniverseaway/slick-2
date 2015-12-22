@@ -1,0 +1,7 @@
+{
+	"jcr:primaryType": "slick:page",
+	"sling:resourceType": "slick/author/editSettings",
+	"title": "Settings",
+	"description": "Settings",
+	"menuOrder": 500
+}

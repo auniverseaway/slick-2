@@ -4,33 +4,27 @@ import java.util.Map;
 
 public interface SettingsService {
 
-    /** OSGi property name for the blog name */
-    String BLOG_NAME = "slick.blogName";
+	/** OSGi property name for the blog name */
+    public static final String SYSTEM_BLOG_NAME = "system.blogName";
 
-    /**
-     * Set multiple properties for the System Settings service.
-     *
-     * This is useful for setting multiple properties as the same
-     * time in that the OSGi component will only be updated once
-     * and thus reset only once.
-     *
-     * @param properties A map of properties to set.
-     * @return true if save was successful.
-     */
+    /** OSGi property name for extensionless URLs */
+    public static final String SYSTEM_EXTENSIONLESS_URLS = "system.extentionlessUrls";
+
+    /** OSGi property name for the temporary directory */
+    public static final String SYSTEM_TEMPORARY_DIRECTORY = "system.temporaryDirectory";
+
     boolean setProperties(final Map<String, Object> properties);
 
-    /**
-     * Get the name of the blog.
-     *
-     * @return The name of the blog.
-     */
     String getBlogName();
-
-    /**
-     * Set the name of the blog.
-     *
-     * @param name The name of the blog.
-     * @return true if the save was successful.
-     */
+    
     boolean setBlogName(final String name);
+    
+    boolean getExtensionlessUrls();
+    
+    boolean setExtensionlessUrls(final boolean value);
+    
+	String getTemporaryDirectory();
+	
+	boolean setTemporaryDirectory(final String directory);	
+	
 }

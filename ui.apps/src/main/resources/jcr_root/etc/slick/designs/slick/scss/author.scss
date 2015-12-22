@@ -17,6 +17,7 @@ $slick-gutter: 14px;
 
 // Colors
 $light-gray: #EFEFEF;
+$light-ultra-gray: #FAFAFA;
 $light-medium-gray: #F3F3F3;
 $medium-gray: #C1C1C1;
 $slick-green: #009444;
@@ -251,10 +252,17 @@ header {
 .button {
     line-height: 60px;
     display: inline-block;
+    border: none;
+    font-size: 1em;
     
     &.square {
         width: 60px;
         height: 60px;
+    }
+
+    &.bg-green {
+        background-color: $slick-green;
+        color: $light-green;
     }
 }
 
@@ -359,7 +367,7 @@ header {
     
     label {
         display: block;
-        padding: 7px 28px;
+        padding: $slick-gutter / 2 $slick-gutter * 2;
         text-transform: uppercase;
         font-family: GothamMediumRegular;
         color: #8A8A8A;
@@ -369,8 +377,8 @@ header {
 #editor {
     width: 100%;
     border: none;
-    background: transparent;
-    padding: 28px;
+    background: $light-ultra-gray;
+    padding: $slick-gutter * 2;
     font-size: 1em;
 }
 
