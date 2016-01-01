@@ -58,6 +58,8 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		final String title = request.getParameter("title");
 		final String name = request.getParameter("nodeName");
 		final String content = request.getParameter("content");
+		final String description = request.getParameter("description");
+		final String[] tags = request.getParameterValues("tags");
 		final String slickType = request.getParameter("slickType");
 		
 		Resource myResource = resolver.getResource(SlickConstants.PUBLISH_PATH + "/" + slickType);
@@ -72,9 +74,14 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, "slick/publish/page");
 		properties.put("title", title);
 		properties.put("content", content);
+		properties.put("description", description);
+		
+		if (tags != null) {
+            properties.put("tags", tags);
+        }
 		
 		// Update or create our resource
-		// Try to get the existing.
+		//// Try to get the existing resource.
 		Resource post = resolver.getResource(existingPath);
 		
 		if (post != null) {

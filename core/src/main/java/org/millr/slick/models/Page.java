@@ -26,6 +26,9 @@ public class Page
 	@Inject @Optional
     private String content;
 	
+	@Inject @Optional
+    private String description;
+	
 	@Inject @Optional @Named("created")
     private Calendar date;
 	
@@ -74,6 +77,10 @@ public class Page
 	public String getContent() {
         return content;
     }
+	
+	public String getDescription() {
+		return description;
+	}
 
     public ValueMap getProperties()
     {

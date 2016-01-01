@@ -1,8 +1,7 @@
 <body data-sly-use.editBlog="org.millr.slick.components.author.EditBlog">
-	<sly data-sly-include="navigation.html"></sly>
+	<sly data-sly-include="navigation.html"/>
 	<div class="author-wrap">
 		<sly data-sly-include="subNavigation.html"></sly>
-		
 		<div class="content">
 			<form method="POST" action="edit.item.html" enctype="multipart/form-data">
 				<section id="title-section">
@@ -16,7 +15,12 @@
 					</section>
 					<section class="edit-label-input basic">
 						<label>description <a href="#">Change</a></label>
-						<input name="description" type="text" class="form-control">
+						<input name="description" type="text" class="form-control" value="${editBlog.post.description}">
+					</section>
+					<section class="edit-label-input basic">
+						<label>tags</label>
+						<input name="tags" type="text" class="form-control">
+						<input name="tags" type="text" class="form-control">
 					</section>
 					<section class="edit-label-input basic">
 						<label>featured image</label>
@@ -31,9 +35,6 @@
 				</section>
 				<input name="slickType" type="hidden" value="${properties.slickType}"/>
 			</form>
-			<h1>${editBlog.slickType}</h1>
-			<h1>${editBlog.path}</h1>
-			<h1>${editBlog.editPath}</h1>
 		</div>
 	</div>
 	<sly data-sly-include="scripts.html"></sly>
