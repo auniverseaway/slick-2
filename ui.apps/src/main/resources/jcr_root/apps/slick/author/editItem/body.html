@@ -8,19 +8,22 @@
 					<input name="title" type="text" class="item-title" tabindex="1" placeholder="enter title" value="${editBlog.post.title}">
 					<a href="#" class="button square seo" id="seo-button">SEO</a>
 				</section>
-				<section id="seo-section">
+				<section id="seo-section" class="open">
 					<section class="edit-label-input basic">
 						<label>url <a href="#">Change</a></label>
 						<input name="nodeName" type="text" class="form-control" value="${editBlog.post.name}">
 					</section>
 					<section class="edit-label-input basic">
-						<label>description <a href="#">Change</a></label>
+						<label>description</label>
 						<input name="description" type="text" class="form-control" value="${editBlog.post.description}">
 					</section>
 					<section class="edit-label-input basic">
 						<label>tags</label>
-						<input name="tags" type="text" class="form-control">
-						<input name="tags" type="text" class="form-control">
+						<div id="tag-section">
+							<div id="tag-input">
+								<input name="tag-input" type="text" placeholder="add tag">
+								<a href="#">Add</a>
+							</div><sly data-sly-list.tag="${editBlog.post.tags}"><div class="finished-tag"><label>${tag}<a href="#">Remove</a></label><input name="tags" type="text" value="${tag}"></div></sly></div>
 					</section>
 					<section class="edit-label-input basic">
 						<label>featured image</label>

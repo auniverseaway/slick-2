@@ -29,6 +29,9 @@ public class Page
 	@Inject @Optional
     private String description;
 	
+	@Inject @Optional
+    private String[] tags;
+	
 	@Inject @Optional @Named("created")
     private Calendar date;
 	
@@ -80,6 +83,10 @@ public class Page
 	
 	public String getDescription() {
 		return description;
+	}
+	
+	public String[] getTags() {
+		return tags;
 	}
 
     public ValueMap getProperties()

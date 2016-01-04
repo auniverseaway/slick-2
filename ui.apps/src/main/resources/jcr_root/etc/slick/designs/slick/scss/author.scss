@@ -350,7 +350,7 @@ header {
             background: transparent;
             line-height: inherit;
             padding-bottom: 6px;
-        }
+        }        
     }
 }
 
@@ -371,6 +371,66 @@ header {
         text-transform: uppercase;
         font-family: GothamMediumRegular;
         color: #8A8A8A;
+    }
+    
+    #tag-section {
+    	padding: 0 $slick-gutter * 2;
+    	#tag-input {
+    		display: inline-block;
+    		margin: 0 14px 14px 0;
+    	
+    		input {
+    			display: inline-block;
+    			line-height: 30px;
+    			font-size: 1em;
+    			width: auto;
+    			padding: 0px;
+    			
+    		}
+    		
+    		a {
+    				display: block;
+    				float: right;
+    				text-indent: 1000px;
+    				overflow: hidden;
+    				height: 30px;
+    				width: 32px;
+    				background: url("../img/btn-tag-add.svg") 50% no-repeat;
+    			}
+    	}
+    	.finished-tag {
+    		display: inline-block;
+    		padding: 0 0 0 10px;
+    		background: rgba(165, 226, 249, 0.92);
+    		margin-right: $slick-gutter;
+    		margin-bottom: 14px;
+            
+    		label {
+    			display: inline-block;
+    			padding: 0;
+    			font-family: GothamLightRegular;
+    			text-transform: none;
+    			line-height: 30px;
+    			color: #000;
+    			
+    			a {
+    				display: block;
+    				float: right;
+    				text-indent: 1000px;
+    				overflow: hidden;
+    				height: 30px;
+    				width: 32px;
+    				background: url("../img/btn-tag-remove.svg") 50% no-repeat;
+    			}
+    			
+    		}
+    	
+    		input {
+    			display: none;
+    		}
+    	
+    		
+    	}
     }
 }
 
