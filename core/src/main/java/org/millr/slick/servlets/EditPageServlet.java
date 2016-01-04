@@ -88,6 +88,11 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 			LOGGER.info("NOT NULL");
 			ModifiableValueMap existingProperties = post.adaptTo(ModifiableValueMap.class);
 			existingProperties.putAll(properties);
+			
+			if (tags == null){
+				existingProperties.remove("tags");
+			}
+			
 		} else {
 			LOGGER.info("NULL");
 			post = resolver.create(myResource, name, properties);
