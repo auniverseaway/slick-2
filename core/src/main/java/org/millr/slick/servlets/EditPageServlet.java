@@ -8,6 +8,8 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
 import javax.servlet.ServletException;
+
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.JcrConstants;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -18,6 +20,7 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.jcr.resource.JcrResourceConstants;
 import org.millr.slick.SlickConstants;
+import org.millr.slick.services.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +50,9 @@ public class EditPageServlet extends SlingAllMethodsServlet {
      * to the assets folder using the FileUploadService.
      */
 	
+	@Reference
+    private UploadService uploadService;
+	
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
 		LOGGER.info("*** In doPost ***");
@@ -61,6 +67,8 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		final String description = request.getParameter("description");
 		final String[] tags = request.getParameterValues("tags");
 		final String slickType = request.getParameter("slickType");
+		
+		String image = uploadService.uploadFile(request, SlickConstants.MEDIA_PATH);
 		
 		Resource myResource = resolver.getResource(SlickConstants.PUBLISH_PATH + "/" + slickType);
 		
@@ -80,6 +88,10 @@ public class EditPageServlet extends SlingAllMethodsServlet {
             properties.put("tags", tags);
         }
 		
+		if (image != null) {
+            properties.put("image", image);
+        }
+		
 		// Update or create our resource
 		//// Try to get the existing resource.
 		Resource post = resolver.getResource(existingPath);
@@ -89,6 +101,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 			ModifiableValueMap existingProperties = post.adaptTo(ModifiableValueMap.class);
 			existingProperties.putAll(properties);
 			
+			// If all tags were removed, remove them from existing properties
 			if (tags == null){
 				existingProperties.remove("tags");
 			}

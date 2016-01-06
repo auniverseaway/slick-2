@@ -15,7 +15,7 @@ Demo
 
 Requirements
 ============
-* Java 8
+* Java 7
 * Apache Sling 8
 * Maven 3.2+
 
@@ -42,19 +42,15 @@ Installation
 ============
 
 1. Start Sling
-2. Install i18n
-3. Install javax.mail
-4. Install jcr.compiler
-5. Install Sling XSS
-6. Install Sightly
-7. Deploy Slick 
+ * java -jar org.apache.sling.launchpad-8.jar
+ * java -Xmx1024M -agentlib:jdwp=transport=dt_socket,address=30303,server=y,suspend=n -jar org.apache.sling.launchpad-8.jar
+2. Deploy Slick 
  * mvn clean install -PautoInstallBundle
  * mvn clean install -PautoInstallBundle -Dsling.host=YOURHOST -Dsling.password=YOURPASSWORD -Dsling.port=YOURPORT
 
 #Base Configuration
 
-1. Admin is located at http://localhost:8080/auth.html (admin:admin)
-2. Configure your URL in settings.
+1. Admin is located at http://localhost:8080/slick/author.html (admin:admin)
 
 #Bare Minimum Apache Configuration
     <VirtualHost *:80>
@@ -65,9 +61,9 @@ Installation
     </VirtualHost>
 
 #Dispatcher Configuration
-If you are using a dispatcher, you are probably already know what you need to do. You can flush your cache by heading to http://{your-domain}/auth/flush
+If you are using a dispatcher, you probably already know what you need to do. You can flush your cache by heading to http://{your-domain}/author/flush
 
-Styling
+User Interface
 =======
 
 1. Use [Brackets](http://brackets.io) + Brackets SASS Extension

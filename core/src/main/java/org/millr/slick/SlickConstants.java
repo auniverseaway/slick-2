@@ -15,6 +15,9 @@ public final class SlickConstants {
     /** Publish Path **/
     public static final String PUBLISH_PATH = CONTENT_PATH + "/publish";
     
+    /** Publish Path **/
+    public static final String MEDIA_PATH = PUBLISH_PATH + "/media";
+    
     /** Apps Path **/
     public static final String APP_PATH = "/apps/slick";
     
