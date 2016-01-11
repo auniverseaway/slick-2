@@ -46,7 +46,7 @@ public class Page
 	@Inject @Optional @Named("jcr:created")
     private Calendar created;
 	
-	private SlickUser user;
+	private Author author;
 	
 	@Inject @Optional
     private String slickType;
@@ -67,6 +67,7 @@ public class Page
 	
 	public Page(final Resource resource) {
 		this.resource = resource;
+		this.author = resource.adaptTo(Author.class);
     }
 	
 	public String getName() {
@@ -114,6 +115,10 @@ public class Page
     public Calendar getCreated()
     {
     	return created;
+    }
+    
+    public Author getAuthor() {
+    	return author;
     }
     
     public String getUserId() {

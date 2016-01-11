@@ -416,7 +416,7 @@ header {
     			a {
     				display: block;
     				float: right;
-    				text-indent: 1000px;
+    				text-indent: 100em;
     				overflow: hidden;
     				height: 30px;
     				width: 32px;
@@ -432,6 +432,13 @@ header {
     		
     	}
     }
+    
+    .featured-image {
+	    max-width: 200px;
+	    display: block;
+	    padding: 0px 28px;
+	    box-sizing: content-box;
+	}
 }
 
 #editor {

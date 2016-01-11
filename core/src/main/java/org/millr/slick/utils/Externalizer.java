@@ -2,10 +2,11 @@ package org.millr.slick.utils;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.models.annotations.Model;
 
-public class Externalizer extends WCMUse {
+@Model(adaptables=SlingHttpServletRequest.class)
+public class Externalizer {
 	
-	private Resource resource;
 	private SlingHttpServletRequest request;
 
 	private String scheme;
@@ -14,59 +15,57 @@ public class Externalizer extends WCMUse {
 	
 	private int serverPort;
 	
-	private String fullDomain;
+	private String contextPath;
 	
-
-	@Override
-    public void activate() {
-		this.request = getRequest();
-		this.resource = getResource();
-        
-        this.scheme = request.getScheme();
-        this.serverName = request.getServerName();
-        this.serverPort = request.getServerPort();
-	}
+	private String servletPath;
 	
-	public String getScheme() {
-		return scheme;
-	}
+	private String pathInfo;
 	
-	public String getFullDomain() {
-		StringBuilder url = new StringBuilder();
+	private String queryString;
+	
+	private String domain;
+	
+	private String url;
+	
+	public Externalizer(SlingHttpServletRequest request) {
+		this.request = request;
+		
+		// Get all parts of the URL
+		this.scheme = request.getScheme();				// http
+        this.serverName = request.getServerName();		// hostname.com
+        this.serverPort = request.getServerPort();		// 80
+        this.contextPath = request.getContextPath();	// /mywebapp
+	    this.servletPath = request.getServletPath();	// /servlet/MyServlet
+	    this.pathInfo = request.getPathInfo();			// /a/b;c=123
+	    this.queryString = request.getQueryString();	// d=789
+	    
+	    // Build the Domain
+	    StringBuilder url = new StringBuilder();
 	    url.append(scheme).append("://").append(serverName);
 	    if (serverPort != 80 && serverPort != 443) {
 	        url.append(":").append(serverPort);
 	    }
-	    return url.toString();
+	    this.domain = url.toString();
+	    
+	    // Build the rest of the URL
+	    url.append(contextPath).append(servletPath);
+
+	    if (pathInfo != null) {
+	        url.append(pathInfo);
+	    }
+	    if (queryString != null) {
+	        url.append("?").append(queryString);
+	    }
+	    this.url = url.toString();
+	    
+	}
+
+	public String getDomain() {
+		return domain;
 	}
 	
+	public String getUrl() {
+		return url;
+	}
 	
-//	public static String getURL(HttpServletRequest req) {
-//
-//	    String scheme = req.getScheme();             // http
-//	    String serverName = req.getServerName();     // hostname.com
-//	    int serverPort = req.getServerPort();        // 80
-//	    String contextPath = req.getContextPath();   // /mywebapp
-//	    String servletPath = req.getServletPath();   // /servlet/MyServlet
-//	    String pathInfo = req.getPathInfo();         // /a/b;c=123
-//	    String queryString = req.getQueryString();          // d=789
-//
-//	    // Reconstruct original requesting URL
-//	    StringBuilder url = new StringBuilder();
-//	    url.append(scheme).append("://").append(serverName);
-//
-//	    if (serverPort != 80 && serverPort != 443) {
-//	        url.append(":").append(serverPort);
-//	    }
-//
-//	    url.append(contextPath).append(servletPath);
-//
-//	    if (pathInfo != null) {
-//	        url.append(pathInfo);
-//	    }
-//	    if (queryString != null) {
-//	        url.append("?").append(queryString);
-//	    }
-//	    return url.toString();
-//	}
 }

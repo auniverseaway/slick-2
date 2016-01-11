@@ -2,6 +2,7 @@ package org.millr.slick.models;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -15,15 +16,16 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Model(adaptables = SlingHttpServletRequest.class)
-public class SlickUser
+@Model(adaptables = Resource.class)
+public class Author
 {
-	private static final Logger LOGGER = LoggerFactory.getLogger(SlickUser.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Author.class);
 	
-	@Inject
+	@Inject @Optional @Named("jcr:createdBy")
 	private String userId;
 	
 	private User user;
@@ -38,8 +40,8 @@ public class SlickUser
 	
 	private String email;
 
-	public SlickUser(final SlingHttpServletRequest request) {
-        this.resource = request.getResource();
+	public Author(final Resource resource) {
+        this.resource = resource;
     }
 	
 	@PostConstruct

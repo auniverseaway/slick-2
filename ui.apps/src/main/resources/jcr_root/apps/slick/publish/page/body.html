@@ -1,11 +1,11 @@
-<body id="${resource.name}" data-sly-use.page="org.millr.slick.models.Page">
-    <img data-sly-use.external="org.millr.slick.utils.Externalizer" src="${external.fullDomain}${page.image}"/>
+<body id="${resource.name}" data-sly-use.view="org.millr.slick.components.common.ViewPage">
+    <img data-sly-test="${view.page.image}" src="${view.external.domain}${view.page.image}"/>
 	<div class="title">
-		<h1>${page.title}</h1>
-		<h2 data-sly-use.user="${'org.millr.slick.models.SlickUser' @ userId=page.userId}">${user.firstName} ${page.user.firstName}</h2>
+		<h1>${view.page.title}</h1>
+		<h2>${view.page.author.firstName}</h2>
 	</div>
 	<div class="content">
-		${page.content @ context='unsafe'}
+		${view.page.content @ context='unsafe'}
 	</div>
 	<div class="meta">
 		<div class="tags">
@@ -14,5 +14,10 @@
 		<div data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=properties.jcr:created, dateFormat='MMMM, d yyyy'}">
 	    	${format.formattedValue}
 	    </div>
+    </div>
+    <div >
+    	
+    	
+    	
     </div>
 </body>

@@ -1,14 +1,16 @@
 <!doctype html>
 <html lang="en">
-    <head data-sly-use.page="org.millr.slick.models.Page" data-sly-use.external="org.millr.slick.utils.Externalizer" src="${page.image}">
+    <head data-sly-use.view="org.millr.slick.components.common.ViewPage">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>${page.title}</title>
-        <meta name="description" content="${page.description}"/>
-        <meta name="keywords" content="${page.tags}" />
+        <meta name="description" content="${view.page.description}"/>
+        <meta name="keywords" content="${view.page.tags}" />
         
-        <meta property="og:url" content="${external.fullDomain}${page.link}"/>
-        <meta property="og:image" content="${external.fullDomain}${page.image}" />
+        <meta property="og:title" content="${view.page.title}"/>
+        <meta property="og:description" content="${view.page.description}"/>
+        <meta property="og:url" content="${view.external.url}"/>
+        <meta property="og:image" content="${view.external.domain}${view.page.image}" />
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">

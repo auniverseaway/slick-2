@@ -27,7 +27,8 @@
 					</section>
 					<section class="edit-label-input basic">
 						<label>featured image</label>
-						<input type="file" name="image">
+						<input data-sly-test="${!editBlog.post.image}" type="file" name="image"/>
+						<img data-sly-test="${editBlog.post.image}" src="${editBlog.post.image}" class="featured-image" alt="Featured Image"/>
 					</section>
 				</section>
 				<section class="content">
