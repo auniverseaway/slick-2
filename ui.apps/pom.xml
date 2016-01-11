@@ -45,7 +45,6 @@
                             jcr_root/apps/slick;overwrite:=true;uninstall:=true;path:=/apps/slick,
                             jcr_root/libs/languages;overwrite:=true;uninstall:=true;path:=/libs/languages,
                             jcr_root/etc/slick/designs/slick;overwrite:=true;uninstall:=true;path:=/etc/slick/designs/slick,
-                            jcr_root/etc/slick/settings;overwrite:=false;uninstall:=false;path:=/etc/slick/settings,
                             jcr_root/content/slick;overwrite:=false;overwriteProperties:=true;uninstall:=false;path:=/content/slick,
                             jcr_root/content/slick/author;overwrite:=true;uninstall:=true;path:=/content/slick/author,
                             jcr_root/content/slick/login;overwrite:=true;uninstall:=true;path:=/content/slick/login,
