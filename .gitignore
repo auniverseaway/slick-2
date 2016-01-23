@@ -145,7 +145,7 @@ node_modules
 *.css.map
 
 ##### Gulp
-
+node/
 .DS_Store
 *.log
 node_modules
