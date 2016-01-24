@@ -46,23 +46,25 @@ public class UploadServiceImpl implements UploadService {
             	
                 final String name = param.getFileName();
                 final String mimeType = param.getContentType();
+                
+                if (!name.isEmpty()) {
+                	try {
+                        final InputStream stream = param.getInputStream();
+                        
+                        LOGGER.info("******Image Parent: " + path);
+                        LOGGER.info("******Image Name: " + name);
+                        LOGGER.info("******Image MimeType: " + mimeType);
 
-                try {
-                    final InputStream stream = param.getInputStream();
-                    
-                    LOGGER.info("******Image Parent: " + path);
-                    LOGGER.info("******Image Name: " + name);
-                    LOGGER.info("******Image MimeType: " + mimeType);
+                        Resource imagesParent = resolver.getResource(path);
+                        Node imageNode = JcrUtils.putFile(imagesParent.adaptTo(Node.class), name, mimeType, stream);
+                        resolver.commit();
 
-                    Resource imagesParent = resolver.getResource(path);
-                    Node imageNode = JcrUtils.putFile(imagesParent.adaptTo(Node.class), name, mimeType, stream);
-                    resolver.commit();
-
-                    filePath = imageNode.getPath();
-                } catch (javax.jcr.RepositoryException e) {
-                    LOGGER.error("Could not save image to repository.", e);
-                } catch (java.io.IOException e) {
-                    LOGGER.error("Could not get image input stream", e);
+                        filePath = imageNode.getPath();
+                    } catch (javax.jcr.RepositoryException e) {
+                        LOGGER.error("Could not save image to repository.", e);
+                    } catch (java.io.IOException e) {
+                        LOGGER.error("Could not get image input stream", e);
+                    }
                 }
             }
         }
