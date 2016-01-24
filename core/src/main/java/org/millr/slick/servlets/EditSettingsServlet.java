@@ -70,8 +70,6 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
             properties.put(SettingsService.SYSTEM_BLOG_NAME, blogName);
             properties.put(SettingsService.SYSTEM_ANALYTICS_SCRIPT, analyticsScript);
             properties.put(SettingsService.SYSTEM_USE_DISPATCHER, useDispatcher);
-            properties.put(SettingsService.SYSTEM_TEMPORARY_DIRECTORY, tempDir);
-
             boolean result = settingsService.setProperties(properties);
 
             if (result) {

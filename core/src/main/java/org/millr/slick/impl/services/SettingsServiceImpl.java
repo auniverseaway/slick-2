@@ -52,29 +52,15 @@ public class SettingsServiceImpl implements SettingsService {
     /** Default value for the blog name */
     public static final String BLOG_NAME_DEFAULT_VALUE = "Slick Blogging Engine";
     
-    /** Default value for the blog name */
+    /** Default value for the analytics script */
     public static final String ANALYTICS_SCRIPT_DEFAULT_VALUE = "";
 
-    /** Default value for extensionless URLs */
+    /** Default value for using a dispatcher. */
     public static final boolean USE_DISPATCHER_DEFAULT_VALUE = false;
 
     /** Service activation */
     @Activate
     protected void activate(Map<String, Object> properties) {
-    }
-
-    /**
-     * Set multiple properties for the System Settings service.
-     *
-     * This is useful for setting multiple properties as the same
-     * time in that the OSGi component will only be updated once
-     * and thus reset only once.
-     *
-     * @param properties A map of properties to set.
-     * @return true if save was successful.
-     */
-    public boolean setProperties(final Map<String, Object> properties) {
-        return osgiService.setProperties(COMPONENT_PID, properties);
     }
 
     /**
@@ -122,24 +108,19 @@ public class SettingsServiceImpl implements SettingsService {
     public boolean setUseDispatcher(final boolean value) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_USE_DISPATCHER, value);
     }
-
+    
     /**
-     * Get the setting for temporary directory.
+     * Set multiple properties for the System Settings service.
      *
-     * @return The setting for temporary directory.
-     */
-    public String getTemporaryDirectory() {
-        return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_TEMPORARY_DIRECTORY, null);
-    }
-
-    /**
-     * Set the value for temporary directory.
+     * This is useful for setting multiple properties as the same
+     * time in that the OSGi component will only be updated once
+     * and thus reset only once.
      *
-     * @param value The setting for the temporary directory.
-     * @return true if the save was successful.
+     * @param properties A map of properties to set.
+     * @return true if save was successful.
      */
-    public boolean setTemporaryDirectory(final String directory) {
-        return osgiService.setProperty(COMPONENT_PID, SYSTEM_TEMPORARY_DIRECTORY, directory);
+    public boolean setProperties(final Map<String, Object> properties) {
+        return osgiService.setProperties(COMPONENT_PID, properties);
     }
 
 }

@@ -20,8 +20,6 @@ public class Settings extends WCMUse {
     
     private String analyticsScript;
 
-    private String temporaryDirectory;
-
     private boolean useDispatcher;
 
     @Override
@@ -35,7 +33,6 @@ public class Settings extends WCMUse {
             blogName = settingsService.getBlogName();
             analyticsScript = settingsService.getAnalyticsScript();
             useDispatcher = settingsService.getUseDispatcher();
-            temporaryDirectory = settingsService.getTemporaryDirectory();
         }
     }
 
@@ -50,15 +47,6 @@ public class Settings extends WCMUse {
     
     public String getAnalyticsScript() {
     	return analyticsScript;
-    }
-
-    /**
-     * Get the temporary directory.
-     *
-     * @return The temporary directory.
-     */
-    public String getTemporaryDirectory() {
-        return temporaryDirectory;
     }
 
     /**
