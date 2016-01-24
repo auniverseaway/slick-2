@@ -1,0 +1,27 @@
+<body id="${resource.name}" data-sly-use.view="org.millr.slick.components.common.ViewPage">
+	<header data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view}"></header>
+	<section id="content">
+		<article>
+		    <div class="Grid Fit-Medium title">
+				<h1 class="Cell">${view.page.title}</h1>
+				<h2 class="Cell">${view.page.author.firstName}</h2>
+			</div>
+			<div class="content">
+				${view.page.content @ context='unsafe'}
+			</div>
+			<div class="Grid Fit-Medium meta">
+				<div class="Cell tags">
+					<sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span> </sly>
+				</div>
+				<div class="Cell date" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=properties.jcr:created, dateFormat='MMMM, d yyyy'}">
+			    	${format.formattedValue}
+			    </div>
+		    </div>
+	    </article>
+    </section>
+    <div >
+    	
+    	
+    	
+    </div>
+</body>

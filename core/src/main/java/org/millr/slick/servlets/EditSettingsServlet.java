@@ -40,7 +40,9 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
 	
 	private static final String BLOG_NAME_PROPERTY = "blogName";
 	
-	private static final String EXTENSIONLESS_URLS_PROPERTY = "extensionlessUrls";
+	private static final String ANALYTICS_SCRIPT_PROPERTY = "analyticsScript";
+	
+	private static final String USE_DISPATCHER_PROPERTY = "useDispatcher";
 	
 	private static final String TEMPORARY_DIRECTORY_PROPERTY = "temporaryDirectory";
 
@@ -57,13 +59,17 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
 
         if (allowWrite) {
             final String blogName = request.getParameter(BLOG_NAME_PROPERTY);
-            final boolean extensionlessUrls = Boolean.parseBoolean(request.getParameter(EXTENSIONLESS_URLS_PROPERTY));
+            final String analyticsScript = request.getParameter(ANALYTICS_SCRIPT_PROPERTY);
+            final boolean useDispatcher = Boolean.parseBoolean(request.getParameter(USE_DISPATCHER_PROPERTY));
+            LOGGER.info(USE_DISPATCHER_PROPERTY);
+            LOGGER.info("USE DISPATCHER VALUE: " + String.valueOf(useDispatcher));
             final String tempDir = request.getParameter(TEMPORARY_DIRECTORY_PROPERTY);
 
             final Map<String, Object> properties = new HashMap<String, Object>();
 
             properties.put(SettingsService.SYSTEM_BLOG_NAME, blogName);
-            properties.put(SettingsService.SYSTEM_EXTENSIONLESS_URLS, extensionlessUrls);
+            properties.put(SettingsService.SYSTEM_ANALYTICS_SCRIPT, analyticsScript);
+            properties.put(SettingsService.SYSTEM_USE_DISPATCHER, useDispatcher);
             properties.put(SettingsService.SYSTEM_TEMPORARY_DIRECTORY, tempDir);
 
             boolean result = settingsService.setProperties(properties);

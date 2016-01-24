@@ -8,7 +8,10 @@ public interface SettingsService {
     public static final String SYSTEM_BLOG_NAME = "system.blogName";
 
     /** OSGi property name for extensionless URLs */
-    public static final String SYSTEM_EXTENSIONLESS_URLS = "system.extentionlessUrls";
+    public static final String SYSTEM_USE_DISPATCHER = "system.useDispatcher";
+    
+    /** OSGi property name for the blog analytics script */
+    public static final String SYSTEM_ANALYTICS_SCRIPT = "system.analyticsScript";
 
     /** OSGi property name for the temporary directory */
     public static final String SYSTEM_TEMPORARY_DIRECTORY = "system.temporaryDirectory";
@@ -19,9 +22,13 @@ public interface SettingsService {
     
     boolean setBlogName(final String name);
     
-    boolean getExtensionlessUrls();
+    String getAnalyticsScript();
     
-    boolean setExtensionlessUrls(final boolean value);
+    boolean setAnalyticsScript(final String script);
+    
+    boolean getUseDispatcher();
+    
+    boolean setUseDispatcher(final boolean value);
     
 	String getTemporaryDirectory();
 	

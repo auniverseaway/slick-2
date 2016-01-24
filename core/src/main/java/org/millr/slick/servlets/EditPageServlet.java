@@ -67,6 +67,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		final String description = request.getParameter("description");
 		final String[] tags = request.getParameterValues("tags");
 		final String slickType = request.getParameter("slickType");
+		final String resourceType = slickType.substring(0, slickType.length()-1);
 		
 		String image = uploadService.uploadFile(request, SlickConstants.MEDIA_PATH);
 		
@@ -79,7 +80,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		Map<String,Object> properties = new HashMap<String,Object>();
 		
 		properties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:page");
-		properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, "slick/publish/page");
+		properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, "slick/publish/" + resourceType);
 		properties.put("title", title);
 		properties.put("content", content);
 		properties.put("description", description);

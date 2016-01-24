@@ -17,10 +17,12 @@ public class Settings extends WCMUse {
     private Resource resource;
 
     private String blogName;
+    
+    private String analyticsScript;
 
     private String temporaryDirectory;
 
-    private boolean extensionlessUrls;
+    private boolean useDispatcher;
 
     @Override
     public void activate() {
@@ -31,7 +33,8 @@ public class Settings extends WCMUse {
 
         if (settingsService != null) {
             blogName = settingsService.getBlogName();
-            extensionlessUrls = settingsService.getExtensionlessUrls();
+            analyticsScript = settingsService.getAnalyticsScript();
+            useDispatcher = settingsService.getUseDispatcher();
             temporaryDirectory = settingsService.getTemporaryDirectory();
         }
     }
@@ -43,6 +46,10 @@ public class Settings extends WCMUse {
      */
     public String getBlogName() {
         return blogName;
+    }
+    
+    public String getAnalyticsScript() {
+    	return analyticsScript;
     }
 
     /**
@@ -59,7 +66,7 @@ public class Settings extends WCMUse {
      *
      * @return The setting for extensionless URLs.
      */
-    public boolean getExtensionlessUrls() {
-        return extensionlessUrls;
+    public boolean getUseDispatcher() {
+        return useDispatcher;
     }
 }

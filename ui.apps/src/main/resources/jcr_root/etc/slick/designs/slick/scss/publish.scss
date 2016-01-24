@@ -1,3 +1,25 @@
 @import '../fonts/fonts';
 @import 'grid';
 @import 'base';
+
+#content {
+	max-width: 1200px;
+	margin: 0px auto;
+}
+
+header {
+	height: 450px;
+	position: relative;
+}
+
+article {
+	.title {
+		h1,h2 {
+			font-size: 1.6em;
+		}
+	}
+	.content {
+		line-height: 1.8em;
+	}
+	
+}

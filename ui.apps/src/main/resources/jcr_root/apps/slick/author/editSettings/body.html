@@ -4,8 +4,18 @@
 		<sly data-sly-include="subNavigation.html"></sly>
 		<div class="content" data-sly-use.settings="org.millr.slick.components.common.Settings">
 		<form action="settings.edit.json" method="POST">
-			<input type="text" name="blogName" value="${settings.blogName}"/>
-			<input type="submit" value="Save" class="button"/>
+			<div>
+				<input type="text" name="blogName" value="${settings.blogName}"/>
+			</div>
+			<div>
+				<textarea name="analyticsScript">${settings.analyticsScript}</textarea>
+			</div>
+			<div>
+				<input type="checkbox" name="useDispatcher" value="true" data-sly-attribute.checked="${settings.useDispatcher}"> Use Dispatcher
+			</div>
+			<div>
+				<input type="submit" value="Save" class="button"/>
+			</div>
 		</form>
 		</div>
 	</div>

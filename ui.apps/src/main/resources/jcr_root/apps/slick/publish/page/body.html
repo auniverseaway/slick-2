@@ -1,23 +1,3 @@
 <body id="${resource.name}" data-sly-use.view="org.millr.slick.components.common.ViewPage">
-    <img data-sly-test="${view.page.image}" src="${view.external.domain}${view.page.image}"/>
-	<div class="title">
-		<h1>${view.page.title}</h1>
-		<h2>${view.page.author.firstName}</h2>
-	</div>
-	<div class="content">
-		${view.page.content @ context='unsafe'}
-	</div>
-	<div class="meta">
-		<div class="tags">
-			<sly data-sly-list.tag="${page.tags}"><span class="tag">${tag}</span> </sly>
-		</div>
-		<div data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=properties.jcr:created, dateFormat='MMMM, d yyyy'}">
-	    	${format.formattedValue}
-	    </div>
-    </div>
-    <div >
-    	
-    	
-    	
-    </div>
+	${view.page.content @ context='unsafe'}
 </body>

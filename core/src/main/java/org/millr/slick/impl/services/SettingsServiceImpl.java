@@ -24,10 +24,14 @@ import org.osgi.framework.Constants;
               value = SettingsServiceImpl.BLOG_NAME_DEFAULT_VALUE,
               label = "Blog Name",
               description = "The blog name is used throughout the application."),
-    @Property(name = SettingsServiceImpl.SYSTEM_EXTENSIONLESS_URLS,
-              boolValue = SettingsServiceImpl.EXTENSIONLESS_URLS_DEFAULT_VALUE,
-              label = "Extentionless URLs",
-              description = "Enabling extenionless URLs alters links written by the blog engine. "),
+    @Property(name = SettingsServiceImpl.SYSTEM_ANALYTICS_SCRIPT,
+    			value = SettingsServiceImpl.ANALYTICS_SCRIPT_DEFAULT_VALUE,
+    			label = "Analytics Script",
+    			description = "The script provided by your analytics service. This should include the <script> tag."),
+    @Property(name = SettingsServiceImpl.SYSTEM_USE_DISPATCHER,
+              boolValue = SettingsServiceImpl.USE_DISPATCHER_DEFAULT_VALUE,
+              label = "Use Dispatcher",
+              description = "Using a dispatcher will trigger an Apache cache flush on content modification."),
     @Property(name = Constants.SERVICE_DESCRIPTION,
               value = "General blog engine system settings."),
     @Property(name = Constants.SERVICE_VENDOR,
@@ -47,9 +51,12 @@ public class SettingsServiceImpl implements SettingsService {
 
     /** Default value for the blog name */
     public static final String BLOG_NAME_DEFAULT_VALUE = "Slick Blogging Engine";
+    
+    /** Default value for the blog name */
+    public static final String ANALYTICS_SCRIPT_DEFAULT_VALUE = "";
 
     /** Default value for extensionless URLs */
-    public static final boolean EXTENSIONLESS_URLS_DEFAULT_VALUE = false;
+    public static final boolean USE_DISPATCHER_DEFAULT_VALUE = false;
 
     /** Service activation */
     @Activate
@@ -78,7 +85,7 @@ public class SettingsServiceImpl implements SettingsService {
     public String getBlogName() {
         return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_BLOG_NAME, BLOG_NAME_DEFAULT_VALUE);
     }
-
+    
     /**
      * Set the name of the blog.
      *
@@ -88,14 +95,22 @@ public class SettingsServiceImpl implements SettingsService {
     public boolean setBlogName(final String name) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_BLOG_NAME, name);
     }
+    
+    public String getAnalyticsScript() {
+        return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_ANALYTICS_SCRIPT, ANALYTICS_SCRIPT_DEFAULT_VALUE);
+    }
+    
+    public boolean setAnalyticsScript(final String script) {
+        return osgiService.setProperty(COMPONENT_PID, SYSTEM_ANALYTICS_SCRIPT, script);
+    }
 
     /**
      * Get the setting for extensionless URLs.
      *
      * @return The setting for extensionless URLS.
      */
-    public boolean getExtensionlessUrls() {
-        return osgiService.getBooleanProperty(COMPONENT_PID, SYSTEM_EXTENSIONLESS_URLS, EXTENSIONLESS_URLS_DEFAULT_VALUE);
+    public boolean getUseDispatcher() {
+        return osgiService.getBooleanProperty(COMPONENT_PID, SYSTEM_USE_DISPATCHER, USE_DISPATCHER_DEFAULT_VALUE);
     }
 
     /**
@@ -104,8 +119,8 @@ public class SettingsServiceImpl implements SettingsService {
      * @param value The setting for extensionless URLs.
      * @return true if the save was successful.
      */
-    public boolean setExtensionlessUrls(final boolean value) {
-        return osgiService.setProperty(COMPONENT_PID, SYSTEM_EXTENSIONLESS_URLS, value);
+    public boolean setUseDispatcher(final boolean value) {
+        return osgiService.setProperty(COMPONENT_PID, SYSTEM_USE_DISPATCHER, value);
     }
 
     /**
