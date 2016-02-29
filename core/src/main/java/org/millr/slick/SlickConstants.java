@@ -13,7 +13,7 @@ public final class SlickConstants {
     public static final String AUTHOR_PATH = CONTENT_PATH + "/author";
     
     /** Publish Path **/
-    public static final String PUBLISH_PATH = CONTENT_PATH + "/publish";
+    public static final String PUBLISH_PATH = CONTENT_PATH + "";
     
     public static final String POSTS_PATH = PUBLISH_PATH + "/posts";
     
