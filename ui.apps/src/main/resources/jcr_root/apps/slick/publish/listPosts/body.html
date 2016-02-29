@@ -1,3 +1,17 @@
-<body id="listPosts">
-	${properties.description}
+<body id="listPosts" data-sly-use.settings="org.millr.slick.components.common.Settings">
+	<div id="content">
+		<sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
+			<sly data-sly-resource="${page.path @ resourceType='slick/publish/listPost'}"/>
+	  	</sly>
+
+	  	<div class="Grid Fit-Small" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
+			<div class="Cell">
+				<a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
+			</div>
+			<div class="Cell align-right">
+				<a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
+		 	</div>
+	    </div>
+    </div>
+
 </body>

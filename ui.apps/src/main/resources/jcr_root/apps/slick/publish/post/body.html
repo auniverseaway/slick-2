@@ -4,7 +4,9 @@
 		<article>
 		    <div class="Grid Fit-Medium title">
 				<h1 class="Cell">${view.page.title}</h1>
-				<h2 class="Cell">${view.page.author.firstName}</h2>
+				<h2 class="Cell align-right" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=properties.jcr:created, dateFormat='MMMM, d yyyy'}">
+					${format.formattedValue}
+				</h2>
 			</div>
 			<div class="content">
 				${view.page.content @ context='unsafe'}
@@ -13,15 +15,9 @@
 				<div class="Cell tags">
 					<sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span> </sly>
 				</div>
-				<div class="Cell date" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=properties.jcr:created, dateFormat='MMMM, d yyyy'}">
-			    	${format.formattedValue}
-			    </div>
+				<div class="Cell align-right"><span class="author">${'by' @ i18n}: ${view.page.author.firstName}</span>
+			 	</div>
 		    </div>
 	    </article>
     </section>
-    <div >
-    	
-    	
-    	
-    </div>
 </body>

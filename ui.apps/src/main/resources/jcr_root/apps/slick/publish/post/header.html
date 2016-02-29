@@ -1,4 +1,6 @@
-<template data-sly-template.header="${@ view}">
+<template data-sly-use.settings="org.millr.slick.components.common.Settings"
+		  data-sly-template.header="${@ view}" 
+		  data-sly-test.headerBg="${view.page.image ? view.page.image : settings.headerImage}">
 <style scoped>
 	.cover {
 		position: absolute;
@@ -6,7 +8,7 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		background: url('${view.page.image @ context='uri'}') center center no-repeat;
+		background: url('${headerBg @ context='uri'}') center center no-repeat;
 		background-size:cover;
 	}
 </style>

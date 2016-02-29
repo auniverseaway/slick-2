@@ -19,6 +19,8 @@ public class Settings extends WCMUse {
     private String blogName;
     
     private String analyticsScript;
+    
+    private String headerImage;
 
     private boolean useDispatcher;
 
@@ -33,6 +35,7 @@ public class Settings extends WCMUse {
             blogName = settingsService.getBlogName();
             analyticsScript = settingsService.getAnalyticsScript();
             useDispatcher = settingsService.getUseDispatcher();
+            headerImage = settingsService.getDefaultHeaderImage();
         }
     }
 
@@ -47,6 +50,10 @@ public class Settings extends WCMUse {
     
     public String getAnalyticsScript() {
     	return analyticsScript;
+    }
+    
+    public String getHeaderImage() {
+    	return headerImage;
     }
 
     /**

@@ -30,3 +30,7 @@
 [slick:page] > nt:unstructured
 	- title (string)
 	- description (string)
+	
+[slick:post] > nt:unstructured
+	- title (string)
+	- description (string)

@@ -28,6 +28,10 @@ import org.osgi.framework.Constants;
     			value = SettingsServiceImpl.ANALYTICS_SCRIPT_DEFAULT_VALUE,
     			label = "Analytics Script",
     			description = "The script provided by your analytics service. This should include the <script> tag."),
+    @Property(name = SettingsServiceImpl.SYSTEM_HEADER_IMAGE,
+				value = SettingsServiceImpl.HEADER_IMAGE_DEFAULT_VALUE,
+				label = "Header Image",
+				description = "The default post header image if one has not been set."),
     @Property(name = SettingsServiceImpl.SYSTEM_USE_DISPATCHER,
               boolValue = SettingsServiceImpl.USE_DISPATCHER_DEFAULT_VALUE,
               label = "Use Dispatcher",
@@ -54,6 +58,9 @@ public class SettingsServiceImpl implements SettingsService {
     
     /** Default value for the analytics script */
     public static final String ANALYTICS_SCRIPT_DEFAULT_VALUE = "";
+    
+    /** Default value for the analytics script */
+    public static final String HEADER_IMAGE_DEFAULT_VALUE = "/etc/slick/designs/slick/img/default-header-image.jpg";
 
     /** Default value for using a dispatcher. */
     public static final boolean USE_DISPATCHER_DEFAULT_VALUE = false;
@@ -88,6 +95,14 @@ public class SettingsServiceImpl implements SettingsService {
     
     public boolean setAnalyticsScript(final String script) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_ANALYTICS_SCRIPT, script);
+    }
+    
+    public String getDefaultHeaderImage() {
+        return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_HEADER_IMAGE, HEADER_IMAGE_DEFAULT_VALUE);
+    }
+    
+    public boolean setDefaultHeaderImage(final String imageUri) {
+        return osgiService.setProperty(COMPONENT_PID, SYSTEM_HEADER_IMAGE, imageUri);
     }
 
     /**

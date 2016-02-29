@@ -15,6 +15,7 @@ import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
 import org.millr.slick.SlickConstants;
+import org.millr.slick.utils.TrimString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,8 +32,7 @@ public class Page
 	@Inject @Optional
     private String content;
 	
-	@Inject @Optional
-    private String description;
+	private String description;
 	
 	@Inject @Optional
     private String[] tags;
@@ -66,9 +66,11 @@ public class Page
 	public Iterator<Page> children;
 	
 	public Page(final Resource resource) {
+		LOGGER.info("In Constructor");
 		this.resource = resource;
 		this.author = resource.adaptTo(Author.class);
-    }
+		this.properties = getProperties();
+	}
 	
 	public String getName() {
 		return resource.getName();
@@ -96,6 +98,12 @@ public class Page
     }
 	
 	public String getDescription() {
+		if(properties.containsKey("description")) {
+			this.description = properties.get("description", (String)"");
+		} else {
+			TrimString ts = new TrimString(content,140,false);
+			this.description = ts.trimmedString;
+		}		
 		return description;
 	}
 	
@@ -109,6 +117,7 @@ public class Page
 
     public ValueMap getProperties()
     {
+    	LOGGER.info("In get properties.");
         return resource.adaptTo(ValueMap.class);
     }
     

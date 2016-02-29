@@ -33,8 +33,7 @@ public class CurrentUser {
 			displayName = currentUserService.getFirstName(resourceResolver);
 		} catch (Exception e) {
 			displayName = currentUserService.getId(resourceResolver);
-		}	
-		
+		}
 		return displayName;
 	}
 }

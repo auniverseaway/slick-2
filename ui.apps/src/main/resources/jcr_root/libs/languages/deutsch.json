@@ -6,5 +6,10 @@
     "jcr:primaryType": "nt:folder",
     "jcr:mixinTypes": ["sling:Message"],
     "sling:message": "hallo"
+  },
+  "by": {
+    "jcr:primaryType": "nt:folder",
+    "jcr:mixinTypes": ["sling:Message"],
+    "sling:message": "durch"
   }
 }

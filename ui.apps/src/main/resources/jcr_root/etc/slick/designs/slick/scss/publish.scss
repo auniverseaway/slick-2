@@ -1,10 +1,11 @@
 @import '../fonts/fonts';
 @import 'grid';
 @import 'base';
+@import 'variables';
 
 #content {
 	max-width: 1200px;
-	margin: 0px auto;
+	margin: 100px auto 0 auto;
 }
 
 header {
@@ -13,13 +14,35 @@ header {
 }
 
 article {
+	margin-bottom: 100px;
 	.title {
 		h1,h2 {
 			font-size: 1.6em;
 		}
 	}
+	img {
+		max-width: 100%;
+		margin-bottom: $slick-gutter * 2;
+	}
 	.content {
 		line-height: 1.8em;
+	}
+	.tags {
+		.tag {
+    		display: inline-block;
+    		padding: 0 10px 0 10px;
+    		background: rgba(165, 226, 249, 0.92);
+    		margin-right: $slick-gutter;
+    		margin-bottom: 14px;
+    		font-family: GothamLightRegular;
+    		text-transform: none;
+    		line-height: 30px;
+			color: #000;   		
+    	}
+	}
+
+	.author {
+		line-height: 30px;
 	}
 	
 }

@@ -83,7 +83,13 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, "slick/publish/" + resourceType);
 		properties.put("title", title);
 		properties.put("content", content);
-		properties.put("description", description);
+		
+		// Check to see if description is empty
+		if(!description.isEmpty()){
+			LOGGER.info("Description is not null.");
+			properties.put("description", description);
+		}
+		
 		
 		if (tags != null) {
             properties.put("tags", tags);
@@ -98,7 +104,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		Resource post = resolver.getResource(existingPath);
 		
 		if (post != null) {
-			LOGGER.info("NOT NULL");
+			LOGGER.info("Saving existing post.");
 			ModifiableValueMap existingProperties = post.adaptTo(ModifiableValueMap.class);
 			existingProperties.putAll(properties);
 			
@@ -108,7 +114,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 			}
 			
 		} else {
-			LOGGER.info("NULL");
+			LOGGER.info("Creating New Post.");
 			post = resolver.create(myResource, name, properties);
 		}
 		

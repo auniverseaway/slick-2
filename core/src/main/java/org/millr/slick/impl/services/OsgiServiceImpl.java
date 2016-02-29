@@ -25,7 +25,7 @@ import org.millr.slick.services.OsgiService;
  * Service to interact with OSGi configurations.
  */
 @Service
-@Component(name = "Slick OSGi Service",description = "Programatically set properties of OSGi configurations.")
+@Component(name = "Slick OSGi Service", description = "Programatically set properties of OSGi configurations.")
 public class OsgiServiceImpl implements OsgiService {
 
     /** The service to get OSGi configs */

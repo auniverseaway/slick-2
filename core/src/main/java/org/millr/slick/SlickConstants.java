@@ -15,6 +15,13 @@ public final class SlickConstants {
     /** Publish Path **/
     public static final String PUBLISH_PATH = CONTENT_PATH + "/publish";
     
+    public static final String POSTS_PATH = PUBLISH_PATH + "/posts";
+    
+    
+    public static final String SLICK_BASE_RESOURCE_TYPE = "slick";
+    
+    public static final String POST_RESOURCE_TYPE = "slick/publish/post";
+    
     /** Publish Path **/
     public static final String MEDIA_PATH = PUBLISH_PATH + "/media";
     
@@ -44,4 +51,15 @@ public final class SlickConstants {
     
     /** Slick Default Blog Values **/
     public static final String SETTINGS_PATH = ETC_PATH + "/settings/slick";
+    
+    /** Slick Node Types **/
+    /** Defined in ui.apps/../SLING-INF **/
+    public static final String NODE_TYPE = "slick";
+    
+    /** Slick Post Type **/
+    public static final String NODE_POST_TYPE = NODE_TYPE + ":page";
+    
+    public static final String PAGINATION_QUERY_STRING = "page";
+    
+    public static final Long PAGINATION_SIZE = 5L;
 }
