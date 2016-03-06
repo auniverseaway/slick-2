@@ -16,9 +16,9 @@ import org.millr.slick.services.CurrentUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CurrentUserServiceImpl.
+ * This class will get the current logged in user details.
  */
 @Service
 @Component

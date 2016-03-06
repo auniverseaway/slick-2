@@ -1,7 +1,5 @@
 package org.millr.slick.impl.services;
 
-import java.util.Iterator;
-
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;

@@ -1,10 +1,6 @@
 package org.millr.slick.components.common;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -13,7 +9,6 @@ import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.millr.slick.SlickConstants;
 import org.millr.slick.services.PostService;
-import org.millr.slick.utils.Externalizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

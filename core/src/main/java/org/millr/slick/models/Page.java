@@ -66,7 +66,7 @@ public class Page
 	public Iterator<Page> children;
 	
 	public Page(final Resource resource) {
-		LOGGER.info("In Constructor");
+		LOGGER.info(">>>>> In Constructor");
 		this.resource = resource;
 		this.author = resource.adaptTo(Author.class);
 		this.properties = getProperties();

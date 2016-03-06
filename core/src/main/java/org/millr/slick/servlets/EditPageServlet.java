@@ -47,7 +47,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
      *
      * Creates blog path and saves properties. If blog resource already
      * exists, the resource is updated with new properties. Saves file
-     * to the assets folder using the FileUploadService.
+     * to the media folder using the UploadService.
      */
 	
 	@Reference
@@ -55,7 +55,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 	
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-		LOGGER.info("*** In doPost ***");
+		LOGGER.debug(">>>> Entering doPost");
 		
 		ResourceResolver resolver = request.getResourceResolver();
 		
@@ -75,21 +75,19 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		
 		String existingPath = myResource.getPath() + "/" + name;
 		
-		LOGGER.info(existingPath);
-		
 		Map<String,Object> properties = new HashMap<String,Object>();
 		
 		properties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:page");
 		properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, "slick/publish/" + resourceType);
 		properties.put("title", title);
 		properties.put("content", content);
+		properties.put("slickType", slickType);
 		
 		// Check to see if description is empty
 		if(!description.isEmpty()){
 			LOGGER.info("Description is not null.");
 			properties.put("description", description);
-		}
-		
+		}		
 		
 		if (tags != null) {
             properties.put("tags", tags);
@@ -108,7 +106,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 			ModifiableValueMap existingProperties = post.adaptTo(ModifiableValueMap.class);
 			existingProperties.putAll(properties);
 			
-			// If all tags were removed, remove them from existing properties
+			// If all tags were removed on an existing post, remove them from existing properties
 			if (tags == null){
 				existingProperties.remove("tags");
 			}
@@ -131,6 +129,6 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		resolver.close();
 		
 		response.sendRedirect(post.getPath() + SlickConstants.PAGE_EXTENSION);
-		
+		LOGGER.debug("<<<< Leaving doPost");
 	}
 }

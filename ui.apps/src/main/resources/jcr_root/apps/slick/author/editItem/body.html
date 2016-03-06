@@ -31,7 +31,36 @@
 						<img data-sly-test="${editBlog.post.image}" src="${editBlog.post.image}" class="featured-image" alt="Featured Image"/>
 					</section>
 				</section>
-				<section class="content">
+				<section class="content" id="content-editor">
+          <div id="wysihtml5-editor-toolbar">
+  					<header>
+              <ul class="commands">
+                <li data-wysihtml5-command="bold" title="Make text bold (CTRL + B)" class="command"></li>
+                <li data-wysihtml5-command="italic" title="Make text italic (CTRL + I)" class="command"></li>
+                <li data-wysihtml5-command="insertUnorderedList" title="Insert an unordered list" class="command"></li>
+                <li data-wysihtml5-command="insertOrderedList" title="Insert an ordered list" class="command"></li>
+                <li data-wysihtml5-command="createLink" title="Insert a link" class="command"></li>
+                <li data-wysihtml5-dialog="createLink" style="display: none;">
+                  <div class="dialog-container">
+                    <input data-wysihtml5-dialog-field="href" value="http://">
+                    <a data-wysihtml5-dialog-action="save">OK</a>
+                  </div>
+                </li>
+                <li data-wysihtml5-command="insertImage" title="Insert an image" class="command"></li>
+                <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" title="Insert headline 1" class="command"></li>
+                <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" title="Insert headline 2" class="command"></li>
+                <li data-wysihtml5-command="insertSpeech" title="Insert speech" class="command"></li>
+                <li data-wysihtml5-action="change_view" title="Show HTML" class="action"></li>
+              </ul>
+            </header>
+            <div data-wysihtml5-dialog="insertImage" style="display: none;">
+              <label>
+                Image:
+                <input data-wysihtml5-dialog-field="src" value="http://">
+              </label>
+              <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+            </div>
+          </div>
 					<textarea name="content" id="editor" class="editor-area" rows="32" tabindex="2" placeholder="add content">${editBlog.post.content}</textarea>
 				</section>
 				<section class="publish">
@@ -42,4 +71,20 @@
 		</div>
 	</div>
 	<sly data-sly-include="scripts.html"></sly>
+  <script>
+      var editor = new wysihtml5.Editor("editor", {
+        toolbar:     "wysihtml5-editor-toolbar",
+        contentEditableMode: true,
+        useLineBreaks: false,
+        parserRules: wysihtml5ParserRules
+      });
+      
+      editor.on("load", function() {
+        var composer = editor.composer,
+            h1 = editor.composer.element.querySelector("h1");
+        if (h1) {
+          composer.selection.selectNode(h1);
+        }
+      });
+    </script>
 </body>

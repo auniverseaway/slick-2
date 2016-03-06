@@ -106,33 +106,27 @@ public class Activator implements BundleActivator {
             try {
                 Principal everyonePrincipal =  AccessControlUtils.getEveryonePrincipal(session);
 
+                // Clear all permissions to publish, then selectively add back.
+                AccessControlUtils.clear(session, SlickConstants.CONTENT_PATH);
+                AccessControlUtils.denyAllToEveryone(session, SlickConstants.CONTENT_PATH);
+                
+                Node postsNode = session.getNode(SlickConstants.POSTS_PATH);
+                Node pagesNode = session.getNode(SlickConstants.PAGES_PATH);
+                Node mediaNode = session.getNode(SlickConstants.MEDIA_PATH);
+                Node loginNode = session.getNode(SlickConstants.LOGIN_PATH);
+                
+                AccessControlUtils.allow(postsNode, "authors", Privilege.JCR_ALL);
+                AccessControlUtils.allow(pagesNode, "authors", Privilege.JCR_ALL);
+                AccessControlUtils.allow(mediaNode, "authors", Privilege.JCR_ALL);
+                
+                AccessControlUtils.allow(postsNode, everyonePrincipal.getName(), Privilege.JCR_READ);
+                AccessControlUtils.allow(pagesNode, everyonePrincipal.getName(), Privilege.JCR_READ);
+                AccessControlUtils.allow(mediaNode, everyonePrincipal.getName(), Privilege.JCR_READ);
+                AccessControlUtils.allow(loginNode, everyonePrincipal.getName(), Privilege.JCR_READ);
+                
                 AccessControlUtils.clear(session, SlickConstants.AUTHOR_PATH);
                 AccessControlUtils.denyAllToEveryone(session, SlickConstants.AUTHOR_PATH);
                 AccessControlUtils.allow(session.getNode(SlickConstants.AUTHOR_PATH), "authors", Privilege.JCR_ALL);
-                
-                // Clear all permissions to publish, then selectively add back.
-                AccessControlUtils.clear(session, SlickConstants.PUBLISH_PATH);
-                AccessControlUtils.denyAllToEveryone(session, SlickConstants.PUBLISH_PATH);
-                
-                Node publishNode = session.getNode(SlickConstants.PUBLISH_PATH);
-                AccessControlUtils.allow(publishNode, "authors", Privilege.JCR_ALL);
-                AccessControlUtils.allow(publishNode, everyonePrincipal.getName(), Privilege.JCR_READ);
-                
-
-                // Clear all permissions to publish, then selectively add back.
-                // AccessControlUtils.clear(session, SlickConstants.PUBLISH_PATH);
-                
-                // Deny jcr:all privilege to the everyone group principal
-                // AccessControlUtils.denyAllToEveryone(session, SlickConstants.PUBLISH_PATH);
-                
-                // Store the publish path
-                // Node publishPath = session.getNode("/content/slick/publish");
-                
-                // Allow everyone to read publish paths.
-                // AccessControlUtils.allow(publishPath, everyonePrincipal.getName(), Privilege.JCR_READ);
-                                
-                // Allow any author to jcr:all the publish path
-                // AccessControlUtils.allow(publishPath, "authors", Privilege.JCR_ALL);
 
                 session.save();
             } catch (Exception e) {

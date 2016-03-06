@@ -57,9 +57,9 @@ public class Settings extends WCMUse {
     }
 
     /**
-     * Get the setting for extensionless URLs.
+     * Get the setting for using a dispatcher.
      *
-     * @return The setting for extensionless URLs.
+     * @return The setting for using a dispatcher.
      */
     public boolean getUseDispatcher() {
         return useDispatcher;

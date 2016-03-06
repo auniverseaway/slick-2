@@ -12,18 +12,23 @@ public final class SlickConstants {
     /** Author Path **/
     public static final String AUTHOR_PATH = CONTENT_PATH + "/author";
     
+    /** Login Path **/
+    public static final String LOGIN_PATH = CONTENT_PATH + "/login";
+    
     /** Publish Path **/
     public static final String PUBLISH_PATH = CONTENT_PATH + "";
     
     public static final String POSTS_PATH = PUBLISH_PATH + "/posts";
     
+    /** Pages Path **/
+    public static final String PAGES_PATH = PUBLISH_PATH + "/pages";
+    
+    /** Media Path **/
+    public static final String MEDIA_PATH = PUBLISH_PATH + "/media";
     
     public static final String SLICK_BASE_RESOURCE_TYPE = "slick";
     
     public static final String POST_RESOURCE_TYPE = "slick/publish/post";
-    
-    /** Publish Path **/
-    public static final String MEDIA_PATH = PUBLISH_PATH + "/media";
     
     /** Apps Path **/
     public static final String APP_PATH = "/apps/slick";

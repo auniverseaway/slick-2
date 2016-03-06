@@ -302,6 +302,10 @@ header {
 
 // Edit Screen
 
+#content-editor {
+    position: relative;
+}
+
 #title-section, #seo-section {
     
     position: relative;
@@ -429,12 +433,132 @@ header {
 	}
 }
 
-#editor {
+// wysiwyg5x editor
+
+#wysihtml5-editor-toolbar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: $light-green;
+
+    header {
+        padding: 0;
+    }
+
+    [data-wysihtml5-command],
+    [data-wysihtml5-action],
+    .fore-color {
+      position: relative;
+      list-style: none;
+      font-size: 12px;
+      display: block;
+      cursor: pointer;
+      height: 60px;
+      width: 60px;
+    }
+
+    [data-wysihtml5-command='bold'] {
+        background: url('../img/author/icon-bold.svg') center no-repeat;
+    }
+
+    [data-wysihtml5-command='italic'] {
+        background: url('../img/author/icon-italic.svg') center no-repeat;
+    }
+
+    [data-wysihtml5-command='insertUnorderedList'] {
+        background: url('../img/author/icon-ul.svg') center no-repeat;
+    }
+
+    [data-wysihtml5-command='insertOrderedList'] {
+        background: url('../img/author/icon-ol.svg') center no-repeat;
+    }
+
+    [data-wysihtml5-command='createLink'] {
+        background: url('../img/author/icon-link.svg') center no-repeat;
+
+        &.wysihtml5-command-dialog-opened {
+            background: #cc8579 url('../img/author/icon-link-opened.svg') center no-repeat;
+        }
+    }
+
+    [data-wysihtml5-command='insertImage'] {
+        background: url('../img/author/icon-image.svg') center no-repeat;
+    }
+
+    [data-wysihtml5-command-value='h1'] {
+        background: url('../img/author/icon-h1.svg') center no-repeat;
+    }
+
+    [data-wysihtml5-command-value='h2'] {
+        background: url('../img/author/icon-h2.svg') center no-repeat;
+    }
+
+    [data-wysihtml5-action='change_view'] {
+        background: url('../img/author/icon-toggle.svg') center no-repeat;
+    }
+
+    [data-wysihtml5-dialog='createLink'], [data-wysihtml5-dialog='insertImage'] {
+        position: relative;
+        
+        .dialog-container {
+            position: absolute;
+            right: 60px;
+            top: -60px;
+            height: 60px;
+            width: 400px;
+            background: #f3f3f3;
+
+            input {
+                padding: 0 20px;
+                position: absolute;
+                top: 0;
+                right: 60px;
+                bottom: 0;
+                width: 100%;
+                background-color: $light-gray;
+                border: none;
+                outline: none;
+                font-size: 1em;
+            }
+
+            a {
+                display: block;
+                float: right;
+                font-size: 1em;
+                width: 60px;
+                height: 60px;
+                background-color: $slick-green;
+                color: $light-green;
+                font-size: 1em;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+
+        
+
+    }
+
+    
+
+    
+
+}
+
+#editor, .editor-area.wysihtml5-editor {
     width: 100%;
+    min-height: 600px;
     border: none;
     background: $light-ultra-gray;
     padding: $slick-gutter * 2;
     font-size: 1em;
+    outline: none;
+
+    p {
+        margin-top: 0;
+    }
+
 }
 
 // Footer

@@ -1,19 +1,13 @@
 package org.millr.slick.components.common;
 
-import java.util.Iterator;
-
-import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.millr.slick.SlickConstants;
-import org.millr.slick.models.Page;
 import org.millr.slick.services.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

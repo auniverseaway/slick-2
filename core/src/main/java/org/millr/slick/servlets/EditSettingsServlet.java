@@ -45,6 +45,8 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
 	private static final String USE_DISPATCHER_PROPERTY = "useDispatcher";
 	
 	private static final String TEMPORARY_DIRECTORY_PROPERTY = "temporaryDirectory";
+	
+	private static final String DEFAULT_HEADER_IMAGE = "defaultImage";
 
 	@Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
@@ -61,15 +63,14 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
             final String blogName = request.getParameter(BLOG_NAME_PROPERTY);
             final String analyticsScript = request.getParameter(ANALYTICS_SCRIPT_PROPERTY);
             final boolean useDispatcher = Boolean.parseBoolean(request.getParameter(USE_DISPATCHER_PROPERTY));
-            LOGGER.info(USE_DISPATCHER_PROPERTY);
-            LOGGER.info("USE DISPATCHER VALUE: " + String.valueOf(useDispatcher));
-            final String tempDir = request.getParameter(TEMPORARY_DIRECTORY_PROPERTY);
+            final String defaultHeaderImage = request.getParameter(DEFAULT_HEADER_IMAGE);
 
             final Map<String, Object> properties = new HashMap<String, Object>();
 
             properties.put(SettingsService.SYSTEM_BLOG_NAME, blogName);
             properties.put(SettingsService.SYSTEM_ANALYTICS_SCRIPT, analyticsScript);
             properties.put(SettingsService.SYSTEM_USE_DISPATCHER, useDispatcher);
+            properties.put(SettingsService.SYSTEM_HEADER_IMAGE, defaultHeaderImage);
             boolean result = settingsService.setProperties(properties);
 
             if (result) {

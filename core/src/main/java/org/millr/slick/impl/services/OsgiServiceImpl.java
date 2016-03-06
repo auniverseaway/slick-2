@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.millr.slick.services.OsgiService;
 
 /**
- * Service to interact with OSGi configurations.
+ * The base service to interact with OSGi configurations.
  */
 @Service
 @Component(name = "Slick OSGi Service", description = "Programatically set properties of OSGi configurations.")
