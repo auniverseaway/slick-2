@@ -2,6 +2,7 @@
 @import 'grid';
 @import 'base';
 @import 'variables';
+@import 'rome';
 
 // Mixins
 @mixin clearfix {
@@ -300,6 +301,23 @@ header {
 
 // List Screen
 
+.list-items {
+    article {
+        padding: 0 $slick-gutter * 2;
+        transition: background-color 0.24s ease;
+
+        h1, h2 {
+            font-size: 1.2em;
+            line-height: 60px;
+        }
+
+        &:hover {
+            background-color: #e6e6e6;
+        }
+    }
+}
+
+
 // Edit Screen
 
 #content-editor {
@@ -324,9 +342,15 @@ header {
         position: absolute;
         right: 0;
         top: 0;
-        background: $light-green url("../img/button-seo.svg") no-repeat;
+        background-color: $light-green;
+        background-image: url("../img/button-seo.svg");
+        background-size: 60px;
         text-indent: 1000px;
         overflow: hidden;
+
+        &:hover {
+            background-color: lighten($light-green, 5%);
+        }
     }
     
     .edit-label-input  {
@@ -456,6 +480,12 @@ header {
       cursor: pointer;
       height: 60px;
       width: 60px;
+      transition: background-color 0.24s ease;
+
+      &:hover {
+        background-color: rgba(255,255,255,.25);
+      }
+
     }
 
     [data-wysihtml5-command='bold'] {
@@ -484,6 +514,10 @@ header {
 
     [data-wysihtml5-command='insertImage'] {
         background: url('../img/author/icon-image.svg') center no-repeat;
+
+        &.wysihtml5-command-dialog-opened {
+            background: #cc8579 url('../img/author/icon-image-opened.svg') center no-repeat;
+        }
     }
 
     [data-wysihtml5-command-value='h1'] {
@@ -535,23 +569,17 @@ header {
                 cursor: pointer;
             }
         }
-
-        
-
     }
-
-    
-
-    
-
 }
+
+
 
 #editor, .editor-area.wysihtml5-editor {
     width: 100%;
     min-height: 600px;
     border: none;
     background: $light-ultra-gray;
-    padding: $slick-gutter * 2;
+    padding: $slick-gutter * 2 88px $slick-gutter * 2 $slick-gutter * 2;
     font-size: 1em;
     outline: none;
 
@@ -559,6 +587,33 @@ header {
         margin-top: 0;
     }
 
+    img {
+        max-width: 50%;
+    }
+
+}
+
+// Editor Publish Section
+#publish-section {
+    position: relative;
+
+    #dateInput {
+        height: 60px;
+        line-height: 60px;
+        width: 212px;
+        border: none;
+        display: block;
+        float: right;
+        padding: 0 $slick-gutter;
+        font-size: 1.2em;
+    }
+
+    .button {
+        height: 60px;
+        min-width: 140px;
+        display: block;
+        float: right;
+    }
 }
 
 // Footer

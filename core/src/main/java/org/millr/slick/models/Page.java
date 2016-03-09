@@ -46,6 +46,9 @@ public class Page
 	@Inject @Optional @Named("jcr:created")
     private Calendar created;
 	
+	@Inject @Optional
+    private Calendar publishDate;
+	
 	private Author author;
 	
 	@Inject @Optional
@@ -124,6 +127,11 @@ public class Page
     public Calendar getCreated()
     {
     	return created;
+    }
+    
+    public Calendar getPublishDate()
+    {
+    	return publishDate;
     }
     
     public Author getAuthor() {

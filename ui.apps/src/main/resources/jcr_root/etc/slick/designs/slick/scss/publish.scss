@@ -9,8 +9,34 @@
 }
 
 header {
-	height: 450px;
+	height: 480px;
 	position: relative;
+
+	#nav-share {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		text-transform: uppercase;
+		background-color: rgba(222,242,251,.90);
+		padding: 0 $slick-gutter;
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+
+			li {
+				line-height: 60px;
+				display: inline-block;
+				padding: 0 $slick-gutter;
+			}
+		}
+
+		#nav {
+			float: left;
+		}
+	}
 }
 
 article {
@@ -44,5 +70,21 @@ article {
 	.author {
 		line-height: 30px;
 	}
-	
+
+	#share {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		float: right;
+		li {
+			display: inline-block;
+			a {
+
+			}
+		}
+	}
+}
+
+#pagination {
+	margin-bottom: 100px;
 }

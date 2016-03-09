@@ -4,7 +4,7 @@
 			<sly data-sly-resource="${page.path @ resourceType='slick/publish/listPost'}"/>
 	  	</sly>
 
-	  	<div class="Grid Fit-Small" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
+	  	<div id="pagination" class="Grid Fit-Small" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
 			<div class="Cell">
 				<a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
 			</div>

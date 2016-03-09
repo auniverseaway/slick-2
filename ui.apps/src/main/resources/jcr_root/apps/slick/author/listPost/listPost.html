@@ -1,8 +1,6 @@
-<article data-sly-use.page="org.millr.slick.models.Page">
-	<div class="Grid Fit-Medium title">
-		<h1 class="Cell"><a href="${page.slickType}/edit.html?edit=${page.name}">${page.title}</a></h1>
-		<h2 class="Cell align-right" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=properties.jcr:created, dateFormat='MMMM, d yyyy'}">
-			${format.formattedValue}
-		</h2>
-	</div>
+<article data-sly-use.page="org.millr.slick.models.Page" class="Grid Fit-Medium title">
+	<h1 class="Cell Medium-85"><a href="${page.slickType}/edit.html?edit=${page.name}">${page.title}</a></h1>
+	<h2 class="Cell align-right" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=page.publishDate, dateFormat='MMMM, d yyyy'}">
+		${format.formattedValue}
+	</h2>
 </article>

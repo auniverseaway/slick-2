@@ -13,4 +13,22 @@
 	}
 </style>
 <div class="cover"></div>
+<sly data-sly-test="${!view.page.image}">
+	<style scoped>
+		.slick-logo {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 60px;
+			left: 0;
+			background: url('/etc/slick/designs/slick/img/slick-logo.svg') center/10em no-repeat;
+		}
+	</style>
+	<div class="slick-logo"></div>
+</sly>
+<section id="nav-share">
+	<ul id="nav">
+		<li><a href="${view.external.domain}">${settings.blogName}</a></li>
+	</ul>
+</section>
 </template>

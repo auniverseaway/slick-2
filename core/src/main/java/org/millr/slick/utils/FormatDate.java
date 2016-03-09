@@ -9,6 +9,9 @@ import javax.inject.Inject;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.models.annotations.Model;
+import org.millr.slick.models.Page;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The Class FormatDate.
@@ -16,6 +19,8 @@ import org.apache.sling.models.annotations.Model;
  */
 @Model(adaptables=SlingHttpServletRequest.class)
 public class FormatDate {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(FormatDate.class);
 	
 	/** The date format. */
 	@Inject
@@ -35,7 +40,7 @@ public class FormatDate {
 	protected void init() {
 		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 		// TODO: Pull timezone from OSGI config.
-		formatter.setTimeZone(TimeZone.getTimeZone("America/Denver"));
+		formatter.setTimeZone(TimeZone.getDefault());
 	    formattedValue = formatter.format(date.getTime());
 	}
 }

@@ -1,11 +1,14 @@
 package org.millr.slick.components.common;
 
+import javax.inject.Inject;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.Via;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.millr.slick.SlickConstants;
 import org.millr.slick.services.PostService;
@@ -25,6 +28,9 @@ public class ListPosts {
     
     private static final String PAGE_SIZE_PROPERTY = "pageSize";
     
+    @Inject @Via("resource")
+    public String slickType;
+    
     @OSGiService
 	private PostService postService = null;
     
@@ -39,7 +45,7 @@ public class ListPosts {
     
     public NodeIterator getPosts() {
     	final Long offset = getOffset();
-    	posts = postService.getPosts(session, offset, SlickConstants.PAGINATION_SIZE);
+    	posts = postService.getPosts(session, offset, SlickConstants.PAGINATION_SIZE, slickType);
     	return posts;
     }
     
@@ -58,5 +64,10 @@ public class ListPosts {
         } else {
             return (offset - 1) * SlickConstants.PAGINATION_SIZE;
         }
+    }
+    
+    public String getSlickType()
+    {
+    	return slickType;
     }
 }

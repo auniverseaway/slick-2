@@ -3,7 +3,8 @@
     "sling.auth.requirements": [
       "/",
       "-/etc/slick/designs",
-      "-/content/slick/publish",
-      "-/content/slick/login"
+      "-/content/slick",
+      "-/content/slick/login",
+      "+/content/slick/author"
     ]
 }

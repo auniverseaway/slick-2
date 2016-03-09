@@ -3,8 +3,8 @@
 	<section id="content">
 		<article>
 		    <div class="Grid Fit-Medium title">
-				<h1 class="Cell">${view.page.title}</h1>
-				<h2 class="Cell align-right" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=properties.jcr:created, dateFormat='MMMM, d yyyy'}">
+				<h1 class="Cell"><a href="${view.external.url}">${view.page.title}</a></h1>
+				<h2 class="Cell align-right" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=view.page.publishDate, dateFormat='MMMM, d yyyy'}">
 					${format.formattedValue}
 				</h2>
 			</div>
@@ -15,8 +15,13 @@
 				<div class="Cell tags">
 					<sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span> </sly>
 				</div>
-				<div class="Cell align-right"><span class="author">${'by' @ i18n}: ${view.page.author.firstName}</span>
+				<div class="Cell align-right"><span class="author">${'by' @ i18n}: ${view.page.author.firstName} ${view.page.author.lastName}</span>
 			 	</div>
+		    </div>
+		    <div>
+		    	<ul id="share">
+					<li>Share</li><li><a href="#">Twitter</a></li><li><a href="#">Facebook</a></li><li><a href="#">LinkedIn</a></li>
+				</ul>
 		    </div>
 	    </article>
     </section>

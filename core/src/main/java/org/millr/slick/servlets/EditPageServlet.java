@@ -1,7 +1,16 @@
 package org.millr.slick.servlets;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.jcr.Node;
@@ -20,6 +29,7 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.jcr.resource.JcrResourceConstants;
 import org.millr.slick.SlickConstants;
+import org.millr.slick.services.CurrentUserService;
 import org.millr.slick.services.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,6 +78,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		final String[] tags = request.getParameterValues("tags");
 		final String slickType = request.getParameter("slickType");
 		final String resourceType = slickType.substring(0, slickType.length()-1);
+		final String publishString = request.getParameter("publishDate");
 		
 		String image = uploadService.uploadFile(request, SlickConstants.MEDIA_PATH);
 		
@@ -87,7 +98,16 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		if(!description.isEmpty()){
 			LOGGER.info("Description is not null.");
 			properties.put("description", description);
-		}		
+		}
+		
+		Calendar publishCalendar = Calendar.getInstance();
+		
+		if(!publishString.isEmpty()){
+			Date publishDate = convertDate(publishString);
+			publishCalendar.setTime(publishDate);
+		}
+		
+		properties.put("publishDate", publishCalendar);
 		
 		if (tags != null) {
             properties.put("tags", tags);
@@ -110,19 +130,13 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 			if (tags == null){
 				existingProperties.remove("tags");
 			}
-			
+			setMixin(post, NodeType.MIX_LAST_MODIFIED);
 		} else {
 			LOGGER.info("Creating New Post.");
 			post = resolver.create(myResource, name, properties);
+			setMixin(post, NodeType.MIX_CREATED);
 		}
 		
-		// Update time stamp and created by
-        try {
-        	Node postNode = post.adaptTo(Node.class);
-			postNode.addMixin(NodeType.MIX_CREATED);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
         // Commit and close our work
 		resolver.commit();
@@ -130,5 +144,24 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		
 		response.sendRedirect(post.getPath() + SlickConstants.PAGE_EXTENSION);
 		LOGGER.debug("<<<< Leaving doPost");
+	}
+
+	private void setMixin(Resource post, String mixinName) {
+		try {
+        	Node postNode = post.adaptTo(Node.class);
+        	postNode.addMixin(mixinName);
+        } catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+
+	private Date convertDate(String publishString) {
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH);
+		LocalDateTime dateTime = LocalDateTime.parse(publishString, formatter);
+		
+		Date publishDate = Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
+		
+		return publishDate;
 	}
 }

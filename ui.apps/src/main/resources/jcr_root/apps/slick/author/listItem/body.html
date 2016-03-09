@@ -2,7 +2,7 @@
 	<sly data-sly-include="navigation.html"></sly>
 	<div class="author-wrap">
 		<sly data-sly-include="subNavigation.html"></sly>
-		<div class="content">
+		<div class="list-items">
 			<sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
 				<sly data-sly-resource="${page.path @ resourceType='slick/author/listPost'}"/>
 	  		</sly>

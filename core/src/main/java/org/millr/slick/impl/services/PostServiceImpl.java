@@ -21,25 +21,30 @@ public class PostServiceImpl implements PostService {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(PostServiceImpl.class);
 	
-	private static final String BLOG_QUERY = String.format(
-			  "SELECT * FROM [%s] AS s "
-			+ "WHERE "
-			+ "ISCHILDNODE(s,'/content/slick/posts') "
-			+ "ORDER BY [%s] DESC",
-			SlickConstants.NODE_POST_TYPE,
-            JcrConstants.JCR_CREATED);
+	private static final String BLOG_QUERY = "SELECT * FROM [%s] AS s "
+										   + "WHERE "
+										   + "ISCHILDNODE(s,'/content/slick/%s') "
+										   + "ORDER BY [%s] DESC";
 
 	public NodeIterator getPosts(Session session) {
-		return getPosts(session, null, null);
+		return getPosts(session, null, null, "posts");
     }
 	
-	public NodeIterator getPosts(Session session, Long offset, Long limit) {
+	public NodeIterator getPosts(Session session, Long offset, Long limit,String slickType) {
+		
+		String currentQuery = String.format(BLOG_QUERY,
+				SlickConstants.NODE_POST_TYPE,
+				slickType,
+	            "publishDate");
+		
+		LOGGER.info("CURRENT QUERY: " + currentQuery);
+		
 		NodeIterator nodes = null;
 
         if (session != null) {
             try {
                 QueryManager queryManager = session.getWorkspace().getQueryManager();
-                Query query = queryManager.createQuery(BLOG_QUERY, Query.JCR_SQL2);
+                Query query = queryManager.createQuery(currentQuery, Query.JCR_SQL2);
 
                 if (offset != null) {
                     query.setOffset(offset);

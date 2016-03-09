@@ -7,7 +7,7 @@ public interface PostService {
 	
 	NodeIterator getPosts(Session session);
 	
-	NodeIterator getPosts(Session session, Long offset, Long limit);
+	NodeIterator getPosts(Session session, Long offset, Long limit, String slickType);
 	
 	long getTotalPages(Session session, Long pageSize);
 	
