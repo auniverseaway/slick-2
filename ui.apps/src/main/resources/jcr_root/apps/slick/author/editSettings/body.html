@@ -3,21 +3,21 @@
 	<div class="author-wrap">
 		<sly data-sly-include="subNavigation.html"></sly>
 		<div class="content" data-sly-use.settings="org.millr.slick.components.common.Settings">
-		<form action="settings.edit.json" method="POST">
+		<form action="settings.edit.json" method="POST" id="settings-form">
 			<div>
-				<input type="text" name="blogName" value="${settings.blogName}"/>
+				<input type="text" name="blogName" value="${settings.blogName}" placeholder="Blog Name"/>
 			</div>
 			<div>
-				<textarea name="analyticsScript">${settings.analyticsScript}</textarea>
+				<textarea name="analyticsScript" placeholder="Analytics Script">${settings.analyticsScript}</textarea>
+			</div>
+			<div class="checkbox">
+				<label><input type="checkbox" name="useDispatcher" value="true" data-sly-attribute.checked="${settings.useDispatcher}"> Use Dispatcher</label>
 			</div>
 			<div>
-				<input type="checkbox" name="useDispatcher" value="true" data-sly-attribute.checked="${settings.useDispatcher}"> Use Dispatcher
+				<input type="text" name="defaultImage" value="${settings.headerImage}" placeholder="Default Hero Image"/>
 			</div>
 			<div>
-				<input type="text" name="defaultImage" value="${settings.headerImage}"/>
-			</div>
-			<div>
-				<input type="submit" value="Save" class="button"/>
+				<input type="submit" value="Save" class="button bg-green"/>
 			</div>
 		</form>
 		</div>

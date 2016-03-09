@@ -60,7 +60,7 @@ public class SettingsServiceImpl implements SettingsService {
     public static final String ANALYTICS_SCRIPT_DEFAULT_VALUE = "";
     
     /** Default value for the analytics script */
-    public static final String HEADER_IMAGE_DEFAULT_VALUE = "/etc/slick/designs/slick/img/default-header-image.jpg";
+    public static final String HEADER_IMAGE_DEFAULT_VALUE = "/etc/slick/designs/slick/img/default-header-background.jpg";
 
     /** Default value for using a dispatcher. */
     public static final boolean USE_DISPATCHER_DEFAULT_VALUE = false;
