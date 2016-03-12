@@ -14,6 +14,9 @@ public final class SlickConstants {
     
     /** Login Path **/
     public static final String LOGIN_PATH = CONTENT_PATH + "/login";
+
+    /** Search Path **/
+    public static final String SEARCH_PATH = CONTENT_PATH + "/search";
     
     /** Publish Path **/
     public static final String PUBLISH_PATH = CONTENT_PATH + "";

@@ -45,12 +45,14 @@
                             jcr_root/apps/slick;overwrite:=true;uninstall:=true;path:=/apps/slick,
                             jcr_root/libs/languages;overwrite:=true;uninstall:=true;path:=/libs/languages,
                             jcr_root/etc/slick/designs/slick;overwrite:=true;uninstall:=true;path:=/etc/slick/designs/slick,
+                            jcr_root/etc/map;overwrite:=true;uninstall:=true;path:=/etc/map,
                             jcr_root/content/slick;overwrite:=false;overwriteProperties:=true;uninstall:=false;path:=/content/slick,
                             jcr_root/content/slick/author;overwrite:=true;uninstall:=true;path:=/content/slick/author,
                             jcr_root/content/slick/login;overwrite:=true;uninstall:=true;path:=/content/slick/login,
                             jcr_root/content/slick/posts;overwrite:=false;uninstall:=false;path:=/content/slick/posts,
                             jcr_root/content/slick/pages;overwrite:=false;uninstall:=false;path:=/content/slick/pages,
-                            jcr_root/content/slick/media;overwrite:=false;uninstall:=false;path:=/content/slick/media
+                            jcr_root/content/slick/media;overwrite:=false;uninstall:=false;path:=/content/slick/media,
+                            jcr_root/content/slick/search;overwrite:=true;uninstall:=true;path:=/content/slick/search
                         </Sling-Initial-Content>
                     </instructions>
                 </configuration>

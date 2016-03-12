@@ -1,0 +1,16 @@
+{
+    "localhost": {
+    	"sling:internalRedirect": "/content/slick/posts.html",
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "localhost.8080/$"
+    },
+    "localhost.8080": {
+    	"sling:internalRedirect": ["/content/slick"],
+        "jcr:primaryType": "sling:Mapping",
+        "redirect": {
+			"sling:internalRedirect": ["/content/slick/$1","/$1"],
+			"jcr:primaryType": "sling:Mapping",
+			"sling:match": "(.+)$"
+	 	}
+    }
+}

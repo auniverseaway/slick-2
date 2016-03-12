@@ -1,4 +1,5 @@
-<body id="listPosts" data-sly-use.settings="org.millr.slick.components.common.Settings">
+<body id="listPosts">
+	<header data-sly-include="header.html"></header>
 	<div id="content">
 		<sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
 			<sly data-sly-resource="${page.path @ resourceType='slick/publish/listPost'}"/>
@@ -13,4 +14,5 @@
 		 	</div>
 	    </div>
     </div>
+    <script src="/etc/slick/designs/slick/js/publish.js"></script>
 </body>

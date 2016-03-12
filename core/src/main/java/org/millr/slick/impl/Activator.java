@@ -114,6 +114,7 @@ public class Activator implements BundleActivator {
                 Node pagesNode = session.getNode(SlickConstants.PAGES_PATH);
                 Node mediaNode = session.getNode(SlickConstants.MEDIA_PATH);
                 Node loginNode = session.getNode(SlickConstants.LOGIN_PATH);
+                Node searchNode = session.getNode(SlickConstants.SEARCH_PATH);
                 
                 AccessControlUtils.allow(postsNode, "authors", Privilege.JCR_ALL);
                 AccessControlUtils.allow(pagesNode, "authors", Privilege.JCR_ALL);
@@ -123,6 +124,7 @@ public class Activator implements BundleActivator {
                 AccessControlUtils.allow(pagesNode, everyonePrincipal.getName(), Privilege.JCR_READ);
                 AccessControlUtils.allow(mediaNode, everyonePrincipal.getName(), Privilege.JCR_READ);
                 AccessControlUtils.allow(loginNode, everyonePrincipal.getName(), Privilege.JCR_READ);
+                AccessControlUtils.allow(searchNode, everyonePrincipal.getName(), Privilege.JCR_READ);
                 
                 AccessControlUtils.clear(session, SlickConstants.AUTHOR_PATH);
                 AccessControlUtils.denyAllToEveryone(session, SlickConstants.AUTHOR_PATH);

@@ -1,34 +1,28 @@
 <template data-sly-use.settings="org.millr.slick.components.common.Settings"
 		  data-sly-template.header="${@ view}" 
 		  data-sly-test.headerBg="${view.page.image ? view.page.image : settings.headerImage}">
-<style scoped>
-	.cover {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: url('${headerBg @ context='uri'}') center center no-repeat;
-		background-size:cover;
-	}
-</style>
-<div class="cover"></div>
-<sly data-sly-test="${!view.page.image}">
 	<style scoped>
-		.slick-logo {
+		.cover {
 			position: absolute;
 			top: 0;
 			right: 0;
-			bottom: 60px;
+			bottom: 0;
 			left: 0;
-			background: url('/etc/slick/designs/slick/img/slick-logo.svg') center/10em no-repeat;
+			background: url('${headerBg @ context='uri'}') center center no-repeat;
+			background-size:cover;
 		}
 	</style>
-	<div class="slick-logo"></div>
-</sly>
-<section id="nav-share">
-	<ul id="nav">
-		<li><a href="${view.external.domain}">${settings.blogName}</a></li>
-	</ul>
-</section>
+	<div class="cover"></div>
+	<div id="menu">
+		<nav>
+			<ul>
+				<li><a href="${view.external.domain}">Home</a></li>
+				<li><a href="#">Search</a></li>
+			</ul>
+		</nav>
+	</div>
+	<a href="#" id="logo">
+		<div id="square"></div>
+		<div id="blog-name">${settings.blogName}</div>
+	</a>
 </template>

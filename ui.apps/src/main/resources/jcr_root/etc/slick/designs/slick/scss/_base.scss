@@ -26,6 +26,10 @@ textarea, input { outline: none; }
 // Utility Classes
 
 ///// Hide Utility
+.Hide-Always {
+    display: none !important;
+}
+
 @media (max-width: 33.9em) {
     .Hide-Below-Small {
         display: none !important;

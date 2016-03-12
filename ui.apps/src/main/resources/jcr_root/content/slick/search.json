@@ -1,0 +1,7 @@
+{
+	"jcr:primaryType": "slick:page",
+	"sling:resourceType": "slick:publish:search",
+	"title": "Search",
+	"description": "Search",
+	"slickType":"posts"
+}
