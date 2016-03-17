@@ -11,4 +11,6 @@ public interface PostService {
 	
 	long getTotalPages(Session session, Long pageSize);
 	
+	public long getNumberOfPosts(Session session);
+	
 }

@@ -8,13 +8,20 @@
         <meta name="description" content="${view.page.description}"/>
         <meta name="keywords" content="${view.page.tags}" />
         
+        <!--/* Open Graph */-->
         <meta property="og:title" content="${view.page.title}"/>
         <meta property="og:description" content="${view.page.description}"/>
         <meta property="og:url" content="${view.external.url}"/>
+        <sly data-sly-test.metaImage="${view.page.image ? view.page.image : settings.headerImage}"/>
+        <meta property="og:image" content="${view.external.domain}${metaImage}" />
 
-        <sly data-sly-test.ogImage="${view.page.image ? view.page.image : settings.headerImage}"/>
+        <!--/* Twitter Card */-->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@auniverseaway" />
+        <meta name="twitter:title" content="${view.page.title}" />
+        <meta name="twitter:description" content="${view.page.description}" />
+        <meta name="twitter:image" content="${view.external.domain}${metaImage}" />
 
-        <meta property="og:image" content="${view.external.domain}${ogImage}" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="stylesheet" href="/etc/slick/designs/slick/css/publish.css" type="text/css">

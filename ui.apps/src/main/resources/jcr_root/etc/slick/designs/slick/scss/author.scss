@@ -317,6 +317,89 @@ header {
     }
 }
 
+// Media List
+#upload-form {
+    display: block;
+    float: left;
+    width: 240px;
+    height: 240px;
+    position: relative;
+
+    #media-upload {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    #media-upload + label {
+        text-align: center;
+        padding: 0;
+        line-height: 240px;
+        background-color: #FFF;
+        color: $slick-green;
+        display: block;
+        cursor: pointer;
+        width: 100%;
+    }
+    #image-preview {
+        display: none;
+
+        &.open {
+            max-width: 140%;
+            display: block;
+            position: absolute;
+            opacity: 1;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            transition: opacity .125s;
+
+            &:hover {
+                opacity: .2;
+            }
+        }
+    }
+    .button {
+        display: none;
+        width: 100%;
+        padding: 0 $slick-gutter;
+        position: absolute;
+        bottom: 0;
+
+        &.open {
+            display: block;
+        }
+    }
+}
+
+.media-box {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    float: left;
+    overflow: hidden;
+
+    .image-url {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        line-height: 60px;
+        background-color: rgba(255,255,255,.8);
+        display: none;
+        white-space: nowrap;
+    }
+
+    &:hover {
+        .image-url {
+            display: block;
+        }
+    }
+}
+
 
 // Edit Screen
 
@@ -597,15 +680,33 @@ header {
 #publish-section {
     position: relative;
 
+    #calendar-toggle {
+        width: 60px;
+        height: 60px;
+        background: #C9E4A6 url('../img/author/icon-calendar.svg');
+        border: none;
+        text-indent: -1000px;
+        overflow: hidden;
+        cursor: pointer;
+        float: right;
+    }
+
     #dateInput {
         height: 60px;
         line-height: 60px;
-        width: 212px;
         border: none;
         display: block;
         float: right;
-        padding: 0 $slick-gutter;
+        padding: 0;
         font-size: 1.2em;
+        width: 0px;
+        overflow: hidden;
+        transition: all .25s;
+
+        &.open {
+            width: 212px;
+            padding: 0 $slick-gutter;
+        }
     }
 
     .button {
@@ -618,6 +719,14 @@ header {
 
 // Settings Form
 #settings-form {
+    label {
+        display: block;
+        padding: 7px 28px 0px;
+        text-transform: uppercase;
+        font-family: GothamMediumRegular;
+        color: #8A8A8A;
+    }
+
     input[type="text"], textarea {
         display: block;
         border: none;
@@ -628,6 +737,7 @@ header {
     }
 
     textarea {
+        padding: 20px $slick-gutter * 2;
         height: 120px;
     }
 
@@ -637,16 +747,30 @@ header {
 
     .checkbox {
         padding: 0px $slick-gutter * 2;
-        font-size: 1.2em;
         line-height: 60px;
 
         input[type="checkbox"] {
             margin: 0;
             padding: 0;
         }
+
+        label {
+            padding: 0;
+        }
         
     }
 
+}
+
+// Pagination
+.pagination {
+    padding: $slick-gutter 0;
+    clear: both;
+    text-transform: uppercase;
+
+    .view-newer, .view-older {
+        line-height: 30px
+    }
 }
 
 // Footer

@@ -4,6 +4,7 @@
 	"title": "Media",
 	"description": "Media",
 	"menuOrder": 300,
+	"slickType":"media",
 	"edit": {
 		"jcr:primaryType": "slick:page",
 		"sling:resourceType": "slick/author/editMedia",

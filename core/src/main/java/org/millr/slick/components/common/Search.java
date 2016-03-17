@@ -3,7 +3,12 @@ package org.millr.slick.components.common;
 import java.util.Iterator;
 
 import javax.inject.Inject;
+import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
@@ -23,6 +28,8 @@ public class Search {
 	
 	private ResourceResolver resourceResolver;
 	
+	private Session session;
+	
 	private static final String initialQuery = "SELECT * FROM [slick:page] AS s "
 									         + "WHERE contains(s.*, '%s') "
 									         + "AND ISCHILDNODE(s,'" + SlickConstants.POSTS_PATH + "') "
@@ -30,22 +37,40 @@ public class Search {
 	
 	public String query;
 	
-	public Iterator<Page> results;
+	public NodeIterator results;
+	
+	public Long resultsCount;
 	
 	public Search(final SlingHttpServletRequest request) {
 		this.request = request;
 		this.query = request.getParameter("query");
         this.resourceResolver = this.request.getResourceResolver();
+        this.session = resourceResolver.adaptTo(Session.class);
     }
 	
 	public String getQuery() {
 		return query;
 	}
 	
-	public Iterator<Page> getResults() {
+	public NodeIterator getResults() {
+		
 		String searchQuery = String.format(initialQuery, query);
-		Iterator<Resource> childs = resourceResolver.findResources(searchQuery, Query.JCR_SQL2);
-		return ResourceUtil.adaptTo(childs,Page.class);
+		NodeIterator nodes = null;
+		
+		try {
+			QueryManager queryManager = session.getWorkspace().getQueryManager();
+	        Query query = queryManager.createQuery(searchQuery, Query.JCR_SQL2);
+	        QueryResult result = query.execute();
+	        nodes = result.getNodes();
+	    } catch (RepositoryException e) {
+			LOGGER.error("Could not search repository", e);
+        }
+		this.resultsCount = nodes.getSize();
+		return nodes;
     }
+	
+	public Long getResultsCount() {
+		return resultsCount;
+	}
 	
 }

@@ -20,7 +20,15 @@
 		    </div>
 		    <div>
 		    	<ul id="share">
-					<li>Share</li><li><a href="#">Twitter</a></li><li><a href="#">Facebook</a></li><li><a href="#">LinkedIn</a></li>
+					<li>Share</li>
+					<li><a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="twitter" class="social">Twitter</a></li>
+					<li><a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
+						data-social-network="facebook" 
+						class="social">
+							Facebook
+						</a>
+					</li>
+					<li><a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="linkedin" class="social">LinkedIn</a></li>
 				</ul>
 		    </div>
 	    </article>

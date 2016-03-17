@@ -13,7 +13,7 @@
 		<div class="Cell tags">
 			<sly data-sly-list.tag="${page.tags}"><span class="tag">${tag}</span> </sly>
 		</div>
-		<div class="Cell align-right"><span class="author">${'by' @ i18n}: ${page.author.firstName}</span>
+		<div class="Cell align-right"><span class="author">${'by' @ i18n}: ${page.author.firstName} ${page.author.lastName}</span>
 	 	</div>
     </div>
 </article>

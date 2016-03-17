@@ -2,15 +2,17 @@
     <header data-sly-include="header.html"></header>
     <form action="search.html" id="search-header">
     	<div class="container">
-    		<input type="text" name="query" placeholder="Search" value="${search.query}">
+    		<input type="text" name="query" placeholder="Search for title, tags, or text" value="${search.query}">
     		<input type="submit" value="Search"/>
 		</div>
 	</form>
-    <div data-sly-list.searchItem="${search.getResults}" id="content">
-    	<sly data-sly-resource="${searchItem.path @ resourceType='slick/publish/listPost'}"/>
-    </div>
-    <div data-sly-test="${!searchItem}" id="content">
-    	No Results. 
-    </div>
+	<div id="content">
+		<sly data-sly-test.searchList="${search.results}"/>
+    	<div class="results-count" data-sly-test="${search.resultsCount == 0}">${ 'No Results' @ i18n}</div>
+	    <div class="results-count" data-sly-test="${search.resultsCount == 1}">${search.resultsCount} ${ 'Result' @ i18n}</div>
+	    <div class="results-count" data-sly-test="${search.resultsCount >= 2}">${search.resultsCount} ${ 'Results' @ i18n}</div>
+	    <sly data-sly-list.searchItem="${searchList}">
+	    	<sly data-sly-resource="${searchItem.path @ resourceType='slick/publish/listPost'}"/>
+	    </sly>
     <script src="/etc/slick/designs/slick/js/publish.js"></script>
 </body>

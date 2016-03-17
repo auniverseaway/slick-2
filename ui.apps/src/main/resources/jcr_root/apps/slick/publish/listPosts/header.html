@@ -1,5 +1,13 @@
 <sly data-sly-use.settings="org.millr.slick.components.common.Settings" />
 <style scoped>
+	#logo #square {
+		border: 4px solid #${settings.accentColor @ context='styleString'};
+	}
+
+	#logo #blog-name {
+		background: #${settings.accentColor @ context='styleString'};
+	}
+
 	.cover {
 		position: absolute;
 		top: 0;

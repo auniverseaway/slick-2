@@ -8,9 +8,11 @@
 	margin: 100px auto 0 auto;
     padding: 0 15px;
 }
-
+// Extra Large (Desktops, 1200px)
 @media (min-width: 75em) {
-    padding: 0 0;
+	#content, .container {
+    	padding: 0 0;
+    }
 }
 
 header {
@@ -52,14 +54,13 @@ header {
 		#square {
 		    width: 40px;
 		    height: 40px;
-		    border: 4px solid green;
+		    
 		    float: left;
 		}
 
 		#blog-name {
 			height: 40px;
 			line-height: 40px;
-			background: green;
 			float: left;
 			padding: 0px 14px 0px 10px;
 			text-transform: uppercase;
@@ -140,8 +141,14 @@ article {
 		}
 	}
 	img {
-		max-width: 100%;
+		max-width: 80%;
 		margin-bottom: $slick-gutter * 2;
+		display: block;
+	}
+	pre {
+	    background: #efefef;
+	    padding: 7px 14px;
+	    white-space: normal;
 	}
 	.content {
 		line-height: 1.8em;
@@ -176,6 +183,16 @@ article {
 			}
 		}
 	}
+}
+
+@media (min-width: 75em) {
+	article {
+		img {
+			max-width: 50%;
+			margin-bottom: $slick-gutter * 2;
+			display: block;
+		}
+    }
 }
 
 #pagination {

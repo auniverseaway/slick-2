@@ -29,6 +29,9 @@ public final class SlickConstants {
     /** Media Path **/
     public static final String MEDIA_PATH = PUBLISH_PATH + "/media";
     
+    /** Favicon Path */
+    public static final String FAVICON_PATH = PUBLISH_PATH + "/favicon.ico";
+    
     public static final String SLICK_BASE_RESOURCE_TYPE = "slick";
     
     public static final String POST_RESOURCE_TYPE = "slick/publish/post";

@@ -15,6 +15,9 @@ public interface SettingsService {
 	
 	/** OSGi property name for the analytics script **/
 	public static final String SYSTEM_HEADER_IMAGE = "system.headerImage";
+	
+	/** OSGi property name for the analytics script **/
+	public static final String SYSTEM_ACCENT_COLOR = "system.accentColor";
 
     /**
      * Set multiple properties for the System Settings service.
@@ -73,19 +76,12 @@ public interface SettingsService {
      */
     boolean setAnalyticsScript(final String script);
     
-    /**
-     * Get the analytics script.
-     *
-     * @return The analytics script.
-     */
     String getDefaultHeaderImage();
     
-    /**
-     * Set the analytics script.
-     *
-     * @param script The analytics script.
-     * @return true if the save was successful.
-     */
-    boolean setDefaultHeaderImage(final String imageUri);
+    boolean setDefaultHeaderImage(final String accentColor);
+    
+    String getAccentColor();
+    
+    boolean setAccentColor(final String accentColor);
 	
 }

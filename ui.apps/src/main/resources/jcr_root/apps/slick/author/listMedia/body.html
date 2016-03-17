@@ -1,10 +1,47 @@
-<body id="home">
+<body id="home" data-sly-use.external="org.millr.slick.utils.Externalizer">
 	<sly data-sly-include="navigation.html"></sly>
 	<div class="author-wrap">
 		<sly data-sly-include="subNavigation.html"></sly>
-		
-		<div class="content">
+		<section>
 			
+		</section>
+		<div class="content">
+			<section>
+				<form method="POST" action="media/edit.media.json" enctype="multipart/form-data" id="upload-form">
+					<input type="file" name="image" id="media-upload"/>
+					<label for="media-upload"><span>Upload a File</span><img id="image-preview" /></label>
+					<input type="submit" value="Upload" id="submit-media-button" class="button bg-green">
+				</form>
+				<sly data-sly-use.list="org.millr.slick.components.author.ListMedia" data-sly-list.media="${list.media}">
+					<div class="media-box" id="media-${mediaList.index}">
+						<style scoped>
+							#media-${mediaList.index @ context='styleToken'} .cover {
+								display: block;
+								position: absolute;
+								top: 0;
+								right: 0;
+								bottom: 0;
+								left: 0;
+								background: url('${media.path @ context='uri'}') center center no-repeat;
+								background-size:cover;
+							}
+						</style>
+						<a href="${media.path @ context='uri'}" class="cover" target="_blank" title="View Image"></a>
+						<div class="image-url">${external.domain}${media.path @ context='uri'}</div>
+					</div>
+				</sly>
+	  		</section>
+	  		<section class="Grid Fit-Small pagination" data-sly-use.pagination="org.millr.slick.components.common.MediaPagination">
+				<div class="Cell view-newer">
+					<a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
+				</div>
+				<div class="Cell align-right view-older">
+					<a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
+			 	</div>
+		    </section>
 		</div>
 	</div>
+	<script src="/etc/slick/designs/slick/author/js/media.js"></script>
+
+
 </body>

@@ -23,7 +23,11 @@ import org.osgi.framework.Constants;
     @Property(name = SettingsServiceImpl.SYSTEM_BLOG_NAME,
               value = SettingsServiceImpl.BLOG_NAME_DEFAULT_VALUE,
               label = "Blog Name",
-              description = "The blog name is used throughout the application."),
+              description = "The blog name is used throughout your site."),
+    @Property(name = SettingsServiceImpl.SYSTEM_ACCENT_COLOR,
+		      value = SettingsServiceImpl.ACCENT_COLOR_DEFAULT_VALUE,
+		      label = "Accent Color",
+		      description = "The accent color used throughout your site."),
     @Property(name = SettingsServiceImpl.SYSTEM_ANALYTICS_SCRIPT,
     			value = SettingsServiceImpl.ANALYTICS_SCRIPT_DEFAULT_VALUE,
     			label = "Analytics Script",
@@ -58,6 +62,9 @@ public class SettingsServiceImpl implements SettingsService {
     
     /** Default value for the analytics script */
     public static final String ANALYTICS_SCRIPT_DEFAULT_VALUE = "";
+    
+    /** Default value for the analytics script */
+    public static final String ACCENT_COLOR_DEFAULT_VALUE = "009444";
     
     /** Default value for the analytics script */
     public static final String HEADER_IMAGE_DEFAULT_VALUE = "/etc/slick/designs/slick/img/default-header-background.jpg";
@@ -104,22 +111,19 @@ public class SettingsServiceImpl implements SettingsService {
     public boolean setDefaultHeaderImage(final String imageUri) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_HEADER_IMAGE, imageUri);
     }
+    
+    public String getAccentColor() {
+    	return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_ACCENT_COLOR, ACCENT_COLOR_DEFAULT_VALUE);
+    }
+    
+    public boolean setAccentColor(final String accentColor) {
+    	return osgiService.setProperty(COMPONENT_PID, SYSTEM_ACCENT_COLOR, accentColor);
+    }
 
-    /**
-     * Get the setting for extensionless URLs.
-     *
-     * @return The setting for extensionless URLS.
-     */
     public boolean getUseDispatcher() {
         return osgiService.getBooleanProperty(COMPONENT_PID, SYSTEM_USE_DISPATCHER, USE_DISPATCHER_DEFAULT_VALUE);
     }
 
-    /**
-     * Set the value for extensionless URLs.
-     *
-     * @param value The setting for extensionless URLs.
-     * @return true if the save was successful.
-     */
     public boolean setUseDispatcher(final boolean value) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_USE_DISPATCHER, value);
     }

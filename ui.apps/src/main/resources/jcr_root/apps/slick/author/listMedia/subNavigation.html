@@ -1,0 +1,6 @@
+<header>
+	<h1 class="title">${properties.title}</h1>
+	<div data-sly-use.currentUser="org.millr.slick.components.author.CurrentUser" class="user-info">
+		<a href="/system/sling/logout.html">${currentUser.getDisplayName}</a>
+	</div>
+</header>

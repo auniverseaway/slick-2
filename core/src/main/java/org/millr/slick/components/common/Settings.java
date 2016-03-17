@@ -21,6 +21,8 @@ public class Settings extends WCMUse {
     private String analyticsScript;
     
     private String headerImage;
+    
+    private String accentColor;
 
     private boolean useDispatcher;
 
@@ -36,6 +38,7 @@ public class Settings extends WCMUse {
             analyticsScript = settingsService.getAnalyticsScript();
             useDispatcher = settingsService.getUseDispatcher();
             headerImage = settingsService.getDefaultHeaderImage();
+            accentColor = settingsService.getAccentColor();
         }
     }
 
@@ -54,6 +57,10 @@ public class Settings extends WCMUse {
     
     public String getHeaderImage() {
     	return headerImage;
+    }
+    
+    public String getAccentColor() {
+    	return accentColor;
     }
 
     /**
