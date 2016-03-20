@@ -87,7 +87,7 @@ public class Page
 	public String getLink() {
 		// TODO: I feel like there should be a better way to do this while supporting localhost & httpd.
 		String fullPath = resource.getPath();
-		return fullPath.replace("/content/slick", "") + SlickConstants.PAGE_EXTENSION;
+		return fullPath.replace("/content/slick/publish", "") + SlickConstants.PAGE_EXTENSION;
 	}
 	
 	public String getGuid() throws RepositoryException {

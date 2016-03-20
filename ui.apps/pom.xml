@@ -48,11 +48,12 @@
                             jcr_root/etc/map;overwrite:=true;uninstall:=true;path:=/etc/map,
                             jcr_root/content/slick;overwrite:=false;overwriteProperties:=true;uninstall:=false;path:=/content/slick,
                             jcr_root/content/slick/author;overwrite:=true;uninstall:=true;path:=/content/slick/author,
-                            jcr_root/content/slick/login;overwrite:=true;uninstall:=true;path:=/content/slick/login,
-                            jcr_root/content/slick/posts;overwrite:=false;uninstall:=false;path:=/content/slick/posts,
-                            jcr_root/content/slick/pages;overwrite:=false;uninstall:=false;path:=/content/slick/pages,
-                            jcr_root/content/slick/media;overwrite:=false;uninstall:=false;path:=/content/slick/media,
-                            jcr_root/content/slick/search;overwrite:=true;uninstall:=true;path:=/content/slick/search
+                            jcr_root/content/slick/publish/login;overwrite:=true;uninstall:=true;path:=/content/slick/publish/login,
+                            jcr_root/content/slick/publish/posts;overwrite:=false;uninstall:=false;path:=/content/slick/publish/posts,
+                            jcr_root/content/slick/publish/pages;overwrite:=false;uninstall:=false;path:=/content/slick/publish/pages,
+                            jcr_root/content/slick/publish/media;overwrite:=false;uninstall:=false;path:=/content/slick/publish/media,
+                            jcr_root/content/slick/publish/search;overwrite:=true;uninstall:=true;path:=/content/slick/publish/search,
+                            jcr_root/content/slick/publish/feed;overwrite:=true;uninstall:=true;path:=/content/slick/publish/feed
                         </Sling-Initial-Content>
                     </instructions>
                 </configuration>

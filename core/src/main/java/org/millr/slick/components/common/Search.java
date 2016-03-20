@@ -33,7 +33,7 @@ public class Search {
 	private static final String initialQuery = "SELECT * FROM [slick:page] AS s "
 									         + "WHERE contains(s.*, '%s') "
 									         + "AND ISCHILDNODE(s,'" + SlickConstants.POSTS_PATH + "') "
-									         + "ORDER BY [publishDate] ASC";
+									         + "ORDER BY [publishDate] DESC";
 	
 	public String query;
 	

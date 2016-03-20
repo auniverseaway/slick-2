@@ -27,10 +27,13 @@ import org.apache.sling.api.resource.ModifiableValueMap;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
+import org.apache.sling.commons.json.JSONObject;
 import org.apache.sling.jcr.resource.JcrResourceConstants;
 import org.millr.slick.SlickConstants;
 import org.millr.slick.services.CurrentUserService;
+import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.UploadService;
+import org.millr.slick.utils.Externalizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,6 +66,9 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 	@Reference
     private UploadService uploadService;
 	
+	@Reference
+    private DispatcherService dispatcherService;
+	
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
 		LOGGER.debug(">>>> Entering doPost");
@@ -89,7 +95,7 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		Map<String,Object> properties = new HashMap<String,Object>();
 		
 		properties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:page");
-		properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, "slick/publish/" + resourceType);
+		properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, "slick/publish/" + resourceType + "/detail");
 		properties.put("title", title);
 		properties.put("content", content);
 		properties.put("slickType", slickType);
@@ -137,16 +143,23 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 			setMixin(post, NodeType.MIX_CREATED);
 		}
 		
-		
-        // Commit and close our work
+		// Commit and close our work
 		resolver.commit();
 		resolver.close();
+		
+		flushDispatch(request);
 		
 		response.sendRedirect(post.getPath() + SlickConstants.PAGE_EXTENSION);
 		LOGGER.debug("<<<< Leaving doPost");
 	}
 
-	private void setMixin(Resource post, String mixinName) {
+	private void flushDispatch(SlingHttpServletRequest request) {
+        Externalizer external = request.adaptTo(Externalizer.class);
+        String currentDomain = external.getDomain();
+        dispatcherService.flush(currentDomain, "flushContent");
+    }
+
+    private void setMixin(Resource post, String mixinName) {
 		try {
         	Node postNode = post.adaptTo(Node.class);
         	postNode.addMixin(mixinName);

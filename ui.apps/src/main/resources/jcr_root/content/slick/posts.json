@@ -1,6 +1,0 @@
-{
-	"jcr:primaryType": "slick:page",
-	"sling:resourceType": "slick:publish:listPosts",
-	"description": "Working Posts",
-	"slickType":"posts"
-}

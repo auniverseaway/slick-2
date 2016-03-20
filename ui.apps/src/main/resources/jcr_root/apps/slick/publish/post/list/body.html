@@ -2,7 +2,7 @@
 	<header data-sly-include="header.html"></header>
 	<div id="content">
 		<sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
-			<sly data-sly-resource="${page.path @ resourceType='slick/publish/listPost'}"/>
+			<sly data-sly-resource="${page.path @ resourceType='slick/publish/post/content'}"/>
 	  	</sly>
 
 	  	<div id="pagination" class="Grid Fit-Small" data-sly-use.pagination="org.millr.slick.components.common.Pagination">

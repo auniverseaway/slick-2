@@ -1,4 +1,0 @@
-{
-    "jcr:primaryType" : "slick:page",
-    "sling:resourceSuperType" : "slick:publish:listPosts",
-}

@@ -1,0 +1,25 @@
+<rss version="2.0" 
+xmlns:atom="http://www.w3.org/2005/Atom" 
+xmlns:content="http://purl.org/rss/1.0/modules/content/"
+data-sly-use.settings="org.millr.slick.components.common.Settings"
+data-sly-use.view="org.millr.slick.components.common.ViewPage">
+<channel>
+	<title>${settings.blogName}</title>
+	<link>${view.external.domain}</link>
+	<description>${properties.description}</description>
+	<atom:link href="${view.external.url}" rel="self" type="application/rss+xml" />
+	<image>
+		<title>${settings.blogName}</title>
+		<url>${view.external.domain}/etc/slick/designs/slick/img/apple-touch-icon.png</url>
+		<link>${view.external.domain}</link>
+		<width>128</width>
+		<height>128</height>
+		<description>${properties.description}</description>
+	</image>
+	<sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
+		<item>
+			<sly data-sly-resource="${page.path @ resourceType='slick/publish/post/content'}"/>
+		</item>
+	</sly>
+</channel>
+</rss>

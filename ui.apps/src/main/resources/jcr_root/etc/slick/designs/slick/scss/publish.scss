@@ -158,7 +158,7 @@ article {
     		display: inline-block;
     		padding: 0 10px 0 10px;
     		background: rgba(165, 226, 249, 0.92);
-    		margin-right: $slick-gutter;
+    		margin-right: $slick-gutter / 2;
     		margin-bottom: 14px;
     		font-family: GothamLightRegular;
     		text-transform: none;
@@ -178,8 +178,22 @@ article {
 		float: right;
 		li {
 			display: inline-block;
-			a {
-
+			margin-right: $slick-gutter / 2;
+			.social {
+				display: block;
+				width: 30px;
+				height: 30px;
+				text-indent: -1000px;
+				overflow: hidden;
+				&.linkedin {
+					background: url('../img/btn-social-linkedin.svg') 100%;
+				}
+				&.twitter {
+					background: url('../img/btn-social-twitter.svg') 100%;
+				}
+				&.facebook {
+					background: url('../img/btn-social-facebook.svg') 100%;
+				}
 			}
 		}
 	}

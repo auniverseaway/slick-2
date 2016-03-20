@@ -23,7 +23,7 @@ public class PostServiceImpl implements PostService {
 	
 	private static final String BLOG_QUERY = "SELECT * FROM [%s] AS s "
 										   + "WHERE "
-										   + "ISCHILDNODE(s,'/content/slick/%s') "
+										   + "ISCHILDNODE(s,'/content/slick/publish/%s') "
 										   + "ORDER BY [%s] DESC";
 
 	public NodeIterator getPosts(Session session) {

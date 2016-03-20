@@ -8,6 +8,7 @@ import javax.jcr.Session;
 import javax.jcr.ValueFactory;
 import javax.jcr.security.Privilege;
 
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.jackrabbit.api.security.user.Group;
@@ -17,6 +18,7 @@ import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.millr.slick.SlickConstants;
+import org.millr.slick.services.DispatcherService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -29,7 +31,7 @@ public class Activator implements BundleActivator {
      * Logger instance to log and debug errors.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(Activator.class);
-
+    
     @SuppressWarnings("deprecation")
 	@Override
     public void start(BundleContext bundleContext) throws Exception {
@@ -110,21 +112,14 @@ public class Activator implements BundleActivator {
                 AccessControlUtils.clear(session, SlickConstants.CONTENT_PATH);
                 AccessControlUtils.denyAllToEveryone(session, SlickConstants.CONTENT_PATH);
                 
-                Node postsNode = session.getNode(SlickConstants.POSTS_PATH);
-                Node pagesNode = session.getNode(SlickConstants.PAGES_PATH);
-                Node mediaNode = session.getNode(SlickConstants.MEDIA_PATH);
-                Node loginNode = session.getNode(SlickConstants.LOGIN_PATH);
-                Node searchNode = session.getNode(SlickConstants.SEARCH_PATH);
+                // Get our public publish node.
+                Node publishNode = session.getNode(SlickConstants.PUBLISH_PATH);
                 
-                AccessControlUtils.allow(postsNode, "authors", Privilege.JCR_ALL);
-                AccessControlUtils.allow(pagesNode, "authors", Privilege.JCR_ALL);
-                AccessControlUtils.allow(mediaNode, "authors", Privilege.JCR_ALL);
+                // Authors can do everything to the publish node.
+                AccessControlUtils.allow(publishNode, "authors", Privilege.JCR_ALL);
                 
-                AccessControlUtils.allow(postsNode, everyonePrincipal.getName(), Privilege.JCR_READ);
-                AccessControlUtils.allow(pagesNode, everyonePrincipal.getName(), Privilege.JCR_READ);
-                AccessControlUtils.allow(mediaNode, everyonePrincipal.getName(), Privilege.JCR_READ);
-                AccessControlUtils.allow(loginNode, everyonePrincipal.getName(), Privilege.JCR_READ);
-                AccessControlUtils.allow(searchNode, everyonePrincipal.getName(), Privilege.JCR_READ);
+                // Everyone can read the publish node.
+                AccessControlUtils.allow(publishNode, everyonePrincipal.getName(), Privilege.JCR_READ);
                 
                 AccessControlUtils.clear(session, SlickConstants.AUTHOR_PATH);
                 AccessControlUtils.denyAllToEveryone(session, SlickConstants.AUTHOR_PATH);

@@ -3,31 +3,47 @@
 	<div class="author-wrap">
 		<sly data-sly-include="subNavigation.html"></sly>
 		<div class="content" data-sly-use.settings="org.millr.slick.components.common.Settings">
-		<form action="settings.edit.json" method="POST" id="settings-form">
-			<div>
-				<label>Blog Name</label>
-				<input type="text" name="blogName" value="${settings.blogName}" placeholder="Blog Name"/>
-			</div>
-			<div>
-				<label>Accent Color</label>
-				<input type="text" name="accentColor" value="${settings.accentColor}" placeholder="Accent Color"/>
-			</div>
-			<div>
-				<label>Analytics Script</label>
-				<textarea name="analyticsScript" placeholder="Analytics Script">${settings.analyticsScript}</textarea>
-			</div>
-			<div class="checkbox">
-				<label><input type="checkbox" name="useDispatcher" value="true" data-sly-attribute.checked="${settings.useDispatcher}"> Use Dispatcher</label>
-			</div>
-			<div>
-				<label>Default Hero Image</label>
-				<input type="text" name="defaultImage" value="${settings.headerImage}" placeholder="Default Hero Image"/>
-			</div>
-			<div>
-				<input type="submit" value="Save" class="button bg-green"/>
-			</div>
-		</form>
+			<form action="settings.edit.json" method="POST" id="settings-form">
+				<div>
+					<label>Blog Name</label>
+					<input type="text" name="blogName" value="${settings.blogName}" placeholder="Blog Name"/>
+				</div>
+				<div>
+					<label>Accent Color</label>
+					<input type="text" name="accentColor" value="${settings.accentColor}" placeholder="Accent Color"/>
+				</div>
+				<div>
+					<label>Analytics Script</label>
+					<textarea name="analyticsScript" placeholder="Analytics Script">${settings.analyticsScript}</textarea>
+				</div>
+				<div class="checkbox">
+					<label><input type="checkbox" name="useDispatcher" value="true" data-sly-attribute.checked="${settings.useDispatcher}"> Use Dispatcher</label>
+				</div>
+				<div>
+					<label>Default Hero Image</label>
+					<input type="text" name="defaultImage" value="${settings.headerImage}" placeholder="Default Hero Image"/>
+				</div>
+				<div>
+					<input type="submit" value="Save" class="button bg-green"/>
+				</div>
+			</form>
+			<section id="dispatcher-caching" data-sly-test="${settings.useDispatcher}">
+				<h2>Dispatcher Caching</h2>
+				<form class="cache-form" action="/bin/slick/flushDispatcher">
+					<input type="hidden" name="flushType" value="flushAll"/>
+					<input type="submit" value="Flush All" class="button bg-green"/>
+				</form>
+				<form class="cache-form" action="/bin/slick/flushDispatcher">
+					<input type="hidden" name="flushType" value="flushContent"/>
+					<input type="submit" value="Flush Content" class="button bg-green"/>
+				</form>
+				<form class="cache-form" action="/bin/slick/flushDispatcher">
+					<input type="hidden" name="flushType" value="flushUi"/>
+					<input type="submit" value="Flush UI" class="button bg-green"/>
+				</form>
+			</section>
 		</div>
 	</div>
 	<sly data-sly-include="scripts.html"></sly>
+	<script src="/etc/slick/designs/slick/author/js/settings.js"></script>
 </body>

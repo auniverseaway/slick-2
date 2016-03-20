@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en">
     <head data-sly-use.settings="org.millr.slick.components.common.Settings" 
-    	  data-sly-use.view="org.millr.slick.components.common.ViewPage">
+          data-sly-use.view="org.millr.slick.components.common.ViewPage">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>${view.page.title} ${settings.blogName}</title>
+        <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="${view.external.domain}/feed.xml"/>
         <meta name="description" content="${view.page.description}"/>
         <meta name="keywords" content="${view.page.tags}" />
         
@@ -12,11 +13,11 @@
         <meta property="og:title" content="${view.page.title}"/>
         <meta property="og:description" content="${view.page.description}"/>
         <meta property="og:url" content="${view.external.url}"/>
-        <sly data-sly-test.metaImage="${view.page.image ? view.page.image : settings.headerImage}"/>
-        <meta property="og:image" content="${view.external.domain}${metaImage}" />
+        <meta data-sly-test.metaImage="${view.page.image ? view.page.image : settings.headerImage}" 
+              property="og:image" content="${view.external.domain}${metaImage}" />
 
         <!--/* Twitter Card */-->
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@auniverseaway" />
         <meta name="twitter:title" content="${view.page.title}" />
         <meta name="twitter:description" content="${view.page.description}" />

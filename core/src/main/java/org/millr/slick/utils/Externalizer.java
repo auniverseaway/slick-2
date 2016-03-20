@@ -65,7 +65,7 @@ public class Externalizer {
 	}
 	
 	public String getUrl() {
-		return url;
+		return url.replace("/content/slick/publish", "");
 	}
 	
 }

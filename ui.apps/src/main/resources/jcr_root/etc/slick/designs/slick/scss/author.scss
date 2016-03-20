@@ -762,6 +762,26 @@ header {
 
 }
 
+#dispatcher-caching {
+    margin-top: $slick-gutter;
+    padding: 0px $slick-gutter * 2;
+
+    h2 {
+        margin-bottom: $slick-gutter;
+    }
+
+    .cache-form {
+        float: left;
+        padding-right: $slick-gutter;
+
+        .button {
+            min-width: 180px;
+        }
+
+    }
+
+}
+
 // Pagination
 .pagination {
     padding: $slick-gutter 0;

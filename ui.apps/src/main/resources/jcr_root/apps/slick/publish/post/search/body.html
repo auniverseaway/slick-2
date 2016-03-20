@@ -12,7 +12,7 @@
 	    <div class="results-count" data-sly-test="${search.resultsCount == 1}">${search.resultsCount} ${ 'Result' @ i18n}</div>
 	    <div class="results-count" data-sly-test="${search.resultsCount >= 2}">${search.resultsCount} ${ 'Results' @ i18n}</div>
 	    <sly data-sly-list.searchItem="${searchList}">
-	    	<sly data-sly-resource="${searchItem.path @ resourceType='slick/publish/listPost'}"/>
+	    	<sly data-sly-resource="${searchItem.path @ resourceType='slick/publish/post/content'}"/>
 	    </sly>
     <script src="/etc/slick/designs/slick/js/publish.js"></script>
 </body>

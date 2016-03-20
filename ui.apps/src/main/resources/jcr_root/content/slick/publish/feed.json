@@ -1,0 +1,6 @@
+{
+	"jcr:primaryType": "slick:page",
+	"sling:resourceType": "slick/publish/post/list",
+	"description": "RSS Feed",
+	"slickType":"posts"
+}

@@ -1,10 +1,7 @@
 {
     "jcr:primaryType": "sling:OsgiConfig",
     "sling.auth.requirements": [
-      "/",
-      "-/etc/slick/designs",
-      "-/content/slick",
-      "-/content/slick/login",
+      "+/author",
       "+/content/slick/author"
     ]
 }
