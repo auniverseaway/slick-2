@@ -16,8 +16,6 @@ import org.slf4j.LoggerFactory;
 @Model(adaptables = Resource.class)
 public class Navigation {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(Navigation.class);
-	
 	private final Resource resource;
 	
 	public String link;

@@ -2,7 +2,7 @@
 	<title>${view.page.title}</title>
 	<guid isPermaLink="true">${view.external.domain}${view.page.link}</guid>
 	<link>${view.external.domain}${view.page.link}</link>
-	<description><![CDATA[ ${view.page.content @ context='html'} ]]></description>
+	<description><![CDATA[ ${view.page.description} ]]></description>
 	<content:encoded><![CDATA[ ${view.page.content @ context='html'} ]]></content:encoded>
 	<pubDate data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=view.page.publishDate, dateFormat='EEE, dd MMM yyyy HH:mm:ss Z'}">${format.formattedValue}</pubDate>
 </sly>

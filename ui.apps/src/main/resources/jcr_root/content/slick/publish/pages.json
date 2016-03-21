@@ -1,6 +1,6 @@
 {
 	"jcr:primaryType": "slick:page",
-	"sling:resourceType": "slick:publish:listPages",
-	"description": "Working",
-	"title": "List Pages"
+	"sling:resourceType": "slic/publish/page/list",
+	"description": "These are the pages of the site.",
+	"title": "Pages List"
 }
