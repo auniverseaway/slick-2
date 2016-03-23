@@ -4,14 +4,14 @@
 @import 'variables';
 
 #content, .container {
-	max-width: 1200px;
-	margin: 100px auto 0 auto;
+    max-width: 1200px;
+    margin: 100px auto 0 auto;
     padding: 0 15px;
 }
 // Extra Large (Desktops, 1200px)
 @media (min-width: 75em) {
-	#content, .container {
-    	padding: 0 0;
+    #content, .container {
+        padding: 0 0;
     }
 }
 
@@ -29,61 +29,61 @@ header {
 
 
 header {
-	position: relative;
+    position: relative;
 
-	#menu {
-		position: absolute;
-		left: -240px;
-		top: 0;
-		bottom: 0;
-		width: 240px;
-		background: rgba(255,255,255,.9);
-		transition: left .25s ease-in-out;
+    #menu {
+        position: absolute;
+        left: -240px;
+        top: 0;
+        bottom: 0;
+        width: 240px;
+        background: rgba(255,255,255,.9);
+        transition: left .25s ease-in-out;
 
-		&.open {
-			left: 0px;
-		}
-	}
-	#logo {
-		position: absolute;
-		display: block;
-		float: left;
-		margin: 40px;
-		text-decoration: none;
-		
-		#square {
-		    width: 40px;
-		    height: 40px;
-		    
-		    float: left;
-		}
+        &.open {
+            left: 0px;
+        }
+    }
+    #logo {
+        position: absolute;
+        display: block;
+        float: left;
+        margin: 40px;
+        text-decoration: none;
+        
+        #square {
+            width: 40px;
+            height: 40px;
+            
+            float: left;
+        }
 
-		#blog-name {
-			height: 40px;
-			line-height: 40px;
-			float: left;
-			padding: 0px 14px 0px 10px;
-			text-transform: uppercase;
-			color: #FFF;
-		}
-	}
+        #blog-name {
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            padding: 0px 14px 0px 10px;
+            text-transform: uppercase;
+            color: #FFF;
+        }
+    }
 
-	nav { 
-		ul {
-			list-style: none;
-    		margin: 100px 0px 0px 40px;
-    		padding: 0;
+    nav { 
+        ul {
+            list-style: none;
+            margin: 100px 0px 0px 40px;
+            padding: 0;
 
-    		li {
-    			a {
-    				line-height: 1.6em;
-    				font-size: 1.2em;
-    				color: $dark-gray;
-    			}
+            li {
+                a {
+                    line-height: 1.6em;
+                    font-size: 1.2em;
+                    color: $dark-gray;
+                }
 
-    			form {
+                form {
 
-    				input {
+                    input {
                         background: transparent;
                         border: none;
                         margin: 0;
@@ -91,12 +91,12 @@ header {
                         font-family: GothamLightRegular;
                         font-size: 1.2em;
                         line-height: 1.6em;
-    				}
-    			}
+                    }
+                }
 
-    		}
-		}
-	}
+            }
+        }
+    }
 }
 
 #search-header {
@@ -134,81 +134,99 @@ header {
 }
 
 article {
-	margin-bottom: 100px;
-	.title {
-		h1,h2 {
-			font-size: 1.6em;
-		}
-	}
-	img {
-		max-width: 80%;
-		margin-bottom: $slick-gutter * 2;
-		display: block;
-	}
-	pre {
-	    background: #efefef;
-	    padding: 7px 14px;
-	    white-space: normal;
-	}
-	.content {
-		line-height: 1.8em;
-	}
-	.tags {
-		.tag {
-    		display: inline-block;
-    		padding: 0 10px 0 10px;
-    		background: rgba(165, 226, 249, 0.92);
-    		margin-right: $slick-gutter / 2;
-    		margin-bottom: 14px;
-    		font-family: GothamLightRegular;
-    		text-transform: none;
-    		line-height: 30px;
-			color: #000;   		
-    	}
-	}
+    margin-bottom: 100px;
+    .title {
+        h1,h2 {
+            font-size: 1.6em;
+        }
+    }
+    img {
+        max-width: 80%;
+        margin-bottom: $slick-gutter * 2;
+        display: block;
+    }
+    pre {
+        border: 1px solid #efefef;
+    }
+    .content {
+        line-height: 1.8em;
+    }
+    .video-frame {
+        width: 600px;
+        margin: $slick-gutter auto;
 
-	.author {
-		line-height: 30px;
-	}
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 25px;
+            height: 0;
+            iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
 
-	#share {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		float: right;
-		li {
-			display: inline-block;
-			margin-right: $slick-gutter / 2;
-			.social {
-				display: block;
-				width: 30px;
-				height: 30px;
-				text-indent: -1000px;
-				overflow: hidden;
-				&.linkedin {
-					background: url('../img/btn-social-linkedin.svg') 100%;
-				}
-				&.twitter {
-					background: url('../img/btn-social-twitter.svg') 100%;
-				}
-				&.facebook {
-					background: url('../img/btn-social-facebook.svg') 100%;
-				}
-			}
-		}
-	}
+    }
+
+    .tags {
+        .tag {
+            display: inline-block;
+            padding: 0 10px 0 10px;
+            background: rgba(165, 226, 249, 0.92);
+            margin-right: $slick-gutter / 2;
+            margin-bottom: 14px;
+            font-family: GothamLightRegular;
+            text-transform: none;
+            line-height: 30px;
+            color: #000;        
+        }
+    }
+
+    .author {
+        line-height: 30px;
+    }
+
+    #share {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        float: right;
+        li {
+            display: inline-block;
+            margin-right: $slick-gutter / 2;
+            .social {
+                display: block;
+                width: 30px;
+                height: 30px;
+                text-indent: -1000px;
+                overflow: hidden;
+                &.linkedin {
+                    background: url('../img/btn-social-linkedin.svg') 100%;
+                }
+                &.twitter {
+                    background: url('../img/btn-social-twitter.svg') 100%;
+                }
+                &.facebook {
+                    background: url('../img/btn-social-facebook.svg') 100%;
+                }
+            }
+        }
+    }
 }
 
 @media (min-width: 75em) {
-	article {
-		img {
-			max-width: 50%;
-			margin-bottom: $slick-gutter * 2;
-			display: block;
-		}
+    article {
+        img {
+            max-width: 50%;
+            margin-bottom: $slick-gutter * 2;
+            display: block;
+        }
     }
 }
 
 #pagination {
-	margin-bottom: 100px;
+    margin-bottom: 100px;
 }

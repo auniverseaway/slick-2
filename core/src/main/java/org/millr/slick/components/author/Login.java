@@ -1,4 +1,21 @@
+/*
+ * Copyright 2016 Chris Millar
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.millr.slick.components.author;
+
+import java.util.Objects;
 
 import javax.jcr.Repository;
 import javax.jcr.RepositoryException;
@@ -42,27 +59,32 @@ public class Login {
     }
     
     public Boolean getIsAdminDefault() {
-    	Boolean result = null;
+    	Boolean result = false;
     	
-    	try {
-    		
-    		// Get our current resolver.
-    		ResourceResolver resolver = request.getResourceResolver();
-    		
-    		// Adapt to an anonymous session and get the repo as anonymous.
-    		JackrabbitSession session = (JackrabbitSession) resolver.adaptTo(Session.class);
-        	Repository repository = session.getRepository();
-        	
-        	// Create a new session by logging into using the default admin username and password.
-			Session adminSession = repository.login(new SimpleCredentials("admin", "admin".toCharArray()));
-			adminSession.logout();
-			
-			result = true;
-			
-		} catch (RepositoryException e) {
-			LOGGER.debug("Repo Exception: ", e);
-			result = false;
-		}
+    	// Get our current resolver.
+        ResourceResolver resolver = request.getResourceResolver();
+        
+        // Adapt to a session and get the current User ID.
+        JackrabbitSession session = (JackrabbitSession) resolver.adaptTo(Session.class);
+        String currentUser = session.getUserID();
+        
+        // Don't check this if we're not logged in as admin.
+        if (Objects.equals(currentUser, new String("admin"))) {
+            try {
+        		
+        		Repository repository = session.getRepository();
+            	
+            	// Create a new session by logging into using the default admin username and password.
+    			Session adminSession = repository.login(new SimpleCredentials("admin", "admin".toCharArray()));
+    			adminSession.logout();
+    			
+    			result = true;
+    			
+    		} catch (RepositoryException e) {
+    			LOGGER.debug("Repo Exception: ", e);
+    			result = false;
+    		}
+    	}
     	
     	return result;
     }

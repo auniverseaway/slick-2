@@ -1,3 +1,18 @@
+/*
+ * Copyright 2016 Chris Millar
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.millr.slick.models;
 
 import java.util.Calendar;
@@ -69,7 +84,6 @@ public class Page
 	public Iterator<Page> children;
 	
 	public Page(final Resource resource) {
-		LOGGER.info(">>>>> In Constructor");
 		this.resource = resource;
 		this.author = resource.adaptTo(Author.class);
 		this.properties = getProperties();
@@ -85,9 +99,13 @@ public class Page
 	
 	
 	public String getLink() {
-		// TODO: I feel like there should be a better way to do this while supporting localhost & httpd.
+		// TODO: This desperately needs to be a sling filter.
 		String fullPath = resource.getPath();
-		return fullPath.replace("/content/slick/publish", "") + SlickConstants.PAGE_EXTENSION;
+		// Replace /content/slick for all URLs.
+		String noContent = fullPath.replace("/content/slick", "");
+		// Replace /publish for all public URLs.
+		String noPublish = noContent.replace("/publish", "") + SlickConstants.PAGE_EXTENSION;
+		return noPublish;
 	}
 	
 	public String getGuid() throws RepositoryException {

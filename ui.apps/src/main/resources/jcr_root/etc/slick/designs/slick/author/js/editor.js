@@ -17,3 +17,13 @@ calendarToggle.addEventListener("click", function(event) {
 	event.preventDefault();
     dateInputField.classList.toggle('open');
 }, false);
+
+// Gist Toolbar Button
+// var gistInput = document.getElementById('gistInput');
+// var gistButton = document.getElementById('gistButton');
+// gistInput.addEventListener("paste", function() {
+//     setTimeout(function() {
+        
+//         gistButton.dataset.wysihtml5CommandValue = gistInput.value;
+//     }, 100);
+// });

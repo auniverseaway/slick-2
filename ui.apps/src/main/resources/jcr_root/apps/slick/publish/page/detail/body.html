@@ -1,3 +1,29 @@
-<body id="${resource.name}" data-sly-use.view="org.millr.slick.components.common.ViewPage">
-	${view.page.content @ context='unsafe'}
+<template data-sly-template.body="${@ view, settings}">
+<body id="${resource.name}">
+	<sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
+	<section id="content">
+        <article>
+            <div class="Grid Fit-Medium title">
+                <h1 class="Cell"><a href="${view.external.url}">${view.page.title}</a></h1>
+            </div>
+            <div class="content">
+                ${view.page.content @ context='unsafe'}
+            </div>
+            <div class="Grid Fit-Medium meta">
+                <ul id="share">
+                    <li><a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="twitter" class="social twitter">Twitter</a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
+                        data-social-network="facebook" 
+                        class="social facebook">Facebook</a></li><li><a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="linkedin" class="social linkedin">LinkedIn</a></li>
+                </ul>
+                <div class="Cell tags">
+                    <sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span></sly>
+                </div>
+            </div>
+        </article>
+    </section>
+    <script src="/etc/slick/designs/slick/js/publish.js"></script>
+    <script src="/etc/slick/designs/slick/author/js/libs/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
+</html>
+</template>

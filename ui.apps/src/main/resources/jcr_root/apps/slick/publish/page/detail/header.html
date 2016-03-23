@@ -1,14 +1,18 @@
-<template data-sly-template.header="${@ view}">
-<style scoped>
-	.cover {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background: url('${view.page.image @ context='uri'}') center center no-repeat;
-		background-size:cover;
-	}
-</style>
-<div class="cover"></div>
+<template data-sly-template.header="${@ view, settings}">
+<header>
+    <div class="cover"></div>
+    <div id="menu">
+        <nav>
+            <ul>
+                <li><a href="/pages.html">Pages</a></li>
+                <li><a href="/posts.html">Posts</a></li>
+                <li><form action="/search.html"><div class="Hide-Always"><input type="submit" tabindex="-1"/></div><input name="query" placeholder="Search"></form></li>
+            </ul>
+        </nav>
+    </div>
+    <a href="#" id="logo">
+        <div id="square"></div>
+        <div id="blog-name">${settings.blogName}</div>
+    </a>
+</header>
 </template>
