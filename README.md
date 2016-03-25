@@ -1,13 +1,13 @@
 About
 =====
 
-For Nerds
----------
-Slick is a blogging engine built on top of Sling and Sightly. The idea was to create a lightweight blogging engine using technologies common to AEM. It uses Sling Models heavily.
-
 For Humans
 ----------
 Slick is a beautiful app to help create exceptional web content. It's highly optimized for blogging.
+
+For Nerds
+---------
+Slick is a blogging engine built on top of Sling and Sightly. The idea was to create a lightweight blogging engine using technologies common to AEM. It uses Sling Models heavily.
 
 Demo
 ====
@@ -15,8 +15,8 @@ Demo
 
 Requirements
 ============
-* Java 7
-* Apache Sling 8
+* Java 8
+* Sling 8
 * Maven 3.2+
 
 Features
@@ -26,17 +26,14 @@ Features
 * RSS 2.0 Feed
 * Authentication
 * Dispatcher
-* Analytics
+* Analytics and SEO 
 * Pagination
 
 Planned
 =======
-* Tagging of posts
-* Better support of media
-* Better docs
+* Commenting
+* Documentation
 * More editing features
-* Pagination
-* Better theming support
 
 Installation
 ============
@@ -50,7 +47,7 @@ Installation
 
 #Base Configuration
 
-1. Admin is located at http://localhost:8080/slick/author.html (admin:admin)
+1. Admin is located at http://localhost:8080/author.html (admin:admin)
 
 #Bare Minimum Apache Configuration
     <VirtualHost *:80>
@@ -63,8 +60,7 @@ Installation
 #Dispatcher Configuration
 If you are using a dispatcher, you probably already know what you need to do. You can flush your cache by heading to http://{your-domain}/author/flush
 
-User Interface
-=======
+#Front-End Development
 
 1. Use [Brackets](http://brackets.io) + Brackets SASS Extension
 2. Slick theme located in /src/main/resources/themes/slick
