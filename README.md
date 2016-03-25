@@ -1,31 +1,28 @@
 About
 =====
 
-For Humans
-----------
+#For Humans
 Slick is a beautiful app to help create exceptional web content. It's highly optimized for blogging.
 
-For Nerds
----------
-Slick is a blogging engine built on top of Sling and Sightly. The idea was to create a lightweight blogging engine using technologies common to AEM. It uses Sling Models heavily.
+#For Nerds
+Slick is a blogging engine built on top of Sling. The idea was to create a lightweight blogging engine using technologies common to AEM. It uses Sling Models heavily.
 
-Demo
-====
+#Demo
 [slick.millr.org](http://slick.millr.org)
 
-Requirements
-============
+#Requirements
 * Java 8
 * Sling 8
 * Maven 3.2+
 
-Features
-========
+#Features
 * Creating and editing posts, pages, and media
 * WYSIWYG Editor
 * RSS 2.0 Feed
 * Authentication
-* Dispatcher
+* Search
+* Post and Page Scheduling
+* Dispatcher (
 * Analytics and SEO 
 * Pagination
 
@@ -35,8 +32,7 @@ Planned
 * Documentation
 * More editing features
 
-Installation
-============
+#Installation
 
 1. Start Sling
  * java -jar org.apache.sling.launchpad-8.jar
@@ -57,10 +53,15 @@ Installation
 		 ProxyPassReverse / http://localhost:8080/
     </VirtualHost>
 
-#Dispatcher Configuration
-If you are using a dispatcher, you probably already know what you need to do. You can flush your cache by heading to http://{your-domain}/author/flush
+#Dispatcher
+1. In settings (author/settings.html) turn on dispatcher.
+2. Editing content or changing settings will automatically trigger a cache flush.
+3. If the UI has changed, you should flush the UI cache.
+4. You can find a sample dispatch.any file under dispatcher/dispatcher.any
 
 #Front-End Development
 
-1. Use [Brackets](http://brackets.io) + Brackets SASS Extension
+1. HTML can be found in ui.apps/src/main/resources/jcr_root/apps
+2. SCSS, JS, images, and CSS can be found in ui.apps/src/main/resources/jcr_root/etc/slick/designs/slick
+2. All SCSS will be compiled upon build.
 2. Slick theme located in /src/main/resources/themes/slick
