@@ -29,9 +29,9 @@
             </div>
         </div>
     </div>
-    <script src="/etc/slick/designs/slick/js/publish.js"></script>
-    <script src="/etc/slick/designs/slick/author/js/libs/highlight/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <sly data-sly-include="partials/lightbox.html"/>
+    <sly data-sly-use.footer="footer.html" data-sly-call="${footer.footer @ view=view, settings=settings}"/>
+    <sly data-sly-include="partials/footlibs.html"/>
 </body>
 </html>
 </template>

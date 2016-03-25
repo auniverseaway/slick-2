@@ -1,6 +1,7 @@
 {
 	"jcr:primaryType": "slick:page",
 	"sling:resourceType": "slick/publish/post/list",
-	"description": "Blog Posts",
+	"title": "Posts",
+	"description": "The blog posts of the site.",
 	"slickType":"posts"
 }

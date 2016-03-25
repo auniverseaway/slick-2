@@ -15,6 +15,8 @@
  */
 package org.millr.slick.components.common;
 
+import java.util.Calendar;
+
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.millr.slick.services.SettingsService;
@@ -25,13 +27,13 @@ import org.millr.slick.utils.WCMUse;
  */
 public class Settings extends WCMUse {
 
-    /** The Sling Script Helper to get the OSGi service. */
     private SlingScriptHelper scriptHelper;
 
-    /** The current resource. */
     private Resource resource;
 
     private String blogName;
+    
+    private String blogDescription;
     
     private String analyticsScript;
     
@@ -40,6 +42,8 @@ public class Settings extends WCMUse {
     private String accentColor;
 
     private boolean useDispatcher;
+    
+    private int currentYear;
 
     @Override
     public void activate() {
@@ -50,6 +54,7 @@ public class Settings extends WCMUse {
 
         if (settingsService != null) {
             blogName = settingsService.getBlogName();
+            blogDescription = settingsService.getBlogDescription();
             analyticsScript = settingsService.getAnalyticsScript();
             useDispatcher = settingsService.getUseDispatcher();
             headerImage = settingsService.getDefaultHeaderImage();
@@ -57,13 +62,12 @@ public class Settings extends WCMUse {
         }
     }
 
-    /**
-     * Get the name of the blog.
-     *
-     * @return The name of the blog.
-     */
     public String getBlogName() {
         return blogName;
+    }
+    
+    public String getBlogDescription() {
+        return blogDescription;
     }
     
     public String getAnalyticsScript() {
@@ -78,12 +82,11 @@ public class Settings extends WCMUse {
     	return accentColor;
     }
 
-    /**
-     * Get the setting for using a dispatcher.
-     *
-     * @return The setting for using a dispatcher.
-     */
     public boolean getUseDispatcher() {
         return useDispatcher;
+    }
+    
+    public int getCurrentDate() {
+        return Calendar.getInstance().get(Calendar.YEAR);
     }
 }

@@ -4,9 +4,12 @@
     <div id="menu">
         <nav>
             <ul>
-                <li><a href="/pages.html">Pages</a></li>
-                <li><a href="/posts.html">Posts</a></li>
-                <li><form action="/search.html"><div class="Hide-Always"><input type="submit" tabindex="-1"/></div><input name="query" placeholder="Search"></form></li>
+                <li><a href="${view.external.domain}">Home</a></li>
+                <sly data-sly-use.nav="org.millr.slick.components.common.Navigation" 
+                     data-sly-list.menuItem="${nav.pages}"><li><a href="${menuItem.link}">${menuItem.title}</a></li></sly>
+                <li><a href="${view.external.domain}/posts.html">Posts</a></li>
+                <li><a href="${view.external.domain}/feed.xml">RSS Feed</a></li>
+                <li><form action="${view.external.domain}/search.html"><div class="Hide-Always"><input type="submit" tabindex="-1"/></div><input name="query" placeholder="Search"></form></li>
             </ul>
         </nav>
     </div>

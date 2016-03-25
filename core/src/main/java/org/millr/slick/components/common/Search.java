@@ -15,9 +15,6 @@
  */
 package org.millr.slick.components.common;
 
-import java.util.Iterator;
-
-import javax.inject.Inject;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -26,12 +23,9 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.models.annotations.Model;
 import org.millr.slick.SlickConstants;
-import org.millr.slick.models.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,10 +39,11 @@ public class Search {
 	
 	private Session session;
 	
-	private static final String initialQuery = "SELECT * FROM [slick:page] AS s "
+	private static final String initialQuery = "SELECT "
+	                                         + "* FROM [slick:page] "
+	                                         + "AS s "
 									         + "WHERE contains(s.*, '%s') "
-									         + "AND ISCHILDNODE(s,'" + SlickConstants.POSTS_PATH + "') "
-									         + "ORDER BY [publishDate] DESC";
+									         + "AND ISCHILDNODE(s,'" + SlickConstants.POSTS_PATH + "')";
 	
 	public String query;
 	

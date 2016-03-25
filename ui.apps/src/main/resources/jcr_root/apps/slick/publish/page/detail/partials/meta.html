@@ -1,0 +1,17 @@
+<template data-sly-template.meta="${@ view, settings}">
+        <title>${view.page.title} ${settings.blogName}</title>
+        <meta name="description" content="${view.page.description}"/>
+        <meta name="keywords" content="${view.page.tags}" />
+        <!--/* Open Graph */-->
+        <meta property="og:title" content="${view.page.title}"/>
+        <meta property="og:description" content="${view.page.description}"/>
+        <meta property="og:url" content="${view.external.url}"/>
+        <meta data-sly-test.metaImage="${view.page.image ? view.page.image : settings.headerImage}" 
+              property="og:image" content="${view.external.domain}${metaImage}" />
+        <!--/* Twitter Card */-->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@auniverseaway" />
+        <meta name="twitter:title" content="${view.page.title}" />
+        <meta name="twitter:description" content="${view.page.description}" />
+        <meta name="twitter:image" content="${view.external.domain}${metaImage}" />
+</template>

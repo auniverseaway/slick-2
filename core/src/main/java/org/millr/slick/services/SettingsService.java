@@ -21,6 +21,9 @@ public interface SettingsService {
 	
 	/** OSGi property name for the blog name **/
 	String SYSTEM_BLOG_NAME = "system.blogName";
+	
+	/** OSGi property name for the blog name **/
+    String SYSTEM_BLOG_DESCRIPTION = "system.blogDescription";
 
     /** OSGi property name for using a dispatcher **/
 	String SYSTEM_USE_DISPATCHER = "system.useDispatcher";
@@ -60,6 +63,21 @@ public interface SettingsService {
      * @return true if the save was successful.
      */
     boolean setBlogName(final String name);
+    
+    /**
+     * Get the blog description.
+     *
+     * @return The description of the blog.
+     */
+    String getBlogDescription();
+
+    /**
+     * Set the the blog description.
+     *
+     * @param description The description of the blog.
+     * @return true if the save was successful.
+     */
+    boolean setBlogDescription(final String description);
 
     /**
      * Get the setting for using a dispatcher.

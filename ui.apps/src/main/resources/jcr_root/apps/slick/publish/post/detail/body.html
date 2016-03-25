@@ -19,8 +19,8 @@
     <section id="content">
         <article itemscope itemtype="https://schema.org/BlogPosting">
             <div class="Grid Fit-Medium title">
-                <h1 class="Cell" itemprop="headline" content="${view.page.title}"><a href="${view.external.url}">${view.page.title}</a></h1>
-                <h2 class="Cell align-right" itemprop="datePublished"
+                <h1 class="Cell Medium-65" itemprop="headline" content="${view.page.title}"><a href="${view.external.url}">${view.page.title}</a></h1>
+                <h2 class="Cell publish-date" itemprop="datePublished"
                     data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=view.page.publishDate, dateFormat='MMMM, d yyyy'}">
                     ${format.formattedValue}
                 </h2>
@@ -29,22 +29,24 @@
                 ${view.page.content @ context='unsafe'}
             </div>
             <div class="Grid Fit-Medium meta">
-                <ul id="share">
-                    <li><a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="twitter" class="social twitter">Twitter</a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
-                        data-social-network="facebook" 
-                        class="social facebook">Facebook</a></li><li><a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="linkedin" class="social linkedin">LinkedIn</a></li>
-                </ul>
-                <div class="Cell tags">
-                    <sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span></sly>
+                <div class="Cell">
+                    <ul id="share">
+                        <li><a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="twitter" class="social twitter">Twitter</a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
+                            data-social-network="facebook" 
+                            class="social facebook">Facebook</a></li><li><a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="linkedin" class="social linkedin">LinkedIn</a></li>
+                    </ul>
+                    <div class="tags">
+                        <sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span></sly>
+                    </div>
                 </div>
                 <div class="Cell align-right" itemprop="author"><span class="author" itemscope itemtype="http://schema.org/Person">${'by' @ i18n}: <span itemprop="name">${view.page.author.firstName} ${view.page.author.lastName}</span></span>
                 </div>
             </div>
         </article>
     </section>
-    <script src="/etc/slick/designs/slick/js/publish.js"></script>
-    <script src="/etc/slick/designs/slick/author/js/libs/highlight/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <sly data-sly-include="partials/lightbox.html"/>
+    <sly data-sly-use.footer="footer.html" data-sly-call="${footer.footer @ view=view, settings=settings}"/>
+    <sly data-sly-include="partials/footlibs.html"/>    
 </body>
 </html>
 </template>

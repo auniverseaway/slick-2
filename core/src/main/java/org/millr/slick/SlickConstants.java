@@ -54,15 +54,23 @@ public final class SlickConstants {
     /** Pages Path */
     public static final String PAGES_PATH = PUBLISH_PATH + "/pages";
     
+    /** Draft Path */
+    public static final String DRAFT_PATH = PUBLISH_PATH + "/draft";
+    
     /** Media Path */
     public static final String MEDIA_PATH = PUBLISH_PATH + "/media";
     
     /** Favicon Path */
     public static final String FAVICON_PATH = PUBLISH_PATH + "/favicon.ico";
     
+    /** Base ResourceType */
     public static final String SLICK_BASE_RESOURCE_TYPE = "slick";
     
-    public static final String POST_RESOURCE_TYPE = "slick/publish/post";
+    /** Publish ResourceType */
+    public static final String PUBLISH_RESOURCE_TYPE = SLICK_BASE_RESOURCE_TYPE + "/publish";
+    
+    /** Post Detail ResourceType */
+    public static final String POST_RESOURCE_TYPE = SLICK_BASE_RESOURCE_TYPE + PUBLISH_RESOURCE_TYPE + "/post/detail";
     
     /** Apps Path */
     public static final String APP_PATH = "/apps/slick";

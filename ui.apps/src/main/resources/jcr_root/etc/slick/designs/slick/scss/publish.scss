@@ -5,12 +5,13 @@
 
 #content, .container {
     max-width: 1200px;
-    margin: 100px auto 0 auto;
-    padding: 0 15px;
+    margin: 0 auto;
+    padding: 15px;
 }
 // Extra Large (Desktops, 1200px)
 @media (min-width: 75em) {
     #content, .container {
+        margin: 100px auto 0 auto;
         padding: 0 0;
     }
 }
@@ -97,6 +98,14 @@ header {
             }
         }
     }
+
+    .cover {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
 }
 
 #search-header {
@@ -133,17 +142,25 @@ header {
     }
 }
 
+.results-count {
+    font-size: 1.2em;
+    margin-bottom: $slick-gutter * 2;
+}
+
 article {
     margin-bottom: 100px;
     .title {
-        h1,h2 {
+        h1 {
             font-size: 1.6em;
+        }
+        .publish-date {
+            font-size: 1.2em;
         }
     }
     img {
-        max-width: 80%;
+        max-width: 100%;
         margin-bottom: $slick-gutter * 2;
-        display: block;
+        cursor: pointer;
     }
     pre {
         border: 1px solid #efefef;
@@ -171,29 +188,11 @@ article {
 
     }
 
-    .tags {
-        .tag {
-            display: inline-block;
-            padding: 0 10px 0 10px;
-            background: rgba(165, 226, 249, 0.92);
-            margin-right: $slick-gutter / 2;
-            margin-bottom: 14px;
-            font-family: GothamLightRegular;
-            text-transform: none;
-            line-height: 30px;
-            color: #000;        
-        }
-    }
-
-    .author {
-        line-height: 30px;
-    }
-
     #share {
         list-style: none;
         padding: 0;
         margin: 0;
-        float: right;
+        float: left;
         li {
             display: inline-block;
             margin-right: $slick-gutter / 2;
@@ -215,18 +214,86 @@ article {
             }
         }
     }
+
+    .tags {
+        .tag {
+            display: inline-block;
+            padding: 0 10px 0 10px;
+            background: rgba(165, 226, 249, 0.92);
+            margin-right: $slick-gutter / 2;
+            margin-bottom: 14px;
+            font-family: GothamLightRegular;
+            text-transform: none;
+            line-height: 30px;
+            color: #000;        
+        }
+    }
+
+    .author {
+        line-height: 30px;
+    }
+}
+
+@media (min-width: 48em) {
+    article {
+        .title {
+            .publish-date {
+                font-size: 1.6em;
+                text-align: right;
+            }
+        }
+
+        img {
+            max-width: 80%;
+        }
+    }
 }
 
 @media (min-width: 75em) {
     article {
         img {
             max-width: 50%;
-            margin-bottom: $slick-gutter * 2;
-            display: block;
         }
     }
 }
 
 #pagination {
     margin-bottom: 100px;
+}
+
+#lightbox {
+    transition: background-color .25s;
+    text-align: center;
+    position: fixed;
+    overflow: hidden;
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    &.open {
+        display: block;
+        background-color: rgba(0,0,0,.85);
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+}
+
+footer {
+    background: $light-gray;
+    color: $dark-gray;
+
+    .container {
+        margin: 0 auto;
+        height: 60px;
+    }
+}
+
+@media (min-width: 48em) {
+    .powered-by {
+        text-align: right;
+    }
 }

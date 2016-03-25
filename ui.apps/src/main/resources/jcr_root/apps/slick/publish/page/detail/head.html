@@ -20,23 +20,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>${view.page.title} ${settings.blogName}</title>
         <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="${view.external.domain}/feed.xml"/>
-        <meta name="description" content="${view.page.description}"/>
-        <meta name="keywords" content="${view.page.tags}" />
-        <!--/* Open Graph */-->
-        <meta property="og:title" content="${view.page.title}"/>
-        <meta property="og:description" content="${view.page.description}"/>
-        <meta property="og:url" content="${view.external.url}"/>
-        <meta data-sly-test.metaImage="${view.page.image ? view.page.image : settings.headerImage}" 
-              property="og:image" content="${view.external.domain}${metaImage}" />
-        <!--/* Twitter Card */-->
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@auniverseaway" />
-        <meta name="twitter:title" content="${view.page.title}" />
-        <meta name="twitter:description" content="${view.page.description}" />
-        <meta name="twitter:image" content="${view.external.domain}${metaImage}" />
-
+        <sly data-sly-use.meta="partials/meta.html" data-sly-call="${meta.meta @ view=view, settings=settings}"/>
         <link rel="apple-touch-icon" href="/etc/slick/designs/slick/img/apple-touch-icon.png">
         <link rel="stylesheet" href="/etc/slick/designs/slick/css/publish.css" type="text/css">
         <link rel="stylesheet" href="/etc/slick/designs/slick/author/js/libs/highlight/styles/github-gist.css">
@@ -48,14 +33,12 @@
             #logo #blog-name {
                 background: #${settings.accentColor @ context='styleString'};
             }
-            .cover {
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
+            header .cover {
                 background: url('${headerBg @ context='uri'}') center center no-repeat;
                 background-size:cover;
+            }
+            .powered-by a {
+                color: #${settings.accentColor @ context='styleString'};
             }
         </style>
         ${settings.analyticsScript @ context="unsafe"}

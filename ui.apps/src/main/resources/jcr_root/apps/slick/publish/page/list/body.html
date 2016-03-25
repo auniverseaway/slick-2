@@ -1,3 +1,7 @@
-<body id="listPages">
-	${properties.description}
-</body>
+<template data-sly-template.body="${@ view, settings}">
+	<body id="${resource.name}">
+		<sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
+		${properties.description}
+		<sly data-sly-include="partials/footlibs.html"/>
+	</body>
+</template>

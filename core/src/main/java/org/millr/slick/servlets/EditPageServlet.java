@@ -24,20 +24,25 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.NodeType;
+import javax.jcr.security.Privilege;
 import javax.servlet.ServletException;
 
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.JcrConstants;
+import org.apache.jackrabbit.commons.jackrabbit.authorization.AccessControlUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.ModifiableValueMap;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.jcr.resource.JcrResourceConstants;
 import org.millr.slick.SlickConstants;
@@ -61,18 +66,14 @@ public class EditPageServlet extends SlingAllMethodsServlet {
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(EditPageServlet.class);
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/**
-     * Create or edit the item.
-     *
-     * Creates blog path and saves properties. If blog resource already
-     * exists, the resource is updated with new properties. Saves file
-     * to the media folder using the UploadService.
+    /**
+     * The generated serialVersionUID.
      */
+    private static final long serialVersionUID = 169080260544691827L;
+	
+	private ResourceResolver resolver;
+	
+	private Session session;
 	
 	@Reference
     private UploadService uploadService;
@@ -84,9 +85,8 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
 		LOGGER.debug(">>>> Entering doPost");
 		
-		ResourceResolver resolver = request.getResourceResolver();
-		
-		Session session = resolver.adaptTo(Session.class);
+		resolver = request.getResourceResolver();
+		session = resolver.adaptTo(Session.class);
 		
 		final String title = request.getParameter("title");
 		final String name = request.getParameter("nodeName");
@@ -96,48 +96,52 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 		final String slickType = request.getParameter("slickType");
 		final String resourceType = slickType.substring(0, slickType.length()-1);
 		final String publishString = request.getParameter("publishDate");
+		final String publishStatus = request.getParameter("publishStatus");
 		
+		// Upload our image
 		String image = uploadService.uploadFile(request, SlickConstants.MEDIA_PATH);
 		
+		// Get our parent resource
 		Resource myResource = resolver.getResource(SlickConstants.PUBLISH_PATH + "/" + slickType);
 		
-		String existingPath = myResource.getPath() + "/" + name;
-		
+		// Create a properties Map to store our params.
 		Map<String,Object> properties = new HashMap<String,Object>();
-		
 		properties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:page");
 		properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, "slick/publish/" + resourceType + "/detail");
 		properties.put("title", title);
 		properties.put("content", content);
 		properties.put("slickType", slickType);
+		properties.put("publishStatus", publishStatus);
 		
 		// Check to see if description is empty
 		if(!description.isEmpty()){
-			LOGGER.info("Description is not null.");
 			properties.put("description", description);
 		}
 		
+		// Set Published Date
 		Calendar publishCalendar = Calendar.getInstance();
-		
+		// If the publish request param is set, use it.
 		if(!publishString.isEmpty()){
 			Date publishDate = convertDate(publishString);
 			publishCalendar.setTime(publishDate);
 		}
-		
 		properties.put("publishDate", publishCalendar);
 		
+		// Set Tags
 		if (tags != null) {
             properties.put("tags", tags);
         }
 		
+		// Set Image
 		if (image != null) {
             properties.put("image", image);
         }
 		
-		// Update or create our resource
-		//// Try to get the existing resource.
+		// Try to get the existing resource.
+		String existingPath = myResource.getPath() + "/" + name;
 		Resource post = resolver.getResource(existingPath);
 		
+		// Update or create our resource
 		if (post != null) {
 			LOGGER.info("Saving existing post.");
 			ModifiableValueMap existingProperties = post.adaptTo(ModifiableValueMap.class);
@@ -154,17 +158,56 @@ public class EditPageServlet extends SlingAllMethodsServlet {
 			setMixin(post, NodeType.MIX_CREATED);
 		}
 		
+		// Set the status of our post
+		try {
+            setStatus(post);
+        } catch (RepositoryException e) {
+            LOGGER.debug("Could not update post status. " + e.getMessage());
+        }
+		
 		// Commit and close our work
 		resolver.commit();
 		resolver.close();
 		
+		// Build redirect path
+		String redirectPath = post.getPath() + SlickConstants.PAGE_EXTENSION;
+		if(Objects.equals(publishStatus, new String("draft"))) {
+		    redirectPath = SlickConstants.DRAFT_PATH + ".html?resource=" + post.getPath();
+		}
+		
+		// Flush our dispatcher
 		flushDispatch(request);
 		
-		response.sendRedirect(post.getPath() + SlickConstants.PAGE_EXTENSION);
+		// Send our redirect
+		response.sendRedirect(redirectPath);
 		LOGGER.debug("<<<< Leaving doPost");
 	}
 
-	private void flushDispatch(SlingHttpServletRequest request) {
+	/**
+	 * Sets the status of a post.
+	 * Always clear the status, but set a deny to everyone if post is set as draft.
+	 * Authors will still be able to update the post.
+	 *
+	 * @param post the new status
+	 * @throws RepositoryException the repository exception
+	 */
+	private void setStatus(Resource post) throws RepositoryException {
+        
+	    ValueMap properties = post.adaptTo(ValueMap.class);
+	    String publishStatus = (String) properties.get("publishStatus", (String) null);
+	    Node postNode = post.adaptTo(Node.class);
+        String postPath = postNode.getPath();
+        
+        // Clear any ACLs
+        AccessControlUtils.clear(session, postPath);
+	    if(Objects.equals(publishStatus, new String("draft"))) {
+	        AccessControlUtils.denyAllToEveryone(session, postPath);
+            AccessControlUtils.allow(postNode, "authors", Privilege.JCR_ALL);
+        }
+	    session.save();
+	}
+
+    private void flushDispatch(SlingHttpServletRequest request) {
         Externalizer external = request.adaptTo(Externalizer.class);
         String currentDomain = external.getDomain();
         dispatcherService.flush(currentDomain, "flushContent");

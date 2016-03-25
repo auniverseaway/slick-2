@@ -63,7 +63,6 @@
                         </li>
                         <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" title="Insert headline 1" class="command"></li>
                         <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" title="Insert headline 2" class="command"></li>
-                        <li data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="pre" title="Insert Preformated" unselectable="on"></li>
                         <li data-wysihtml5-command="formatCode" unselectable="on"></li>
                         <!-- <li data-wysihtml5-command="createGist" title="Insert a Gist" class="command"></li>
                         <li data-wysihtml5-dialog="createGist" style="display: none;">
@@ -85,9 +84,9 @@
                            type="text" id="dateInput" name="publishDate"
                            value="${publishDateUse.formattedValue}" />
                     <div class="item-status">
-                        <select name="status">
-                          <option value="saab">Published</option>
-                          <option value="volvo">Draft</option>
+                        <select name="publishStatus">
+                          <option value="publish">Publish</option>
+                          <option value="draft">Draft</option>
                         </select>
                     </div>
                     <input data-sly-test="${!editBlog.post.publishDate}"

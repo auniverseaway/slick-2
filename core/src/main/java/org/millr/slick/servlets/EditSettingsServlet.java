@@ -60,6 +60,8 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
 	
 	private static final String BLOG_NAME_PROPERTY = "blogName";
 	
+	private static final String BLOG_DESCRIPTION_PROPERTY = "blogDescription";
+	
 	private static final String ACCENT_COLOR_PROPERTY = "accentColor";
 	
 	private static final String ANALYTICS_SCRIPT_PROPERTY = "analyticsScript";
@@ -83,6 +85,7 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
 
         if (allowWrite) {
             final String blogName = request.getParameter(BLOG_NAME_PROPERTY);
+            final String blogDescription = request.getParameter(BLOG_DESCRIPTION_PROPERTY);
             final String accentColor = request.getParameter(ACCENT_COLOR_PROPERTY);
             final String analyticsScript = request.getParameter(ANALYTICS_SCRIPT_PROPERTY);
             final boolean useDispatcher = Boolean.parseBoolean(request.getParameter(USE_DISPATCHER_PROPERTY));
@@ -91,6 +94,7 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
             final Map<String, Object> properties = new HashMap<String, Object>();
 
             properties.put(SettingsService.SYSTEM_BLOG_NAME, blogName);
+            properties.put(SettingsService.SYSTEM_BLOG_DESCRIPTION, blogDescription);
             properties.put(SettingsService.SYSTEM_ACCENT_COLOR, accentColor);
             properties.put(SettingsService.SYSTEM_ANALYTICS_SCRIPT, analyticsScript);
             properties.put(SettingsService.SYSTEM_USE_DISPATCHER, useDispatcher);

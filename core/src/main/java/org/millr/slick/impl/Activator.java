@@ -23,7 +23,6 @@ import javax.jcr.Session;
 import javax.jcr.ValueFactory;
 import javax.jcr.security.Privilege;
 
-import org.apache.felix.scr.annotations.Reference;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.jackrabbit.api.security.user.Group;
@@ -33,7 +32,6 @@ import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.millr.slick.SlickConstants;
-import org.millr.slick.services.DispatcherService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;

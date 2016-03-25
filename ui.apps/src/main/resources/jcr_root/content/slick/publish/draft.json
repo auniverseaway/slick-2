@@ -1,0 +1,6 @@
+{
+	"jcr:primaryType": "slick:page",
+	"sling:resourceType": "slick/publish/page/draft",
+	"description": "Draft Preview",
+	"title": "Draft"
+}

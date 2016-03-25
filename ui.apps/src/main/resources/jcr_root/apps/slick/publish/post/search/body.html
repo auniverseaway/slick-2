@@ -30,6 +30,8 @@
         <sly data-sly-list.searchItem="${searchList}">
             <sly data-sly-resource="${searchItem.path @ resourceType='slick/publish/post/content'}"/>
         </sly>
-    <script src="/etc/slick/designs/slick/js/publish.js"></script>
+    <sly data-sly-include="partials/lightbox.html"/>
+    <sly data-sly-use.footer="footer.html" data-sly-call="${footer.footer @ view=view, settings=settings}"/>
+    <sly data-sly-include="partials/footlibs.html"/>
 </body>
 </template>

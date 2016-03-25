@@ -3,44 +3,54 @@
 	<div class="author-wrap">
 		<sly data-sly-include="subNavigation.html"></sly>
 		<div class="content" data-sly-use.settings="org.millr.slick.components.common.Settings">
-			<form action="settings.edit.json" method="POST" id="settings-form">
-				<div>
-					<label>Blog Name</label>
-					<input type="text" name="blogName" value="${settings.blogName}" placeholder="Blog Name"/>
-				</div>
-				<div>
-					<label>Accent Color</label>
-					<input type="text" name="accentColor" value="${settings.accentColor}" placeholder="Accent Color"/>
-				</div>
-				<div>
-					<label>Analytics Script</label>
-					<textarea name="analyticsScript" placeholder="Analytics Script">${settings.analyticsScript}</textarea>
-				</div>
-				<div class="checkbox">
-					<label><input type="checkbox" name="useDispatcher" value="true" data-sly-attribute.checked="${settings.useDispatcher}"> Use Dispatcher</label>
-				</div>
-				<div>
-					<label>Default Hero Image</label>
-					<input type="text" name="defaultImage" value="${settings.headerImage}" placeholder="Default Hero Image"/>
-				</div>
-				<div>
-					<input type="submit" value="Save" class="button bg-green"/>
-				</div>
-			</form>
-			<section id="dispatcher-caching" data-sly-test="${settings.useDispatcher}">
+			<section class="author-section">
+				<h2>General</h2>
+				<form action="settings.edit.json" method="POST" id="settings-form">
+					<div>
+						<label>Blog Name</label>
+						<input type="text" name="blogName" value="${settings.blogName}" placeholder="Blog Name"/>
+					</div>
+					<div>
+						<label>Blog Description</label>
+						<input type="text" name="blogDescription" value="${settings.blogDescription}" placeholder="Blog Description"/>
+					</div>
+					<div>
+						<label>Accent Color</label>
+						<input type="text" name="accentColor" value="${settings.accentColor}" placeholder="Accent Color"/>
+					</div>
+					<div>
+						<label>Analytics Script</label>
+						<textarea name="analyticsScript" placeholder="Analytics Script (inclue script tag)">${settings.analyticsScript}</textarea>
+					</div>
+					<div class="checkbox">
+						<label><input type="checkbox" name="useDispatcher" value="true" data-sly-attribute.checked="${settings.useDispatcher}"> Use Dispatcher</label>
+					</div>
+					<div>
+						<label>Default Hero Image</label>
+						<input type="text" name="defaultImage" value="${settings.headerImage}" placeholder="Default Hero Image"/>
+					</div>
+					<div class="form-footer">
+						<input type="submit" value="Save" class="button bg-green"/>
+					</div>
+				</form>
+			</section>
+			<section id="dispatcher-caching" class="author-section" data-sly-test="${settings.useDispatcher}">
 				<h2>Dispatcher Caching</h2>
-				<form class="cache-form" action="/bin/slick/flushDispatcher">
-					<input type="hidden" name="flushType" value="flushAll"/>
-					<input type="submit" value="Flush All" class="button bg-green"/>
-				</form>
-				<form class="cache-form" action="/bin/slick/flushDispatcher">
-					<input type="hidden" name="flushType" value="flushContent"/>
-					<input type="submit" value="Flush Content" class="button bg-green"/>
-				</form>
-				<form class="cache-form" action="/bin/slick/flushDispatcher">
-					<input type="hidden" name="flushType" value="flushUi"/>
-					<input type="submit" value="Flush UI" class="button bg-green"/>
-				</form>
+				<div class="form-footer">
+					<div class="form-submit">
+					<form class="cache-form" action="/bin/slick/flushDispatcher">
+						<input type="hidden" name="flushType" value="flushAll"/>
+						<input type="submit" value="Flush All" class="button bg-green"/>
+					</form>
+					<form class="cache-form" action="/bin/slick/flushDispatcher">
+						<input type="hidden" name="flushType" value="flushContent"/>
+						<input type="submit" value="Flush Content" class="button bg-green"/>
+					</form>
+					<form class="cache-form" action="/bin/slick/flushDispatcher">
+						<input type="hidden" name="flushType" value="flushUi"/>
+						<input type="submit" value="Flush UI" class="button bg-green"/>
+					</form>
+				</div>
 			</section>
 		</div>
 	</div>

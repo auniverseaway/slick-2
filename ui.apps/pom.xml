@@ -48,6 +48,7 @@
                             jcr_root/etc/map;overwrite:=true;uninstall:=true;path:=/etc/map,
                             jcr_root/content/slick;overwrite:=false;overwriteProperties:=true;uninstall:=false;path:=/content/slick,
                             jcr_root/content/slick/author;overwrite:=true;uninstall:=true;path:=/content/slick/author,
+                            jcr_root/content/slick/publish/draft;overwrite:=true;uninstall:=true;path:=/content/slick/publish/draft,
                             jcr_root/content/slick/publish/login;overwrite:=true;uninstall:=true;path:=/content/slick/publish/login,
                             jcr_root/content/slick/publish/posts;overwrite:=false;uninstall:=false;path:=/content/slick/publish/posts,
                             jcr_root/content/slick/publish/pages;overwrite:=false;uninstall:=false;path:=/content/slick/publish/pages,

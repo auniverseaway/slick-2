@@ -39,6 +39,10 @@ import org.osgi.framework.Constants;
               value = SettingsServiceImpl.BLOG_NAME_DEFAULT_VALUE,
               label = "Blog Name",
               description = "The blog name is used throughout your site."),
+    @Property(name = SettingsServiceImpl.SYSTEM_BLOG_DESCRIPTION,
+              value = SettingsServiceImpl.BLOG_DESCRIPTION_DEFAULT_VALUE,
+              label = "Blog Description",
+              description = "The blog description is used throughout your site."),
     @Property(name = SettingsServiceImpl.SYSTEM_ACCENT_COLOR,
 		      value = SettingsServiceImpl.ACCENT_COLOR_DEFAULT_VALUE,
 		      label = "Accent Color",
@@ -75,6 +79,9 @@ public class SettingsServiceImpl implements SettingsService {
     /** Default value for the blog name */
     public static final String BLOG_NAME_DEFAULT_VALUE = "Slick Blogging Engine";
     
+    /** Default value for the blog description */
+    public static final String BLOG_DESCRIPTION_DEFAULT_VALUE = "Blogging for the modern web.";
+    
     /** Default value for the analytics script */
     public static final String ANALYTICS_SCRIPT_DEFAULT_VALUE = "";
     
@@ -87,28 +94,25 @@ public class SettingsServiceImpl implements SettingsService {
     /** Default value for using a dispatcher. */
     public static final boolean USE_DISPATCHER_DEFAULT_VALUE = false;
 
-    /** Service activation */
+    /** Activate Service */
     @Activate
     protected void activate(Map<String, Object> properties) {
     }
 
-    /**
-     * Get the name of the blog.
-     *
-     * @return The name of the blog.
-     */
     public String getBlogName() {
         return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_BLOG_NAME, BLOG_NAME_DEFAULT_VALUE);
     }
     
-    /**
-     * Set the name of the blog.
-     *
-     * @param name The name of the blog.
-     * @return true if the save was successful.
-     */
     public boolean setBlogName(final String name) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_BLOG_NAME, name);
+    }
+    
+    public String getBlogDescription() {
+        return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_BLOG_DESCRIPTION, BLOG_DESCRIPTION_DEFAULT_VALUE);
+    }
+    
+    public boolean setBlogDescription(final String description) {
+        return osgiService.setProperty(COMPONENT_PID, SYSTEM_BLOG_DESCRIPTION, description);
     }
     
     public String getAnalyticsScript() {
@@ -143,16 +147,6 @@ public class SettingsServiceImpl implements SettingsService {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_USE_DISPATCHER, value);
     }
     
-    /**
-     * Set multiple properties for the System Settings service.
-     *
-     * This is useful for setting multiple properties as the same
-     * time in that the OSGi component will only be updated once
-     * and thus reset only once.
-     *
-     * @param properties A map of properties to set.
-     * @return true if save was successful.
-     */
     public boolean setProperties(final Map<String, Object> properties) {
         return osgiService.setProperties(COMPONENT_PID, properties);
     }

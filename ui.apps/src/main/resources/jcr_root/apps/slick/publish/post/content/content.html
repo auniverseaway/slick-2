@@ -1,8 +1,8 @@
 <article data-sly-use.page="org.millr.slick.models.Page">
 	<img data-sly-test="${page.image}" src="${page.image}"/>
     <div class="Grid Fit-Medium title">
-		<h1 class="Cell"><a href="${page.link}">${page.title}</a></h1>
-		<h2 class="Cell align-right" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=page.publishDate, dateFormat='MMMM, d yyyy'}">
+		<h1 class="Cell Medium-65"><a href="${page.link}">${page.title}</a></h1>
+		<h2 class="Cell publish-date" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=page.publishDate, dateFormat='MMMM, d yyyy'}">
 			${format.formattedValue}
 		</h2>
 	</div>
@@ -10,9 +10,11 @@
 		${page.content @ context='unsafe'}
 	</div>
 	<div class="Grid Fit-Medium meta">
-		<div class="Cell tags">
-			<sly data-sly-list.tag="${page.tags}"><span class="tag">${tag}</span> </sly>
-		</div>
+		<div class="Cell">
+            <div class="tags">
+                <sly data-sly-list.tag="${page.tags}"><span class="tag">${tag}</span></sly>
+            </div>
+        </div>
 		<div class="Cell align-right"><span class="author">${'by' @ i18n}: ${page.author.firstName} ${page.author.lastName}</span>
 	 	</div>
     </div>
