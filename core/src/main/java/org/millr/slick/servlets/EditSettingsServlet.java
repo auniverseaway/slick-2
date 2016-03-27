@@ -68,22 +68,17 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
 	
 	private static final String USE_DISPATCHER_PROPERTY = "useDispatcher";
 	
-	private static final String TEMPORARY_DIRECTORY_PROPERTY = "temporaryDirectory";
-	
 	private static final String DEFAULT_HEADER_IMAGE = "defaultImage";
 
 	@Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws ServletException, IOException {
 		
-		final PrintWriter writer = response.getWriter();
-		
 		final boolean allowWrite = userService.getAuthorable(request.getResourceResolver());
 		
-		response.setCharacterEncoding(CharEncoding.UTF_8);
-        response.setContentType("application/json");
-
-        if (allowWrite) {
+		int statusCode;
+		
+		if (allowWrite) {
             final String blogName = request.getParameter(BLOG_NAME_PROPERTY);
             final String blogDescription = request.getParameter(BLOG_DESCRIPTION_PROPERTY);
             final String accentColor = request.getParameter(ACCENT_COLOR_PROPERTY);
@@ -102,17 +97,17 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
             boolean result = settingsService.setProperties(properties);
             
             flushDispatch(request);
-
+            
             if (result) {
-                response.setStatus(SlingHttpServletResponse.SC_OK);
-                sendResponse(writer, "OK", "Settings successfully updated.");
+            	statusCode = SlingHttpServletResponse.SC_OK;
+                sendResponse(response, statusCode, "success", "Settings successfully updated.");
             } else {
-                response.setStatus(SlingHttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                sendResponse(writer, "Error", "Settings failed to update.");
+            	statusCode = SlingHttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+                sendResponse(response, statusCode, "error", "Settings failed to update.");
             }
         } else {
-            response.setStatus(SlingHttpServletResponse.SC_FORBIDDEN);
-            sendResponse(writer, "Error", "Current user not authorized.");
+        	statusCode = SlingHttpServletResponse.SC_FORBIDDEN;
+            sendResponse(response, statusCode, "error", "Current user not authorized.");
         }
 	}
 	
@@ -122,19 +117,27 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
         dispatcherService.flush(currentDomain, "flushContent");
     }
 	
-	protected void sendResponse(final PrintWriter writer, final String header, final String message) {
+	protected void sendResponse(final SlingHttpServletResponse response, int responseCode, final String responseType, final String responseMessage) {
+		
+		JSONObject responseJSON = new JSONObject();
         try {
-            JSONObject json = new JSONObject();
-
-            json.put("header", header);
-            json.put("message", message);
-
-            writer.write(json.toString());
-            
-        } catch (JSONException e) {
-            LOGGER.error("Could not write JSON", e);
-
-                writer.write(String.format("{\"header\" : \"%s\", \"message\" : \"%s\"}", header, message));
+        	responseJSON.put("responseCode", responseCode);
+        	responseJSON.put("responseType", responseType);
+        	responseJSON.put("responseMessage", responseMessage);
+        } catch(Exception e) {
+            e.printStackTrace();
         }
-    }
+        
+        response.setCharacterEncoding(CharEncoding.UTF_8);
+        response.setContentType("application/json");
+        response.setStatus(responseCode);
+        
+        try {
+			response.getWriter().write(responseJSON.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+    }	
 }

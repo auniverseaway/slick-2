@@ -1,4 +1,4 @@
-[].forEach.call(document.querySelectorAll('.cache-form'), function (element) {
+[].forEach.call(document.querySelectorAll('.ajax-form'), function (element) {
   element.addEventListener('submit', function(event) {
 
     event.preventDefault();
