@@ -63,7 +63,7 @@ $("#create-new-user").submit(function(event) {
 	
 	setTimeout(function() {
 		addToGroup(username);
-		window.location = "/content/slick/login.html?resource=%2Fauthor.html";
+		window.location = "/login.html?resource=%2Fauthor.html";
 	}, 4400);
 	
 });

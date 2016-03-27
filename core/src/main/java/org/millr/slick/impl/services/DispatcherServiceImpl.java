@@ -80,6 +80,8 @@ public class DispatcherServiceImpl implements DispatcherService {
         LOGGER.info(uiResponse.toString());
         try {
             response.put("responseCode", 200);
+            response.put("responseType", "success");
+            response.put("responseMessage", "All cache successfully flushed.");
             response.put("uiResponse", uiResponse);
             response.put("contentResponse", contentResponse);
         } catch(Exception e) {
@@ -125,7 +127,7 @@ public class DispatcherServiceImpl implements DispatcherService {
             urlConn.setRequestProperty("CQ-Handle", path);
 
             urlConn.getResponseMessage();
-            responseMessage = "Cache successfully flushed";
+            responseMessage = path + " cache successfully flushed";
             responseCode = 200;
             responseType = "success";
 

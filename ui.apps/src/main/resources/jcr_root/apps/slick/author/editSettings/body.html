@@ -36,7 +36,7 @@
 			</section>
 			<section id="dispatcher-caching" class="author-section" data-sly-test="${settings.useDispatcher}">
 				<h2>Dispatcher Caching</h2>
-				<div class="form-footer">
+				<div class="form-footer group">
 					<div class="form-submit">
 					<form class="cache-form" action="/bin/slick/flushDispatcher">
 						<input type="hidden" name="flushType" value="flushAll"/>
@@ -54,6 +54,12 @@
 			</section>
 		</div>
 	</div>
+	<div id="messages"></div>
+	
+	<script id="message" type="text/x-handlebars-template">
+		<div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
+	</script>
+	
 	<sly data-sly-include="scripts.html"></sly>
 	<script src="/etc/slick/designs/slick/author/js/settings.js"></script>
 </body>

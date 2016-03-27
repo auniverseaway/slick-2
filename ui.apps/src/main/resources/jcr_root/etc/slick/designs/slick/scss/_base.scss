@@ -98,3 +98,10 @@ textarea, input { outline: none; }
 .align-center {
     text-align: center;
 }
+
+// Clearfix
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}

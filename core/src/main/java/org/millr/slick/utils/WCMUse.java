@@ -32,9 +32,6 @@ import org.slf4j.LoggerFactory;
  */
 public class WCMUse implements Use {
 	
-	/** The Constant LOGGER. */
-	private static final Logger LOGGER = LoggerFactory.getLogger(WCMUse.class);
-	
 	/** The bindings. */
 	private Bindings bindings;
 	
@@ -49,6 +46,7 @@ public class WCMUse implements Use {
 
 	/**
 	 * Activate.
+	 * Called when activating the class. This should be overridden.
 	 */
 	public void activate() {
 	}
