@@ -1,14 +1,7 @@
 {
 	"jcr:primaryType": "slick:page",
-	"sling:resourceType": "slick/author/listUser",
+	"sling:resourceType": "slick/author/user/edit",
 	"title": "Users",
 	"description": "Users",
-	"menuOrder": 400,
-	"edit": {
-		"jcr:primaryType": "slick:page",
-		"sling:resourceType": "slick/author/editUser",
-		"title": "Edit User",
-		"description": "Edit Slick User",
-		"slickType": "page"
-	}
+	"menuOrder": 400
 }

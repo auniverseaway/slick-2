@@ -17,9 +17,12 @@
 <body id="listPosts">
     <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
     <div id="content">
-        <sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
+        <sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}" data-sly-test="page">
             <sly data-sly-resource="${page.path @ resourceType='slick/publish/post/content'}"/>
         </sly>
+        <div data-sly-test="${!list.posts}">
+        	You have no posts. Start authoring something.
+        </div>
         <div id="pagination" class="Grid Fit-Small" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
             <div class="Cell">
                 <a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
