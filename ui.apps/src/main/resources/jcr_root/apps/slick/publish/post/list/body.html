@@ -20,6 +20,9 @@
         <sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
             <sly data-sly-resource="${page.path @ resourceType='slick/publish/post/content'}"/>
         </sly>
+        <div data-sly-test="${!list.getTotalPosts}">
+        	It looks like there aren't any posts. Do you need to <a href="/author/posts.html">author one</a>?
+        </div>
         <div id="pagination" class="Grid Fit-Small" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
             <div class="Cell">
                 <a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>

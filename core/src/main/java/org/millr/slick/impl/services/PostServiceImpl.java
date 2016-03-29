@@ -43,12 +43,14 @@ public class PostServiceImpl implements PostService {
 										   + "WHERE s.[%s] <= CAST('%s' AS DATE) "
 										   + "AND ISCHILDNODE(s,'/content/slick/publish/%s') "
 										   + "ORDER BY [%s] DESC";
+	
+	private static Long postsCount;
 
 	public NodeIterator getPosts(Session session) {
 		return getPosts(session, null, null, "posts");
     }
 	
-	public NodeIterator getPosts(Session session, Long offset, Long limit,String slickType) {
+	public NodeIterator getPosts(Session session, Long offset, Long limit, String slickType) {
 	    
 	    String today = getToday();
 		
@@ -80,6 +82,7 @@ public class PostServiceImpl implements PostService {
                 LOGGER.error("Could not search repository", e);
             }
         }
+        postsCount = nodes.getSize();
         return nodes;
 	}
 

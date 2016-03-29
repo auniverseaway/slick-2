@@ -51,6 +51,8 @@ public class ListPosts {
     
     private NodeIterator posts;
 
+    private Long totalPosts;
+
     public ListPosts(SlingHttpServletRequest request)
     {
     	this.request = request;
@@ -62,6 +64,10 @@ public class ListPosts {
     	final Long offset = getOffset();
     	posts = postService.getPosts(session, offset, SlickConstants.PAGINATION_SIZE, slickType);
     	return posts;
+    }
+
+    public Long getTotalPosts() {
+        return postService.getNumberOfPosts(session);
     }
     
     private Long getOffset() {
