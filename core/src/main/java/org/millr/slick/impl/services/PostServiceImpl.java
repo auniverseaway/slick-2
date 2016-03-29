@@ -107,7 +107,7 @@ public class PostServiceImpl implements PostService {
     }
 	
 	public long getNumberOfPosts(Session session) {
-        return getPosts(session).getSize();
+        return postsCount;
     }
 	
 }

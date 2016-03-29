@@ -1,0 +1,55 @@
+<body>
+	<sly data-sly-include="navigation.html"></sly>
+	<div class="author-wrap">
+		<sly data-sly-include="subNavigation.html"></sly>
+		<div class="content">
+			<section class="author-section" id="add-user">
+				<h2>Add Author</h2>
+				<form method="POST" action="/system/userManager/user.create.json" id="create-user">
+					<div class="Grid Fit-Mobile">
+						<input class="Cell" type="text" name=":name" placeholder="username"/>
+						<input class="Cell" type="text" name="email" placeholder="email"/>
+					</div>
+					<div class="Grid Fit-Mobile">
+						<input class="Cell" type="text" name="firstName" placeholder="First Name"/>
+						<input class="Cell" type="text" name="lastName" placeholder="Last Name"/>
+					</div>
+					<div class="Grid Fit-Mobile">
+						<input class="Cell" type="password" name="pwd" placeholder="Password"/>
+						<input class="Cell" type="password" name="pwdConfirm" placeholder="Confirm Password"/>
+					</div>
+					<div class="form-footer">
+						<input type="submit" value="Create" class="button bg-green"/>
+					</div>
+					
+				</form>
+			</section>
+			<section class="author-section" id="users">
+				<h2>User List</h2>
+				<div class="Grid Fit-Small sub-head-container">
+					<div class="Cell sub-head-label">Name</div>
+					<div class="Cell sub-head-label">Email</div>
+					<div class="Cell sub-head-label">Username</div>
+				</div>
+				<script id="user-list" type="text/x-handlebars-template">
+					{{#each this}}
+						<div class="Grid Fit-Small user-list-item">
+							<div class="Cell">{{firstName}} {{lastName}}</div>
+							<div class="Cell">{{email}}</div>
+							<div class="Cell">{{@key}}</div>
+						</div>
+					{{/each}}
+				</script>
+			</section>
+		</div>
+	</div>
+	<div id="messages"></div>
+	
+	<script id="message" type="text/x-handlebars-template">
+		<div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
+	</script>
+	
+	<sly data-sly-include="scripts.html"/>
+	<script src="/etc/slick/designs/slick/author/js/userManager.js"></script>
+	<script src="/etc/slick/designs/slick/author/js/messaging.js"></script>
+</body>
