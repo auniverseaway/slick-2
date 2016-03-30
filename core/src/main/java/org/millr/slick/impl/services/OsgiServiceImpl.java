@@ -22,6 +22,8 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Properties;
+import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.commons.osgi.PropertiesUtil;
@@ -37,10 +39,14 @@ import org.slf4j.LoggerFactory;
 import org.millr.slick.services.OsgiService;
 
 /**
- * The base service to interact with OSGi configurations.
+ * The base OSGi service to interact with configurations.
  */
 @Service
-@Component(name = "Slick OSGi Service", description = "Programatically set properties of OSGi configurations.")
+@Component(metatype = true)
+@Properties({
+    @Property(name = "name", value = "Slick OSGi Service"),
+    @Property(name = "description", value = "Programatically set properties of OSGi configurations.")
+})
 public class OsgiServiceImpl implements OsgiService {
 
     /** The service to get OSGi configs */

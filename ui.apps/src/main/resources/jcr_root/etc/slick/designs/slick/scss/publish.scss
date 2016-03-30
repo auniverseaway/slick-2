@@ -3,10 +3,24 @@
 @import 'base';
 @import 'variables';
 
+.page-wrap {
+    min-height: 100%;
+    margin-bottom: -60px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+  height: 60px;
+}
+
 #content, .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 15px;
+}
+
+#content {
+	flex: 1;
 }
 // Extra Large (Desktops, 1200px)
 @media (min-width: 75em) {
@@ -283,6 +297,7 @@ article {
 }
 
 footer {
+    height: 60px;
     background: $light-gray;
     color: $dark-gray;
 

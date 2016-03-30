@@ -47,7 +47,7 @@ public class ListPosts {
     public String slickType;
     
     @OSGiService
-	private PostService postService = null;
+    private PostService postService = null;
     
     private NodeIterator posts;
 
@@ -55,15 +55,15 @@ public class ListPosts {
 
     public ListPosts(SlingHttpServletRequest request)
     {
-    	this.request = request;
-    	this.resourceResolver = this.request.getResourceResolver();
-    	this.session = this.resourceResolver.adaptTo(Session.class);
+        this.request = request;
+        this.resourceResolver = this.request.getResourceResolver();
+        this.session = this.resourceResolver.adaptTo(Session.class);
     }
     
     public NodeIterator getPosts() {
-    	final Long offset = getOffset();
-    	posts = postService.getPosts(session, offset, SlickConstants.PAGINATION_SIZE, slickType);
-    	return posts;
+        final Long offset = getOffset();
+        posts = postService.getPosts(session, offset, SlickConstants.PAGINATION_SIZE, slickType);
+        return posts;
     }
 
     public Long getTotalPosts() {
@@ -89,6 +89,6 @@ public class ListPosts {
     
     public String getSlickType()
     {
-    	return slickType;
+        return slickType;
     }
 }

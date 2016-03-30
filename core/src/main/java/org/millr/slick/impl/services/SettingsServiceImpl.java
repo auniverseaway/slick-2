@@ -28,6 +28,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.osgi.framework.Constants;
 
+/**
+ * The Settings Service Implementation.
+ * 
+ * This service allows for setting specific configurations 
+ * for the application specific to a site.
+ */
 @Service(value = SettingsService.class)
 @Component(metatype = true,
            immediate = true,
@@ -35,6 +41,10 @@ import org.osgi.framework.Constants;
            label = "Slick Configuration",
            description = "General blog settings.")
 @Properties({
+	@Property(name = Constants.SERVICE_DESCRIPTION,
+              value = "General Configurations"),
+    @Property(name = Constants.SERVICE_VENDOR,
+              value = "Slick"),
     @Property(name = SettingsServiceImpl.SYSTEM_BLOG_NAME,
               value = SettingsServiceImpl.BLOG_NAME_DEFAULT_VALUE,
               label = "Blog Name",
@@ -48,21 +58,17 @@ import org.osgi.framework.Constants;
 		      label = "Accent Color",
 		      description = "The accent color used throughout your site."),
     @Property(name = SettingsServiceImpl.SYSTEM_ANALYTICS_SCRIPT,
-    			value = SettingsServiceImpl.ANALYTICS_SCRIPT_DEFAULT_VALUE,
-    			label = "Analytics Script",
-    			description = "The script provided by your analytics service. This should include the <script> tag."),
+    		  value = SettingsServiceImpl.ANALYTICS_SCRIPT_DEFAULT_VALUE,
+    		  label = "Analytics Script",
+    		  description = "The script provided by your analytics service. This should include the <script> tag."),
     @Property(name = SettingsServiceImpl.SYSTEM_HEADER_IMAGE,
-				value = SettingsServiceImpl.HEADER_IMAGE_DEFAULT_VALUE,
-				label = "Header Image",
-				description = "The default post header image if one has not been set."),
+			  value = SettingsServiceImpl.HEADER_IMAGE_DEFAULT_VALUE,
+			  label = "Header Image",
+			  description = "The default post header image if one has not been set."),
     @Property(name = SettingsServiceImpl.SYSTEM_USE_DISPATCHER,
               boolValue = SettingsServiceImpl.USE_DISPATCHER_DEFAULT_VALUE,
               label = "Use Dispatcher",
-              description = "Using a dispatcher will trigger an Apache cache flush on content modification."),
-    @Property(name = Constants.SERVICE_DESCRIPTION,
-              value = "General blog engine system settings."),
-    @Property(name = Constants.SERVICE_VENDOR,
-              value = "Slick")
+              description = "Using a dispatcher will trigger an Apache cache flush on content modification.")
 })
 public class SettingsServiceImpl implements SettingsService {
 

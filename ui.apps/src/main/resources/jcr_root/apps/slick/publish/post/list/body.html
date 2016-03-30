@@ -14,21 +14,23 @@
     limitations under the License.
 -->
 <template data-sly-template.body="${@ view, settings}">
-<body id="listPosts">
-    <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
-    <div id="content">
-        <sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}" data-sly-test="page">
-            <sly data-sly-resource="${page.path @ resourceType='slick/publish/post/content'}"/>
-        </sly>
-        <div data-sly-test="${!list.getTotalPosts}">
-        	It looks like there aren't any posts. Do you need to <a href="/author/posts.html">author one</a>?
-        </div>
-        <div id="pagination" class="Grid Fit-Small" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
-            <div class="Cell">
-                <a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
+<body>
+    <div class="page-wrap"> <!--/* We wrap the page for sticky footer functionality */-->
+        <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"></sly>
+        <div id="content">
+            <sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}" data-sly-test="page">
+                <sly data-sly-resource="${page.path @ resourceType='slick/publish/post/content'}"></sly>
+            </sly>
+            <div data-sly-test="${!list.getTotalPosts}">
+            	It looks like there aren't any posts. Do you need to <a href="/author/posts.html">author one</a>?
             </div>
-            <div class="Cell align-right">
-                <a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
+            <div id="pagination" class="Grid Fit-Small" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
+                <div class="Cell">
+                    <a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
+                </div>
+                <div class="Cell align-right">
+                    <a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
+                </div>
             </div>
         </div>
     </div>

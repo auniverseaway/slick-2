@@ -23,19 +23,33 @@ import java.net.URL;
 import java.util.Objects;
 
 import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Properties;
+import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.apache.sling.commons.json.JSONObject;
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.SettingsService;
+import org.osgi.framework.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The Class Dispatcher Service Implementation.
+ * The Dispatcher Service Implementation.
+ * 
+ * This service determines if a dispatcher is turned on 
+ * in settings. It has various methods to flush different 
+ * nodes depending on need. It will return a standardized 
+ * Slick Response JSON Object.
  */
 @Service
-@Component
+@Component(metatype = true,
+		   name = "Dispatcher Service")
+@Properties({
+    @Property(name = "name", value = "Slick Dispatcher Service"),
+    @Property(name = Constants.SERVICE_PID, value = "org.millr.slick.impl.services.DispatcherServiceImpl"),
+    @Property(name = Constants.SERVICE_DESCRIPTION, value = "A service to flush a dispatch server.")
+})
 public class DispatcherServiceImpl implements DispatcherService {
     
     /** The Constant LOGGER. */

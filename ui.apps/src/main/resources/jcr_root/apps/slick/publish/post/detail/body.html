@@ -15,6 +15,7 @@
 -->
 <template data-sly-template.body="${@ view, settings}">
 <body id="${resource.name}">
+    <div class="page-wrap"> <!--/* We wrap the page for sticky footer functionality */-->
     <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
     <section id="content">
         <article itemscope itemtype="https://schema.org/BlogPosting">
@@ -44,6 +45,7 @@
             </div>
         </article>
     </section>
+    </div>
     <sly data-sly-include="partials/lightbox.html"/>
     <sly data-sly-use.footer="footer.html" data-sly-call="${footer.footer @ view=view, settings=settings}"/>
     <sly data-sly-include="partials/footlibs.html"/>    
