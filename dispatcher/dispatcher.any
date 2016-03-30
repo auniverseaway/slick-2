@@ -1,0 +1,246 @@
+#
+#
+#
+# Slick Dispatcher Sample File - Tested with Dispatcher 4.1.9
+# Apache Mod can be found at https://www.adobeaemcloud.com/content/companies/public/adobe/dispatcher/dispatcher.html
+# Please change any entries listed as "[CHANGEME]"
+#
+#
+#
+# Each farm configures a set of load balanced renders (i.e. remote servers)
+/farms
+{
+  # First farm entry
+  /slick 
+  {  
+      # Request headers that should be forwarded to the remote server.
+      /clientheaders
+      {
+        # Forward all request headers that are end-to-end. If you want
+        # to forward a specific set of headers, you'll have to list
+        # them here.
+        "*"
+      }
+      
+      # Hostname globbing for farm selection (virtual domain addressing)
+      /virtualhosts
+      {
+        # Entries will be compared against the "Host" request header
+        # and an optional request URL prefix.
+        #
+        # Examples:
+        #
+        #   www.company.com
+        #   intranet.*
+        #   myhost:8888/mysite
+        "[CHANGEME]"
+      }
+      
+      # The load will be balanced among these render instances
+      /renders
+      {
+        /rend01
+        {
+
+        # Hostname or IP of the render
+        /hostname "127.0.0.1"
+
+        # Port of the render
+        /port "8080"
+
+        # Connect timeout in milliseconds, 0 to wait indefinitely
+        # /timeout "0"
+        }
+      }
+      
+      # The filter section defines the requests that should be handled by the dispatcher.
+      #
+      # Entries can be either specified using globs, or elements of the request line:
+      #
+      # (1) globs will be compared against the entire request line, e.g.:
+      #
+      #     /0001 { /type "deny" /glob "* /index.html *" }
+      #
+      #   matches request "GET /index.html HTTP/1.1" but not "GET /index.html?a=b HTTP/1.1".
+      #
+      # (2) method/url/query/protocol will be compared againts the respective elements of
+      #   the request line, e.g.:
+      #
+      #     /0001 { /type "deny" /method "GET" /url "/index.html" }
+      #
+      #   matches both "GET /index.html" and "GET /index.html?a=b HTTP/1.1".
+      #
+      # Note: specifying elements of the request line is the preferred method.
+      /filter
+      {
+        # Deny everything first and then allow specific entries
+        /0001 { /type "deny" /glob "*" }
+        
+        # Open consoles
+        /0013 { /type "allow" /url "/system/*"                }  # allow OSGi console
+        /0014 { /type "allow" /url "/system/sling/form/login" }  
+        
+        # Allow non-public content directories
+        /0022 { /type "allow" /url "/bin/slick/*"             }  # Slick Servlets
+        /0023 { /type "allow" /url "/content*"                }  # disable this rule to allow mapped content only
+
+        # Enable specific mime types in non-public content directories 
+        /0041 { /type "allow" /url "*.css"                    }  # enable css
+        /0042 { /type "allow" /url "*.gif"                    }  # enable gifs
+        /0043 { /type "allow" /url "*.ico"                    }  # enable icos
+        /0044 { /type "allow" /url "*.js"                     }  # enable javascript
+        /0045 { /type "allow" /url "*.png"                    }  # enable png
+        /0046 { /type "allow" /url "*.swf"                    }  # enable flash
+        /0047 { /type "allow" /url "*.jpg"                    }  # enable jpg
+        /0048 { /type "allow" /url "*.jpeg"                   }  # enable jpeg
+        /0049 { /type "allow" /url "*.woff"                   }  # enable woff fonts
+        /0050 { /type "allow" /url "*.ttf"                    }  # enable ttf fonts
+        /0051 { /type "allow" /url "*.eot"                    }  # enable eot fonts
+        /0052 { /type "allow" /url "*.svg"                    }  # enable svg
+
+        # Deny content grabbing
+        /0081 { /type "deny"  /url "*.infinity.json"          }
+        /0082 { /type "deny"  /url "*.tidy.json"              }
+        /0083 { /type "deny"  /url "*.sysview.xml"            }
+        /0084 { /type "deny"  /url "*.docview.json"           }
+        /0085 { /type "deny"  /url "*.docview.xml"            }
+        /0086 { /type "deny"  /url "*.*[0-9].json"            }
+
+        # Deny query
+        /0090 { /type "deny"  /url "*.query.json"             }
+      }
+
+      # The cache section regulates what responses will be cached and where.
+      /cache
+      {
+        # The docroot must be equal to the document root of the webserver. The
+        # dispatcher will store files relative to this directory and subsequent
+        # requests may be "declined" by the dispatcher, allowing the webserver
+        # to deliver them just like static files.
+        /docroot "/var/www/[CHANGEME]/slick_html/cache"
+
+        # Sets the level upto which files named ".stat" will be created in the 
+        # document root of the webserver. When an activation request for some 
+        # page is received, only files within the same subtree are affected 
+        # by the invalidation.
+        # /statfileslevel "0"
+        
+        # Flag indicating whether to cache responses to requests that contain
+        # authorization information.
+        # /allowAuthorized "0"
+        
+        # Flag indicating whether the dispatcher should serve stale content if
+        # no remote server is available.
+        # /serveStaleOnError "0"
+        
+        # The rules section defines what responses should be cached based on
+        # the requested URL. Please note that only the following requests can
+        # lead to cacheable responses:
+        #
+        # - HTTP method is GET
+        # - URL has an extension
+        # - Request has no query string
+        # - Request has no "Authorization" header (unless allowAuthorized is 1)
+        /rules
+        {
+          # Path Specific Caches
+          /0010 { /glob "/bin/slick[./]*" /type "deny"              }  # Do not cache servlet responses
+          /0010 { /glob "/content/slick/author[./]*" /type "deny"   }  # Do not cache anything in author
+          /0020 { /glob "/content/slick/publish[./]*" /type "allow" }
+
+          # File Specific Caches
+          /0061 { /glob "*.css" /type "allow"                       }
+          /0062 { /glob "*.gif" /type "allow"                       }
+          /0063 { /glob "*.ico" /type "allow"                       }
+          /0064 { /glob "*.js" /type "allow"                        }
+          /0065 { /glob "*.png" /type "allow"                       }
+          /0066 { /glob "*.swf" /type "allow"                       }
+          /0067 { /glob "*.jpg" /type "allow"                       }
+          /0068 { /glob "*.jpeg" /type "allow"                      }
+          /0069 { /glob "*.svg" /type "allow"                       }
+          /0070 { /glob "*.zip" /type "allow"                       }
+          
+          # Ignore Query Strings
+          /ignoreUrlParams
+          {
+            /0001 { /glob "*" /type "deny" }
+            /0002 { /glob "page" /type "allow" }
+          }
+        }
+        
+        # The invalidate section defines the pages that are "invalidated" after
+        # any activation. Please note that the activated page itself and all 
+        # related documents are flushed on an modification. For example: if the 
+        # page /foo/bar is activated, all /foo/bar.* files are removed from the
+        # cache.
+        /invalidate
+        {
+          /0000
+            {
+              /glob "*"
+              /type "allow"
+            }
+          /0001
+            {
+            # Consider all HTML files stale after an activation.
+            /glob "*.html"
+            /type "allow"
+            }
+        }
+      }
+
+
+      # The allowedClients section restricts the client IP addresses that are
+      # allowed to issue activation requests.
+      /allowedClients
+      {
+
+        # Uncomment the following to restrict activation requests to originate
+        # from "localhost" only.
+        /0000
+        {
+          /glob "*"
+          /type "deny"
+        }
+        /0001
+        {
+          /glob "[CHANGEME]" # This needs to be the public IP of your site.
+          /type "allow"
+        }
+      }
+        
+        # The ignoreUrlParams section contains query string parameter names that
+        # should be ignored when determining whether some request's output can be
+        # cached or delivered from cache.
+        #
+        # In this example configuration, the "q" parameter will be ignored. 
+        #  /ignoreUrlParams
+        #  {
+        #    /0001 { /glob "*" /type "deny" }
+        #    /0002 { /glob "q" /type "allow" }
+        #  }
+      
+      }
+      
+      # The statistics sections dictates how the load should be balanced among the
+      # renders according to the media-type. 
+    /statistics
+    {
+      /categories
+      {
+        /html
+        {
+          /glob "*.html"
+        }
+        /others
+        {
+          /glob "*"
+        }
+      }
+    }
+
+     
+    
+  }
+
+}
