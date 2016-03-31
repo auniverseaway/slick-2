@@ -3,6 +3,8 @@ Slick is a beautiful app to help create exceptional web content. It's highly opt
 
 It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common to Adobe Experience Manager.
 
+![Travis Status](https://travis-ci.org/auniverseaway/slick2.svg?branch=master)
+
 #Demo
 [slick.millr.org](http://slick.millr.org) | [experiencemanaged.com](http://experiencemanaged.com)
 
