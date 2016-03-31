@@ -37,9 +37,9 @@ import org.osgi.framework.Constants;
 @Service(value = SettingsService.class)
 @Component(metatype = true,
            immediate = true,
-           name = "org.millr.slick",
+           name = "org.millr.slick.impl.services.SettingsServiceImpl",
            label = "Slick Configuration",
-           description = "General blog settings.")
+           description = "General site settings.")
 @Properties({
 	@Property(name = Constants.SERVICE_DESCRIPTION,
               value = "General Configurations"),
