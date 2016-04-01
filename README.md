@@ -5,7 +5,7 @@ It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common 
 
 ![Travis Status](https://travis-ci.org/auniverseaway/slick2.svg?branch=master)
 
-![Sling and Slick](https://raw.githubusercontent.com/auniverseaway/slick2/master/ui.apps/src/main/resources/jcr_root/etc/slick/designs/slick/img/sling-slick-logo.svg)
+![Sling and Slick](https://raw.githubusercontent.com/auniverseaway/slick2/master/ui.apps/src/main/resources/jcr_root/etc/slick/designs/slick/img/sling-slick-logo.png)
 
 #Demo
 [slick.millr.org](http://slick.millr.org) | [experiencemanaged.com](http://experiencemanaged.com)
