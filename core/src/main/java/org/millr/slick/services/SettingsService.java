@@ -18,35 +18,19 @@ package org.millr.slick.services;
 import java.util.Map;
 
 public interface SettingsService {
-	
-	/** OSGi property name for the blog name **/
-	String SYSTEM_BLOG_NAME = "system.blogName";
-	
-	/** OSGi property name for the blog name **/
+    
+    String SYSTEM_BLOG_NAME = "system.blogName";
+    
     String SYSTEM_BLOG_DESCRIPTION = "system.blogDescription";
 
-    /** OSGi property name for using a dispatcher **/
-	String SYSTEM_USE_DISPATCHER = "system.useDispatcher";
-	
-	/** OSGi property name for the analytics script **/
-	public static final String SYSTEM_ANALYTICS_SCRIPT = "system.analyticsScript";
-	
-	/** OSGi property name for the analytics script **/
-	public static final String SYSTEM_HEADER_IMAGE = "system.headerImage";
-	
-	/** OSGi property name for the analytics script **/
-	public static final String SYSTEM_ACCENT_COLOR = "system.accentColor";
+    String SYSTEM_USE_DISPATCHER = "system.useDispatcher";
+    
+    public static final String SYSTEM_ANALYTICS_SCRIPT = "system.analyticsScript";
+    
+    public static final String SYSTEM_HEADER_IMAGE = "system.headerImage";
+    
+    public static final String SYSTEM_ACCENT_COLOR = "system.accentColor";
 
-    /**
-     * Set multiple properties for the System Settings service.
-     *
-     * This is useful for setting multiple properties as the same
-     * time in that the OSGi component will only be updated once
-     * and thus reset only once.
-     *
-     * @param properties A map of properties to set.
-     * @return true if save was successful.
-     */
     boolean setProperties(final Map<String, Object> properties);
 
     /**
@@ -116,5 +100,5 @@ public interface SettingsService {
     String getAccentColor();
     
     boolean setAccentColor(final String accentColor);
-	
+    
 }

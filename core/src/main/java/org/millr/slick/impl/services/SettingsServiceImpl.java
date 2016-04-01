@@ -31,7 +31,7 @@ import org.osgi.framework.Constants;
 /**
  * The Settings Service Implementation.
  * 
- * This service allows for setting specific configurations 
+ * This service allows for setting configurations 
  * for the application specific to a site.
  */
 @Service(value = SettingsService.class)
@@ -41,7 +41,7 @@ import org.osgi.framework.Constants;
            label = "Slick Configuration",
            description = "General site settings.")
 @Properties({
-	@Property(name = Constants.SERVICE_DESCRIPTION,
+    @Property(name = Constants.SERVICE_DESCRIPTION,
               value = "General Configurations"),
     @Property(name = Constants.SERVICE_VENDOR,
               value = "Slick"),
@@ -54,17 +54,17 @@ import org.osgi.framework.Constants;
               label = "Blog Description",
               description = "The blog description is used throughout your site."),
     @Property(name = SettingsServiceImpl.SYSTEM_ACCENT_COLOR,
-		      value = SettingsServiceImpl.ACCENT_COLOR_DEFAULT_VALUE,
-		      label = "Accent Color",
-		      description = "The accent color used throughout your site."),
+              value = SettingsServiceImpl.ACCENT_COLOR_DEFAULT_VALUE,
+              label = "Accent Color",
+              description = "The accent color used throughout your site."),
     @Property(name = SettingsServiceImpl.SYSTEM_ANALYTICS_SCRIPT,
-    		  value = SettingsServiceImpl.ANALYTICS_SCRIPT_DEFAULT_VALUE,
-    		  label = "Analytics Script",
-    		  description = "The script provided by your analytics service. This should include the <script> tag."),
+              value = SettingsServiceImpl.ANALYTICS_SCRIPT_DEFAULT_VALUE,
+              label = "Analytics Script",
+              description = "The script provided by your analytics service. This should include the <script> tag."),
     @Property(name = SettingsServiceImpl.SYSTEM_HEADER_IMAGE,
-			  value = SettingsServiceImpl.HEADER_IMAGE_DEFAULT_VALUE,
-			  label = "Header Image",
-			  description = "The default post header image if one has not been set."),
+              value = SettingsServiceImpl.HEADER_IMAGE_DEFAULT_VALUE,
+              label = "Header Image",
+              description = "The default post header image if one has not been set."),
     @Property(name = SettingsServiceImpl.SYSTEM_USE_DISPATCHER,
               boolValue = SettingsServiceImpl.USE_DISPATCHER_DEFAULT_VALUE,
               label = "Use Dispatcher",
@@ -80,7 +80,7 @@ public class SettingsServiceImpl implements SettingsService {
     private static final Logger LOGGER = LoggerFactory.getLogger(SettingsService.class);
 
     /** PID of the current OSGi component */
-    private static final String COMPONENT_PID = "org.millr.slick";
+    private static final String COMPONENT_PID = "org.millr.slick.impl.services.SettingsServiceImpl";
 
     /** Default value for the blog name */
     public static final String BLOG_NAME_DEFAULT_VALUE = "Slick Blogging Engine";
@@ -138,11 +138,11 @@ public class SettingsServiceImpl implements SettingsService {
     }
     
     public String getAccentColor() {
-    	return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_ACCENT_COLOR, ACCENT_COLOR_DEFAULT_VALUE);
+        return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_ACCENT_COLOR, ACCENT_COLOR_DEFAULT_VALUE);
     }
     
     public boolean setAccentColor(final String accentColor) {
-    	return osgiService.setProperty(COMPONENT_PID, SYSTEM_ACCENT_COLOR, accentColor);
+        return osgiService.setProperty(COMPONENT_PID, SYSTEM_ACCENT_COLOR, accentColor);
     }
 
     public boolean getUseDispatcher() {

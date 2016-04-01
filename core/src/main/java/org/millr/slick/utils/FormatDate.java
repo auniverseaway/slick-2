@@ -29,33 +29,33 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The Class FormatDate.
+ * FormatDate Utility
  * Inject a Java date and format it based on a front-end supplied SimpleDateFormat.
  */
 @Model(adaptables=SlingHttpServletRequest.class)
 public class FormatDate {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(FormatDate.class);
-	
-	/** The date format. */
-	@Inject
-	private String dateFormat;
-	
-	/** The date. */
-	@Inject
-	private Calendar date;
-	
-	/** The formatted value. */
-	public String formattedValue;
-	
-	/**
-	 * Inits the.
-	 */
-	@PostConstruct
-	protected void init() {
-		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
-		// TODO: Pull timezone from OSGI config.
-		formatter.setTimeZone(TimeZone.getDefault());
-	    formattedValue = formatter.format(date.getTime());
-	}
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(FormatDate.class);
+    
+    /** The date format. */
+    @Inject
+    private String dateFormat;
+    
+    /** The date. */
+    @Inject
+    private Calendar date;
+    
+    /** The formatted value. */
+    public String formattedValue;
+    
+    /**
+     * Inits the.
+     */
+    @PostConstruct
+    protected void init() {
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+        // TODO: Pull timezone from OSGI config.
+        formatter.setTimeZone(TimeZone.getDefault());
+        formattedValue = formatter.format(date.getTime());
+    }
 }

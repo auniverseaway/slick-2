@@ -17,7 +17,7 @@
   </properties>
 
   <modules>
-    <module>core</module>
     <module>ui.apps</module>
+    <module>core</module>
   </modules>
 </project>

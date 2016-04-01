@@ -34,8 +34,8 @@ import org.slf4j.LoggerFactory;
 
 @Model(adaptables = SlingHttpServletRequest.class)
 public class Login {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(Login.class);
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(Login.class);
 
     /**
      * The request.
@@ -59,9 +59,9 @@ public class Login {
     }
     
     public Boolean getIsAdminDefault() {
-    	Boolean result = false;
-    	
-    	// Get our current resolver.
+        Boolean result = false;
+        
+        // Get our current resolver.
         ResourceResolver resolver = request.getResourceResolver();
         
         // Adapt to a session and get the current User ID.
@@ -71,22 +71,22 @@ public class Login {
         // Don't check this if we're not logged in as admin.
         if (Objects.equals(currentUser, new String("admin"))) {
             try {
-        		
-        		Repository repository = session.getRepository();
-            	
-            	// Create a new session by logging into using the default admin username and password.
-    			Session adminSession = repository.login(new SimpleCredentials("admin", "admin".toCharArray()));
-    			adminSession.logout();
-    			
-    			result = true;
-    			
-    		} catch (RepositoryException e) {
-    			LOGGER.debug("Repo Exception: ", e);
-    			result = false;
-    		}
-    	}
-    	
-    	return result;
+                
+                Repository repository = session.getRepository();
+                
+                // Create a new session by logging into using the default admin username and password.
+                Session adminSession = repository.login(new SimpleCredentials("admin", "admin".toCharArray()));
+                adminSession.logout();
+                
+                result = true;
+                
+            } catch (RepositoryException e) {
+                LOGGER.debug("Repo Exception: ", e);
+                result = false;
+            }
+        }
+        
+        return result;
     }
     
     /**

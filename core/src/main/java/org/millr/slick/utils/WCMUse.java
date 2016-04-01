@@ -28,72 +28,73 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Duplicate WCMUse functionality from AEM.
+ * WCMUse Utility
+ * Duplicate AEM WCMUse Class.
  */
 public class WCMUse implements Use {
-	
-	/** The bindings. */
-	private Bindings bindings;
-	
-	/* (non-Javadoc)
-	 * @see org.apache.sling.scripting.sightly.pojo.Use#init(javax.script.Bindings)
-	 */
-	@Override
-	public void init(Bindings bindings) {
-		this.bindings = bindings;
+    
+    /** The bindings. */
+    private Bindings bindings;
+    
+    /* (non-Javadoc)
+     * @see org.apache.sling.scripting.sightly.pojo.Use#init(javax.script.Bindings)
+     */
+    @Override
+    public void init(Bindings bindings) {
+        this.bindings = bindings;
         activate();
-	}
+    }
 
-	/**
-	 * Activate.
-	 * Called when activating the class. This should be overridden.
-	 */
-	public void activate() {
-	}
-	
-	/**
-	 * Gets the request.
-	 *
-	 * @return the request
-	 */
-	public SlingHttpServletRequest getRequest() {
+    /**
+     * Activate.
+     * Called when activating the class. This should be overridden.
+     */
+    public void activate() {
+    }
+    
+    /**
+     * Gets the request.
+     *
+     * @return the request
+     */
+    public SlingHttpServletRequest getRequest() {
         return (SlingHttpServletRequest)bindings.get(SlingBindings.REQUEST);
     }
-	
-	/**
-	 * Gets the resource.
-	 *
-	 * @return the resource
-	 */
-	public Resource getResource() {
+    
+    /**
+     * Gets the resource.
+     *
+     * @return the resource
+     */
+    public Resource getResource() {
         return (Resource)bindings.get(SlingBindings.RESOURCE);
     }
-	
-	/**
-	 * Gets the resource resolver.
-	 *
-	 * @return the resource resolver
-	 */
-	public ResourceResolver getResourceResolver() {
+    
+    /**
+     * Gets the resource resolver.
+     *
+     * @return the resource resolver
+     */
+    public ResourceResolver getResourceResolver() {
         return getResource().getResourceResolver();
     }
-	
-	/**
-	 * Gets the properties.
-	 *
-	 * @return the properties
-	 */
-	public ValueMap getProperties() {
+    
+    /**
+     * Gets the properties.
+     *
+     * @return the properties
+     */
+    public ValueMap getProperties() {
         return getResource().adaptTo(ValueMap.class);
     }
-	
-	/**
-	 * Gets the script helper.
-	 *
-	 * @return the script helper.
-	 */
-	public SlingScriptHelper getSlingScriptHelper() {
+    
+    /**
+     * Gets the script helper.
+     *
+     * @return the script helper.
+     */
+    public SlingScriptHelper getSlingScriptHelper() {
         return (SlingScriptHelper)bindings.get(SlingBindings.SLING);
     }
-	
+    
 }

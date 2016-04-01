@@ -29,7 +29,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The Class EditUserServlet.
+ * Edit User Servlet.
+ * This is not currently being used. It might never be used.
  */
 @SlingServlet(
     resourceTypes = "sling/servlet/default",
@@ -38,40 +39,39 @@ import org.slf4j.LoggerFactory;
     methods = {"GET", "POST"}
 )
 public class EditUserServlet extends SlingAllMethodsServlet {
-	/**
+    /**
      * The logger.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(EditUserServlet.class);
     
     /** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
-	
-	/** The Constant DEFAULT_ADMIN. */
-	private static final String DEFAULT_ADMIN = "admin";
-	
-	@Reference
-	private ResourceResolverFactory resolverFactory;
-	
-	/* (non-Javadoc)
-	 * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
-	 */
-	@Override
-	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-		LOGGER.info("*** In doGet ***");
-	}
-	
-	
-	/* (non-Javadoc)
-	 * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
-	 */
-	@Override
-	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-		LOGGER.info("*** In doPost ***");
-		
-		final String method = request.getParameter("method");	
-		
-	}
+    private static final long serialVersionUID = 1L;
+    
+    /** The Constant DEFAULT_ADMIN. */
+    private static final String DEFAULT_ADMIN = "admin";
+    
+    @Reference
+    private ResourceResolverFactory resolverFactory;
+    
+    /* (non-Javadoc)
+     * @see org.apache.sling.api.servlets.SlingSafeMethodsServlet#doGet(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+     */
+    @Override
+    protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
+        LOGGER.info("*** In doGet ***");
+    }
+    
+    
+    /* (non-Javadoc)
+     * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+     */
+    @Override
+    protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
+        LOGGER.info("*** In doPost ***");
+        final String method = request.getParameter("method");    
+        
+    }
 
-	
-	
+    
+    
 }

@@ -25,30 +25,30 @@ import org.slf4j.LoggerFactory;
 
 @Model(adaptables = SlingHttpServletRequest.class)
 public class CurrentUser {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(CurrentUser.class);
-	
-	private SlingHttpServletRequest request;
-	
-	private ResourceResolver resourceResolver;
-	
-	private String displayName;
-	
-	@OSGiService
-	private CurrentUserService currentUserService = null;
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(CurrentUser.class);
+    
+    private SlingHttpServletRequest request;
+    
+    private ResourceResolver resourceResolver;
+    
+    private String displayName;
+    
+    @OSGiService
+    private CurrentUserService currentUserService = null;
 
-	public CurrentUser(SlingHttpServletRequest request) {
+    public CurrentUser(SlingHttpServletRequest request) {
         this.request = request;
         this.resourceResolver = this.request.getResourceResolver();
     }
-	
-	public String getDisplayName() {
-		String displayName;
-		try {
-			displayName = currentUserService.getFirstName(resourceResolver);
-		} catch (Exception e) {
-			displayName = currentUserService.getId(resourceResolver);
-		}
-		return displayName;
-	}
+    
+    public String getDisplayName() {
+        String displayName;
+        try {
+            displayName = currentUserService.getFirstName(resourceResolver);
+        } catch (Exception e) {
+            displayName = currentUserService.getId(resourceResolver);
+        }
+        return displayName;
+    }
 }

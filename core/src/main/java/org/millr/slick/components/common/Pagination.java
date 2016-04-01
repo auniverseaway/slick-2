@@ -29,8 +29,8 @@ import org.slf4j.LoggerFactory;
 
 @Model(adaptables = SlingHttpServletRequest.class)
 public class Pagination {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(Pagination.class);
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(Pagination.class);
     
     private SlingHttpServletRequest request;
     
@@ -39,7 +39,7 @@ public class Pagination {
     private Session session;
     
     @OSGiService
-	private PostService postService = null;
+    private PostService postService = null;
     
     public long currentPage = 1;
     
@@ -50,36 +50,36 @@ public class Pagination {
     private static final String PAGE_QUERY_STRING = "?" + SlickConstants.PAGINATION_QUERY_STRING + "=";
     
     public Pagination(SlingHttpServletRequest request){
-    	this.request = request;
-    	this.resourceResolver = this.request.getResourceResolver();
-    	this.session = this.resourceResolver.adaptTo(Session.class);
+        this.request = request;
+        this.resourceResolver = this.request.getResourceResolver();
+        this.session = this.resourceResolver.adaptTo(Session.class);
     }
     
     public String getOlderPosts() {
-    	long totalPages = getTotalPageCount();
-    	long currentPage = getCurrentPage();
-    	String uri = null;
-    	if (currentPage < totalPages){
-    		uri = request.getRequestURI() + PAGE_QUERY_STRING + (currentPage + 1);
-    	}
-    	return uri;
+        long totalPages = getTotalPageCount();
+        long currentPage = getCurrentPage();
+        String uri = null;
+        if (currentPage < totalPages){
+            uri = request.getRequestURI() + PAGE_QUERY_STRING + (currentPage + 1);
+        }
+        return uri;
     }
     
     public String getNewerPosts() {
-    	long currentPage = getCurrentPage();
-    	String uri = null;
-    	if (currentPage > 2){
-    		uri = request.getRequestURI() + PAGE_QUERY_STRING + (currentPage - 1);
-    	}
-    	if (currentPage == 2){
-    		uri = request.getRequestURI();
-    	}
-    	return uri;
+        long currentPage = getCurrentPage();
+        String uri = null;
+        if (currentPage > 2){
+            uri = request.getRequestURI() + PAGE_QUERY_STRING + (currentPage - 1);
+        }
+        if (currentPage == 2){
+            uri = request.getRequestURI();
+        }
+        return uri;
     }
     
     public long getCurrentPage() {
-    	
-    	// By default, we're on the first page.
+        
+        // By default, we're on the first page.
         long offset = 1;
         
         // Get the page param.
@@ -97,9 +97,9 @@ public class Pagination {
     }
     
     public long getTotalPageCount() {
-    	long pages = 0;
+        long pages = 0;
         pages = postService.getTotalPages(session, SlickConstants.PAGINATION_SIZE);
         return pages;
     }
-	
+    
 }

@@ -18,15 +18,15 @@ package org.millr.slick.services;
 import org.apache.sling.commons.json.JSONObject;
 
 public interface DispatcherService {
-	
+    
     Boolean canFlush();
     
     JSONObject flush(String domain, String flushType);
     
-	JSONObject flushAll(String domain);
-	
-	JSONObject flushUi(String domain);
-	
-	JSONObject flushContent(String domain);
-	
+    JSONObject flushAll(String domain);
+    
+    JSONObject flushUi(String domain);
+    
+    JSONObject flushContent(String domain);
+    
 }

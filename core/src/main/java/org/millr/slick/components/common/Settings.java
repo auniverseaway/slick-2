@@ -71,15 +71,15 @@ public class Settings extends WCMUse {
     }
     
     public String getAnalyticsScript() {
-    	return analyticsScript;
+        return analyticsScript;
     }
     
     public String getHeaderImage() {
-    	return headerImage;
+        return headerImage;
     }
     
     public String getAccentColor() {
-    	return accentColor;
+        return accentColor;
     }
 
     public boolean getUseDispatcher() {

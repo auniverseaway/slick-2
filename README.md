@@ -5,6 +5,8 @@ It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common 
 
 ![Travis Status](https://travis-ci.org/auniverseaway/slick2.svg?branch=master)
 
+![Sling and Slick](https://raw.githubusercontent.com/auniverseaway/slick2/master/ui.apps/src/main/resources/jcr_root/etc/slick/designs/slick/img/sling-slick-logo.svg)
+
 #Demo
 [slick.millr.org](http://slick.millr.org) | [experiencemanaged.com](http://experiencemanaged.com)
 
@@ -18,19 +20,19 @@ It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common 
 * Dispatcher
 * Analytics, SEO, and social integrations
 * Pagination
-* Localization
+* Basic Localization
 
 #Requirements
-* Java 8
-* Sling 8
-* Maven 3+
+* [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* [Sling 8](http://sling.apache.org/downloads.cgi)
+* [Maven 3+](http://maven.apache.org/download.cgi)
 
 #Installation
 ##1. Run Sling
 
     java -jar org.apache.sling.launchpad-8.jar
 
-##2. Install Slick (**Bug:** On first install, this must be done twice)
+##2. Install Slick
 
     mvn clean install -PautoInstallBundle
 

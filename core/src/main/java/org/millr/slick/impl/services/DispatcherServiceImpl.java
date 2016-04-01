@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
  */
 @Service
 @Component(metatype = true,
-		   name = "Dispatcher Service")
+           name = "Dispatcher Service")
 @Properties({
     @Property(name = "name", value = "Slick Dispatcher Service"),
     @Property(name = Constants.SERVICE_PID, value = "org.millr.slick.impl.services.DispatcherServiceImpl"),

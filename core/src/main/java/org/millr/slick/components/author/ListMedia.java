@@ -39,22 +39,22 @@ public class ListMedia {
     private Session session;
     
     @OSGiService
-	private MediaService mediaService = null;
+    private MediaService mediaService = null;
     
     private NodeIterator media;
 
     public ListMedia(SlingHttpServletRequest request)
     {
-    	LOGGER.info(">>>> In ListMedia Constructor");
-    	this.request = request;
-    	this.resourceResolver = this.request.getResourceResolver();
-    	this.session = this.resourceResolver.adaptTo(Session.class);
+        LOGGER.info(">>>> In ListMedia Constructor");
+        this.request = request;
+        this.resourceResolver = this.request.getResourceResolver();
+        this.session = this.resourceResolver.adaptTo(Session.class);
     }
     
     public NodeIterator getMedia() {
-    	final Long offset = getOffset();
-    	media = mediaService.getMedia(session, offset, 9L);
-    	return media;
+        final Long offset = getOffset();
+        media = mediaService.getMedia(session, offset, 9L);
+        return media;
     }
     
     private Long getOffset() {
