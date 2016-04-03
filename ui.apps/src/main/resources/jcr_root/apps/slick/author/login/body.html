@@ -13,5 +13,8 @@
             </form>
         </div>
     </div>
+    <div id="messages">
+    	<div data-sly-test="${login.reason}" id="message-0" class="message error show"><strong>Error</strong> ${login.reason}</div>
+    </div>
     <sly data-sly-include="scripts.html"></sly>
 </body>

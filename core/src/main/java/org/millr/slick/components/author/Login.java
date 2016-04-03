@@ -94,7 +94,7 @@ public class Login {
      */
     public String getLoginRedirect() {
         String loginRedirect = request.getParameter("resource");
-        if (StringUtils.isEmpty(loginRedirect)) {
+        if (StringUtils.isEmpty(loginRedirect) || Objects.equals(loginRedirect, new String("/"))) {
             loginRedirect = SlickConstants.AUTHOR_PATH + SlickConstants.PAGE_EXTENSION;
         }
         return loginRedirect;

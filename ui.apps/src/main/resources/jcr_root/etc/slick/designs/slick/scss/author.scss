@@ -284,6 +284,11 @@ header {
             color: $red;
         }
         
+        &.error {
+            background: rgba(204, 146, 146, 0.92);
+            color: $red;
+        }
+        
         &.show {
             opacity: 1;
         }
