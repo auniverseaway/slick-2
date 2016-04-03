@@ -41,7 +41,20 @@ header {
     }
 }
 
+.header-image {
+    position: relative;
+    height: 180px;
+    margin-bottom: 1em;
+}
 
+// Anything that is designed to cover
+.cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
 
 header {
     position: relative;
@@ -111,14 +124,6 @@ header {
 
             }
         }
-    }
-
-    .cover {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
     }
 }
 
