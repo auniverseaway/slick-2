@@ -4,8 +4,8 @@
 		<sly data-sly-include="subNavigation.html"></sly>
 		<div class="content" data-sly-use.settings="org.millr.slick.components.common.Settings">
 			<section class="author-section">
-				<h2>General</h2>
 				<form action="settings.edit.json" method="POST" id="settings-form" class="ajax-form">
+					<h2>General</h2>
 					<div>
 						<label>Blog Name</label>
 						<input type="text" name="blogName" value="${settings.blogName}" placeholder="Blog Name"/>
@@ -16,7 +16,12 @@
 					</div>
 					<div>
 						<label>Accent Color</label>
-						<input type="text" name="accentColor" value="${settings.accentColor}" placeholder="Accent Color"/>
+						<input type="text" name="accentColor" value="${settings.accentColor}" placeholder="Accent Color" class="jscolor" 
+							   data-jscolor="{padding:10, borderRadius:0, borderWidth:0, shadow:false, insetColor:'#444', backgroundColor:'#444'}"/>
+					</div>
+					<div>
+						<label>Default Hero Image</label>
+						<input type="text" name="defaultImage" value="${settings.headerImage}" placeholder="Default Hero Image"/>
 					</div>
 					<div>
 						<label>Analytics Script</label>
@@ -24,10 +29,6 @@
 					</div>
 					<div class="checkbox">
 						<label><input type="checkbox" name="useDispatcher" value="true" data-sly-attribute.checked="${settings.useDispatcher}"> Use Dispatcher</label>
-					</div>
-					<div>
-						<label>Default Hero Image</label>
-						<input type="text" name="defaultImage" value="${settings.headerImage}" placeholder="Default Hero Image"/>
 					</div>
 					<div class="form-footer">
 						<input type="submit" value="Save" class="button bg-green"/>
@@ -61,5 +62,6 @@
 	</script>
 	
 	<sly data-sly-include="scripts.html"></sly>
-	<script src="/etc/slick/designs/slick/author/js/settings.js"></script>
+	<script src="/etc/slick/designs/slick/author/js/libs/jscolor.min.js"></script>
+	<script src="/etc/slick/designs/slick/author/js/settings.js"></script>	
 </body>
