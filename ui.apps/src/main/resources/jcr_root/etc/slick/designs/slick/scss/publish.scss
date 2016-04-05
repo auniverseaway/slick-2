@@ -3,6 +3,13 @@
 @import 'base';
 @import 'variables';
 
+
+// Base styles for publish
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    margin: 0 0 16px;
+}
+
 .page-wrap {
     min-height: 100%;
     margin-bottom: -60px;
@@ -87,6 +94,7 @@ header {
         }
 
         #blog-name {
+            font-size: .88889em;
             height: 40px;
             line-height: 40px;
             float: left;
@@ -105,7 +113,7 @@ header {
             li {
                 a {
                     line-height: 1.6em;
-                    font-size: 1.2em;
+                    font-size: 1em;
                     color: $dark-gray;
                 }
 
@@ -116,8 +124,8 @@ header {
                         border: none;
                         margin: 0;
                         padding: 0;
-                        font-family: GothamLightRegular;
-                        font-size: 1.2em;
+                        font-family: 'LatoWebLight';
+                        font-size: 1em;
                         line-height: 1.6em;
                     }
                 }
@@ -141,7 +149,7 @@ header {
             padding: 0;
             line-height: 80px;
             font-size: 1.8em;
-            font-family: GothamLightRegular;
+            font-family: 'LatoWebLight';
             display: block;
             width: 100%;
         }
@@ -241,7 +249,7 @@ article {
             background: rgba(165, 226, 249, 0.92);
             margin-right: $slick-gutter / 2;
             margin-bottom: 14px;
-            font-family: GothamLightRegular;
+            font-family: 'LatoWebLight';
             text-transform: none;
             line-height: 30px;
             color: #000;        
@@ -309,6 +317,10 @@ footer {
     .container {
         margin: 0 auto;
         height: 60px;
+    }
+
+    h5 {
+        margin-bottom: 0;
     }
 }
 

@@ -23,7 +23,7 @@ a {
 }
 
 input, textarea {
-    font-family: GothamLightRegular;
+    font-family: 'LatoWebLight';
 }
 
 // Login
@@ -67,7 +67,7 @@ input, textarea {
             padding: 0px 28px;
             margin: 0px;
             line-height: 60px;
-            font-family: GothamLightRegular;
+            font-family: 'LatoWebLight';
             font-size: 1.1em;
             
             &::-webkit-input-placeholder {
@@ -130,7 +130,7 @@ input, textarea {
                 background: green;
                 border: 0;
                 color: #fff;
-                font-family: GothamLightRegular;
+                font-family: 'LatoWebLight';
                 text-transform: uppercase;
                 font-size: 1em;
             }
@@ -153,6 +153,10 @@ input, textarea {
     margin-left: 176px;
     min-height: 100%;
     margin-bottom: -72px;
+
+    h2 {
+        margin-bottom: 0;
+    }
 }
 
 // Page Specific
@@ -210,10 +214,11 @@ header {
     @include clearfix;
 
     h1.title, .user-info, ul li a {
-        line-height: 3.75rem;
+        line-height: 60px;
         float: left;
         text-transform: uppercase;
         font-size: 1.4rem;
+        margin-bottom: 0;
     }
     
     ul {
@@ -474,7 +479,7 @@ header {
         display: block;
         padding: $slick-gutter / 2 $slick-gutter * 2;
         text-transform: uppercase;
-        font-family: GothamMediumRegular;
+        font-family: 'LatoWebSemibold';
         color: #8A8A8A;
     }
     
@@ -513,7 +518,7 @@ header {
     		label {
     			display: inline-block;
     			padding: 0;
-    			font-family: GothamLightRegular;
+    			font-family: 'LatoWebLight';
     			text-transform: none;
     			line-height: 30px;
     			color: #000;
@@ -756,16 +761,19 @@ header {
     }
 
     #dateInput {
+        background-color: $light-ultra-green;
+        color: $slick-green;
         height: 60px;
         line-height: 60px;
         border: none;
         display: block;
         float: right;
         padding: 0;
-        font-size: 1.2em;
+        font-size: 1em;
         width: 0px;
         overflow: hidden;
         transition: all .25s;
+        text-align: center;
 
         &.open {
             width: 212px;
@@ -791,7 +799,7 @@ header {
         line-height: 60px;
         height: 60px;
         font-size: 1em;
-        font-family: GothamLightRegular;
+        font-family: 'LatoWebLight';
         color: green;
         /* padding: 0 28px; */
         -webkit-appearance: none;
@@ -814,7 +822,7 @@ input:-webkit-autofill {
         display: block;
         padding: 0 28px;
         text-transform: uppercase;
-        font-family: GothamMediumRegular;
+        font-family: 'LatoWebSemibold';
         color: #8A8A8A;
         line-height: 60px;
     }
@@ -872,6 +880,10 @@ input:-webkit-autofill {
     }
 }
 
+#dispatcher-caching h2 {
+    margin: $slick-gutter * 2 0;
+}
+
 // Edit Users
 #add-user {
 	h2 {
@@ -892,7 +904,7 @@ input:-webkit-autofill {
 	display: block;
     padding: 0;
     text-transform: uppercase;
-    font-family: GothamMediumRegular;
+    font-family: 'LatoWebSemibold';
     color: #8A8A8A;
     line-height: 60px;
 }

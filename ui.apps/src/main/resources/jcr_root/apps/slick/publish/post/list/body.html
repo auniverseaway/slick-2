@@ -22,7 +22,7 @@
                 <sly data-sly-resource="${page.path @ resourceType='slick/publish/post/content'}"></sly>
             </sly>
             <div data-sly-test="${!list.getTotalPosts}">
-            	It looks like there aren't any posts. Do you need to <a href="/author/posts.html">author one</a>?
+            	<p>It looks like there aren't any posts. Do you need to <a href="/author/posts.html">author one</a>?</p>
             </div>
             <div id="pagination" class="Grid Fit-Small" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
                 <div class="Cell">

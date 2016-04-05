@@ -83,14 +83,14 @@
                            data-sly-use.publishDateUse="${'org.millr.slick.utils.FormatDate' @ date=editBlog.post.publishDate, dateFormat='yyyy-MM-dd HH:mm'}"
                            type="text" id="dateInput" name="publishDate"
                            value="${publishDateUse.formattedValue}" />
+                    <input data-sly-test="${!editBlog.post.publishDate}"
+                           type="text" id="dateInput" name="publishDate"/>
                     <div class="item-status">
                         <select name="publishStatus">
                           <option value="publish">Publish</option>
                           <option value="draft">Draft</option>
                         </select>
                     </div>
-                    <input data-sly-test="${!editBlog.post.publishDate}"
-                           type="text" id="dateInput" name="publishDate"/>
                     <input type="submit" value="Post" id="submit-item-button" class="button bg-green">
                 </section>
                 <input name="slickType" type="hidden" value="${properties.slickType}"/>
