@@ -53,7 +53,8 @@ public class PostServiceImpl implements PostService {
     private static Long postsCount;
 
     public NodeIterator getPosts(Session session) {
-        return getPosts(session, null, null, "posts");
+        NodeIterator allPosts = getPosts(session, null, null, "posts");
+        return allPosts;
     }
     
     public NodeIterator getPosts(Session session, Long offset, Long limit, String slickType) {
@@ -109,11 +110,13 @@ public class PostServiceImpl implements PostService {
 
     public long getTotalPages(Session session, Long pageSize) {
         long posts = getNumberOfPosts(session);
-        return (long)Math.ceil((double)posts / pageSize);
+        long totalPages = (long)Math.ceil((double)posts / pageSize);
+        LOGGER.info("TOTAL PAGES: " + totalPages);
+        return totalPages;
     }
     
     public long getNumberOfPosts(Session session) {
-        return postsCount;
+        return getPosts(session).getSize();
     }
     
 }
