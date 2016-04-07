@@ -1,21 +1,28 @@
 <body id="home">
-	<sly data-sly-include="navigation.html"></sly>
-	<div class="author-wrap">
-		<sly data-sly-include="subNavigation.html"></sly>
-		<div class="list-items">
-			<sly data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
-				<sly data-sly-resource="${page.path @ resourceType='slick/author/listPost'}"/>
-	  		</sly>
-	  		<section class="content">
-			  	<div class="Grid Fit-Small pagination" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
-					<div class="Cell">
-						<a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
-					</div>
-					<div class="Cell align-right">
-						<a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
-				 	</div>
-			    </div>
-		    </section>
-		</div>
-	</div>
+    <sly data-sly-include="navigation.html"></sly>
+    <div class="author-wrap">
+        <sly data-sly-include="subNavigation.html"></sly>
+        <h2>Published</h2>
+        <section class="list-items" data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
+            <sly data-sly-resource="${page.path @ resourceType='slick/author/item/content'}"/>
+        </section>
+        <section class="content">
+            <div class="Grid Fit-Small pagination" data-sly-use.pagination="org.millr.slick.components.common.Pagination">
+                <div class="Cell">
+                    <a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
+                </div>
+                <div class="Cell align-right">
+                    <a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="messages"></div>
+	
+	<script id="message" type="text/x-handlebars-template">
+		<div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
+	</script>
+	<script src="/etc/slick/designs/slick/js/libs/handlebars-v4.0.5.js"></script>
+	<script src="/etc/slick/designs/slick/author/js/messaging.js"></script>
+    <script src="/etc/slick/designs/slick/author/js/itemList.js"></script>  
 </body>

@@ -1,6 +1,6 @@
 {
 	"jcr:primaryType": "slick:page",
-	"sling:resourceType": "slick/author/login",
+	"sling:resourceType": "slick/author/common/login",
 	"title": "Slick Login",
 	"description": "Welcome to Slick"
 }
