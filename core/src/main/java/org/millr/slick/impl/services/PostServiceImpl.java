@@ -46,7 +46,8 @@ public class PostServiceImpl implements PostService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PostServiceImpl.class);
     
     private static final String BLOG_QUERY = "SELECT * FROM [%s] AS s "
-                                           + "WHERE s.[%s] <= CAST('%s' AS DATE) "
+                                           + "WHERE CONTAINS(s.publishStatus, 'publish') "
+                                           + "AND s.[%s] <= CAST('%s' AS DATE) "
                                            + "AND ISCHILDNODE(s,'/content/slick/publish/%s') "
                                            + "ORDER BY [%s] DESC";
     
@@ -56,6 +57,7 @@ public class PostServiceImpl implements PostService {
         NodeIterator allPosts = getPosts(session, null, null, "posts");
         return allPosts;
     }
+    
     
     public NodeIterator getPosts(Session session, Long offset, Long limit, String slickType) {
         

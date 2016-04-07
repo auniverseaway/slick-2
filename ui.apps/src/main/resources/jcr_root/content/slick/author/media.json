@@ -1,15 +1,8 @@
 {
 	"jcr:primaryType": "slick:page",
-	"sling:resourceType": "slick/author/listMedia",
+	"sling:resourceType": "slick/author/media/list",
 	"title": "Media",
 	"description": "Media",
 	"menuOrder": 300,
-	"slickType":"media",
-	"edit": {
-		"jcr:primaryType": "slick:page",
-		"sling:resourceType": "slick/author/editMedia",
-		"title": "Edit Media",
-		"description": "Edit Media",
-		"slickType": "media"
-	}
+	"slickType":"media"
 }

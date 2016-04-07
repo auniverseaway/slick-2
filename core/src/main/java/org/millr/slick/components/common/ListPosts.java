@@ -41,8 +41,6 @@ public class ListPosts {
     
     private Session session;
     
-    private static final String PAGE_SIZE_PROPERTY = "pageSize";
-    
     @Inject @Via("resource")
     public String slickType;
     
