@@ -5,7 +5,7 @@
 	"description": "Posts",
 	"menuOrder": 100,
 	"slickType": "posts",
-	"edit": {
+	"item": {
 		"jcr:primaryType": "slick:page",
 		"sling:resourceType": "slick/author/item/edit",
 		"title": "Edit Post",

@@ -18,15 +18,15 @@
 
 // Send the Delete Request
 function sendDeleteRequest(resourcePath, resourceName) {
-	var formAction = resourcePath;
+	var formAction = resourcePath + ".delete.json";
     var formData = new FormData();
-    formData.append(":operation", "delete");
+    formData.append("resource", resourcePath);
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
     	var msg;
     	if (xhr.readyState == 4) {
     		if(xhr.status == 200) {
-            	msg = { 'responseCode': xhr.status, 'responseType':'success', 'responseMessage': 'Post successfully deleted' };
+    			msg = JSON.parse(xhr.responseText);
             	var deletedResource = document.querySelector("#" + resourceName);
             	deletedResource.parentNode.removeChild(deletedResource);
             } else {

@@ -23,7 +23,6 @@ import javax.inject.Named;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
-import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.api.resource.ValueMap;
@@ -31,8 +30,6 @@ import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
 import org.millr.slick.SlickConstants;
 import org.millr.slick.utils.TrimString;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Page Class - The page model that most resources use.
@@ -40,8 +37,6 @@ import org.slf4j.LoggerFactory;
 @Model(adaptables = { Resource.class })
 public class Page
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Page.class);
-    
     private final Resource resource;
     
     @Inject @Optional

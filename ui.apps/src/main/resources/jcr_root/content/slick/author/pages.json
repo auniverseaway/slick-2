@@ -5,7 +5,7 @@
 	"description": "A list of pages",
 	"menuOrder": 200,
 	"slickType": "pages",
-	"edit": {
+	"item": {
 		"jcr:primaryType": "slick:page",
 		"sling:resourceType": "slick/author/item/edit",
 		"title": "Edit Page",

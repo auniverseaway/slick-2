@@ -24,8 +24,6 @@ import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.scripting.SlingBindings;
 import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.apache.sling.scripting.sightly.pojo.Use;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * WCMUse Utility

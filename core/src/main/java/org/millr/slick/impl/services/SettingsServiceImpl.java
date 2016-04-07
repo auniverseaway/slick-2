@@ -24,8 +24,6 @@ import org.apache.felix.scr.annotations.Properties;
 import org.apache.felix.scr.annotations.Property;
 import org.millr.slick.services.SettingsService;
 import org.millr.slick.services.OsgiService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.osgi.framework.Constants;
 
 /**
@@ -75,9 +73,6 @@ public class SettingsServiceImpl implements SettingsService {
     /** Service to get and set OSGi properties. */
     @Reference
     private OsgiService osgiService;
-
-    /** The logger */
-    private static final Logger LOGGER = LoggerFactory.getLogger(SettingsService.class);
 
     /** PID of the current OSGi component */
     private static final String COMPONENT_PID = "org.millr.slick.impl.services.SettingsServiceImpl";

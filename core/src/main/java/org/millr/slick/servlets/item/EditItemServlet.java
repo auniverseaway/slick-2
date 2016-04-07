@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.millr.slick.servlets;
+package org.millr.slick.servlets.item;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -46,7 +46,6 @@ import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.jcr.resource.JcrResourceConstants;
 import org.millr.slick.SlickConstants;
-import org.millr.slick.models.Page;
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.UploadService;
 import org.millr.slick.utils.Externalizer;
@@ -55,16 +54,16 @@ import org.slf4j.LoggerFactory;
 
 @SlingServlet(
 	    resourceTypes = "sling/servlet/default",
-	    selectors = "item",
+	    selectors = "edit",
 	    extensions = "html",
 	    methods = "POST"
 	)
-public class EditPageServlet extends SlingAllMethodsServlet {
+public class EditItemServlet extends SlingAllMethodsServlet {
 	
 	/**
      * The logger.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(EditPageServlet.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EditItemServlet.class);
 	
     /**
      * The generated serialVersionUID.

@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.util.Map;
 
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;

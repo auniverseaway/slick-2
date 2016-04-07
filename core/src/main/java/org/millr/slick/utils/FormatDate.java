@@ -24,9 +24,6 @@ import javax.inject.Inject;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.models.annotations.Model;
-import org.millr.slick.models.Page;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * FormatDate Utility
@@ -34,8 +31,6 @@ import org.slf4j.LoggerFactory;
  */
 @Model(adaptables=SlingHttpServletRequest.class)
 public class FormatDate {
-    
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatDate.class);
     
     /** The date format. */
     @Inject

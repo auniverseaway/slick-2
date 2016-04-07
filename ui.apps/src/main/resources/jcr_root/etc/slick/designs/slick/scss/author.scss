@@ -15,11 +15,11 @@
 
 // Base
 body {
-	background: $light-gray;
+    background: $light-gray;
 }
 
 a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 input, textarea {
@@ -171,7 +171,7 @@ input, textarea {
 
 // Main Menu
 nav {
-	background: #FFF;
+    background: #FFF;
     position: fixed;
     width: 176px;
     top: 0;
@@ -179,36 +179,35 @@ nav {
     font-size: .875em;
 
     #author-home {
-	    height: 60px;
-	    margin: $slick-gutter * 2;
-	    display: block;
-	}
+        height: 60px;
+        margin: $slick-gutter * 2;
+        display: block;
+    }
 
-	.menu {
-		list-style: none;
-    	margin: 0px;
-    	padding: 0px;
-    	letter-spacing: .375rem;
-    	text-align: center;
+    .menu {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        letter-spacing: .375rem;
+        text-align: center;
 
-    	li {
-		    
-		    a {
-				line-height: 60px;
-				text-transform: uppercase;
-				color: $medium-gray;
-				display: block;
-				transition: background-color 0.24s ease;
+        li {
+            
+            a {
+                line-height: 60px;
+                text-transform: uppercase;
+                color: $medium-gray;
+                display: block;
+                transition: background-color 0.24s ease;
 
-				&:hover {
-				    background-color: $slick-green;
-				    text-decoration: none;
-				    color: #FFF;
-				}
-			}
+                &:hover {
+                    text-decoration: none;
+                    color: #FFF;
+                }
+            }
 
-		}
-	}
+        }
+    }
 }
 
 // Page Headers
@@ -556,71 +555,71 @@ header {
     }
     
     #tag-section {
-    	padding: 0 $slick-gutter * 2;
-    	#tag-input {
-    		display: inline-block;
-    		margin: 0 14px 14px 0;
-    	
-    		input {
-    			display: inline-block;
-    			line-height: 30px;
-    			font-size: 1em;
-    			width: auto;
-    			padding: 0px;
-    			
-    		}
-    		
-    		a {
-    				display: block;
-    				float: right;
-    				text-indent: 1000px;
-    				overflow: hidden;
-    				height: 30px;
-    				width: 32px;
-    				background: url("../img/btn-tag-add.svg") 50% no-repeat;
-    			}
-    	}
-    	.finished-tag {
-    		display: inline-block;
-    		padding: 0 0 0 10px;
-    		background: rgba(165, 226, 249, 0.92);
-    		margin-right: $slick-gutter;
-    		margin-bottom: 14px;
+        padding: 0 $slick-gutter * 2;
+        #tag-input {
+            display: inline-block;
+            margin: 0 14px 14px 0;
+        
+            input {
+                display: inline-block;
+                line-height: 30px;
+                font-size: 1em;
+                width: auto;
+                padding: 0px;
+                
+            }
             
-    		label {
-    			display: inline-block;
-    			padding: 0;
-    			font-family: 'LatoWebLight';
-    			text-transform: none;
-    			line-height: 30px;
-    			color: #000;
-    			
-    			a {
-    				display: block;
-    				float: right;
-    				text-indent: 100em;
-    				overflow: hidden;
-    				height: 30px;
-    				width: 32px;
-    				background: url("../img/btn-tag-remove.svg") 50% no-repeat;
-    			}
-    			
-    		}
-    	
-    		input {
-    			display: none;
-    		}
-    	
-    		
-    	}
+            a {
+                    display: block;
+                    float: right;
+                    text-indent: 1000px;
+                    overflow: hidden;
+                    height: 30px;
+                    width: 32px;
+                    background: url("../img/btn-tag-add.svg") 50% no-repeat;
+                }
+        }
+        .finished-tag {
+            display: inline-block;
+            padding: 0 0 0 10px;
+            background: rgba(165, 226, 249, 0.92);
+            margin-right: $slick-gutter;
+            margin-bottom: 14px;
+            
+            label {
+                display: inline-block;
+                padding: 0;
+                font-family: 'LatoWebLight';
+                text-transform: none;
+                line-height: 30px;
+                color: #000;
+                
+                a {
+                    display: block;
+                    float: right;
+                    text-indent: 100em;
+                    overflow: hidden;
+                    height: 30px;
+                    width: 32px;
+                    background: url("../img/btn-tag-remove.svg") 50% no-repeat;
+                }
+                
+            }
+        
+            input {
+                display: none;
+            }
+        
+            
+        }
     }
     
     .featured-image {
-	    max-width: 200px;
-	    display: block;
-	    padding: 0px 28px;
-	    box-sizing: content-box;
-	}
+        max-width: 200px;
+        display: block;
+        padding: 0px 28px;
+        box-sizing: content-box;
+    }
 }
 
 // wysiwyg5x editor
@@ -952,13 +951,13 @@ input:-webkit-autofill {
 
 // Edit Users
 #add-user {
-	h2 {
-		margin-bottom: 0;
-	}
+    h2 {
+        margin-bottom: 0;
+    }
 }
 
 .sub-head-container {
-	padding: 0 28px;
+    padding: 0 28px;
 }
 
 .user-list-item {
@@ -967,7 +966,7 @@ input:-webkit-autofill {
 }
 
 .sub-head-label {
-	display: block;
+    display: block;
     padding: 0;
     text-transform: uppercase;
     font-family: 'LatoWebSemibold';

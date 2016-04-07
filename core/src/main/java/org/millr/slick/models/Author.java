@@ -30,20 +30,14 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 /**
- * Author Class - Supply a resource and receive a user who created the content.
+ * Author Model Class - Supply a resource and receive a user who created the content.
  * This assumes that jcr:createdBy is populated.
  */
 @Model(adaptables = Resource.class)
 public class Author
 {
-    
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Author.class);
     
     /** The user id. */
     @Inject @Optional @Named("jcr:createdBy")

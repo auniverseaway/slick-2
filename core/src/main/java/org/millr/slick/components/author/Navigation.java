@@ -25,8 +25,6 @@ import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.models.annotations.Model;
 import org.millr.slick.SlickConstants;
 import org.millr.slick.models.Page;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Model(adaptables = Resource.class)
 public class Navigation {

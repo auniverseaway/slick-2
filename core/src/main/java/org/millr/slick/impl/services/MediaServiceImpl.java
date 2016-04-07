@@ -24,9 +24,7 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
-import org.millr.slick.SlickConstants;
 import org.millr.slick.services.MediaService;
-import org.millr.slick.services.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

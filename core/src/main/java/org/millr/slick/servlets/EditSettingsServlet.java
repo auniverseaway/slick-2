@@ -16,7 +16,6 @@
 package org.millr.slick.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,14 +27,11 @@ import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 import org.millr.slick.services.CurrentUserService;
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.SettingsService;
 import org.millr.slick.utils.Externalizer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @SlingServlet(
         resourceTypes = "sling/servlet/default",
@@ -46,8 +42,6 @@ import org.slf4j.LoggerFactory;
 public class EditSettingsServlet extends SlingAllMethodsServlet {
 
     private static final long serialVersionUID = 1L;
-    
-    private static final Logger LOGGER = LoggerFactory.getLogger(EditSettingsServlet.class);
     
     @Reference
     SettingsService settingsService;
@@ -79,6 +73,7 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
         int statusCode;
         
         if (allowWrite) {
+            
             final String blogName = request.getParameter(BLOG_NAME_PROPERTY);
             final String blogDescription = request.getParameter(BLOG_DESCRIPTION_PROPERTY);
             final String accentColor = request.getParameter(ACCENT_COLOR_PROPERTY);

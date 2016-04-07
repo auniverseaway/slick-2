@@ -16,7 +16,6 @@
 package org.millr.slick.utils;
 
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 
 @Model(adaptables=SlingHttpServletRequest.class)

@@ -1,0 +1,16 @@
+<style data-sly-use.settings="org.millr.slick.components.common.Settings">
+.accent-fill {
+   fill: #${settings.accentColor @ context='styleString'};
+}
+a {
+   color: #${settings.accentColor @ context='styleString'};
+}
+.accent-background {
+   background-color: #${settings.accentColor @ context='styleString'};
+   color: rgba(255,255,255,.80);
+}
+.accent-background-hover:hover {
+   background-color: #${settings.accentColor @ context='styleString'};
+   color: rgba(255,255,255,.80);
+}
+</style>

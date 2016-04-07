@@ -24,7 +24,6 @@ import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.millr.slick.SlickConstants;
 import org.millr.slick.services.MediaService;
-import org.millr.slick.services.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
