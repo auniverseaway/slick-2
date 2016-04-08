@@ -1,7 +1,7 @@
 <body data-sly-use.login="org.millr.slick.components.author.Login" id="${resource.name}">
 	<div class="Grid Fit-Small login-grid">
         <div class="Cell login-left Align-Center">
-            <img src="/etc/slick/designs/slick/img/slick-logo.svg"/>
+            <sly data-sly-include="logo.html"/>
         </div>
         <div class="Cell login-right">
         	<form class="login-form" role="form" method="POST" action="/j_security_check" autocomplete="off">

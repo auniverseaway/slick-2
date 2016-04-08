@@ -3,7 +3,7 @@
     <div class="author-wrap">
         <sly data-sly-include="subNavigation.html"></sly>
         <h2>Published</h2>
-        <section class="list-items" data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
+        <section class="list-items" data-sly-use.list="${'org.millr.slick.components.common.ListPosts' @ publishStatus='draft'}" data-sly-list.page="${list.posts}">
             <sly data-sly-resource="${page.path @ resourceType='slick/author/item/content'}"/>
         </section>
         <section class="content">

@@ -1,6 +1,6 @@
 <article data-sly-use.page="org.millr.slick.models.Page" class="Grid Fit-Medium Align-Center" id="${page.name}">
     <div class="Cell">
-        <a href="${page.slickType}/edit.html?edit=${page.name}">${page.title}</a>
+        <a href="${page.slickType}/item.html?edit=${page.name}">${page.title}</a>
         <div class="date" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=page.publishDate, dateFormat='MMMM, d yyyy'}">
             ${format.formattedValue}
         </div>

@@ -16,6 +16,7 @@
 package org.millr.slick.components.common;
 
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.request.RequestPathInfo;
 import org.apache.sling.api.resource.Resource;
 import org.millr.slick.models.Page;
 import org.millr.slick.models.Author;
@@ -34,6 +35,8 @@ public class ViewPage extends WCMUse {
     
     private Externalizer external;
     
+    private String pageSelector;
+    
     @Override
     public void activate() {
         this.request = getRequest();
@@ -41,8 +44,13 @@ public class ViewPage extends WCMUse {
         this.page = resource.adaptTo(Page.class);
         this.author = resource.adaptTo(Author.class);
         this.external = request.adaptTo(Externalizer.class);
+        this.pageSelector = request.getRequestPathInfo().getSelectorString();
     }
     
+    public String getPageSelector() {
+        return pageSelector;
+    }
+
     public Page getPage() {
         return page;
     }

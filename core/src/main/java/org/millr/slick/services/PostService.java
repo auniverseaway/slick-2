@@ -22,7 +22,7 @@ public interface PostService {
     
     NodeIterator getPosts(Session session);
     
-    NodeIterator getPosts(Session session, Long offset, Long limit, String slickType);
+    NodeIterator getPosts(Session session, Long offset, Long limit, String slickType, String publishStatus);
     
     long getTotalPages(Session session, Long pageSize);
     
