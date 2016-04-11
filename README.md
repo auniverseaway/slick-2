@@ -36,6 +36,13 @@ It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common 
 
     mvn clean install -PautoInstallBundle
 
+##3. Make things
+
+    http://localhost:8080
+
+## Troubleshooting
+If you get any class not found errors, restart Sling or [activate the Slick Core bundle manually](http://localhost:8080/system/console/bundles).
+
 #Advanced Installation
 ##Debug Run
 

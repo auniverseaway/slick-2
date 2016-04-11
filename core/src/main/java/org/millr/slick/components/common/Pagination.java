@@ -75,10 +75,6 @@ public class Pagination {
         String noContent = fullPath.replace("/content/slick", "");
         // Replace /publish for all public URLs.
         String shortResourcePath = noContent.replace("/publish", "");
-        
-        if(StringUtils.isEmpty(shortResourcePath)) {
-            shortResourcePath = "posts";
-        }
         return shortResourcePath;
     }
     
