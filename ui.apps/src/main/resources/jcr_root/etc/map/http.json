@@ -4,6 +4,11 @@
         "jcr:primaryType": "sling:Mapping",
         "sling:match": "localhost.8080/$"
     },
+    "robot_or_not": {
+        "sling:internalRedirect": "/etc/slick/designs/slick/txt/robots.txt",
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "localhost.8080/robots.txt"
+    },
     "author": {
         "sling:match": "localhost.8080/author(.+)$",
         "sling:internalRedirect": ["/content/slick/author$1","$1"],

@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /content/slick/publish/media/
+Disallow: /content/slick/author/
+Disallow: /etc/
+Disallow: /libs/
+Allow: /content/slick/publish/
+Allow: /etc/slick/designs/

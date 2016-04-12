@@ -94,9 +94,11 @@
         /0047 { /type "allow" /url "*.jpg"                    }  # enable jpg
         /0048 { /type "allow" /url "*.jpeg"                   }  # enable jpeg
         /0049 { /type "allow" /url "*.woff"                   }  # enable woff fonts
-        /0050 { /type "allow" /url "*.ttf"                    }  # enable ttf fonts
-        /0051 { /type "allow" /url "*.eot"                    }  # enable eot fonts
-        /0052 { /type "allow" /url "*.svg"                    }  # enable svg
+        /0050 { /type "allow" /url "*.woff2"                  }  # enable woff2 fonts
+        /0051 { /type "allow" /url "*.ttf"                    }  # enable ttf fonts
+        /0052 { /type "allow" /url "*.eot"                    }  # enable eot fonts
+        /0053 { /type "allow" /url "*.svg"                    }  # enable svg
+        /0054 { /type "allow" /url "*.txt"                    }  # enable txt
 
         # Deny content grabbing
         /0081 { /type "deny"  /url "*.infinity.json"          }
@@ -146,9 +148,9 @@
           # Path Specific Caches
           /0010 { /glob "/bin/slick[./]*" /type "deny"              }  # Do not cache servlet responses
           /0010 { /glob "/content/slick/author[./]*" /type "deny"   }  # Do not cache anything in author
-          /0020 { /glob "/content/slick/publish[./]*" /type "allow" }
+          /0020 { /glob "/content/slick/publish[./]*" /type "allow" }  # Cache everything in publish
 
-          # File Specific Caches
+          # File Specific Caches - Mostly used for /etc folder
           /0061 { /glob "*.css" /type "allow"                       }
           /0062 { /glob "*.gif" /type "allow"                       }
           /0063 { /glob "*.ico" /type "allow"                       }
@@ -159,6 +161,7 @@
           /0068 { /glob "*.jpeg" /type "allow"                      }
           /0069 { /glob "*.svg" /type "allow"                       }
           /0070 { /glob "*.zip" /type "allow"                       }
+          /0070 { /glob "*.txt" /type "allow"                       }
           
           # Ignore Query Strings
           /ignoreUrlParams
