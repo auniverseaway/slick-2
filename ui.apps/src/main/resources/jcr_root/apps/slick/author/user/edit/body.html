@@ -27,16 +27,15 @@
 			<section class="author-section" id="users">
 				<h2>User List</h2>
 				<div class="Grid Fit-Small sub-head-container">
+					<div class="Cell sub-head-label">Username</div>
 					<div class="Cell sub-head-label">Name</div>
 					<div class="Cell sub-head-label">Email</div>
-					<div class="Cell sub-head-label">Username</div>
 				</div>
 				<script id="user-list-item" type="text/x-handlebars-template">
-					
 						<div class="Grid Fit-Small user-list-item">
+							<div class="Cell">{{userId}}</div>
 							<div class="Cell">{{firstName}} {{lastName}}</div>
 							<div class="Cell">{{email}}</div>
-							<div class="Cell">{{@key}}</div>
 						</div>
 				</script>
 			</section>

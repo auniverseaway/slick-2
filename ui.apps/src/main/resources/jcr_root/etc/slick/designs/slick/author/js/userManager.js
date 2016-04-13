@@ -2,13 +2,13 @@ var slick = slick || {};
 slick.userManager = {};
 
 (function() {
-	
+
     this.getAuthorList = function() {
     	
     	var action = '/system/userManager/group/authors.tidy.1.json';
     	var method = 'GET';
     	var callback = parseUsers;
-    	sendXhr(action, method, callback);
+    	sendXhr(action, method, null, callback);
     	
     };
     
@@ -17,48 +17,54 @@ slick.userManager = {};
 slick.userManager.getAuthorList();
 
 
-function sendXhr(action, method, callback) {
+function sendXhr(action, method, formData, callback, userId) {
 	
 	var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             var json = JSON.parse(xhr.responseText);
-            callback(json);
+            callback(json, userId);
         }
     };
     xhr.open(method, action, true);
-    xhr.send();
+    
+    if (formData == null){
+    	xhr.send();
+    } else {
+    	xhr.send(formData);
+    }
 }
 
 function parseUsers(usersJson) {
 	usersJson.members.forEach(getUserDetails);
 }
 
-
 function getUserDetails(element, index, array) {
-	var userId = element.substring(element.lastIndexOf("/") + 1);
-	var action = '/system/userManager/user/' + userId + '.tidy.1.json';
+	var userId = getIdFromPath(element);
+
+    var action = '/system/userManager/user/' + userId + '.tidy.1.json';
 	var method = 'GET';
 	var callback = parseUserDetails;
-	sendXhr(action, method, callback);
+	sendXhr(action, method, null, callback, userId);
 }
 
-function parseUserDetails(user) {
+function getIdFromPath(userPath) {
+	return userPath.substring(userPath.lastIndexOf("/") + 1);
+}
+
+function parseUserDetails(user, userId) {
+	user['userId'] = userId;
 	showUser(user);
 }
 
 function showUser(user) {
-	
-	console.log(user);
-	
-	// Grab the inline template
-	var messageTemplate = document.getElementById('user-list-item').innerHTML;
-	console.log(messageTemplate);
 
+    // Grab the inline template
+	var messageTemplate = document.getElementById('user-list-item').innerHTML;
+	
 	// Compile the template
 	var compiledTemplate = Handlebars.compile(messageTemplate);
-	console.log(compiledTemplate);
-
+	
 	// Render the data into the template (as a string!?)
 	var message = compiledTemplate(user);
 	
@@ -66,25 +72,36 @@ function showUser(user) {
 	document.getElementById('users').insertAdjacentHTML('beforeend', message);
 }
 
+
 var newUserForm = document.querySelector("#create-user");
 newUserForm.addEventListener("submit", function(event){
 	
     event.preventDefault();
-    var formAction = this.action;
+    var action = this.action;
+    var method = 'POST';
     var formData = new FormData(this);
-        
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var response = JSON.parse(xhr.responseText);
-            
-            var msg = { 'responseCode': 200, 'responseType':'success', 'responseMessage': 'User successfully created'};
-            sendMessage(msg);
-            //console.log(msg);
-        }
-    };
-    // Open the request to the token endpoint and send the GET
-    xhr.open("POST", formAction, true);
-    xhr.send(formData);
+    var callback = addAuthor;
+
+    sendXhr(action, method, formData, callback);
 
 });
+
+function addAuthor(userJson) {
+	
+	getUserDetails(userJson.path);
+	
+	var userId = getIdFromPath(userJson.path);
+	var action = '/system/userManager/group/authors.update.json';
+	var method = 'POST';
+	var formData = new FormData();
+	formData.append(':member', userId);
+	var callback = confirmAuthor;
+	
+	sendXhr(action, method, formData, callback);
+	
+}
+
+function confirmAuthor(json) {
+	var msg = { 'responseCode': 200, 'responseType':'success', 'responseMessage': 'User successfully created' };
+    sendMessage(msg);
+}
