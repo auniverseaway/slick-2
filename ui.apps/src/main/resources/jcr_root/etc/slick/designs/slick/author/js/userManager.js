@@ -1,26 +1,58 @@
-getFullUserList();
+var slick = slick || {};
+slick.userManager = {};
 
-function getFullUserList() {
+(function() {
 	
-	var formAction = '/system/userManager/user.tidy.1.json';
+    this.getAuthorList = function() {
+    	
+    	var action = '/system/userManager/group/authors.tidy.1.json';
+    	var method = 'GET';
+    	var callback = parseUsers;
+    	sendXhr(action, method, callback);
+    	
+    };
+    
+}).apply(slick.userManager);
+
+slick.userManager.getAuthorList();
+
+
+function sendXhr(action, method, callback) {
 	
 	var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
-            var userList = JSON.parse(xhr.responseText);
-            showFullUserList(userList);
+            var json = JSON.parse(xhr.responseText);
+            callback(json);
         }
     };
-    xhr.open('GET', formAction, true);
+    xhr.open(method, action, true);
     xhr.send();
 }
 
-function showFullUserList(userList) {
+function parseUsers(usersJson) {
+	usersJson.members.forEach(getUserDetails);
+}
+
+
+function getUserDetails(element, index, array) {
+	var userId = element.substring(element.lastIndexOf("/") + 1);
+	var action = '/system/userManager/user/' + userId + '.tidy.1.json';
+	var method = 'GET';
+	var callback = parseUserDetails;
+	sendXhr(action, method, callback);
+}
+
+function parseUserDetails(user) {
+	showUser(user);
+}
+
+function showUser(user) {
 	
-	console.log(userList);
+	console.log(user);
 	
 	// Grab the inline template
-	var messageTemplate = document.getElementById('user-list').innerHTML;
+	var messageTemplate = document.getElementById('user-list-item').innerHTML;
 	console.log(messageTemplate);
 
 	// Compile the template
@@ -28,7 +60,7 @@ function showFullUserList(userList) {
 	console.log(compiledTemplate);
 
 	// Render the data into the template (as a string!?)
-	var message = compiledTemplate(userList);
+	var message = compiledTemplate(user);
 	
 	// Insert the message into the DOM
 	document.getElementById('users').insertAdjacentHTML('beforeend', message);

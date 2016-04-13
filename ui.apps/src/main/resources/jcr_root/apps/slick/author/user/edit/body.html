@@ -31,14 +31,13 @@
 					<div class="Cell sub-head-label">Email</div>
 					<div class="Cell sub-head-label">Username</div>
 				</div>
-				<script id="user-list" type="text/x-handlebars-template">
-					{{#each this}}
+				<script id="user-list-item" type="text/x-handlebars-template">
+					
 						<div class="Grid Fit-Small user-list-item">
 							<div class="Cell">{{firstName}} {{lastName}}</div>
 							<div class="Cell">{{email}}</div>
 							<div class="Cell">{{@key}}</div>
 						</div>
-					{{/each}}
 				</script>
 			</section>
 		</div>
