@@ -2,8 +2,12 @@
     <sly data-sly-include="navigation.html"></sly>
     <div class="author-wrap">
         <sly data-sly-include="subNavigation.html"></sly>
-        <h2>Published</h2>
-        <section class="list-items" data-sly-use.list="org.millr.slick.components.common.ListPosts" data-sly-list.page="${list.posts}">
+        <h2>
+        	<a href="/author/${properties.slickType}.html">Published</a>
+        	<a href="/author/${properties.slickType}/drafts.html">Drafts</a>
+        	Scheduled
+       	</h2>
+        <section class="list-items" data-sly-use.list="${'org.millr.slick.components.common.ListPosts' @ publishStatus = properties.publishStatus}" data-sly-list.page="${list.posts}">
             <sly data-sly-resource="${page.path @ resourceType='slick/author/item/content'}"/>
         </section>
         <section class="content">

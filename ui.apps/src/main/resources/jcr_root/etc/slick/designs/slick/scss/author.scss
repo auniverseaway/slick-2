@@ -162,6 +162,11 @@ input, textarea {
         font-size: 1.1em;
         font-family: 'LatoWebSemiBold';
         color: #545454;
+
+        a {
+            color: $dark-gray;
+            margin-right: $slick-gutter * 2;
+        }
     }
 }
 
@@ -423,12 +428,12 @@ header {
         text-align: center;
         padding: 0;
         line-height: 240px;
-        background-color: #FFF;
-        color: $slick-green;
         display: block;
         cursor: pointer;
         width: 100%;
+        transition: all .24s ease;
     }
+
     #image-preview {
         display: none;
 

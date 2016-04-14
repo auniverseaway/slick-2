@@ -9,7 +9,7 @@
 			<section>
 				<form method="POST" action="media/edit.media.json" enctype="multipart/form-data" id="upload-form">
 					<input type="file" name="image" id="media-upload"/>
-					<label for="media-upload"><span>Upload a File</span><img id="image-preview" /></label>
+					<label for="media-upload" class="accent-foreground accent-background-hover"><span>Upload a File</span><img id="image-preview" /></label>
 					<input type="submit" value="Upload" id="submit-media-button" class="button bg-green">
 				</form>
 				<sly data-sly-use.list="org.millr.slick.components.author.ListMedia" data-sly-list.media="${list.media}">
