@@ -792,16 +792,30 @@ header {
     }
 }
 
-
+#editor {
+    width: 100%;
+    padding-right: 88px;
+}
 
 #editor, .editor-area.wysihtml5-editor {
-    width: 100%;
-    min-height: 700px;
+    height: 700px;
     border: none;
     background: $light-ultra-gray;
-    padding: $slick-gutter * 2 88px $slick-gutter * 2 $slick-gutter * 2;
+    padding: $slick-gutter * 2;
     font-size: 1em;
     outline: none;
+    overflow: scroll;
+    margin-right: 60px;
+    
+    h2 {
+        line-height: normal;
+        padding: initial;
+        background: none;
+        margin: initial;
+        font-size: 1.5em;
+        font-family: LatoWebLight;
+        color: #000;
+    }
 
     p {
         margin-top: 0;
