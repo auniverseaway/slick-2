@@ -16,7 +16,6 @@
 package org.millr.slick.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 
@@ -26,16 +25,20 @@ import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 import org.millr.slick.SlickConstants;
 import org.millr.slick.services.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The Class EditMediaServlet.
+ * 
+ * <p>A servlet to handle uploading media.</p>
+ */
 @SlingServlet(
         resourceTypes = "sling/servlet/default",
-        selectors = "media",
+        selectors = "edit",
         extensions = "json",
         methods = "POST"
     )
@@ -51,30 +54,69 @@ public class EditMediaServlet extends SlingAllMethodsServlet {
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(EditMediaServlet.class);
 
+    /** The upload service reference. */
     @Reference
     private UploadService uploadService;
     
+    /* (non-Javadoc)
+     * @see org.apache.sling.api.servlets.SlingAllMethodsServlet#doPost(org.apache.sling.api.SlingHttpServletRequest, org.apache.sling.api.SlingHttpServletResponse)
+     */
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-        LOGGER.debug(">>>> Entering doPost");
+        LOGGER.debug(">>>> Entering Media doPost");
         
-        String image = uploadService.uploadFile(request, SlickConstants.MEDIA_PATH);
+        String mediaUrl = uploadService.uploadFile(request, SlickConstants.MEDIA_PATH);
         
-        response.setStatus(SlingHttpServletResponse.SC_OK);
-        response.setCharacterEncoding(CharEncoding.UTF_8);
-        response.setContentType("application/json");
-        
-        JSONObject json = new JSONObject();
+        JSONObject content = new JSONObject();
         try {
-            json.put("header", "Upload");
-            json.put("message", "Success: " + image);
-        } catch (JSONException e) {
-            LOGGER.info("Could not add to JSON object." + e.getMessage());
+            content.put("mediaUrl", mediaUrl);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }     
+        
+        sendResponse(response, SlingHttpServletResponse.SC_OK, "success", "Uploading media.", content);
+        
+    }
+    
+    protected void sendResponse(final SlingHttpServletResponse response, int responseCode, final String responseType, final String responseMessage) {
+        sendResponse(response, responseCode, responseMessage, null);
+    }
+    
+    /**
+     * Send response.
+     *
+     * @param response the response
+     * @param responseCode the response code
+     * @param responseType the response type
+     * @param responseMessage the response message
+     * @param content the response content
+     */
+    protected void sendResponse(final SlingHttpServletResponse response, int responseCode, final String responseType, final String responseMessage, final JSONObject content) {
+        
+        JSONObject responseJSON = new JSONObject();
+        try {
+            responseJSON.put("responseCode", responseCode);
+            responseJSON.put("responseType", responseType);
+            responseJSON.put("responseMessage", responseMessage);
+            
+            if(content != null) {
+                responseJSON.put("content", content);
+            }            
+            
+        } catch(Exception e) {
             e.printStackTrace();
         }
         
-        final PrintWriter writer = response.getWriter();
-        writer.write(json.toString());
+        response.setCharacterEncoding(CharEncoding.UTF_8);
+        response.setContentType("application/json");
+        response.setStatus(responseCode);
         
+        try {
+            response.getWriter().write(responseJSON.toString());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 }

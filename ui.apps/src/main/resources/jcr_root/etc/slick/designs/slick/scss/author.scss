@@ -414,6 +414,7 @@ header {
     height: 240px;
     position: relative;
     overflow: hidden;
+    background: #fff;
 
     #media-upload {
         width: 0.1px;
@@ -434,36 +435,31 @@ header {
         transition: all .24s ease;
     }
 
-    #image-preview {
-        display: none;
-
-        &.open {
-            max-width: 140%;
-            display: block;
-            position: absolute;
-            opacity: 1;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            transition: opacity .125s;
-
-            &:hover {
-                opacity: .2;
-            }
-        }
+    .cover:hover {
+        opacity: .25;
     }
+    
     .button {
         display: none;
         width: 100%;
         padding: 0 $slick-gutter;
         position: absolute;
         bottom: 0;
+        cursor: pointer;
 
         &.open {
             display: block;
         }
     }
+}
+
+.cover {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .media-box {
@@ -472,7 +468,7 @@ header {
     height: 240px;
     float: left;
     overflow: hidden;
-
+    
     .image-url {
         position: absolute;
         bottom: 0;

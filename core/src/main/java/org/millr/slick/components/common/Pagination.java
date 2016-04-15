@@ -18,7 +18,6 @@ package org.millr.slick.components.common;
 
 import javax.jcr.Session;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.request.RequestPathInfo;
 import org.apache.sling.api.resource.ResourceResolver;

@@ -16,7 +16,6 @@
 package org.millr.slick.components.common;
 
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.request.RequestPathInfo;
 import org.apache.sling.api.resource.Resource;
 import org.millr.slick.models.Page;
 import org.millr.slick.models.Author;
