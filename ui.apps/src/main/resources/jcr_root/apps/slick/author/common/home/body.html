@@ -1,10 +1,15 @@
 <body id="home" data-sly-use.login="org.millr.slick.components.author.Login">
 	<sly data-sly-include="navigation.html"></sly>
 	<div class="author-wrap">
-		<header>
-			<h1 class="title">${properties.title}</h1>
-			<div data-sly-use.currentUser="org.millr.slick.components.author.CurrentUser" class="user-info">
-			<a href="/system/sling/logout.html">${currentUser.getDisplayName}</a>
+		<header class="Grid Fit-Small">
+			<div class="Cell">
+				<h1 class="title">${properties.title}</h1>
+			</div>
+			<div data-sly-use.currentUser="org.millr.slick.components.author.CurrentUser" class="Cell align-right">
+				<a href="/system/sling/logout.html" class="user-info">
+					<div class="logout">Logout</div>
+					<div class="name">${currentUser.getDisplayName}</div>
+				</a>
 			</div>
 		</header>
 		<h2 class="sub-head">${properties.description}</h2>

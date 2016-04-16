@@ -78,20 +78,20 @@
                   <textarea name="content" id="editor" class="editor-area" rows="32" tabindex="2" placeholder="add content">${editBlog.post.content}</textarea>
                 </section>
                 <section class="publish" id="publish-section">
-                    <button id="calendar-toggle">Publish Date</button>
+                    <button id="calendar-toggle" class="accent-background-light">Publish Date</button>
                     <input data-sly-test="${editBlog.post.publishDate}"
                            data-sly-use.publishDateUse="${'org.millr.slick.utils.FormatDate' @ date=editBlog.post.publishDate, dateFormat='yyyy-MM-dd HH:mm'}"
                            type="text" id="dateInput" name="publishDate"
                            value="${publishDateUse.formattedValue}" />
                     <input data-sly-test="${!editBlog.post.publishDate}"
                            type="text" id="dateInput" name="publishDate"/>
-                    <div class="item-status">
+                    <div class="item-status accent-background-light">
                         <select name="publishStatus">
                           <option value="publish">Publish</option>
                           <option value="draft">Draft</option>
                         </select>
                     </div>
-                    <input type="submit" value="Post" id="submit-item-button" class="button bg-green">
+                    <input type="submit" value="Post" id="submit-item-button" class="button accent-background">
                 </section>
                 <input name="slickType" type="hidden" value="${properties.slickType}"/>
             </form>
