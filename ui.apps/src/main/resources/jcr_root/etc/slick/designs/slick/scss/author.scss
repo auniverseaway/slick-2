@@ -248,6 +248,27 @@ header {
     
     .user-info {
         float: right;
+        
+        div {
+            float: right;
+            
+            
+        }
+        
+        .logout {
+            max-width: 0;
+            transition: all 0.24s ease;
+            overflow: hidden;
+        }
+        
+        &:hover {
+            .logout {
+                margin-left: 12px;
+                width: auto;
+                max-width: 200px;
+            }
+        }
+        
     }
     
 }
@@ -960,6 +981,10 @@ input:-webkit-autofill {
     .button {
         min-width: 180px;
         padding: 0;
+    }
+    
+    .accent-color-container {
+        position: relative;
     }
 }
 

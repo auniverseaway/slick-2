@@ -5,8 +5,7 @@
         <h2>
         	<a href="/author/${properties.slickType}.html">Published</a>
         	<a href="/author/${properties.slickType}/drafts.html">Drafts</a>
-        	Scheduled
-       	</h2>
+        </h2>
         <section class="list-items" data-sly-use.list="${'org.millr.slick.components.common.ListPosts' @ publishStatus = properties.publishStatus}" data-sly-list.page="${list.posts}">
             <sly data-sly-resource="${page.path @ resourceType='slick/author/item/content'}"/>
         </section>
@@ -22,7 +21,6 @@
         </section>
     </div>
     <div id="messages"></div>
-	
 	<script id="message" type="text/x-handlebars-template">
 		<div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
 	</script>

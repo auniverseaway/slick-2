@@ -9,6 +9,11 @@
         "jcr:primaryType": "sling:Mapping",
         "sling:match": "localhost.8080/robots.txt"
     },
+    "favicon": {
+        "sling:internalRedirect": "/etc/slick/designs/slick/img/favicon.ico",
+        "jcr:primaryType": "sling:Mapping",
+        "sling:match": "localhost.8080/favicon.ico"
+    },
     "author": {
         "sling:match": "localhost.8080/author(.+)$",
         "sling:internalRedirect": ["/content/slick/author$1","$1"],

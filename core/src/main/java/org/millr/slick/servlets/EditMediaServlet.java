@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  */
 @SlingServlet(
         resourceTypes = "sling/servlet/default",
-        selectors = "edit",
+        selectors = "edit.media",
         extensions = "json",
         methods = "POST"
     )

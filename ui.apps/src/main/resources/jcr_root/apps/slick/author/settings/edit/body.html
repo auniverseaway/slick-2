@@ -14,10 +14,10 @@
 						<label>Blog Description</label>
 						<input type="text" name="blogDescription" value="${settings.blogDescription}" placeholder="Blog Description"/>
 					</div>
-					<div>
+					<div class="accent-color-container">
 						<label>Accent Color</label>
-						<input type="text" name="accentColor" value="${settings.accentColor}" placeholder="Accent Color" class="jscolor" 
-							   data-jscolor="{padding:10, borderRadius:0, borderWidth:0, shadow:false, insetColor:'#444', backgroundColor:'#444'}"/>
+						<input type="text" name="accentColor" value="${settings.accentColor}" placeholder="Accent Color" id="colorPreview" />
+						<div id="color-picker" class="cp-default"></div>
 					</div>
 					<div>
 						<label>Default Hero Image</label>
@@ -62,6 +62,43 @@
 	</script>
 	
 	<sly data-sly-include="scripts.html"></sly>
-	<script src="/etc/slick/designs/slick/author/js/libs/jscolor.min.js"></script>
-	<script src="/etc/slick/designs/slick/author/js/settings.js"></script>	
+	<script src="/etc/slick/designs/slick/author/js/libs/colorpicker/colorpicker.min.js"></script>
+	<script src="/etc/slick/designs/slick/author/js/settings.js"></script>
+	<script type="text/javascript">
+	
+	var colorPreview = document.getElementById('colorPreview');
+	var colorPicker = document.getElementById('color-picker');
+    var cpDefault = ColorPicker(colorPicker, updateInputs);
+    var colorValues = colorPreview.value.split(",");
+    
+    var colorValue;
+    
+    console.log(colorValues);
+    
+    updateColorPickers(colorValues[0],colorValues[1],colorValues[2]);
+    
+	function updateColorPickers(red,green,blue) {
+	    cpDefault.setRgb({ r: red, g: green, b: blue });  
+	}
+	
+	function updateInputs(hex, hsv, rgb) {
+		colorValue = rgb.r + "," + rgb.g + "," + rgb.b;
+        console.log(colorValue);
+        colorPreview.value = colorValue;
+        colorPreview.style.backgroundColor = hex;
+	}
+	
+	colorPreview.addEventListener('click', function( event ) {
+		event.preventDefault();
+		colorPicker.classList.toggle('open');
+	});
+
+
+		//var initialHex = '#f4329c';
+		
+	
+	    
+	    
+
+    </script>
 </body>

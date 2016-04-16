@@ -87,7 +87,7 @@ public class SettingsServiceImpl implements SettingsService {
     public static final String ANALYTICS_SCRIPT_DEFAULT_VALUE = "";
     
     /** Default value for the analytics script */
-    public static final String ACCENT_COLOR_DEFAULT_VALUE = "009444";
+    public static final String ACCENT_COLOR_DEFAULT_VALUE = "0,148,68";
     
     /** Default value for the analytics script */
     public static final String HEADER_IMAGE_DEFAULT_VALUE = "/etc/slick/designs/slick/img/default-header-background.jpg";
