@@ -44,7 +44,7 @@ input, textarea {
             justify-content: center;
             background-color: #FFF;
             
-            svg {
+            svg, img {
                 height: 60px;
             }
         }
@@ -62,7 +62,6 @@ input, textarea {
         }
 
         input[type="text"], input[type="password"] {
-            background: transparent;
             border: none;
             padding: 0px 28px;
             margin: 0px;
@@ -114,6 +113,11 @@ input, textarea {
             }
 
             .login-inputs {
+                
+                input {
+                    background: transparent;
+                }
+                
                 .full {
                     width: 100%;
                 }
