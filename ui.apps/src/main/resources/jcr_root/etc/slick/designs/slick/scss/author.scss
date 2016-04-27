@@ -194,6 +194,9 @@ nav {
         height: 60px;
         margin: $slick-gutter * 2;
         display: block;
+        svg {
+            height: 60px;
+        }
     }
 
     .menu {
@@ -531,6 +534,7 @@ header {
         width: 100%;
         line-height: 60px;
         font-size: 1.25em;
+        margin: 0px;
     }
     
     .seo {

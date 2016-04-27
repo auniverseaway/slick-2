@@ -99,6 +99,7 @@
         /0052 { /type "allow" /url "*.eot"                    }  # enable eot fonts
         /0053 { /type "allow" /url "*.svg"                    }  # enable svg
         /0054 { /type "allow" /url "*.txt"                    }  # enable txt
+        /0055 { /type "allow" /url "*.map"                    }  # enable map
 
         # Deny content grabbing
         /0081 { /type "deny"  /url "*.infinity.json"          }
@@ -107,6 +108,7 @@
         /0084 { /type "deny"  /url "*.docview.json"           }
         /0085 { /type "deny"  /url "*.docview.xml"            }
         /0086 { /type "deny"  /url "*.*[0-9].json"            }
+        /0087 { /type "allow" /method "GET" /url "*.*.1.json" }  # allow one-level json requests
 
         # Deny query
         /0090 { /type "deny"  /url "*.query.json"             }
@@ -161,7 +163,12 @@
           /0068 { /glob "*.jpeg" /type "allow"                      }
           /0069 { /glob "*.svg" /type "allow"                       }
           /0070 { /glob "*.zip" /type "allow"                       }
-          /0070 { /glob "*.txt" /type "allow"                       }
+          /0071 { /glob "*.txt" /type "allow"                       }
+          /0072 { /glob "*.txt" /type "allow"                       }
+          /0073 { /glob "*.woff" /type "allow"                      }
+          /0074 { /glob "*.woff2" /type "allow"                     }
+          /0075 { /glob "*.ttf" /type "allow"                       }
+          /0076 { /glob "*.eot" /type "allow"                       }
           
           # Ignore Query Strings
           /ignoreUrlParams

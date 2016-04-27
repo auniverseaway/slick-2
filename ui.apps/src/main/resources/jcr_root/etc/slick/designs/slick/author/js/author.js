@@ -23,10 +23,8 @@ slick.author = {};
             // If we are clicking to reset the slug to the title
             if(changeSlugButton.innerHTML == 'reset') {
             	slugInput.value = formatSlug(titleInput.value);
-            	slugInput.disabled = true;
             	changeSlugButton.innerHTML = 'change';
             } else {
-            	slugInput.disabled = false;
             	slugInput.focus();
             	changeSlugButton.innerHTML = 'reset';
             }     

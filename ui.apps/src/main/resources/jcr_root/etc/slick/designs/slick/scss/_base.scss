@@ -25,6 +25,11 @@ a {
     text-decoration: none;
 }
 
+strong, b {
+    font-weight: normal;
+    font-family: LatoWebSemiBold;
+}
+
 textarea, input { outline: none; }
 
 // Utility Classes
