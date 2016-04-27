@@ -18,6 +18,7 @@ package org.millr.slick.utils;
 import javax.script.Bindings;
 
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
@@ -57,6 +58,15 @@ public class WCMUse implements Use {
      */
     public SlingHttpServletRequest getRequest() {
         return (SlingHttpServletRequest)bindings.get(SlingBindings.REQUEST);
+    }
+    
+    /**
+     * Gets the response.
+     *
+     * @return the response
+     */
+    public SlingHttpServletResponse getResponse() {
+        return (SlingHttpServletResponse)bindings.get(SlingBindings.RESPONSE);
     }
     
     /**

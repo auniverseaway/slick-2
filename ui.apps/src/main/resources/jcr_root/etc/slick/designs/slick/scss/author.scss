@@ -62,7 +62,7 @@ input, textarea {
         }
 
         input[type="text"], input[type="password"] {
-            
+            background: transparent;
             border: none;
             padding: 0px 28px;
             margin: 0px;
@@ -533,26 +533,22 @@ header {
         position: absolute;
         right: 0;
         top: 0;
-        background-color: $light-green;
-        background-image: url("../img/button-seo.svg");
         background-size: 60px;
-        text-indent: 1000px;
-        overflow: hidden;
-
-        &:hover {
-            background-color: lighten($light-green, 5%);
+        width: 60px;
+        height: 60px;
+        
+        .button {
+            text-indent: 1000px;
+            overflow: hidden;
+            background-image: url("../img/button-seo.svg");
+            
+            &:hover {
+                background-color: rgba(255,255,255,.25);
+            }
         }
     }
     
     .edit-label-input  {
-        label {
-
-            a {
-                color: $slick-green;
-            }
-
-        }
-    
         input {
             background: transparent;
             line-height: inherit;
@@ -873,8 +869,8 @@ header {
     }
 
     #dateInput {
-        background-color: $light-ultra-green;
-        color: $slick-green;
+        //background-color: $light-ultra-green;
+        //color: $slick-green;
         height: 60px;
         line-height: 60px;
         border: none;

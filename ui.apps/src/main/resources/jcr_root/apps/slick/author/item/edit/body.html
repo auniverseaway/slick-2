@@ -5,13 +5,16 @@
         <div class="content">
             <form method="POST" action="item.edit.html" enctype="multipart/form-data">
                 <section id="title-section">
-                    <input name="title" type="text" class="item-title" tabindex="1" placeholder="enter title" value="${editBlog.post.title}">
-                    <a href="#" class="button square seo" id="seo-button">SEO</a>
+                    <input name="title" type="text" class="item-title" id="title" tabindex="1" placeholder="enter title" value="${editBlog.post.title}">
+                    <div class="seo accent-background-light">
+                    	<a href="#" class="button square" id="seo-button">SEO</a>
+                    </div>
                 </section>
                 <section id="seo-section">
                     <section class="edit-label-input basic">
-                        <label>url <a href="#">Change</a></label>
-                        <input name="nodeName" type="text" class="form-control" value="${editBlog.post.name}">
+                        <label>url <a href="#" class="accent-foreground" id="change-slug">Change</a></label>
+                        <input name="nodeName" type="text" class="form-control" id="slug-input" value="${editBlog.post.name}" disabled>
+                        <input name="pureNodeName" type="hidden" id="pure-slug-input">
                     </section>
                     <section class="edit-label-input basic">
                         <label>description</label>
@@ -81,10 +84,10 @@
                     <button id="calendar-toggle" class="accent-background-light">Publish Date</button>
                     <input data-sly-test="${editBlog.post.publishDate}"
                            data-sly-use.publishDateUse="${'org.millr.slick.utils.FormatDate' @ date=editBlog.post.publishDate, dateFormat='yyyy-MM-dd HH:mm'}"
-                           type="text" id="dateInput" name="publishDate"
+                           type="text" id="dateInput" class="accent-background-light" name="publishDate"
                            value="${publishDateUse.formattedValue}" />
                     <input data-sly-test="${!editBlog.post.publishDate}"
-                           type="text" id="dateInput" name="publishDate"/>
+                           type="text" id="dateInput" class="accent-background-light" name="publishDate"/>
                     <div class="item-status accent-background-light">
                         <select name="publishStatus">
                           <option value="publish">Publish</option>
