@@ -17,7 +17,7 @@ It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common 
 * RSS 2.0 Feed
 * Authentication and user management
 * Search
-* Dispatcher
+* Dispatcher Caching
 * Analytics, SEO, and social integrations
 * Pagination
 * Basic Localization
@@ -39,9 +39,6 @@ It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common 
 ##3. Make things
 
     http://localhost:8080
-
-## Troubleshooting
-If you get any class not found errors, restart Sling or [activate the Slick Core bundle manually](http://localhost:8080/system/console/bundles).
 
 #Advanced Installation
 ##Debug Run
@@ -67,6 +64,12 @@ Located at [http://localhost:8080/author.html](http://localhost:8080/author.html
 
     # Rewrite the homepage to posts
     RewriteRule ^/$ /content/slick/publish/posts.html [PT,L]
+    
+    # Rewrite Fav Icon
+    RewriteRule ^/favicon.ico$ /etc/slick/designs/slick/img/favicon.ico [PT,L]
+    
+    # Rewrite our Robots
+    RewriteRule ^/robots.txt$ /etc/slick/designs/slick/txt/robots.txt [PT,L]
 
     # Rewrite our author 
     RewriteCond %{REQUEST_URI} !^/apps
