@@ -322,21 +322,7 @@ var wysihtml5ParserRules = {
         },
         
         "div": {
-            "one_of_type": {
-                "alignment_object": 1
-            },
-            "remove_action": "unwrap",
-            "keep_styles": {
-                "textAlign": 1,
-                "float": 1
-            },
-            "add_style": {
-                "align": "align_text"
-            },
-            "check_attributes": {
-                "id": "any",
-                "contenteditable": "any"
-            }
+            "remove": 0
         },
         
         "option": {
@@ -651,13 +637,13 @@ var wysihtml5ParserRules = {
     
     // Paste cleanup for unindentified source
     var universalRules = wysihtml5.lang.object(commonRules).clone(true);
-    universalRules.tags.div.one_of_type.alignment_object = 1;
-    universalRules.tags.div.remove_action = "unwrap";
-    universalRules.tags.div.check_attributes.style = false;
-    universalRules.tags.div.keep_styles = {
-        "textAlign": /^((left)|(right)|(center)|(justify))$/i,
-        "float": 1
-    };
+    //universalRules.tags.div.one_of_type.alignment_object = 1;
+    //universalRules.tags.div.remove_action = "none";
+    //universalRules.tags.div.check_attributes.style = false;
+    //universalRules.tags.div.keep_styles = {
+    //    "textAlign": /^((left)|(right)|(center)|(justify))$/i,
+    //    "float": 1
+    //};
     universalRules.tags.span.keep_styles = false;
 
     // Paste cleanup for MS Office
