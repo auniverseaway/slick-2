@@ -32,6 +32,16 @@ strong, b {
 
 textarea, input { outline: none; }
 
+code {
+    font-weight: 100;
+    padding: 4px 8px;
+    border: 1px solid #C5D4BE;
+    font-size: .8em;
+    border-radius: 5px;
+    background: #E3EAE3;
+    color: #545353;
+}
+
 // Utility Classes
 
 ///// Hide Utility
