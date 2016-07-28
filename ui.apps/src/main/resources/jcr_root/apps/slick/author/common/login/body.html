@@ -1,0 +1,19 @@
+<body data-sly-use.login="org.millr.slick.components.author.Login" id="${resource.name}">
+	<div class="Grid Fit-Small login-grid">
+        <div class="Cell login-left Align-Center">
+            <sly data-sly-include="logo.html"/>
+        </div>
+        <div class="Cell login-right">
+        	<form class="login-form" role="form" method="POST" action="/j_security_check" autocomplete="off">
+                <input placeholder="username" name="j_username" type="text" class="accent-background-light"><input placeholder="password" name="j_password" type="password" class="accent-background-light">
+                <input type="hidden" name="_charset_" value="UTF-8">
+                <input type="hidden" name="sling.auth.redirect" value="${login.loginRedirect}">
+                <button type="submit" class="btn login accent-background">Login</button>
+            </form>
+        </div>
+    </div>
+    <div id="messages">
+    	<div data-sly-test="${login.reason}" id="message-0" class="message error show"><strong>Error</strong> ${login.reason}</div>
+    </div>
+    <sly data-sly-include="scripts.html"></sly>
+</body>

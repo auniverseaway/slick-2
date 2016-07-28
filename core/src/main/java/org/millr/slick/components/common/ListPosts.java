@@ -20,6 +20,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.request.RequestPathInfo;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
@@ -41,10 +42,11 @@ public class ListPosts {
     
     private Session session;
     
-    private static final String PAGE_SIZE_PROPERTY = "pageSize";
-    
     @Inject @Via("resource")
     public String slickType;
+    
+    @Inject @Default(values="publish")
+    public String publishStatus;
     
     @OSGiService
     private PostService postService = null;
@@ -62,7 +64,7 @@ public class ListPosts {
     
     public NodeIterator getPosts() {
         final Long offset = getOffset();
-        posts = postService.getPosts(session, offset, SlickConstants.PAGINATION_SIZE, slickType);
+        posts = postService.getPosts(session, offset, SlickConstants.PAGINATION_SIZE, slickType, publishStatus);
         return posts;
     }
 
@@ -72,7 +74,9 @@ public class ListPosts {
     
     private Long getOffset() {
         Long offset = 0L;
-        String currentPage = request.getParameter(SlickConstants.PAGINATION_QUERY_STRING);
+        
+        RequestPathInfo pathInfo = request.getRequestPathInfo();
+        String currentPage = pathInfo.getSelectorString();
         if (currentPage != null) {
             try {
                 offset = Long.valueOf(currentPage);

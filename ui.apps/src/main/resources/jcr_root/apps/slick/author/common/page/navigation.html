@@ -1,0 +1,8 @@
+<nav data-sly-use.header="org.millr.slick.components.author.Navigation">
+    <a href="${header.link}" id="author-home">
+        <sly data-sly-include="logo.html"/>
+    </a>
+    <ul data-sly-list.menuItem="${header.getAdminHeader}" class="menu">
+        <li><a href="${menuItem.link}" class="accent-background-hover">${menuItem.title}</a></li>
+    </ul>
+</nav>

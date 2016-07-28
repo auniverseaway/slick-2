@@ -1,0 +1,14 @@
+<header class="Grid Fit-Small">
+	<div class="Cell">
+		<h1 class="title">${properties.title}</h1>
+		<ul>
+			<li><a href="/author/${properties.slickType}/item.html">New</a></li>
+		</ul>
+	</div>
+	<div data-sly-use.currentUser="org.millr.slick.components.author.CurrentUser" class="Cell align-right">
+		<a href="/system/sling/logout.html" class="user-info">
+			<div class="logout">Logout</div>
+			<div class="name">${currentUser.getDisplayName}</div>
+		</a>
+	</div>
+</header>

@@ -19,7 +19,6 @@ import java.io.InputStream;
 import java.util.Map;
 
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
@@ -42,12 +41,12 @@ import org.slf4j.LoggerFactory;
 @Component
 public class UploadServiceImpl implements UploadService {
 
-	/** The Constant LOGGER. */
-	private static final Logger LOGGER = LoggerFactory.getLogger(UploadServiceImpl.class);
-	
-	@Override
-	public String uploadFile(SlingHttpServletRequest request, String path) {
-		final RequestParameterMap params = request.getRequestParameterMap();
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(UploadServiceImpl.class);
+    
+    @Override
+    public String uploadFile(SlingHttpServletRequest request, String path) {
+        final RequestParameterMap params = request.getRequestParameterMap();
         ResourceResolver resolver = request.getResourceResolver();
         
         String filePath = null;
@@ -58,12 +57,12 @@ public class UploadServiceImpl implements UploadService {
             final RequestParameter param = pArr[0];
 
             if (!param.isFormField()) {
-            	
+                
                 final String name = param.getFileName();
                 final String mimeType = param.getContentType();
                 
                 if (!name.isEmpty()) {
-                	try {
+                    try {
                         final InputStream stream = param.getInputStream();
                         
                         LOGGER.info("******Image Parent: " + path);
@@ -85,6 +84,6 @@ public class UploadServiceImpl implements UploadService {
         }
 
         return filePath;
-	}
+    }
 
 }

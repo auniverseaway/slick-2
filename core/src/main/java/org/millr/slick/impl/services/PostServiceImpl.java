@@ -33,35 +33,45 @@ import org.millr.slick.services.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The Post Service Implementation.
+ * 
+ * This service gets nodes based on supplied params.
+ * It currently will only grab nodes that are not not before today.
+ */
 @Service
 @Component
 public class PostServiceImpl implements PostService {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(PostServiceImpl.class);
-	
-	private static final String BLOG_QUERY = "SELECT * FROM [%s] AS s "
-										   + "WHERE s.[%s] <= CAST('%s' AS DATE) "
-										   + "AND ISCHILDNODE(s,'/content/slick/publish/%s') "
-										   + "ORDER BY [%s] DESC";
-	
-	private static Long postsCount;
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostServiceImpl.class);
+    
+    private static final String BLOG_QUERY = "SELECT * FROM [%s] AS s "
+                                           + "WHERE CONTAINS(s.publishStatus, '%s') "
+                                           + "AND s.[%s] <= CAST('%s' AS DATE) "
+                                           + "AND ISCHILDNODE(s,'/content/slick/publish/%s') "
+                                           + "ORDER BY [%s] DESC";
+    
+    private static Long postsCount;
 
-	public NodeIterator getPosts(Session session) {
-		return getPosts(session, null, null, "posts");
+    public NodeIterator getPosts(Session session) {
+        NodeIterator allPosts = getPosts(session, null, null, "posts", "publish");
+        return allPosts;
     }
-	
-	public NodeIterator getPosts(Session session, Long offset, Long limit, String slickType) {
-	    
-	    String today = getToday();
-		
-		String currentQuery = String.format(BLOG_QUERY,
-				SlickConstants.NODE_POST_TYPE,
-				"publishDate",
-				today,
-				slickType,
-	            "publishDate");
-		
-		NodeIterator nodes = null;
+    
+    
+    public NodeIterator getPosts(Session session, Long offset, Long limit, String slickType, String publishStatus) {
+        
+        String today = getToday();
+        
+        String currentQuery = String.format(BLOG_QUERY,
+                                            SlickConstants.NODE_POST_TYPE,
+                                            publishStatus,
+                                            "publishDate",
+                                            today,
+                                            slickType,
+                                            "publishDate");
+        
+        NodeIterator nodes = null;
 
         if (session != null) {
             try {
@@ -84,10 +94,10 @@ public class PostServiceImpl implements PostService {
         }
         postsCount = nodes.getSize();
         return nodes;
-	}
+    }
 
-	private String getToday() {
-	    Calendar cal = Calendar.getInstance();
+    private String getToday() {
+        Calendar cal = Calendar.getInstance();
         String today = null;
         try {
             today = ValueFactoryImpl.getInstance().createValue(cal).getString();
@@ -102,12 +112,14 @@ public class PostServiceImpl implements PostService {
     }
 
     public long getTotalPages(Session session, Long pageSize) {
-		long posts = getNumberOfPosts(session);
-        return (long)Math.ceil((double)posts / pageSize);
+        long posts = getNumberOfPosts(session);
+        long totalPages = (long)Math.ceil((double)posts / pageSize);
+        LOGGER.info("TOTAL PAGES: " + totalPages);
+        return totalPages;
     }
-	
-	public long getNumberOfPosts(Session session) {
-        return postsCount;
+    
+    public long getNumberOfPosts(Session session) {
+        return getPosts(session).getSize();
     }
-	
+    
 }

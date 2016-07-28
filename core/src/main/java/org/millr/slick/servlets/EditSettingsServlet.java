@@ -16,7 +16,6 @@
 package org.millr.slick.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,57 +27,53 @@ import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
 import org.millr.slick.services.CurrentUserService;
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.SettingsService;
 import org.millr.slick.utils.Externalizer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @SlingServlet(
-	    resourceTypes = "sling/servlet/default",
-	    selectors = "edit",
-	    extensions = "json",
-	    methods = "POST"
-	)
+        resourceTypes = "sling/servlet/default",
+        selectors = "edit",
+        extensions = "json",
+        methods = "POST"
+    )
 public class EditSettingsServlet extends SlingAllMethodsServlet {
 
-	private static final long serialVersionUID = 1L;
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(EditSettingsServlet.class);
-	
-	@Reference
+    private static final long serialVersionUID = 1L;
+    
+    @Reference
     SettingsService settingsService;
-	
-	@Reference
+    
+    @Reference
     DispatcherService dispatcherService;
-	
-	@Reference
+    
+    @Reference
     CurrentUserService userService;
-	
-	private static final String BLOG_NAME_PROPERTY = "blogName";
-	
-	private static final String BLOG_DESCRIPTION_PROPERTY = "blogDescription";
-	
-	private static final String ACCENT_COLOR_PROPERTY = "accentColor";
-	
-	private static final String ANALYTICS_SCRIPT_PROPERTY = "analyticsScript";
-	
-	private static final String USE_DISPATCHER_PROPERTY = "useDispatcher";
-	
-	private static final String DEFAULT_HEADER_IMAGE = "defaultImage";
+    
+    private static final String BLOG_NAME_PROPERTY = "blogName";
+    
+    private static final String BLOG_DESCRIPTION_PROPERTY = "blogDescription";
+    
+    private static final String ACCENT_COLOR_PROPERTY = "accentColor";
+    
+    private static final String ANALYTICS_SCRIPT_PROPERTY = "analyticsScript";
+    
+    private static final String USE_DISPATCHER_PROPERTY = "useDispatcher";
+    
+    private static final String DEFAULT_HEADER_IMAGE = "defaultImage";
 
-	@Override
+    @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws ServletException, IOException {
-		
-		final boolean allowWrite = userService.getAuthorable(request.getResourceResolver());
-		
-		int statusCode;
-		
-		if (allowWrite) {
+        
+        final boolean allowWrite = userService.getAuthorable(request.getResourceResolver());
+        
+        int statusCode;
+        
+        if (allowWrite) {
+            
             final String blogName = request.getParameter(BLOG_NAME_PROPERTY);
             final String blogDescription = request.getParameter(BLOG_DESCRIPTION_PROPERTY);
             final String accentColor = request.getParameter(ACCENT_COLOR_PROPERTY);
@@ -99,31 +94,31 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
             flushDispatch(request);
             
             if (result) {
-            	statusCode = SlingHttpServletResponse.SC_OK;
+                statusCode = SlingHttpServletResponse.SC_OK;
                 sendResponse(response, statusCode, "success", "Settings successfully updated.");
             } else {
-            	statusCode = SlingHttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+                statusCode = SlingHttpServletResponse.SC_INTERNAL_SERVER_ERROR;
                 sendResponse(response, statusCode, "error", "Settings failed to update.");
             }
         } else {
-        	statusCode = SlingHttpServletResponse.SC_FORBIDDEN;
+            statusCode = SlingHttpServletResponse.SC_FORBIDDEN;
             sendResponse(response, statusCode, "error", "Current user not authorized.");
         }
-	}
-	
-	private void flushDispatch(SlingHttpServletRequest request) {
+    }
+    
+    private void flushDispatch(SlingHttpServletRequest request) {
         Externalizer external = request.adaptTo(Externalizer.class);
         String currentDomain = external.getDomain();
         dispatcherService.flush(currentDomain, "flushContent");
     }
-	
-	protected void sendResponse(final SlingHttpServletResponse response, int responseCode, final String responseType, final String responseMessage) {
-		
-		JSONObject responseJSON = new JSONObject();
+    
+    protected void sendResponse(final SlingHttpServletResponse response, int responseCode, final String responseType, final String responseMessage) {
+        
+        JSONObject responseJSON = new JSONObject();
         try {
-        	responseJSON.put("responseCode", responseCode);
-        	responseJSON.put("responseType", responseType);
-        	responseJSON.put("responseMessage", responseMessage);
+            responseJSON.put("responseCode", responseCode);
+            responseJSON.put("responseType", responseType);
+            responseJSON.put("responseMessage", responseMessage);
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -133,11 +128,11 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
         response.setStatus(responseCode);
         
         try {
-			response.getWriter().write(responseJSON.toString());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            response.getWriter().write(responseJSON.toString());
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-    }	
+    }    
 }

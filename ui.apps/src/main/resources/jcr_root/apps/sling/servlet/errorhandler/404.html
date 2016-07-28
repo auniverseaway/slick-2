@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-sly-use="org.millr.slick.components.common.NotFound">
     <head data-sly-use.settings="org.millr.slick.components.common.Settings">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -11,24 +11,22 @@
     </head>
     <body>
         <header>
-            <style scoped>
-                #logo #square {
-                    border: 4px solid #${settings.accentColor @ context='styleString'};
-                }
-
-                #logo #blog-name {
-                    background: #${settings.accentColor @ context='styleString'};
-                }
-                .cover {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    background: url('${settings.headerImage @ context='uri'}') center center no-repeat;
-                    background-size:cover;
-                }
-            </style>
+            <style data-sly-test.headerBg="${view.page.image ? view.page.image : settings.headerImage}">
+	            #logo #square {
+	                border: 4px solid rgb(${settings.accentColor @ context='styleString'});
+	            }
+	
+	            #logo #blog-name {
+	                background: rgb(${settings.accentColor @ context='styleString'});
+	            }
+	            header .cover {
+	                background: url('${headerBg @ context='uri'}') center center no-repeat;
+	                background-size:cover;
+	            }
+	            a {
+	                color: rgb(${settings.accentColor @ context='styleString'});
+	            }
+        	</style>
             <div class="cover"></div>
             <div id="menu">
                 <nav>

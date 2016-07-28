@@ -19,26 +19,24 @@
 						<input class="Cell" type="password" name="pwdConfirm" placeholder="Confirm Password"/>
 					</div>
 					<div class="form-footer">
-						<input type="submit" value="Create" class="button bg-green"/>
+						<input type="submit" value="Create" class="button accent-background"/>
 					</div>
 					
 				</form>
 			</section>
 			<section class="author-section" id="users">
-				<h2>User List</h2>
+				<h2>Authors</h2>
 				<div class="Grid Fit-Small sub-head-container">
+					<div class="Cell sub-head-label">Username</div>
 					<div class="Cell sub-head-label">Name</div>
 					<div class="Cell sub-head-label">Email</div>
-					<div class="Cell sub-head-label">Username</div>
 				</div>
-				<script id="user-list" type="text/x-handlebars-template">
-					{{#each this}}
+				<script id="user-list-item" type="text/x-handlebars-template">
 						<div class="Grid Fit-Small user-list-item">
+							<div class="Cell">{{userId}}</div>
 							<div class="Cell">{{firstName}} {{lastName}}</div>
 							<div class="Cell">{{email}}</div>
-							<div class="Cell">{{@key}}</div>
 						</div>
-					{{/each}}
 				</script>
 			</section>
 		</div>

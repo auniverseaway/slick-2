@@ -2,8 +2,8 @@
     box-sizing: border-box;
 }
 html {
-    font-size: 16px;
-    font-family: 'GothamLightRegular';
+    font-size: 18px;
+    font-family: 'LatoWebLight';
     font-weight: normal;
     height: 100%;
 }
@@ -16,12 +16,31 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
+p {
+    margin: 0 0 16px;
+}
+
 a {
     color: #337ab7;
     text-decoration: none;
 }
 
+strong, b {
+    font-weight: normal;
+    font-family: LatoWebSemiBold;
+}
+
 textarea, input { outline: none; }
+
+code {
+    font-weight: 100;
+    padding: 4px 8px;
+    border: 1px solid #C5D4BE;
+    font-size: .8em;
+    border-radius: 5px;
+    background: #E3EAE3;
+    color: #545353;
+}
 
 // Utility Classes
 

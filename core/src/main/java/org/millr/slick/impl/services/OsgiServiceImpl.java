@@ -39,9 +39,11 @@ import org.slf4j.LoggerFactory;
 import org.millr.slick.services.OsgiService;
 
 /**
- * The base OSGi service to interact with configurations.
+ * OsgiService Implementation
+ * This is the main OSGi Service wrapper for setting 
+ * and getting different types of properties from an OSGi Service.
  */
-@Service
+@Service(value = OsgiService.class)
 @Component(metatype = true)
 @Properties({
     @Property(name = "name", value = "Slick OSGi Service"),
@@ -49,20 +51,15 @@ import org.millr.slick.services.OsgiService;
 })
 public class OsgiServiceImpl implements OsgiService {
 
-    /** The service to get OSGi configs */
+    /** The config admin. */
     @Reference
     private ConfigurationAdmin configAdmin;
 
-    /** The logger */
+    /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(OsgiServiceImpl.class);
 
-    /**
-     * Set the value of an OSGi configuration property for a given PID.
-     *
-     * @param pid The PID of the OSGi component to update
-     * @param property The property of the config to update
-     * @param value The value to assign the provided property
-     * @return true if the property was updated successfully
+    /* (non-Javadoc)
+     * @see org.millr.slick.services.OsgiService#setProperty(java.lang.String, java.lang.String, java.lang.Object)
      */
     public boolean setProperty(final String pid, final String property, final Object value) {
         try {
@@ -85,12 +82,8 @@ public class OsgiServiceImpl implements OsgiService {
         return true;
     }
 
-    /**
-     * Set the values of an OSGi configuration for a given PID.
-     *
-     * @param pid The PID of the OSGi component to update
-     * @param properties The properties and values of the config to update
-     * @return true if the properties were updated successfully
+    /* (non-Javadoc)
+     * @see org.millr.slick.services.OsgiService#setProperties(java.lang.String, java.util.Map)
      */
     public boolean setProperties(final String pid, final Map<String, Object> properties) {
         try {
@@ -103,10 +96,6 @@ public class OsgiServiceImpl implements OsgiService {
                 props = new Hashtable<String, Object>();
             }
 
-            /* props is of type org.apache.felix.cm.impl.CaseInsensitiveDictionary which
-             * contains an internal HashTable and doesn't contain a putAll(Map) method.
-             * Iterate over the map and put the values into the Dictionary individually.
-             * Remove null values from HashMap as HashTable doesn't support them. */
             for (Map.Entry<String, Object> entry : properties.entrySet()) {
                 String key = entry.getKey();
                 Object value = entry.getValue();
@@ -123,13 +112,8 @@ public class OsgiServiceImpl implements OsgiService {
         return true;
     }
 
-    /**
-     * Get the value of an OSGi configuration string property for a given PID.
-     *
-     * @param pid The PID of the OSGi component to retrieve
-     * @param property The property of the config to retrieve
-     * @param value The value to assign the provided property
-     * @return The property value
+    /* (non-Javadoc)
+     * @see org.millr.slick.services.OsgiService#getStringProperty(java.lang.String, java.lang.String, java.lang.String)
      */
     public String getStringProperty(final String pid, final String property, final String defaultValue) {
         try {
@@ -148,13 +132,8 @@ public class OsgiServiceImpl implements OsgiService {
         return defaultValue;
     }
 
-    /**
-     * Get the value of an OSGi configuration boolean property for a given PID.
-     *
-     * @param pid The PID of the OSGi component to retrieve
-     * @param property The property of the config to retrieve
-     * @param value The value to assign the provided property
-     * @return The property value
+    /* (non-Javadoc)
+     * @see org.millr.slick.services.OsgiService#getBooleanProperty(java.lang.String, java.lang.String, boolean)
      */
     public boolean getBooleanProperty(final String pid, final String property, final boolean defaultValue) {
         try {
@@ -173,13 +152,8 @@ public class OsgiServiceImpl implements OsgiService {
         return defaultValue;
     }
 
-    /**
-     * Get the value of an OSGi configuration long property for a given PID.
-     *
-     * @param pid The PID of the OSGi component to retrieve
-     * @param property The property of the config to retrieve
-     * @param value The value to assign the provided property
-     * @return The property value
+    /* (non-Javadoc)
+     * @see org.millr.slick.services.OsgiService#getLongProperty(java.lang.String, java.lang.String, java.lang.Long)
      */
     public Long getLongProperty(final String pid, final String property, final Long defaultValue) {
         long placeholder = -1L;
@@ -204,11 +178,12 @@ public class OsgiServiceImpl implements OsgiService {
     }
 
     /**
-     * Wait for an OSGi service to become active.
+     * Wait for service.
      *
-     * @param serviceImpl The service implementation class
-     * @param timeout The length of time to wait for the service
+     * @param serviceImpl the service impl
+     * @param timeout the timeout
      */
+    @SuppressWarnings({ "unused", "rawtypes" })
     private void waitForService(Class serviceImpl, long timeout) {
         Class serviceInterface = serviceImpl.getInterfaces()[0];
         BundleContext bundleContext = FrameworkUtil.getBundle(serviceInterface).getBundleContext();

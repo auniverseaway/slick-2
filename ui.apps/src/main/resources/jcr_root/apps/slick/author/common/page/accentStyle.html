@@ -1,0 +1,23 @@
+<style data-sly-use.settings="org.millr.slick.components.common.Settings">
+.accent-fill {
+   fill: rgb(${settings.accentColor @ context='styleString'});
+}
+.accent-foreground {
+	color: rgb(${settings.accentColor @ context='styleString'});
+}
+a {
+   color: rgb(${settings.accentColor @ context='styleString'});
+}
+.accent-background {
+   background-color: rgb(${settings.accentColor @ context='styleString'});
+   color: rgba(255,255,255,.80);
+}
+.accent-background-light, #wysihtml5-editor-toolbar {
+	background-color: rgba(${settings.accentColor @ context='styleString'},.24);
+    color: rgba(${settings.accentColor @ context='styleString'},1);
+}
+.accent-background-hover:hover {
+   background-color: rgb(${settings.accentColor @ context='styleString'});
+   color: rgba(255,255,255,.80);
+}
+</style>

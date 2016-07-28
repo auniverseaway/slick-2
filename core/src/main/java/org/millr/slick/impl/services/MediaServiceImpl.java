@@ -24,34 +24,37 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
-import org.millr.slick.SlickConstants;
 import org.millr.slick.services.MediaService;
-import org.millr.slick.services.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * The Media Service Implementation.
+ * 
+ * This service will get a list of media nodes.
+ */
 @Service
 @Component
 public class MediaServiceImpl implements MediaService {
-	
-	private static final Logger LOGGER = LoggerFactory.getLogger(PostServiceImpl.class);
-	
-	private static final String MEDIA_QUERY = "SELECT * FROM [nt:file] AS s "
-										   + "WHERE "
-										   + "ISCHILDNODE(s,'/content/slick/publish/media') "
-										   + "ORDER BY [%s] DESC";
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(PostServiceImpl.class);
+    
+    private static final String MEDIA_QUERY = "SELECT * FROM [nt:file] AS s "
+                                            + "WHERE "
+                                            + "ISCHILDNODE(s,'/content/slick/publish/media') "
+                                            + "ORDER BY [%s] DESC";
 
-	public NodeIterator getMedia(Session session) {
-		return getMedia(session, null, null);
+    public NodeIterator getMedia(Session session) {
+        return getMedia(session, null, null);
     }
-	
-	public NodeIterator getMedia(Session session, Long offset, Long limit) {
-		
-		String currentQuery = String.format(MEDIA_QUERY,"jcr:created");
-		
-		LOGGER.info("CURRENT QUERY: " + currentQuery);
-		
-		NodeIterator nodes = null;
+    
+    public NodeIterator getMedia(Session session, Long offset, Long limit) {
+        
+        String currentQuery = String.format(MEDIA_QUERY,"jcr:created");
+        
+        LOGGER.info("CURRENT QUERY: " + currentQuery);
+        
+        NodeIterator nodes = null;
 
         if (session != null) {
             try {
@@ -73,15 +76,15 @@ public class MediaServiceImpl implements MediaService {
             }
         }
         return nodes;
-	}
+    }
 
-	public long getMediaPageCount(Session session, Long pageSize) {
-		long posts = getTotalMediaCount(session);
+    public long getMediaPageCount(Session session, Long pageSize) {
+        long posts = getTotalMediaCount(session);
         return (long)Math.ceil((double)posts / pageSize);
     }
-	
-	public long getTotalMediaCount(Session session) {
+    
+    public long getTotalMediaCount(Session session) {
         return getMedia(session).getSize();
     }
-	
+    
 }

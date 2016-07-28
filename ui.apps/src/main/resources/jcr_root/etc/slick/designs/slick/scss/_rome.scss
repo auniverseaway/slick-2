@@ -1,10 +1,13 @@
+@import 'variables';
+
 .rd-container {
   display: none;
-  background-color: #fff;
+  background-color: $light-ultra-green;
   padding: 10px;
   text-align: center;
   height: 240px;
   overflow: hidden;
+  font-size: .88889em;
 }
 .rd-container-attachment {
     position: absolute;
@@ -54,12 +57,12 @@
 .rd-time-selected,
 .rd-time-option:hover {
   cursor: pointer;
-  background-color: #333;
+  background-color: $slick-green;
   color: #fff;
 }
 .rd-day-prev-month,
 .rd-day-next-month {
-  color: #999;
+  color: $slick-green;
 }
 .rd-day-disabled {
   cursor: default;
@@ -78,7 +81,7 @@
   left: 0;
   right: 0;
   background-color: #fff;
-  color: #333;
+  color: $slick-green;
 }
 .rd-time-selected {
   padding: 5px;
