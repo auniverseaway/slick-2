@@ -41,6 +41,6 @@
                 color: rgb(${settings.accentColor @ context='styleString'});
             }
         </style>
-        ${settings.analyticsScript @ context="unsafe"}
+        <sly data-sly-use.analytics="partials/analytics.html" data-sly-call="${analytics.head @ settings=settings}"/>
     </head>
 </template>

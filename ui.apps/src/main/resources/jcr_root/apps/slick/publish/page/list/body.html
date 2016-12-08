@@ -3,5 +3,6 @@
 		<sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
 		${properties.description}
 		<sly data-sly-include="partials/footlibs.html"/>
+        <sly data-sly-use.analytics="partials/analytics.html" data-sly-call="${analytics.foot @ settings=settings}"/>
 	</body>
 </template>
