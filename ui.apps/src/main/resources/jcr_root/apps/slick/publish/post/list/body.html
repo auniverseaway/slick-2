@@ -37,6 +37,7 @@
     <sly data-sly-include="partials/lightbox.html"/>
     <sly data-sly-use.footer="footer.html" data-sly-call="${footer.footer @ view=view, settings=settings}"/>
     <sly data-sly-include="partials/footlibs.html"/>
+    <sly data-sly-use.analytics="partials/analytics.html" data-sly-call="${analytics.foot @ settings=settings}"/>
 </body>
 </html>
 </template>
