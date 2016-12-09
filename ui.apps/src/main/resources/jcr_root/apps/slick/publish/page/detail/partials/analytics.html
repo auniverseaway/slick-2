@@ -1,7 +1,8 @@
 <template data-sly-template.head="${@ settings}">
 <sly data-sly-test="${settings.analyticsHeadScript}">${settings.analyticsHeadScript @ context="unsafe"}</sly>
+<sly data-sly-test="${settings.analyticsScript}">${settings.analyticsScript @ context="unsafe"}</sly>
 </template>
 
 <template data-sly-template.foot="${@ settings}">
-    <sly data-sly-test="${settings.analyticsFootScript}">${settings.analyticsFootScript @ context="unsafe"}</sly>
+<sly data-sly-test="${settings.analyticsFootScript}">${settings.analyticsFootScript @ context="unsafe"}</sly>
 </template>
