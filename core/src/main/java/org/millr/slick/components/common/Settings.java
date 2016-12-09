@@ -20,6 +20,7 @@ import java.util.Calendar;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.millr.slick.services.SettingsService;
+import org.millr.slick.services.settings.AnalyticsService;
 import org.millr.slick.utils.WCMUse;
 
 /**
@@ -37,6 +38,12 @@ public class Settings extends WCMUse {
     
     private String analyticsScript;
     
+    private String analyticsServiceName;
+    
+    private String analyticsHeadScript;
+    
+    private String analyticsFootScript;
+    
     private String headerImage;
     
     private String accentColor;
@@ -51,6 +58,8 @@ public class Settings extends WCMUse {
         resource = getResource();
 
         SettingsService settingsService = scriptHelper.getService(SettingsService.class);
+        
+        AnalyticsService analyticsService = scriptHelper.getService(AnalyticsService.class);
 
         if (settingsService != null) {
             blogName = settingsService.getBlogName();
@@ -59,6 +68,12 @@ public class Settings extends WCMUse {
             useDispatcher = settingsService.getUseDispatcher();
             headerImage = settingsService.getDefaultHeaderImage();
             accentColor = settingsService.getAccentColor();
+        }
+        
+        if (analyticsService != null) {
+            analyticsServiceName = analyticsService.getAnalyticsServiceName();
+            analyticsHeadScript = analyticsService.getAnalyticsHeadScript();
+            analyticsFootScript = analyticsService.getAnalyticsFootScript();
         }
     }
 
@@ -72,6 +87,18 @@ public class Settings extends WCMUse {
     
     public String getAnalyticsScript() {
         return analyticsScript;
+    }
+    
+    public String getAnalyticsServiceName() {
+        return analyticsServiceName;
+    }
+    
+    public String getAnalyticsHeadScript() {
+        return analyticsHeadScript;
+    }
+    
+    public String getAnalyticsFootScript() {
+        return analyticsFootScript;
     }
     
     public String getHeaderImage() {

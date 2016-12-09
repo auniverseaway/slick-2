@@ -31,7 +31,7 @@ public interface SettingsService {
     
     public static final String SYSTEM_ACCENT_COLOR = "system.accentColor";
 
-    boolean setProperties(final Map<String, Object> properties);
+    boolean setProperties(final Map<String, Object> analyticsProperties);
 
     /**
      * Get the name of the blog.

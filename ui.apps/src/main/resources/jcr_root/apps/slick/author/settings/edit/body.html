@@ -23,12 +23,30 @@
 						<label>Default Hero Image</label>
 						<input type="text" name="defaultImage" value="${settings.headerImage}" placeholder="Default Hero Image"/>
 					</div>
-					<div>
-						<label>Analytics Script</label>
-						<textarea name="analyticsScript" placeholder="Analytics Script (inclue script tag)">${settings.analyticsScript}</textarea>
-					</div>
 					<div class="checkbox">
 						<label><input type="checkbox" name="useDispatcher" value="true" data-sly-attribute.checked="${settings.useDispatcher}"> Use Dispatcher</label>
+					</div>
+					<h2>Analytics & Social</h2>
+					<div>
+						<label>Analytics Service</label>
+						<select name="analyticsServiceName" class="settings-select">
+							<option value="none" selected="${settings.analyticsServiceName == 'none'}">None</option>
+							<option value="adobeAnalytics" selected="${settings.analyticsServiceName == 'adobeAnalytics'}">Adobe Analytics</option>
+							<option value="googleAnalytics" selected="${settings.analyticsServiceName == 'googleAnalytics'}">Google Analytics</option>
+							<option value="other" selected="${settings.analyticsServiceName == 'other'}">Other</option>
+						</select>
+					</div>
+					<div>
+						<label>Analytics Head Script</label>
+						<textarea name="analyticsHeadScript" placeholder="Analytics Head Script (inclue script tag)">${settings.analyticsHeadScript}</textarea>
+					</div>
+					<div>
+						<label>Analytics Foot Script</label>
+						<textarea name="analyticsFootScript" placeholder="Analytics Foot Script (inclue script tag)">${settings.analyticsFootScript}</textarea>
+					</div>
+					<div>
+						<label>Analytics Script (Legacy)</label>
+						<textarea name="analyticsScript" placeholder="Analytics Script (inclue script tag)">${settings.analyticsScript}</textarea>
 					</div>
 					<div class="form-footer">
 						<input type="submit" value="Save" class="button accent-background"/>
