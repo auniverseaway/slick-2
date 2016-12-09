@@ -4,6 +4,8 @@
     event.preventDefault();
     var formAction = element.action;
     var formData = new FormData(element);
+    
+    console.log(formData);
         
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {

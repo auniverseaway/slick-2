@@ -963,6 +963,22 @@ input:-webkit-autofill {
         line-height: 60px;
     }
 
+    .settings-select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: #EFEFEF;
+        line-height: 60px;
+        margin: 0px;
+        padding: 0 28px;
+        border: 0;
+        font-size: 1.2em;
+        font-family: LatoWebLight;
+        display: block;
+        height: 60px;
+        width: 100%;
+    }
+
     .checkbox {
         padding: 0px $slick-gutter * 2;
         line-height: 60px;
