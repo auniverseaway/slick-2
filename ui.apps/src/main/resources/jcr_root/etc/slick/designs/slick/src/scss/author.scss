@@ -182,7 +182,7 @@ input, textarea {
 }
 
 // Main Menu
-nav {
+nav#main-nav {
     background: #FFF;
     position: fixed;
     width: 176px;
@@ -277,7 +277,40 @@ header {
         }
 
     }
+}
 
+// Page Navigation
+nav.page-nav {
+    line-height: 60px;
+    padding: 0 $slick-gutter * 2 0 $slick-gutter;
+    background: #f5f5f5;
+    margin-bottom: 0;
+    font-size: 1.1em;
+    font-family: LatoWebSemiBold;
+    color: #545454;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        li {
+            display: inline-block;
+
+            a {
+                display: block;
+                padding: 0 $slick-gutter;
+            }
+        }
+    }
+}
+
+.page-nav-section {
+    display: none;
+
+    &:first-child {
+        display: block;
+    }
 }
 
 // Components
@@ -956,7 +989,7 @@ input:-webkit-autofill {
 
     textarea {
         padding: 20px $slick-gutter * 2;
-        height: 240px;
+        height: 120px;
     }
 
     input {
