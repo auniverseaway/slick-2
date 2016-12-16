@@ -1,4 +1,4 @@
-@import '../fonts/fonts';
+@import '../../dist/fonts/fonts';
 @import 'grid';
 @import 'base';
 @import 'variables';
@@ -85,11 +85,11 @@ header {
         float: left;
         margin: 40px;
         text-decoration: none;
-        
+
         #square {
             width: 40px;
             height: 40px;
-            
+
             float: left;
         }
 
@@ -104,7 +104,7 @@ header {
         }
     }
 
-    nav { 
+    nav {
         ul {
             list-style: none;
             margin: 100px 0px 0px 40px;
@@ -252,7 +252,7 @@ article {
             font-family: 'LatoWebLight';
             text-transform: none;
             line-height: 30px;
-            color: #000;        
+            color: #000;
         }
     }
 

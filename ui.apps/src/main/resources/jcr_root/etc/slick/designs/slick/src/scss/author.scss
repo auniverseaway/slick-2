@@ -1,4 +1,4 @@
-@import '../fonts/fonts';
+@import '../../dist/fonts/fonts';
 @import 'grid';
 @import 'base';
 @import 'variables';
@@ -29,10 +29,10 @@ input, textarea {
 // Login
 #login, #home {
     height: 100%;
-    
+
     .login-grid {
         height: 100%;
-        
+
         .login-left {
             -webkit-box-flex: 0 0 352px;
             -webkit-flex: 0 0 352px;
@@ -43,18 +43,18 @@ input, textarea {
             display: flex;
             justify-content: center;
             background-color: #FFF;
-            
+
             svg, img {
                 height: 60px;
             }
         }
-        
+
         .login-right {
             align-self: stretch;
             align-items: center;
             display: flex;
         }
-        
+
         .login-form {
             background-color: #FFF;
             display: block;
@@ -68,13 +68,13 @@ input, textarea {
             line-height: 60px;
             font-family: 'LatoWebLight';
             font-size: 1.1em;
-            
+
             &::-webkit-input-placeholder {
                 color: #6D6D6D;
             }
-            
+
         }
-        
+
         .btn.login {
             border: none;
             text-indent: 1000px;
@@ -113,11 +113,11 @@ input, textarea {
             }
 
             .login-inputs {
-                
+
                 input {
                     background: transparent;
                 }
-                
+
                 .full {
                     width: 100%;
                 }
@@ -143,10 +143,10 @@ input, textarea {
                 .login-default-step, .btn {
                     height: 180px;
                 }
-            } 
+            }
 
         }
-        
+
     }
 }
 
@@ -207,7 +207,7 @@ nav {
         text-align: center;
 
         li {
-            
+
             a {
                 line-height: 60px;
                 text-transform: uppercase;
@@ -237,37 +237,37 @@ header {
         font-size: 1.4rem;
         margin-bottom: 0;
     }
-    
+
     ul {
         list-style: none;
         margin: 0;
         padding: 0;
         float: left;
         li {
-            display: block;            
-            
+            display: block;
+
             a {
                 display: block;
                 padding: 0 $slick-gutter;
             }
         }
     }
-    
+
     .user-info {
         float: right;
-        
+
         div {
             float: right;
-            
-            
+
+
         }
-        
+
         .logout {
             max-width: 0;
             transition: all 0.24s ease;
             overflow: hidden;
         }
-        
+
         &:hover {
             .logout {
                 margin-left: 12px;
@@ -275,9 +275,9 @@ header {
                 max-width: 200px;
             }
         }
-        
+
     }
-    
+
 }
 
 // Components
@@ -286,7 +286,7 @@ header {
     display: inline-block;
     border: none;
     font-size: 1em;
-    
+
     &.square {
         width: 60px;
         height: 60px;
@@ -302,47 +302,47 @@ header {
     position: fixed;
     width: 100%;
     bottom: 0;
-    
+
     .message {
         padding: $slick-gutter * 2;
         text-transform: uppercase;
-        
+
         opacity: 0;
         -moz-transition: opacity .25s ease;
         -webkit-transition: opacity .25s ease;
         transition: opacity .25s ease;
-        
+
         &.success {
             background: rgba(201, 228, 166, 0.92);
             color: $slick-green;
         }
-        
+
         &.info {
             background: rgba(165, 226, 249, 0.92);
             color: rgb(0,173,238);
         }
-        
+
         &.failure {
             background: rgba(204, 146, 146, 0.92);
             color: $red;
         }
-        
+
         &.error {
             background: rgba(204, 146, 146, 0.92);
             color: $red;
         }
-        
+
         &.show {
             opacity: 1;
         }
-        
+
     }
 }
 
 .sub-head {
     background: $light-medium-gray;
     line-height: 60px;
-    padding: 0 $slick-gutter * 2; 
+    padding: 0 $slick-gutter * 2;
 }
 
 
@@ -466,7 +466,7 @@ header {
     .cover:hover {
         opacity: .25;
     }
-    
+
     .button {
         display: none;
         width: 100%;
@@ -496,7 +496,7 @@ header {
     height: 240px;
     float: left;
     overflow: hidden;
-    
+
     .image-url {
         position: absolute;
         bottom: 0;
@@ -523,9 +523,9 @@ header {
 }
 
 #title-section, #seo-section {
-    
+
     position: relative;
-    
+
     input {
         background: $light-medium-gray;
         border: none;
@@ -536,7 +536,7 @@ header {
         font-size: 1.25em;
         margin: 0px;
     }
-    
+
     .seo {
         position: absolute;
         right: 0;
@@ -544,24 +544,24 @@ header {
         background-size: 60px;
         width: 60px;
         height: 60px;
-        
+
         .button {
             text-indent: 1000px;
             overflow: hidden;
             background-image: url("../img/button-seo.svg");
-            
+
             &:hover {
                 background-color: rgba(255,255,255,.25);
             }
         }
     }
-    
+
     .edit-label-input  {
         input {
             background: transparent;
             line-height: inherit;
             padding-bottom: 6px;
-        }        
+        }
     }
 }
 
@@ -571,11 +571,11 @@ header {
     -webkit-transition: max-height 0.8s;
     -moz-transition: max-height 0.8s;
     transition: max-height 0.8s;
-    
+
     &.open {
         max-height: 500px;
     }
-    
+
     label {
         display: block;
         padding: $slick-gutter / 2 $slick-gutter * 2;
@@ -583,22 +583,22 @@ header {
         font-family: 'LatoWebSemibold';
         color: #8A8A8A;
     }
-    
+
     #tag-section {
         padding: 0 $slick-gutter * 2;
         #tag-input {
             display: inline-block;
             margin: 0 14px 14px 0;
-        
+
             input {
                 display: inline-block;
                 line-height: 30px;
                 font-size: 1em;
                 width: auto;
                 padding: 0px;
-                
+
             }
-            
+
             a {
                     display: block;
                     float: right;
@@ -615,7 +615,7 @@ header {
             background: rgba(165, 226, 249, 0.92);
             margin-right: $slick-gutter;
             margin-bottom: 14px;
-            
+
             label {
                 display: inline-block;
                 padding: 0;
@@ -623,7 +623,7 @@ header {
                 text-transform: none;
                 line-height: 30px;
                 color: #000;
-                
+
                 a {
                     display: block;
                     float: right;
@@ -633,17 +633,17 @@ header {
                     width: 32px;
                     background: url("../img/btn-tag-remove.svg") 50% no-repeat;
                 }
-                
+
             }
-        
+
             input {
                 display: none;
             }
-        
-            
+
+
         }
     }
-    
+
     .featured-image {
         max-width: 200px;
         display: block;
@@ -748,7 +748,7 @@ header {
 
     [data-wysihtml5-dialog='createLink'], [data-wysihtml5-dialog='insertImage'], [data-wysihtml5-dialog='createGist'], [data-wysihtml5-dialog='alignOptions'] {
         position: relative;
-        
+
         .dialog-container {
             position: absolute;
             right: 60px;
@@ -831,7 +831,7 @@ header {
     outline: none;
     overflow: scroll;
     margin-right: 60px;
-    
+
     h2 {
         line-height: normal;
         padding: initial;
@@ -1006,7 +1006,7 @@ input:-webkit-autofill {
         min-width: 180px;
         padding: 0;
     }
-    
+
     .accent-color-container {
         position: relative;
     }

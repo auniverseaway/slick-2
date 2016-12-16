@@ -4,6 +4,7 @@
   "description": "Slick Common Package",
   "dependencies": {},
   "devDependencies": {
+    "amd-optimize": "^0.6.1",
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.1",
     "gulp-minify-css": "^1.2.1",

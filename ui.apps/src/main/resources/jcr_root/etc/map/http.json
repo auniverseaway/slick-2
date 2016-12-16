@@ -5,12 +5,12 @@
         "sling:match": "localhost.8080/$"
     },
     "robot_or_not": {
-        "sling:internalRedirect": "/etc/slick/designs/slick/txt/robots.txt",
+        "sling:internalRedirect": "/etc/slick/designs/slick/dist/txt/robots.txt",
         "jcr:primaryType": "sling:Mapping",
         "sling:match": "localhost.8080/robots.txt"
     },
     "favicon": {
-        "sling:internalRedirect": "/etc/slick/designs/slick/img/favicon.ico",
+        "sling:internalRedirect": "/etc/slick/designs/slick/dist/img/favicon.ico",
         "jcr:primaryType": "sling:Mapping",
         "sling:match": "localhost.8080/favicon.ico"
     },
