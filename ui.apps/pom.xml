@@ -23,7 +23,7 @@
         <groupId>org.millr.slick</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    
+
     <artifactId>ui.apps</artifactId>
     <packaging>bundle</packaging>
     <name>Slick UI</name>
@@ -76,7 +76,7 @@
                     <slingUrl>http://${sling.host}:${sling.port}/system/console</slingUrl>
                     <user>${sling.user}</user>
                     <password>${sling.password}</password>
-                </configuration>                
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.github.eirslett</groupId>
@@ -105,7 +105,7 @@
                             <goal>gulp</goal>
                         </goals>
                         <configuration>
-                            <arguments>styles</arguments>
+                            <arguments>build</arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -136,5 +136,5 @@
     </profiles>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>    
+    </properties>
 </project>

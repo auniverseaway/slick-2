@@ -1,12 +1,12 @@
 /*
  * Copyright 2016 Chris Millar
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,8 +28,8 @@ import org.osgi.framework.Constants;
 
 /**
  * The Settings Service Implementation.
- * 
- * This service allows for setting configurations 
+ *
+ * This service allows for setting configurations
  * for the application specific to a site.
  */
 @Service(value = SettingsService.class)
@@ -79,18 +79,18 @@ public class SettingsServiceImpl implements SettingsService {
 
     /** Default value for the blog name */
     public static final String BLOG_NAME_DEFAULT_VALUE = "Slick Blogging Engine";
-    
+
     /** Default value for the blog description */
     public static final String BLOG_DESCRIPTION_DEFAULT_VALUE = "Blogging for the modern web.";
-    
+
     /** Default value for the analytics script */
     public static final String ANALYTICS_SCRIPT_DEFAULT_VALUE = "";
-    
+
     /** Default value for the analytics script */
     public static final String ACCENT_COLOR_DEFAULT_VALUE = "0,148,68";
-    
+
     /** Default value for the analytics script */
-    public static final String HEADER_IMAGE_DEFAULT_VALUE = "/etc/slick/designs/slick/img/default-header-background.jpg";
+    public static final String HEADER_IMAGE_DEFAULT_VALUE = "/etc/slick/designs/slick/dist/img/default-header-background.jpg";
 
     /** Default value for using a dispatcher. */
     public static final boolean USE_DISPATCHER_DEFAULT_VALUE = false;
@@ -103,39 +103,39 @@ public class SettingsServiceImpl implements SettingsService {
     public String getBlogName() {
         return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_BLOG_NAME, BLOG_NAME_DEFAULT_VALUE);
     }
-    
+
     public boolean setBlogName(final String name) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_BLOG_NAME, name);
     }
-    
+
     public String getBlogDescription() {
         return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_BLOG_DESCRIPTION, BLOG_DESCRIPTION_DEFAULT_VALUE);
     }
-    
+
     public boolean setBlogDescription(final String description) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_BLOG_DESCRIPTION, description);
     }
-    
+
     public String getAnalyticsScript() {
         return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_ANALYTICS_SCRIPT, ANALYTICS_SCRIPT_DEFAULT_VALUE);
     }
-    
+
     public boolean setAnalyticsScript(final String script) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_ANALYTICS_SCRIPT, script);
     }
-    
+
     public String getDefaultHeaderImage() {
         return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_HEADER_IMAGE, HEADER_IMAGE_DEFAULT_VALUE);
     }
-    
+
     public boolean setDefaultHeaderImage(final String imageUri) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_HEADER_IMAGE, imageUri);
     }
-    
+
     public String getAccentColor() {
         return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_ACCENT_COLOR, ACCENT_COLOR_DEFAULT_VALUE);
     }
-    
+
     public boolean setAccentColor(final String accentColor) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_ACCENT_COLOR, accentColor);
     }
@@ -147,7 +147,7 @@ public class SettingsServiceImpl implements SettingsService {
     public boolean setUseDispatcher(final boolean value) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_USE_DISPATCHER, value);
     }
-    
+
     public boolean setProperties(final Map<String, Object> properties) {
         return osgiService.setProperties(COMPONENT_PID, properties);
     }

@@ -3,7 +3,7 @@
     <div class="author-wrap">
         <sly data-sly-include="subNavigation.html"></sly>
         <section>
-            
+
         </section>
         <div class="content">
             <section id="media-list">
@@ -36,7 +36,7 @@
         </div>
     </div>
     <div id="messages"></div>
-    
+
     <script id="media-list-item" type="text/x-handlebars-template">
         <div class="media-box" id="media-{{mediaId}}">
             <style>
@@ -49,7 +49,7 @@
             <div class="image-url">${external.domain @ context='unsafe'}{{mediaUrl}}</div>
         </div>
     </script>
-    
+
     <script id="media-preview" type="text/x-handlebars-template">
         <style>
             #media-upload-label .cover {
@@ -58,11 +58,9 @@
             }
         </style>
     </script>
-    
+
     <script id="message" type="text/x-handlebars-template">
         <div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
     </script>
-    <script src="/etc/slick/designs/slick/js/libs/handlebars-v4.0.5.js"></script>
-    <script src="/etc/slick/designs/slick/author/js/messaging.js"></script>
-    <script src="/etc/slick/designs/slick/author/js/media.js"></script>
+    <sly data-sly-include="scripts.html"></sly>
 </body>

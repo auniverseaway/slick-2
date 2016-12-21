@@ -3,6 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.millr.slick</groupId>
   <artifactId>parent</artifactId>
+  <name>Slick Parent</name>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 

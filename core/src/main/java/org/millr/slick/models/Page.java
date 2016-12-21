@@ -67,6 +67,9 @@ public class Page
     @Inject @Optional
     private String slickType;
     
+    @Inject @Optional
+    private String publishStatus;
+    
     @Optional
     public String name;
     
@@ -144,6 +147,11 @@ public class Page
     public Calendar getCreated()
     {
         return created;
+    }
+    
+    public String getPublishStatus()
+    {
+        return publishStatus;
     }
     
     public Calendar getPublishDate()

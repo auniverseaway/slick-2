@@ -26,7 +26,7 @@
     </parent>
     <artifactId>core</artifactId>
     <packaging>bundle</packaging>
-    <name>core</name>
+    <name>Slick Core</name>
     <description>org.millr.slick - core</description>
     <build>
         <plugins>

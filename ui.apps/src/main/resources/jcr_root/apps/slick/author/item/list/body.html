@@ -3,8 +3,8 @@
     <div class="author-wrap">
         <sly data-sly-include="subNavigation.html"></sly>
         <h2>
-        	<a href="/author/${properties.slickType}.html">Published</a>
-        	<a href="/author/${properties.slickType}/drafts.html">Drafts</a>
+            <a href="/author/${properties.slickType}.html">Published</a>
+            <a href="/author/${properties.slickType}/drafts.html">Drafts</a>
         </h2>
         <section class="list-items" data-sly-use.list="${'org.millr.slick.components.common.ListPosts' @ publishStatus = properties.publishStatus}" data-sly-list.page="${list.posts}">
             <sly data-sly-resource="${page.path @ resourceType='slick/author/item/content'}"/>
@@ -21,10 +21,8 @@
         </section>
     </div>
     <div id="messages"></div>
-	<script id="message" type="text/x-handlebars-template">
-		<div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
-	</script>
-	<script src="/etc/slick/designs/slick/js/libs/handlebars-v4.0.5.js"></script>
-	<script src="/etc/slick/designs/slick/author/js/messaging.js"></script>
-    <script src="/etc/slick/designs/slick/author/js/itemList.js"></script>  
+    <script id="message" type="text/x-handlebars-template">
+        <div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
+    </script>
+    <sly data-sly-include="scripts.html"/>
 </body>
