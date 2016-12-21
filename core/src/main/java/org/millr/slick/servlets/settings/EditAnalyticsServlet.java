@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.millr.slick.servlets;
+package org.millr.slick.servlets.settings;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,23 +33,22 @@ import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.SettingsService;
 import org.millr.slick.services.settings.AnalyticsService;
 import org.millr.slick.utils.Externalizer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @SlingServlet(
         resourceTypes = "sling/servlet/default",
-        selectors = "edit",
+        selectors = "edit.analytics",
         extensions = "json",
         methods = "POST"
     )
-public class EditSettingsServlet extends SlingAllMethodsServlet {
+public class EditAnalyticsServlet extends SlingAllMethodsServlet {
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(EditSettingsServlet.class);
+    private static final long serialVersionUID = 5760735584278014301L;
 
-    private static final long serialVersionUID = 1L;
-    
     @Reference
     SettingsService settingsService;
+    
+    @Reference
+    AnalyticsService analyticsService;
     
     @Reference
     DispatcherService dispatcherService;
@@ -57,16 +56,12 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
     @Reference
     CurrentUserService userService;
     
-    private static final String BLOG_NAME_PROPERTY = "blogName";
+    private static final String ANALYTICS_SERVICE_NAME_PROPERTY = "analyticsServiceName";
     
-    private static final String BLOG_DESCRIPTION_PROPERTY = "blogDescription";
+    private static final String ANALYTICS_HEAD_SCRIPT_PROPERTY = "analyticsHeadScript";
     
-    private static final String ACCENT_COLOR_PROPERTY = "accentColor";
+    private static final String ANALYTICS_FOOT_SCRIPT_PROPERTY = "analyticsFootScript";
     
-    private static final String USE_DISPATCHER_PROPERTY = "useDispatcher";
-    
-    private static final String DEFAULT_HEADER_IMAGE = "defaultImage";
-
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws ServletException, IOException {
@@ -77,25 +72,21 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
         
         if (allowWrite) {
             
-            // Main Settings
-            final String blogName = request.getParameter(BLOG_NAME_PROPERTY);
-            final String blogDescription = request.getParameter(BLOG_DESCRIPTION_PROPERTY);
-            final String accentColor = request.getParameter(ACCENT_COLOR_PROPERTY);
-            final boolean useDispatcher = Boolean.parseBoolean(request.getParameter(USE_DISPATCHER_PROPERTY));
-            final String defaultHeaderImage = request.getParameter(DEFAULT_HEADER_IMAGE);
+            // Analytics Settings
+            final String serviceName = request.getParameter(ANALYTICS_SERVICE_NAME_PROPERTY);
+            final String headScript = request.getParameter(ANALYTICS_HEAD_SCRIPT_PROPERTY);
+            final String footScript = request.getParameter(ANALYTICS_FOOT_SCRIPT_PROPERTY);
             
-            final Map<String, Object> properties = new HashMap<String, Object>();
-
-            properties.put(SettingsService.SYSTEM_BLOG_NAME, blogName);
-            properties.put(SettingsService.SYSTEM_BLOG_DESCRIPTION, blogDescription);
-            properties.put(SettingsService.SYSTEM_ACCENT_COLOR, accentColor);
-            properties.put(SettingsService.SYSTEM_USE_DISPATCHER, useDispatcher);
-            properties.put(SettingsService.SYSTEM_HEADER_IMAGE, defaultHeaderImage);
-            boolean result = settingsService.setProperties(properties);
+            final Map<String, Object> analyticsProperties = new HashMap<String, Object>();
+            analyticsProperties.put(AnalyticsService.SYSTEM_ANALYTICS_SERVICE_NAME, serviceName);
+            analyticsProperties.put(AnalyticsService.SYSTEM_ANALYTICS_HEAD_SCRIPT, headScript);
+            analyticsProperties.put(AnalyticsService.SYSTEM_ANALYTICS_FOOT_SCRIPT, footScript);
+            
+            boolean analyticsResult = analyticsService.setProperties(analyticsProperties);
             
             flushDispatch(request);
             
-            if (result) {
+            if (analyticsResult) {
                 statusCode = SlingHttpServletResponse.SC_OK;
                 sendResponse(response, statusCode, "success", "Settings successfully updated.");
             } else {
@@ -132,7 +123,6 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
         try {
             response.getWriter().write(responseJSON.toString());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

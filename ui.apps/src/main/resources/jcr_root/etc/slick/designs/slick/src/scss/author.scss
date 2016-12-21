@@ -295,11 +295,14 @@ nav.page-nav {
         list-style: none;
 
         li {
-            display: inline-block;
+            display: block;
+            float: left;
 
             a {
                 display: block;
                 padding: 0 $slick-gutter;
+                box-sizing: border-box;
+                height: 60px;
             }
         }
     }
@@ -308,7 +311,7 @@ nav.page-nav {
 .page-nav-section {
     display: none;
 
-    &:first-child {
+    &.active {
         display: block;
     }
 }
@@ -788,7 +791,6 @@ nav.page-nav {
             top: -60px;
             height: 60px;
             width: 400px;
-            background: #f3f3f3;
 
             input {
                 padding: 0 20px;
@@ -827,7 +829,6 @@ nav.page-nav {
             top: -60px;
             height: 60px;
             width: 180px;
-            background: $light-green;
 
             [data-wysihtml5-command] {
                 text-indent: -1000px;
@@ -985,6 +986,20 @@ input:-webkit-autofill {
         width: 100%;
         padding: 0px $slick-gutter * 2;
         font-size: 1.2em;
+
+        &.toggle-enabled-item {
+            display: none;
+            &.active {
+                display: block;
+            }
+        }
+    }
+
+    .toggle-enabled-item {
+        display: none;
+        &.active {
+            display: block;
+        }
     }
 
     textarea {

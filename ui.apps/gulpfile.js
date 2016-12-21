@@ -36,7 +36,9 @@ gulp.task('publish-scripts', function ()
 gulp.task('author-scripts', function ()
 {
     return gulp.src(designs + '/src/js/**/*.js')
-        .pipe(amdOptimize('author'))
+        .pipe(amdOptimize('author', {
+            baseUrl : designs + "/src/js",
+            configFile : designs + "/src/js/config.js" }))
         .pipe(sourceMaps.init())
         .pipe(concat('author.js'))
         .pipe(uglify())

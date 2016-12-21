@@ -1,4 +1,4 @@
-<body data-sly-use.editBlog="org.millr.slick.components.author.EditBlog">
+<body data-sly-use.editBlog="org.millr.slick.components.author.EditBlog" id="itemEdit">
     <sly data-sly-include="navigation.html"/>
     <div class="author-wrap">
         <sly data-sly-include="subNavigation.html"></sly>
@@ -27,6 +27,12 @@
                                 <input name="tag-input" type="text" placeholder="add tag">
                                 <a href="#">Add</a>
                             </div><sly data-sly-list.tag="${editBlog.post.tags}"><div class="finished-tag"><label>${tag}<a href="#">Remove</a></label><input name="tags" type="text" value="${tag}"></div></sly></div>
+                        <script id="finished-tag" type="text/x-handlebars-template">
+                            <div class="finished-tag">
+                                <label>{{tagName}}<a href="#" class="remove-tag-button">Remove</a></label>
+                                <input name="tags" type="text" value="{{tagName}}">
+                            </div>
+                        </script>
                     </section>
                     <section class="edit-label-input basic">
                         <label>featured image</label>
@@ -90,8 +96,8 @@
                            type="text" id="dateInput" class="accent-background-light" name="publishDate"/>
                     <div class="item-status accent-background-light">
                         <select name="publishStatus">
-                          <option value="publish">Publish</option>
-                          <option value="draft">Draft</option>
+                          <option value="publish" selected="${editBlog.post.publishStatus == 'publish'}">Publish</option>
+                          <option value="draft" selected="${editBlog.post.publishStatus == 'draft'}">Draft</option>
                         </select>
                     </div>
                     <input type="submit" value="Post" id="submit-item-button" class="button accent-background">
@@ -100,8 +106,6 @@
             </form>
         </div>
     </div>
+    <script src="/etc/slick/designs/slick/libs/js/rome.js"></script>
     <sly data-sly-include="scripts.html"></sly>
-    <script src="/etc/slick/designs/slick/author/js/author.js"></script>
-    <script src="/etc/slick/designs/slick/author/js/libs/rome.js"></script>
-    <script src="/etc/slick/designs/slick/author/js/editor.js"></script>
 </body>

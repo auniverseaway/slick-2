@@ -1,3 +1,6 @@
-require(['author/base'], function() {
-  'use strict';
+require([
+    'handlebars',
+    'author/base'
+], function () {
+    'use strict';
 });
