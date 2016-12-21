@@ -24,7 +24,7 @@
         <sly data-sly-use.meta="partials/meta.html" data-sly-call="${meta.meta @ view=view, settings=settings}"/>
         <link rel="apple-touch-icon" href="/etc/slick/designs/slick/img/apple-touch-icon.png">
         <link rel="stylesheet" href="/etc/slick/designs/slick/dist/css/publish.css" type="text/css">
-        <link rel="stylesheet" href="/etc/slick/designs/slick/author/js/libs/highlight/styles/github-gist.css">
+        <link rel="stylesheet" href="/etc/slick/designs/slick/libs/css/highlight-github-gist.css">
         <style data-sly-test.headerBg="${view.page.image ? view.page.image : settings.headerImage}">
             #logo #square {
                 border: 4px solid rgb(${settings.accentColor @ context='styleString'});
@@ -35,7 +35,7 @@
             }
             header .cover {
                 background: url('${headerBg @ context='uri'}') center center no-repeat;
-                background-size:cover;
+                background-size: cover;
             }
             a {
                 color: rgb(${settings.accentColor @ context='styleString'});
