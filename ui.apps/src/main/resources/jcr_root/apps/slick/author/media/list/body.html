@@ -62,7 +62,5 @@
     <script id="message" type="text/x-handlebars-template">
         <div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
     </script>
-    <script src="/etc/slick/designs/slick/libs/js/handlebars-v4.0.5.js"></script>
-    <script src="/etc/slick/designs/slick/author/js/messaging.js"></script>
-    <script src="/etc/slick/designs/slick/author/js/media.js"></script>
+    <sly data-sly-include="scripts.html"></sly>
 </body>

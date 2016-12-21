@@ -6,6 +6,7 @@ define(['author/messaging',
         'author/onBoarding',
         'author/itemEdit',
         'author/itemDelete',
+        'author/media',
         'author/settings'], function () {
     'use strict';
 });
