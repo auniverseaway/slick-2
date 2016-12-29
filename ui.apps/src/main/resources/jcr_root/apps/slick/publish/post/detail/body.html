@@ -14,7 +14,8 @@
     limitations under the License.
 -->
 <template data-sly-template.body="${@ view, settings}">
-<body id="${resource.name}">
+<body id="${resource.name}" data-sly-attribute.data-analytics-type="${settings.analyticsServiceName}" 
+      data-sly-attribute.data-report-suite="${settings.analyticsReportSuite}">
     <div class="page-wrap"> <!--/* We wrap the page for sticky footer functionality */-->
     <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
     <section id="content">
@@ -32,9 +33,9 @@
             <div class="Grid Fit-Medium meta">
                 <div class="Cell">
                     <ul id="share">
-                        <li><a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="twitter" class="social twitter">Twitter</a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
-                            data-social-network="facebook" 
-                            class="social facebook">Facebook</a></li><li><a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="linkedin" class="social linkedin">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="Twitter" class="social twitter">Twitter</a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
+                            data-social-network="Facebook" 
+                            class="social facebook">Facebook</a></li><li><a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="LinkedIn" class="social linkedin">LinkedIn</a></li>
                     </ul>
                     <div class="tags">
                         <sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span></sly>

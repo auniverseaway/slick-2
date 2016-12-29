@@ -49,7 +49,7 @@
                         <div>
                             <label>Analytics Service</label>
                             <select name="analyticsServiceName" class="settings-select toggle-enabled" data-toggle-name="analytics">
-                                <option value="none" selected="${settings.analyticsServiceName == 'none'}">None</option>
+                                <option value="" selected="${settings.analyticsServiceName == ''}">None</option>
                                 <option value="adobeAnalytics" selected="${settings.analyticsServiceName == 'adobeAnalytics'}">Adobe Analytics</option>
                                 <option value="googleAnalytics" selected="${settings.analyticsServiceName == 'googleAnalytics'}">Google Analytics</option>
                                 <option value="other" selected="${settings.analyticsServiceName == 'other'}">Other</option>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="toggle-enabled-item" data-toggle-item-value="adobeAnalytics">
                             <label>Adobe Analytics Report Suite</label>
-                            <input type="text" name="reportSuite" placeholder="Example: rsid1, rsid2, rsid3"/>
+                            <input type="text" name="analyticsReportSuite" value="${settings.analyticsReportSuite}" placeholder="Example: rsid1, rsid2, rsid3"/>
                         </div>
                         <div>
                             <label>Analytics Head Script</label>
@@ -67,6 +67,14 @@
                             <label>Analytics Foot Script</label>
                             <textarea name="analyticsFootScript" placeholder="Analytics Foot Script (inclue script tag)">${settings.analyticsFootScript}</textarea>
                         </div>
+                        <div>
+                            <label>Twitter Username</label>
+                            <input type="text" name="analyticsTwitterUsername" value="${settings.analyticsTwitterUsername}" placeholder="Twitter Username (inclue @ symbol)"/>
+                        </div>
+                        <div>
+                            <label>Facebook App Id</label>
+                            <input type="text" name="analyticsFacebookAppId" value="${settings.analyticsFacebookAppId}" placeholder="Your App ID"/>
+                        </div> 
                         <div class="form-footer">
                             <input type="submit" value="Save" class="button accent-background"/>
                         </div>

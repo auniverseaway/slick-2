@@ -44,6 +44,12 @@ public class Settings extends WCMUse {
     
     private String analyticsFootScript;
     
+    private String analyticsReportSuite;
+    
+    private String analyticsTwitterUsername;
+    
+    private String analyticsFacebookAppId;
+    
     private String headerImage;
     
     private String accentColor;
@@ -74,6 +80,9 @@ public class Settings extends WCMUse {
             analyticsServiceName = analyticsService.getAnalyticsServiceName();
             analyticsHeadScript = analyticsService.getAnalyticsHeadScript();
             analyticsFootScript = analyticsService.getAnalyticsFootScript();
+            analyticsReportSuite = analyticsService.getAnalyticsReportSuite();
+            analyticsTwitterUsername = analyticsService.getAnalyticsTwitterUsername();
+            analyticsFacebookAppId = analyticsService.getAnalyticsFacebookAppId();
         }
     }
 
@@ -99,6 +108,18 @@ public class Settings extends WCMUse {
     
     public String getAnalyticsFootScript() {
         return analyticsFootScript;
+    }
+    
+    public String getAnalyticsReportSuite() {
+        return analyticsReportSuite;
+    }
+    
+    public String getAnalyticsTwitterUsername() {
+        return analyticsTwitterUsername;
+    }
+    
+    public String getAnalyticsFacebookAppId() {
+        return analyticsFacebookAppId;
     }
     
     public String getHeaderImage() {

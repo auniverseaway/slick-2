@@ -62,6 +62,12 @@ public class EditAnalyticsServlet extends SlingAllMethodsServlet {
     
     private static final String ANALYTICS_FOOT_SCRIPT_PROPERTY = "analyticsFootScript";
     
+    private static final String ANALYTICS_REPORT_SUITE_PROPERTY = "analyticsReportSuite";
+    
+    private static final String ANALYTICS_TWITTER_USERNAME_PROPERTY = "analyticsTwitterUsername";
+    
+    private static final String ANALYTICS_FACEBOOK_APP_ID_PROPERTY = "analyticsFacebookAppId";
+    
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws ServletException, IOException {
@@ -76,11 +82,17 @@ public class EditAnalyticsServlet extends SlingAllMethodsServlet {
             final String serviceName = request.getParameter(ANALYTICS_SERVICE_NAME_PROPERTY);
             final String headScript = request.getParameter(ANALYTICS_HEAD_SCRIPT_PROPERTY);
             final String footScript = request.getParameter(ANALYTICS_FOOT_SCRIPT_PROPERTY);
+            final String reportSuite = request.getParameter(ANALYTICS_REPORT_SUITE_PROPERTY);
+            final String twitterUsername = request.getParameter(ANALYTICS_TWITTER_USERNAME_PROPERTY);
+            final String facebookAppId = request.getParameter(ANALYTICS_FACEBOOK_APP_ID_PROPERTY);
             
             final Map<String, Object> analyticsProperties = new HashMap<String, Object>();
             analyticsProperties.put(AnalyticsService.SYSTEM_ANALYTICS_SERVICE_NAME, serviceName);
             analyticsProperties.put(AnalyticsService.SYSTEM_ANALYTICS_HEAD_SCRIPT, headScript);
             analyticsProperties.put(AnalyticsService.SYSTEM_ANALYTICS_FOOT_SCRIPT, footScript);
+            analyticsProperties.put(AnalyticsService.SYSTEM_ANALYTICS_REPORT_SUITE, reportSuite);
+            analyticsProperties.put(AnalyticsService.SYSTEM_ANALYTICS_TWITTER_USERNAME, twitterUsername);
+            analyticsProperties.put(AnalyticsService.SYSTEM_ANALYTICS_FACEBOOK_APPID, facebookAppId);
             
             boolean analyticsResult = analyticsService.setProperties(analyticsProperties);
             

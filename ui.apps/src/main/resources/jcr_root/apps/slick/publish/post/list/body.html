@@ -14,7 +14,7 @@
     limitations under the License.
 -->
 <template data-sly-template.body="${@ view, settings}">
-<body>
+<body data-sly-attribute.data-analytics-type="${settings.analyticsServiceName}" data-sly-attribute.data-report-suite="${settings.analyticsReportSuite}">
     <div class="page-wrap"> <!--/* We wrap the page for sticky footer functionality */-->
         <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"></sly>
         <div id="content">

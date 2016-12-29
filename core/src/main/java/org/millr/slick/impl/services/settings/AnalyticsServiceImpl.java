@@ -36,6 +36,18 @@ import org.osgi.framework.Constants;
               value = AnalyticsServiceImpl.ANALYTICS_FOOT_SCRIPT_DEFAULT_VALUE,
               label = "Foot Script",
               description = "The foot script provided by your analytics service. This should include the <script> tag."),
+    @Property(name  = AnalyticsServiceImpl.SYSTEM_ANALYTICS_REPORT_SUITE,
+              value = AnalyticsServiceImpl.ANALYTICS_REPORT_SUITE_DEFAULT_VALUE,
+              label = "Report Suite",
+              description = "Used with Adobe Analytics. The reporting suite ID(s) you wish to track. Can be comma separated."),
+    @Property(name  = AnalyticsServiceImpl.SYSTEM_ANALYTICS_TWITTER_USERNAME,
+              value = AnalyticsServiceImpl.ANALYTICS_TWITTER_USERNAME_DEFAULT_VALUE,
+              label = "Twitter Username",
+              description = "The username used for the entire site. Used as the default when an author doesn't have one."),
+    @Property(name  = AnalyticsServiceImpl.SYSTEM_ANALYTICS_FACEBOOK_APPID,
+              value = AnalyticsServiceImpl.ANALYTICS_FACEBOOK_APPID_DEFAULT_VALUE,
+              label = "Facebook App ID",
+              description = "The App ID associated with your site."),
 })
 public class AnalyticsServiceImpl implements AnalyticsService {
     
@@ -54,6 +66,15 @@ public class AnalyticsServiceImpl implements AnalyticsService {
     
     /** Default value for the analytics foot script */
     public static final String ANALYTICS_FOOT_SCRIPT_DEFAULT_VALUE = "";
+    
+    /** Default value for the analytics report suite */
+    public static final String ANALYTICS_REPORT_SUITE_DEFAULT_VALUE = "";
+    
+    /** Default value for the analytics twitter username */
+    public static final String ANALYTICS_TWITTER_USERNAME_DEFAULT_VALUE = "@slickblog";
+    
+    /** Default value for the analytics twitter username */
+    public static final String ANALYTICS_FACEBOOK_APPID_DEFAULT_VALUE = "";
     
     public boolean setProperties(final Map<String, Object> analyticsProperties) {
         return osgiService.setProperties(COMPONENT_PID, analyticsProperties);
@@ -87,6 +108,36 @@ public class AnalyticsServiceImpl implements AnalyticsService {
     @Override
     public boolean setAnalyticsFootScript(String footScript) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_ANALYTICS_FOOT_SCRIPT, footScript);
+    }
+
+    @Override
+    public String getAnalyticsReportSuite() {
+        return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_ANALYTICS_REPORT_SUITE, ANALYTICS_REPORT_SUITE_DEFAULT_VALUE);
+    }
+
+    @Override
+    public boolean setAnalyticsReportSuite(String reportSuite) {
+        return osgiService.setProperty(COMPONENT_PID, SYSTEM_ANALYTICS_REPORT_SUITE, reportSuite);
+    }
+
+    @Override
+    public String getAnalyticsTwitterUsername() {
+        return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_ANALYTICS_TWITTER_USERNAME, ANALYTICS_TWITTER_USERNAME_DEFAULT_VALUE);
+    }
+
+    @Override
+    public boolean setAnalyticsTwitterUsername(String userName) {
+        return osgiService.setProperty(COMPONENT_PID, SYSTEM_ANALYTICS_TWITTER_USERNAME, userName);
+    }
+
+    @Override
+    public String getAnalyticsFacebookAppId() {
+        return osgiService.getStringProperty(COMPONENT_PID, SYSTEM_ANALYTICS_FACEBOOK_APPID, ANALYTICS_FACEBOOK_APPID_DEFAULT_VALUE);
+    }
+
+    @Override
+    public boolean setAnalyticsFacebookAppId(String facebookAppId) {
+        return osgiService.setProperty(COMPONENT_PID, SYSTEM_ANALYTICS_FACEBOOK_APPID, facebookAppId);
     }
     
 }
