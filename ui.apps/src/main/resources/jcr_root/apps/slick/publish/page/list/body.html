@@ -1,5 +1,6 @@
 <template data-sly-template.body="${@ view, settings}">
-	<body id="${resource.name}">
+	<body id="${resource.name}" data-sly-attribute.data-analytics-type="${settings.analyticsServiceName}" 
+		  data-sly-attribute.data-report-suite="${settings.analyticsReportSuite}">
 		<sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
 		${properties.description}
 		<sly data-sly-include="partials/footlibs.html"/>

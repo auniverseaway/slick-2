@@ -14,7 +14,7 @@
     limitations under the License.
 -->
 <template data-sly-template.body="${@ view, settings}">
-<body data-sly-use.search="org.millr.slick.components.common.Search">
+<body data-sly-use.search="org.millr.slick.components.common.Search" data-sly-attribute.data-analytics-type="${settings.analyticsServiceName}" data-sly-attribute.data-report-suite="${settings.analyticsReportSuite}">
     <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
     <form action="search.html" id="search-header">
         <div class="container">

@@ -8,9 +8,10 @@
         <meta property="og:url" content="${view.external.url}"/>
         <meta data-sly-test.metaImage="${view.page.image ? view.page.image : settings.headerImage}" 
               property="og:image" content="${view.external.domain}${metaImage}" />
+        <meta property="fb:app_id" data-sly-test="${settings.analyticsFacebookAppId}" content="${settings.analyticsFacebookAppId}"/>
         <!--/* Twitter Card */-->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@auniverseaway" />
+        <meta name="twitter:site" content="${settings.analyticsTwitterUsername || '@slickblog'}" />
         <meta name="twitter:title" content="${view.page.title}" />
         <meta name="twitter:description" content="${view.page.description}" />
         <meta name="twitter:image" content="${view.external.domain}${metaImage}" />
