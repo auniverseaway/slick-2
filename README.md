@@ -3,7 +3,7 @@ Slick is a beautiful app to help create exceptional web content. It's highly opt
 
 It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common to Adobe Experience Manager.
 
-[![Build Status](https://travis-ci.org/auniverseaway/slick-2.svg?branch=master)](https://travis-ci.org/auniverseaway/slick-2)
+[![Build Status](https://circleci.com/gh/auniverseaway/slick-2.svg?circle-token=bc0c04395e1bda10b66c1fa370c0425b5ab27784)](https://circleci.com/gh/auniverseaway/slick-2)
 
 ![Sling and Slick](https://raw.githubusercontent.com/auniverseaway/slick2/master/ui.apps/src/main/resources/jcr_root/etc/slick/designs/slick/dist/img/sling-slick-logo.png)
 
