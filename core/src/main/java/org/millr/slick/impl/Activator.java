@@ -31,6 +31,7 @@ import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.millr.slick.SlickConstants;
+import org.millr.slick.utils.SimplePrincipal;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -58,6 +59,7 @@ public class Activator implements BundleActivator {
             if (resolverFactory != null) {
                 resolver = resolverFactory.getAdministrativeResourceResolver(null);
                 createAuthorGroup(resolver);
+                createCommentorServiceUser(resolver);
                 setPermissions(resolver);
             }
         } catch (LoginException e) {
@@ -72,7 +74,32 @@ public class Activator implements BundleActivator {
         }
     }
 
-    @Override
+    private void createCommentorServiceUser(ResourceResolver resolver) {
+    	try {
+			Session session = resolver.adaptTo(Session.class);
+			UserManager userManager = ((JackrabbitSession) session).getUserManager();
+            ValueFactory valueFactory = session.getValueFactory();
+            
+            Authorizable commentsUser = userManager.getAuthorizable("commentor");
+            if(commentsUser == null) {
+            	commentsUser = userManager.createUser("commentor", null, new SimplePrincipal("commentor"),"/home/users/system");
+                commentsUser.setProperty("firstName", valueFactory.createValue("Commentor"));
+                commentsUser.setProperty("lastName", valueFactory.createValue("System Service"));
+                AccessControlUtils.clear(session, commentsUser.getPath());
+                
+                Node userNode = session.getNode(commentsUser.getPath());
+                userNode.setPrimaryType("rep:SystemUser");
+                
+                session.save();
+            }
+			
+		} catch (Exception e) {
+			LOGGER.error("There was a problem creating the commentor system user.");
+			LOGGER.error(e.toString());
+		}		
+	}
+
+	@Override
     public void stop(BundleContext bundleContext) throws Exception {
         LOGGER.info(bundleContext.getBundle().getSymbolicName() + " stopped");
     }
@@ -93,19 +120,6 @@ public class Activator implements BundleActivator {
                     authors = userManager.createGroup("authors");
                     authors.setProperty("displayName", valueFactory.createValue("Authors"));
                 }
-                
-                // No longer do this as it's a security risk
-                // Create the default author if it doesn't exist already.
-//                Authorizable author = userManager.getAuthorizable("author");
-//                if(author == null) {
-//                    author = userManager.createUser("author", "letMeIn");
-//                    author.setProperty("firstName", valueFactory.createValue("Default"));
-//                    author.setProperty("lastName", valueFactory.createValue("Author"));
-//                    author.setProperty("email", valueFactory.createValue("info@slick.millr.org"));
-//                }  
-//                
-//                // Add author member to authors group
-//                ((Group) authors).addMember(author);
                 
                 // Save the session
                 session.save();
