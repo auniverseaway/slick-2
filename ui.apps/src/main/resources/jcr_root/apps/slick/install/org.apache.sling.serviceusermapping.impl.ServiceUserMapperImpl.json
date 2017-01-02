@@ -1,0 +1,7 @@
+{
+    "jcr:primaryType": "sling:OsgiConfig",
+    "user.default": "",
+    "user.mapping": [
+        "org.millr.slick.services:CommentService=commentor"
+    ]
+}
