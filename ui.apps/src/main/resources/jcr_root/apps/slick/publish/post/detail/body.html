@@ -44,6 +44,20 @@
                 <div class="Cell align-right" itemprop="author"><span class="author" itemscope itemtype="http://schema.org/Person">${'by' @ i18n}: <span itemprop="name">${view.page.author.firstName} ${view.page.author.lastName}</span></span>
                 </div>
             </div>
+            <div id="comments">
+                <form class="Grid" id="comment-form" action="${resource.path}.comment.json" method="POST">
+                    <input type="text" name="author" class="Cell"/>
+                    <textarea name="comment" class="Cell"></textarea>
+                    <div class="g-recaptcha" data-sitekey="6LdTTiYTAAAAAI4WUM99zwgkiVEsHlpM06YoJJCX"></div>
+                    <input type="submit" class="Cell" value="Submit"/>
+                </form>
+                <div class="Grid comments-list" data-sly-list.comment="${view.page.comments}">
+                    <div class="Cell comment" id="${comment}">
+                        <p>${comment.comment}</p>
+                        <p>${comment.author}</p>
+                    </div>
+                </div>
+            </div>
         </article>
     </section>
     </div>

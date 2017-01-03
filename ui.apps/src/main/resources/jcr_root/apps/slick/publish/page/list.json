@@ -1,4 +1,4 @@
 {
     "jcr:primaryType" : "slick:page",
-    "sling:resourceSuperType" : "slick/publish/page/detail",
+    "sling:resourceSuperType" : "slick/publish/page/detail"
 }
