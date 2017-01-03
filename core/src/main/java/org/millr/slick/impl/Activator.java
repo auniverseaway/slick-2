@@ -142,11 +142,16 @@ public class Activator implements BundleActivator {
                 // Get our public publish node.
                 Node publishNode = session.getNode(SlickConstants.PUBLISH_PATH);
                 
+                Node commentsNode = session.getNode(SlickConstants.COMMENTS_PATH);
+                
                 // Authors can do everything to the publish node.
                 AccessControlUtils.allow(publishNode, "authors", Privilege.JCR_ALL);
                 
                 // Everyone can read the publish node.
                 AccessControlUtils.allow(publishNode, everyonePrincipal.getName(), Privilege.JCR_READ);
+                
+                // Commentors can read and write to the comments node.
+                AccessControlUtils.allow(commentsNode, "commentor", Privilege.JCR_ALL);
                 
                 AccessControlUtils.clear(session, SlickConstants.AUTHOR_PATH);
                 AccessControlUtils.denyAllToEveryone(session, SlickConstants.AUTHOR_PATH);

@@ -23,12 +23,14 @@ import javax.inject.Named;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
 import org.millr.slick.SlickConstants;
+import org.millr.slick.services.CommentService;
 import org.millr.slick.utils.TrimString;
 
 /**
@@ -83,6 +85,9 @@ public class Page
     public String guid;
     
     public Iterator<Page> children;
+    
+    @Inject
+    private CommentService commentService;
     
     public Page(final Resource resource) {
         this.resource = resource;
@@ -176,5 +181,10 @@ public class Page
     {
         Iterator<Resource> childs = resource.getChildren().iterator();
         return ResourceUtil.adaptTo(childs,Page.class);
+    }
+    
+    public Iterator<Resource> getComments()
+    {
+        return commentService.getComments(getName());
     }
 }

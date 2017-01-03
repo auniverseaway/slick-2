@@ -1,0 +1,7 @@
+{
+	"jcr:primaryType": "slick:page",
+	"sling:resourceType": "slick/publish/comment/list",
+	"title": "Comments",
+	"description": "The comments of the site.",
+	"slickType":"comments"
+}

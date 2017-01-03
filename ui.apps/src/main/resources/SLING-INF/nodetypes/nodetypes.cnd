@@ -34,3 +34,8 @@
 [slick:post] > nt:unstructured
 	- title (string)
 	- description (string)
+
+[slick:comment] > nt:unstructured
+    - author (string)
+    - comment (string)
+    - status (string)

@@ -46,14 +46,14 @@
             </div>
             <div id="comments">
                 <form class="Grid" id="comment-form" action="${resource.path}.comment.json" method="POST">
-                    <input type="text" name="author" class="Cell"/>
-                    <textarea name="comment" class="Cell"></textarea>
+                    <input type="text" name="author" class="Cell" placeholder="name (optional)" />
+                    <textarea name="comment" class="Cell" placeholder="comment (plaintext)"></textarea>
                     <div class="g-recaptcha" data-sitekey="6LdTTiYTAAAAAI4WUM99zwgkiVEsHlpM06YoJJCX"></div>
                     <input type="submit" class="Cell" value="Submit"/>
                 </form>
                 <div class="Grid comments-list" data-sly-list.comment="${view.page.comments}">
-                    <div class="Cell comment" id="${comment}">
-                        <p>${comment.comment}</p>
+                    <div class="Cell comment" id="${comment.name}">
+                        <h5><a href="#${comment.name}">${comment.comment}</a></h5>
                         <p>${comment.author}</p>
                     </div>
                 </div>

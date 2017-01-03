@@ -24,6 +24,7 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.tika.io.IOUtils;
+import org.millr.slick.services.CommentService;
 import org.millr.slick.services.UiMessagingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,59 +44,66 @@ public class EditComment extends SlingAllMethodsServlet {
     @Reference
     private UiMessagingService uiMessagingService;
     
+    @Reference
+    private CommentService commentService;
+    
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException{
         LOGGER.info(">>>> Entering doPost");
         
-        ResourceResolver resolver = request.getResourceResolver();
-        
         // Get our parent resource
-        String postPath = request.getPathInfo().replace(".comment.json", "");
-        Resource postResource = resolver.getResource(postPath);
-        Resource commentsResource = getCommentsResource(resolver, postResource);
+        Resource postResource = request.getResource();
+        String postPath = request.getResource().getPath();
         
-        // Name our child
-        String commentName = java.util.UUID.randomUUID().toString();
         String remoteIp = request.getRemoteAddr();
         Boolean captchaValid = validateCaptcha(request.getParameter("g-recaptcha-response"), remoteIp);
         
-        Map<String,Object> properties = new HashMap<String,Object>();
-        properties.put("comment", request.getParameter("comment"));
-        properties.put("author", request.getParameter("author"));
-        properties.put("status", "approved");
-        properties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:comment");
+        int responseCode;
+        String responseType;
+        String responseMessage;
+        JSONObject responseContent = new JSONObject();
         
-        Resource commentResource = resolver.create(commentsResource, commentName, properties);
-        setMixin(commentResource, NodeType.MIX_CREATED);
-        resolver.commit();
-        resolver.close();
-        
-        JSONObject responseMessage = new JSONObject();
-        try {
-            responseMessage.put("comment", properties.get("comment"));
-            responseMessage.put("path", postPath);
-        } catch(Exception e) {
-            e.printStackTrace();
+        if (captchaValid) {
+            // Build our comment
+            Map<String,Object> commentProperties = new HashMap<String,Object>();
+            commentProperties.put("comment", request.getParameter("comment"));
+            commentProperties.put("author", request.getParameter("author"));
+            commentProperties.put("status", "approved");
+            commentProperties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:comment");
+            
+            // Create our comment
+            commentService.createComment(postResource.getName(), commentProperties);
+            
+            responseCode = 200;
+            responseType = "success";
+            responseMessage = "success";
+            try {
+                responseContent.put("comment", commentProperties.get("comment"));
+                responseContent.put("path", postPath);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            responseCode = 500;
+            responseType = "error";
+            responseMessage = "error";
         }
-        uiMessagingService.sendResponse(response, 200, "success", "success", responseMessage);
+        uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
     }
     
     private Boolean validateCaptcha(String captcha, String remoteIp) {
+        Boolean isValidCaptcha = false;
+        
+        // Setup captcha request values
         HttpURLConnection urlConn = null;
         BufferedReader reader = null;
-        
-        LOGGER.info("*** CAPTCHA *** " + captcha);
-        LOGGER.info("*** IP *** " + remoteIp);
-        
         String charset = "UTF-8";
         String secret = "6LdTTiYTAAAAAOpum_TRxlqYXq6QTqhBUpWAQMiU";
-        
         String query = String.format("secret=%s&response=%s", secret, captcha);
 
         try {
             final URL url = new URL("https://www.google.com/recaptcha/api/siteverify");
             urlConn = (HttpURLConnection) url.openConnection();
             urlConn.setRequestMethod("POST");
-            //urlConn.setAllowUserInteraction(false);
             urlConn.setDoOutput(true);
             urlConn.setReadTimeout(15*1000);
             
@@ -106,6 +114,8 @@ public class EditComment extends SlingAllMethodsServlet {
             LOGGER.info("*** RESPONSE MESSAGE *** ");
             String responseString = IOUtils.toString(response, charset);
             LOGGER.info(responseString);
+            JSONObject responseObject = new JSONObject(responseString);
+            isValidCaptcha = (Boolean) responseObject.get("success");
             IOUtils.closeQuietly(response);
         }
         catch (Exception e)
@@ -130,32 +140,6 @@ public class EditComment extends SlingAllMethodsServlet {
             }
           }
         }
-        return true;
-    }
-
-    private Resource getCommentsResource(ResourceResolver resolver, Resource postResource) {
-        Resource commentsResource = postResource.getChild("comments");
-        Map<String,Object> properties = new HashMap<String,Object>();
-        properties.put("jcr:primaryType", "sling:OrderedFolder");
-        if(commentsResource == null) {
-            try {
-                commentsResource = resolver.create(postResource, "comments", properties);
-                setMixin(commentsResource, NodeType.MIX_CREATED);
-                resolver.commit();
-            } catch (PersistenceException e) {
-                e.printStackTrace();
-            }
-        }
-        
-        return commentsResource;
-    }
-    
-    private void setMixin(Resource post, String mixinName) {
-        try {
-            Node postNode = post.adaptTo(Node.class);
-            postNode.addMixin(mixinName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }       
+        return isValidCaptcha;
     }
 }

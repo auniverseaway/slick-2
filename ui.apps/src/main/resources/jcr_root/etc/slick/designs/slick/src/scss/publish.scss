@@ -259,6 +259,21 @@ article {
     .author {
         line-height: 30px;
     }
+
+    #comments {
+        .comment {
+            margin-bottom: 16px;
+
+            h5 {
+                font-family: 1.2em;
+                margin-bottom: 0;
+            }
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+    }
 }
 
 @media (min-width: 48em) {

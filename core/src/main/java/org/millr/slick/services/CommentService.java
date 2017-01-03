@@ -1,7 +1,14 @@
 package org.millr.slick.services;
 
+import java.util.Iterator;
+import java.util.Map;
+
+import org.apache.sling.api.resource.Resource;
+
 public interface CommentService {
-	
-	public void createComment(String itemName);
+
+    public Iterator<Resource> getComments(String itemName);
+
+    public void createComment(String itemName, Map<String,Object> properties);
 	
 }
