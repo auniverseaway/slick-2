@@ -101,7 +101,7 @@ public class Page
     
     public String getPath() {
         return resource.getPath();
-    }    
+    }
     
     public String getLink() {
         // TODO: This desperately needs to be a sling filter.

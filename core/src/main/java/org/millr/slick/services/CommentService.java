@@ -9,6 +9,6 @@ public interface CommentService {
 
     public Iterator<Resource> getComments(String itemName);
 
-    public void createComment(String itemName, Map<String,Object> properties);
+    public Resource createComment(String itemName, Map<String,Object> properties);
 	
 }

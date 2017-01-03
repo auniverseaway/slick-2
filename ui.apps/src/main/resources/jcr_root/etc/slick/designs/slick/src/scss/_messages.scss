@@ -1,0 +1,40 @@
+#messages {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+
+    .message {
+        padding: $slick-gutter * 2;
+        text-transform: uppercase;
+
+        opacity: 0;
+        -moz-transition: opacity .25s ease;
+        -webkit-transition: opacity .25s ease;
+        transition: opacity .25s ease;
+
+        &.success {
+            background: rgba(201, 228, 166, 0.92);
+            color: $slick-green;
+        }
+
+        &.info {
+            background: rgba(165, 226, 249, 0.92);
+            color: rgb(0,173,238);
+        }
+
+        &.failure {
+            background: rgba(204, 146, 146, 0.92);
+            color: $red;
+        }
+
+        &.error {
+            background: rgba(204, 146, 146, 0.92);
+            color: $red;
+        }
+
+        &.show {
+            opacity: 1;
+        }
+
+    }
+}

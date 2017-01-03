@@ -14,53 +14,90 @@
     limitations under the License.
 -->
 <template data-sly-template.body="${@ view, settings}">
-<body id="${resource.name}" data-sly-attribute.data-analytics-type="${settings.analyticsServiceName}" 
+<body id="${resource.name}" class="detail-view" data-sly-attribute.data-analytics-type="${settings.analyticsServiceName}" 
       data-sly-attribute.data-report-suite="${settings.analyticsReportSuite}">
     <div class="page-wrap"> <!--/* We wrap the page for sticky footer functionality */-->
-    <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
-    <section id="content">
-        <article itemscope itemtype="https://schema.org/BlogPosting">
-            <div class="Grid Fit-Medium title">
-                <h1 class="Cell Medium-65" itemprop="headline" content="${view.page.title}"><a href="${view.external.url}">${view.page.title}</a></h1>
-                <h2 class="Cell publish-date" itemprop="datePublished"
-                    data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=view.page.publishDate, dateFormat='MMMM, d yyyy'}">
-                    ${format.formattedValue}
-                </h2>
-            </div>
-            <div class="content" itemprop="articleBody">
-                ${view.page.content @ context='unsafe'}
-            </div>
-            <div class="Grid Fit-Medium meta">
-                <div class="Cell">
-                    <ul id="share">
-                        <li><a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="Twitter" class="social twitter">Twitter</a></li><li><a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
-                            data-social-network="Facebook" 
-                            class="social facebook">Facebook</a></li><li><a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="LinkedIn" class="social linkedin">LinkedIn</a></li>
-                    </ul>
-                    <div class="tags">
-                        <sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span></sly>
+        <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
+        <section id="content">
+            <article itemscope itemtype="https://schema.org/BlogPosting">
+                <div class="Grid Fit-Medium title">
+                    <h1 class="Cell Medium-65" itemprop="headline" content="${view.page.title}"><a href="${view.external.url}">${view.page.title}</a></h1>
+                    <h2 class="Cell publish-date" itemprop="datePublished"
+                        data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=view.page.publishDate, dateFormat='MMMM, d yyyy'}">
+                        ${format.formattedValue}
+                    </h2>
+                </div>
+                <div class="content" itemprop="articleBody">
+                    ${view.page.content @ context='unsafe'}
+                </div>
+                <div class="Grid Fit-Medium meta">
+                    <div class="Cell">
+                        <ul id="share">
+                            <li>
+                                <a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="Twitter" class="social twitter">Twitter</a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
+                                data-social-network="Facebook" class="social facebook">Facebook</a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="LinkedIn" class="social linkedin">LinkedIn</a>
+                            </li>
+                        </ul>
+                        <div class="tags">
+                            <sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span></sly>
+                        </div>
+                    </div>
+                    <div class="Cell align-right" itemprop="author">
+                    <span class="author" itemscope itemtype="http://schema.org/Person">${'by' @ i18n}:&nbsp;
+                        <span itemprop="name">${view.page.author.firstName} ${view.page.author.lastName}</span></span>
                     </div>
                 </div>
-                <div class="Cell align-right" itemprop="author"><span class="author" itemscope itemtype="http://schema.org/Person">${'by' @ i18n}: <span itemprop="name">${view.page.author.firstName} ${view.page.author.lastName}</span></span>
-                </div>
-            </div>
-            <div id="comments">
-                <form class="Grid" id="comment-form" action="${resource.path}.comment.json" method="POST">
-                    <input type="text" name="author" class="Cell" placeholder="name (optional)" />
-                    <textarea name="comment" class="Cell" placeholder="comment (plaintext)"></textarea>
-                    <div class="g-recaptcha" data-sitekey="6LdTTiYTAAAAAI4WUM99zwgkiVEsHlpM06YoJJCX"></div>
-                    <input type="submit" class="Cell" value="Submit"/>
-                </form>
-                <div class="Grid comments-list" data-sly-list.comment="${view.page.comments}">
-                    <div class="Cell comment" id="${comment.name}">
-                        <h5><a href="#${comment.name}">${comment.comment}</a></h5>
-                        <p>${comment.author}</p>
+                <div class="comments">
+                    <div class="comments-list" id="comments-list">
+                        <sly data-sly-list.comment="${view.page.comments}">
+                            <div class="comment" id="${comment.name}">
+                                <p>${comment.comment}</p>
+                                <div class="Grid Fit-Small">
+                                    <h5 class="Cell">${comment.author}</h5>
+                                    <h5 class="Cell align-right comment-date" 
+                                        data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=comment.jcr:created, dateFormat='MMMM, d yyyy'}">
+                                        <a href="#${comment.name}">${format.formattedValue}</a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </sly>
                     </div>
+                    <form class="comment-form" id="comment-form" action="${view.external.resourcePath}.comment.json" method="POST">
+                        <input type="text" name="author" class="commentor-name" placeholder="name (optional)" />
+                        <textarea name="comment" class="commentor-comment" placeholder="comment (plaintext)"></textarea>
+                        <div class="Grid Fit-Small">
+                            <div class="Cell align-right">
+                                <input type="submit" class="button accent-background comment-submit" value="Submit"/>
+                                <div class="g-recaptcha" data-sitekey="6LdTTiYTAAAAAI4WUM99zwgkiVEsHlpM06YoJJCX"></div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </article>
-    </section>
+            </article>
+        </section>
     </div>
+    <div id="messages"></div>
+    <script id="comment-template" type="text/x-handlebars-template">
+        <div class="comment" id="{{content.name}}">
+            <p>{{content.comment}}</p>
+            <div class="Grid Fit-Small">
+                <h5 class="Cell">{{content.author}}</h5>
+                <h5 class="Cell align-right comment-date" 
+                    data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=comment.jcr:created, dateFormat='MMMM, d yyyy'}">
+                    <a href="#{{content.name}}">Now</a>
+                </h5>
+            </div>
+        </div>
+    </script>
+    <script id="message" type="text/x-handlebars-template">
+        <div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
+    </script>
     <sly data-sly-include="partials/lightbox.html"/>
     <sly data-sly-use.footer="footer.html" data-sly-call="${footer.footer @ view=view, settings=settings}"/>
     <sly data-sly-include="partials/footlibs.html"/>

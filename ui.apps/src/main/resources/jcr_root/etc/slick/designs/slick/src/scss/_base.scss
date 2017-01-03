@@ -30,7 +30,7 @@ strong, b {
     font-family: LatoWebSemiBold;
 }
 
-textarea, input { outline: none; }
+textarea, input { outline: none; font-family: 'LatoWebLight'; }
 
 code {
     font-weight: 100;
@@ -117,10 +117,18 @@ pre {
 // Align Utility
 .align-right {
     text-align: right;
+
+    * {
+        float: right;
+    }
+
 }
 
 .align-left {
     text-align: left;
+    * {
+        float: left;
+    }
 }
 
 .align-center {

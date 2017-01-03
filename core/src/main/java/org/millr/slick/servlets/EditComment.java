@@ -25,7 +25,9 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.tika.io.IOUtils;
 import org.millr.slick.services.CommentService;
+import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.UiMessagingService;
+import org.millr.slick.utils.Externalizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +48,9 @@ public class EditComment extends SlingAllMethodsServlet {
     
     @Reference
     private CommentService commentService;
+    
+    @Reference
+    DispatcherService dispatcherService;
     
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException{
         LOGGER.info(">>>> Entering doPost");
@@ -71,14 +76,18 @@ public class EditComment extends SlingAllMethodsServlet {
             commentProperties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:comment");
             
             // Create our comment
-            commentService.createComment(postResource.getName(), commentProperties);
+            Resource commentResource = commentService.createComment(postResource.getName(), commentProperties);
+            
+            flushDispatch(request);
             
             responseCode = 200;
             responseType = "success";
             responseMessage = "success";
             try {
+                responseContent.put("name", commentResource.getName());
+                responseContent.put("path", commentResource.getPath());
                 responseContent.put("comment", commentProperties.get("comment"));
-                responseContent.put("path", postPath);
+                responseContent.put("author", commentProperties.get("author"));
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -141,5 +150,11 @@ public class EditComment extends SlingAllMethodsServlet {
           }
         }
         return isValidCaptcha;
+    }
+    
+    private void flushDispatch(SlingHttpServletRequest request) {
+        Externalizer external = request.adaptTo(Externalizer.class);
+        String currentDomain = external.getDomain();
+        dispatcherService.flush(currentDomain, "flushContent");
     }
 }

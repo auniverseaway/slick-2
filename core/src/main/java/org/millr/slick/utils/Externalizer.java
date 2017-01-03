@@ -82,4 +82,9 @@ public class Externalizer {
         return url.replace("/content/slick/publish", "");
     }
     
+    public String getResourcePath() {
+        String fullPath = request.getResource().getPath();
+        return fullPath.replace("/content/slick/publish", "");
+    }
+    
 }

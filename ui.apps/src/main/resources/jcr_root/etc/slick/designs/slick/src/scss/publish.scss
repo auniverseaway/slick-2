@@ -2,6 +2,7 @@
 @import 'grid';
 @import 'base';
 @import 'variables';
+@import 'messages';
 
 
 // Base styles for publish
@@ -174,6 +175,24 @@ header {
     margin-bottom: $slick-gutter * 2;
 }
 
+.button {
+    line-height: 60px;
+    display: inline-block;
+    border: none;
+    font-size: 1em;
+
+    &.bg-green {
+        background-color: $slick-green;
+        color: $light-green;
+    }
+}
+
+.detail-view {
+    .meta {
+        margin-bottom: $slick-gutter * 2;
+    }
+}
+
 article {
     margin-bottom: 100px;
     .title {
@@ -221,8 +240,9 @@ article {
         margin: 0;
         float: left;
         li {
-            display: inline-block;
+            display: block;
             margin-right: $slick-gutter / 2;
+            float: left;
             .social {
                 display: block;
                 width: 30px;
@@ -260,16 +280,50 @@ article {
         line-height: 30px;
     }
 
-    #comments {
-        .comment {
+    .meta-detail {
+        margin-bottom: $slick-gutter * 2;
+    }
+
+    .comments {
+
+        .comment-form {
+            background: #f9f9f9;
+            padding: 28px;
+        }
+
+        input.commentor-name, textarea.commentor-comment {
+            display: block;
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-size: 1em;
             margin-bottom: 16px;
+        }
+
+        .g-recaptcha {
+            width: 300px;
+            height: 71px;
+            overflow: hidden;
+        }
+
+        .g-recaptcha > div {
+            margin-right: -3px;
+            margin-top: -3px;
+        }
+
+        input.comment-submit {
+            width: 160px;
+            line-height: 60px;
+            margin-top: 4px;
+            margin-left: $slick-gutter;
+        }
+
+        .comment {
+            margin-bottom: $slick-gutter * 2;
+            padding: $slick-gutter * 2;
+            background: #f9f9f9;
 
             h5 {
-                font-family: 1.2em;
-                margin-bottom: 0;
-            }
-
-            p {
                 margin-bottom: 0;
             }
         }

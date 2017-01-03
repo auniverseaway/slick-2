@@ -47,19 +47,21 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void createComment(String itemName, Map<String,Object> commentProperties) {
+    public Resource createComment(String itemName, Map<String,Object> commentProperties) {
         LOGGER.info("Creating a comment.");
+        Resource commentResource = null;
         try{
             ResourceResolver resolver = getResourceResolver();
             Resource itemForComment = getItemForComment(resolver, itemName);
             String commentName = java.util.UUID.randomUUID().toString();
-            Resource commentResource = resolver.create(itemForComment, commentName, commentProperties);
+            commentResource = resolver.create(itemForComment, commentName, commentProperties);
             setMixin(commentResource, NodeType.MIX_CREATED);
             resolver.commit();
             resolver.close();
         } catch(Exception e){
             LOGGER.info("There was an error creating the comment: " + e.getMessage());
         }
+        return commentResource;
     }
 
     public ResourceResolver getResourceResolver() {
