@@ -103,6 +103,16 @@ public class Page
         return resource.getPath();
     }
     
+    public String getExternalPath() {
+        // TODO: This desperately needs to be a sling filter.
+        String fullPath = resource.getPath();
+        // Replace /content/slick for all URLs.
+        String noContent = fullPath.replace("/content/slick", "");
+        // Replace /publish for all public URLs.
+        String noPublish = noContent.replace("/publish", "");
+        return noPublish;
+    }
+    
     public String getLink() {
         // TODO: This desperately needs to be a sling filter.
         String fullPath = resource.getPath();

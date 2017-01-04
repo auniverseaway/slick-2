@@ -22,6 +22,11 @@
             <div class="tags">
                 <sly data-sly-list.tag="${page.tags}"><span class="tag">${tag}</span></sly>
             </div>
+            <div class="comments-section" data-sly-attribute.data-comments-count="true"
+                                          data-sly-attribute.data-comments-list="false" 
+                                          data-sly-attribute.data-resource-path="${page.externalPath}">
+                    <div class="comment-count"></div>
+            </div>
         </div>
 		<div class="Cell align-right"><span class="author">${'by' @ i18n}: ${page.author.firstName} ${page.author.lastName}</span>
 	 	</div>

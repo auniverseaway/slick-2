@@ -25,6 +25,44 @@ define(['handlebars'], function (handlebars) {
         }
     };
 
+    handlebars.registerHelper('compare', function (lvalue, rvalue, options) {
+
+        var operator = options.hash.operator || '===';
+        var operators = {
+            '===': function (l, r) {
+                return l === r;
+            },
+            '!==': function (l, r) {
+                return l !== r;
+            },
+            '<': function (l, r) {
+                return l < r;
+            },
+            '>': function (l, r) {
+                return l > r;
+            },
+            '<=': function (l, r) {
+                return l <= r;
+            },
+            '>=': function (l, r) {
+                return l >= r;
+            }
+        };
+
+        if (!operators[operator]) {
+            throw new Error('Handlerbars Helper compare doesn\'t know the operator ' + operator);
+        }
+
+        var result = operators[operator](lvalue, rvalue);
+
+        if (result) {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+
+    });
+
     var showCommentsCount = function (commentsSection, commentsContent) {
         var countTemplate = document.getElementById('comment-count-template').innerHTML;
         var compiledTemplate = handlebars.compile(countTemplate);
@@ -40,17 +78,17 @@ define(['handlebars'], function (handlebars) {
     };
 
     var consumeComments = function (json, commentsSection, getCommentsCount, getCommentsList) {
-        if (getCommentsCount) {
+        if (getCommentsCount === true) {
             showCommentsCount(commentsSection, json.content);
         }
-        if (getCommentsList) {
+        if (getCommentsList === true) {
             showCommentsList(commentsSection, json.content);
         }
     };
 
     var setupCommentsSection = function (element) {
-        var getCommentsCount = element.dataset.commentsCount;
-        var getCommentsList = element.dataset.commentsList;
+        var getCommentsCount = (element.dataset.commentsCount === 'true');
+        var getCommentsList = (element.dataset.commentsList === 'true');
         var resourcePath = element.dataset.resourcePath;
         if (getCommentsCount || getCommentsList) {
             var commentsPath = resourcePath + '.list.comments.json';

@@ -86,7 +86,13 @@
         </div>
     </script>
     <script id="comment-count-template" type="text/x-handlebars-template">
-        <span>{{count}}</span>
+        
+        {{#compare count 1 operator='==='}}
+            <h4>{{count}} Comment</h4>
+        {{/compare}}
+        {{#compare count 1 operator='!=='}}
+            <h4>{{count}} Comments</h4>
+        {{/compare}}
     </script>
     <script id="comment-list-template" type="text/x-handlebars-template">
     {{#each comments}}
