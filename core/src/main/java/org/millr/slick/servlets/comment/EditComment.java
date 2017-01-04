@@ -78,7 +78,7 @@ public class EditComment extends SlingAllMethodsServlet {
             // Create our comment
             Resource commentResource = commentService.createComment(postResource.getName(), commentProperties);
             
-            flushDispatch(request);
+            flushDispatch(request, postPath + ".list.comments.json");
             
             responseCode = 200;
             responseType = "success";
@@ -152,9 +152,9 @@ public class EditComment extends SlingAllMethodsServlet {
         return isValidCaptcha;
     }
     
-    private void flushDispatch(SlingHttpServletRequest request) {
+    private void flushDispatch(SlingHttpServletRequest request, String path) {
         Externalizer external = request.adaptTo(Externalizer.class);
         String currentDomain = external.getDomain();
-        dispatcherService.flush(currentDomain, "flushContent");
+        dispatcherService.flushContent(currentDomain, path);
     }
 }

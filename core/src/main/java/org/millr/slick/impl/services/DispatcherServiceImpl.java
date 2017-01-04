@@ -113,6 +113,11 @@ public class DispatcherServiceImpl implements DispatcherService {
     public JSONObject flushContent(String domain) {
         return doFlush(domain, "/content");
     }
+    
+    @Override
+    public JSONObject flushContent(String domain, String path) {
+        return doFlush(domain, path);
+    }
 
     /**
      * Do flush.
