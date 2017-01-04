@@ -46,7 +46,6 @@ define(['author/messaging', 'handlebars'], function (messaging, handlebars) {
     };
 
     var setupCommentForm = function (element) {
-        console.log('comment form');
         element.addEventListener('submit', function (event) {
             event.preventDefault();
             var action = element.action;

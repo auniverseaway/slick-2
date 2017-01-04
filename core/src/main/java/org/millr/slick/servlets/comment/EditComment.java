@@ -1,4 +1,4 @@
-package org.millr.slick.servlets;
+package org.millr.slick.servlets.comment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 
 @SlingServlet(
         resourceTypes = "sling/servlet/default",
-        selectors = "comment",
+        selectors = "edit.comment",
         extensions = "json",
         methods = "POST"
     )

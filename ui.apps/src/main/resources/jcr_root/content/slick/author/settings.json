@@ -3,5 +3,5 @@
 	"sling:resourceType": "slick/author/settings/edit",
 	"title": "Settings",
 	"description": "Settings",
-	"menuOrder": 500
+	"menuOrder": 1000
 }
