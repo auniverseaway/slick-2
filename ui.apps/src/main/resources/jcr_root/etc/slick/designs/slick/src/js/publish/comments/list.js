@@ -2,12 +2,12 @@
 define(['handlebars'], function (handlebars) {
     'use strict';
 
-    var sendXhr = function (action, method, formData, callback, commentsSection, getCommentsCount, getCommentsList) {
+    var sendXhr = function (action, method, formData, callback, article, getCommentsCount, getCommentsList) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 var json = JSON.parse(xhr.responseText);
-                callback(json, commentsSection, getCommentsCount, getCommentsList);
+                callback(json, article, getCommentsCount, getCommentsList);
             }
         };
         xhr.open(method, action, true);
@@ -63,41 +63,41 @@ define(['handlebars'], function (handlebars) {
 
     });
 
-    var showCommentsCount = function (commentsSection, commentsContent) {
+    var showCommentsCount = function (article, commentsContent) {
         var countTemplate = document.getElementById('comment-count-template').innerHTML;
         var compiledTemplate = handlebars.compile(countTemplate);
         var content = compiledTemplate(commentsContent);
-        commentsSection.querySelector('.comment-count').insertAdjacentHTML('beforeend', content);
+        article.querySelector('.comment-count').insertAdjacentHTML('beforeend', content);
     };
 
-    var showCommentsList = function (commentsSection, commentsContent) {
+    var showCommentsList = function (article, commentsContent) {
         var listTemplate = document.getElementById('comment-list-template').innerHTML;
         var compiledTemplate = handlebars.compile(listTemplate);
         var content = compiledTemplate(commentsContent);
-        commentsSection.querySelector('.comments-list').insertAdjacentHTML('beforeend', content);
+        article.querySelector('.comments-list').insertAdjacentHTML('beforeend', content);
     };
 
-    var consumeComments = function (json, commentsSection, getCommentsCount, getCommentsList) {
+    var consumeComments = function (json, article, getCommentsCount, getCommentsList) {
         if (getCommentsCount === true) {
-            showCommentsCount(commentsSection, json.content);
+            showCommentsCount(article, json.content);
         }
         if (getCommentsList === true) {
-            showCommentsList(commentsSection, json.content);
+            showCommentsList(article, json.content);
         }
     };
 
-    var setupCommentsSection = function (element) {
-        var getCommentsCount = (element.dataset.commentsCount === 'true');
-        var getCommentsList = (element.dataset.commentsList === 'true');
-        var resourcePath = element.dataset.resourcePath;
+    var setupCommentsSection = function (article) {
+        var getCommentsCount = (article.dataset.commentsCount === 'true');
+        var getCommentsList = (article.dataset.commentsList === 'true');
+        var resourcePath = article.dataset.resourcePath;
         if (getCommentsCount || getCommentsList) {
             var commentsPath = resourcePath + '.list.comments.json';
-            sendXhr(commentsPath, 'GET', null, consumeComments, element, getCommentsCount, getCommentsList);
+            sendXhr(commentsPath, 'GET', null, consumeComments, article, getCommentsCount, getCommentsList);
         }
     };
 
-    var commentsSection = document.querySelectorAll('.comments-section');
-    if (commentsSection) {
-        forEach(commentsSection, setupCommentsSection);
+    var articles = document.querySelectorAll('article');
+    if (articles) {
+        forEach(articles, setupCommentsSection);
     }
 });

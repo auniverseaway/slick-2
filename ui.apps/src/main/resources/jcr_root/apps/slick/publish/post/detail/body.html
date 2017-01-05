@@ -19,8 +19,11 @@
     <div class="page-wrap"> <!--/* We wrap the page for sticky footer functionality */-->
         <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
         <section id="content">
-            <article itemscope itemtype="https://schema.org/BlogPosting">
-                <div class="Grid Fit-Medium title">
+            <article itemscope itemtype="https://schema.org/BlogPosting" 
+                     data-sly-attribute.data-comments-count="true"
+                     data-sly-attribute.data-comments-list="true" 
+                     data-sly-attribute.data-resource-path="${view.external.resourcePath}">
+                <div class="Grid Fit-Mobile title">
                     <h1 class="Cell Medium-65" itemprop="headline" content="${view.page.title}"><a href="${view.external.url}">${view.page.title}</a></h1>
                     <h2 class="Cell publish-date" itemprop="datePublished"
                         data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=view.page.publishDate, dateFormat='MMMM, d yyyy'}">
@@ -30,33 +33,33 @@
                 <div class="content" itemprop="articleBody">
                     ${view.page.content @ context='unsafe'}
                 </div>
-                <div class="Grid Fit-Medium meta">
-                    <div class="Cell">
-                        <ul id="share">
-                            <li>
-                                <a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="Twitter" class="social twitter">Twitter</a>
-                            </li>
-                            <li>
-                                <a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
-                                data-social-network="Facebook" class="social facebook">Facebook</a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="LinkedIn" class="social linkedin">LinkedIn</a>
-                            </li>
-                        </ul>
-                        <div class="tags">
-                            <sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span></sly>
+                <div class="meta">
+                    <div class="tags">
+                        <sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span></sly>
+                    </div>
+                    <div class="Grid Fit-Small comments-social-author">
+                        <div class="comment-count accent-background">
+                        </div>
+                        <div class="Cell social-icons">
+                            <ul id="share">
+                                <li>
+                                    <a href="https://twitter.com/share?text=${view.page.title}&url=${view.external.url}" data-social-network="Twitter" class="social twitter">Twitter</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=${view.external.url}" 
+                                    data-social-network="Facebook" class="social facebook">Facebook</a>
+                                </li>
+                                <li>
+                                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=${view.external.url}&title=${view.page.title}" data-social-network="LinkedIn" class="social linkedin">LinkedIn</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="Cell author" itemprop="author">
+                            <span itemprop="name">${view.page.author.firstName} ${view.page.author.lastName}</span></span>
                         </div>
                     </div>
-                    <div class="Cell align-right" itemprop="author">
-                        <span class="author" itemscope itemtype="http://schema.org/Person">${'by' @ i18n}:&nbsp;
-                        <span itemprop="name">${view.page.author.firstName} ${view.page.author.lastName}</span></span>
-                    </div>
                 </div>
-                <div class="comments-section" data-sly-attribute.data-comments-count="true"
-                                      data-sly-attribute.data-comments-list="true" 
-                                      data-sly-attribute.data-resource-path="${view.external.resourcePath}">
-                    <div class="comment-count"></div>
+                <div class="comments-section" id="comments-section">
                     <div class="comments-list" id="comments-list"></div>
                     <form class="comment-form" id="comment-form" action="${view.external.resourcePath}.edit.comment.json" method="POST">
                         <input type="text" name="author" class="commentor-name" placeholder="name (optional)" />
@@ -86,13 +89,7 @@
         </div>
     </script>
     <script id="comment-count-template" type="text/x-handlebars-template">
-        
-        {{#compare count 1 operator='==='}}
-            <h4>{{count}} Comment</h4>
-        {{/compare}}
-        {{#compare count 1 operator='!=='}}
-            <h4>{{count}} Comments</h4>
-        {{/compare}}
+        <div class="number">{{count}}</div>
     </script>
     <script id="comment-list-template" type="text/x-handlebars-template">
     {{#each comments}}
