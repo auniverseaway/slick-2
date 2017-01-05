@@ -1,0 +1,115 @@
+article {
+    margin-bottom: 100px;
+
+    .header-image {
+        position: relative;
+        height: 180px;
+        margin-bottom: 1em;
+    }
+    
+    .title {
+        h1 {
+            font-size: 1.6em;
+        }
+        .publish-date {
+            font-size: 1.2em;
+        }
+    }
+    img {
+        max-width: 100%;
+        margin-bottom: $slick-gutter * 2;
+        cursor: pointer;
+    }
+    pre {
+        border: 2px solid #efefef;
+    }
+    .content {
+        line-height: 1.8em;
+    }
+    .video-frame {
+        width: 600px;
+        margin: $slick-gutter auto;
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            padding-top: 25px;
+            height: 0;
+            iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+    }
+
+    .comments-section {
+        .comment-form {
+            background: #f9f9f9;
+            padding: 28px;
+        }
+
+        input.commentor-name, textarea.commentor-comment {
+            display: block;
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-size: 1em;
+            margin-bottom: 16px;
+        }
+
+        .g-recaptcha {
+            width: 300px;
+            height: 71px;
+            overflow: hidden;
+        }
+
+        .g-recaptcha > div {
+            margin-right: -3px;
+            margin-top: -3px;
+        }
+
+        input.comment-submit {
+            width: 160px;
+            line-height: 60px;
+            margin-top: 4px;
+            margin-left: $slick-gutter;
+        }
+
+        .comment {
+            margin-bottom: $slick-gutter * 2;
+            padding: $slick-gutter * 2;
+            background: #f9f9f9;
+
+            h5 {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+@media (min-width: 48em) {
+    article {
+        .title {
+            .publish-date {
+                font-size: 1.6em;
+                text-align: right;
+            }
+        }
+
+        img {
+            max-width: 80%;
+        }
+    }
+}
+
+@media (min-width: 75em) {
+    article {
+        img {
+            max-width: 50%;
+        }
+    }
+}

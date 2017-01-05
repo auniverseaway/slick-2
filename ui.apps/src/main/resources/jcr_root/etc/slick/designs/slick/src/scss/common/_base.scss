@@ -145,3 +145,30 @@ pre {
 .block-height {
     line-height: 60px;
 }
+
+// Anything that is designed to cover
+.cover {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+// Components
+.button {
+    line-height: 60px;
+    display: inline-block;
+    border: none;
+    font-size: 1em;
+
+    &.square {
+        width: 60px;
+        height: 60px;
+    }
+
+    &.bg-green {
+        background-color: $slick-green;
+        color: $light-green;
+    }
+}

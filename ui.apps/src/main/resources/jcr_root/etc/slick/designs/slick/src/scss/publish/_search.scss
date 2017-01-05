@@ -1,0 +1,38 @@
+#search-header {
+    background-color: $light-gray;
+
+    .container {
+        margin: 0 auto;
+        position: relative;
+
+        input[type="text"] {
+            border: none;
+            background: transparent;
+            margin: 0;
+            padding: 0;
+            line-height: 80px;
+            font-size: 1.8em;
+            font-family: 'LatoWebLight';
+            display: block;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: url('../img/search.svg');
+            border: none;
+            text-indent: 100px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+    }
+}
+
+.results-count {
+    font-size: 1.2em;
+    margin-bottom: $slick-gutter * 2;
+}

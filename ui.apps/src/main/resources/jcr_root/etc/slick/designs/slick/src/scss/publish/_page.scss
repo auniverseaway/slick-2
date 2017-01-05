@@ -1,0 +1,30 @@
+.page-wrap {
+    min-height: 100%;
+    margin-bottom: -60px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+  height: 60px;
+}
+
+#content, .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+#content {
+    flex: 1;
+}
+// Extra Large (Desktops, 1200px)
+@media (min-width: 75em) {
+    #content, .container {
+        margin: 100px auto 0 auto;
+        padding: 0 0;
+    }
+}
+
+#pagination {
+    margin-bottom: 100px;
+}

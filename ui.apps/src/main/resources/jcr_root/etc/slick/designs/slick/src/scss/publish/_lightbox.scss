@@ -1,0 +1,20 @@
+#lightbox {
+    transition: background-color .25s;
+    text-align: center;
+    position: fixed;
+    overflow: hidden;
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    &.open {
+        display: block;
+        background-color: rgba(0,0,0,.85);
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+}

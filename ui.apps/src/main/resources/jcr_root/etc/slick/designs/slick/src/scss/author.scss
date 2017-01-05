@@ -1,8 +1,8 @@
 @import '../../dist/fonts/fonts';
-@import 'grid';
-@import 'base';
-@import 'variables';
-@import 'rome';
+@import 'common/variables';
+@import 'common/grid';
+@import 'common/base';
+@import 'common/rome';
 
 // Mixins
 @mixin clearfix {
@@ -313,24 +313,6 @@ nav.page-nav {
 
     &.active {
         display: block;
-    }
-}
-
-// Components
-.button {
-    line-height: 60px;
-    display: inline-block;
-    border: none;
-    font-size: 1em;
-
-    &.square {
-        width: 60px;
-        height: 60px;
-    }
-
-    &.bg-green {
-        background-color: $slick-green;
-        color: $light-green;
     }
 }
 
