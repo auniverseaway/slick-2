@@ -195,6 +195,6 @@ public class Page
     
     public Iterator<Resource> getComments()
     {
-        return commentService.getComments(getName());
+        return commentService.getComments(resource);
     }
 }

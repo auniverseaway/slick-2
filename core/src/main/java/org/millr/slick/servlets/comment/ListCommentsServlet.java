@@ -56,7 +56,7 @@ public class ListCommentsServlet extends SlingAllMethodsServlet {
         responseType = "success";
         responseMessage = "success";
         
-        Iterator<Resource> comments = commentService.getComments(postResource.getName());
+        Iterator<Resource> comments = commentService.getComments(postResource);
         JSONArray commentsArray = new JSONArray();
         int commentsCount = 0;
         while (comments.hasNext()){

@@ -76,7 +76,7 @@ public class EditComment extends SlingAllMethodsServlet {
             commentProperties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:comment");
             
             // Create our comment
-            Resource commentResource = commentService.createComment(postResource.getName(), commentProperties);
+            Resource commentResource = commentService.createComment(postResource, commentProperties);
             
             flushDispatch(request, postPath + ".list.comments.json");
             

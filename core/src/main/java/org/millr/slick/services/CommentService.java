@@ -7,8 +7,8 @@ import org.apache.sling.api.resource.Resource;
 
 public interface CommentService {
 
-    public Iterator<Resource> getComments(String itemName);
+    public Iterator<Resource> getComments(Resource item);
 
-    public Resource createComment(String itemName, Map<String,Object> properties);
+    public Resource createComment(Resource item, Map<String,Object> properties);
 	
 }
