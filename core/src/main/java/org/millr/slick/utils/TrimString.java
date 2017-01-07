@@ -38,27 +38,21 @@ public class TrimString {
         String contentString = input.replaceAll("<[^>]*>", "");
         
         if(contentString == null || contentString.trim().isEmpty()){
-            LOGGER.info("String is empty");
             trimmedString = contentString;
         }
 
-        try {
-            StringBuffer sb = new StringBuffer(contentString);
-            
-            int desiredLength = length;
-            int endIndex = sb.indexOf(" ",desiredLength);
-            
-            //If soft, remove three characters to make room for elipsis.
-            if(soft){
-                desiredLength = length - 3;
-                endIndex = sb.indexOf(" ",desiredLength);
-                contentString = escapeHtml(sb.insert(endIndex,"...").substring(0, endIndex+3));
-            } else {
-                contentString = escapeHtml(sb.substring(0, endIndex));
+        StringBuffer sb = new StringBuffer(contentString);
+        int actualLength = length - 3;
+        if(sb.length() > actualLength){
+            // -3 because we add 3 dots at the end. Returned string length has to be length including the dots.
+            if(!soft)
+                trimmedString = escapeHtml(sb.insert(actualLength, "...").substring(0, actualLength + 3));
+            else {
+                int endIndex = sb.indexOf(" ",actualLength);
+                trimmedString = escapeHtml(sb.insert(endIndex,"...").substring(0, endIndex + 3));
             }
-        } catch (Exception e) {
-            LOGGER.error("Exception: " + e.getMessage(), e);
+        } else {
+            trimmedString = escapeHtml(contentString);
         }
-        trimmedString = contentString;
     }
 }

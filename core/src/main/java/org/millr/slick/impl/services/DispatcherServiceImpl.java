@@ -116,7 +116,11 @@ public class DispatcherServiceImpl implements DispatcherService {
     
     @Override
     public JSONObject flushContent(String domain, String path) {
-        return doFlush(domain, path);
+    	if(canFlush()) {
+    		return doFlush(domain, path);
+    	} else {
+    		return buildResponse(304, "error", "No dispatcher to flush");
+    	}
     }
 
     /**

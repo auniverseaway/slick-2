@@ -1,15 +1,15 @@
 {
     "jcr:primaryType": "slick:page",
-    "sling:resourceType": "slick/author/item/list",
+    "sling:resourceType": "slick/author/comments/list",
     "title": "Comments",
     "description": "A list of comments",
     "menuOrder": 500,
     "slickType": "comments",
-    "item": {
+    "comment": {
         "jcr:primaryType": "slick:page",
-        "sling:resourceType": "slick/author/item/edit",
-        "title": "Edit Page",
-        "description": "Slick Page",
-        "slickType": "pages"
+        "sling:resourceType": "slick/author/comments/edit",
+        "title": "Edit Comment",
+        "description": "Slick Comments",
+        "slickType": "comments"
     }
 }

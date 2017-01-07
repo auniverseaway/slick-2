@@ -152,6 +152,7 @@ public class Activator implements BundleActivator {
                 
                 // Commentors can read and write to the comments node.
                 AccessControlUtils.allow(commentsNode, "commentor", Privilege.JCR_ALL);
+                AccessControlUtils.allow(commentsNode, "authors", Privilege.JCR_ALL);
                 
                 AccessControlUtils.clear(session, SlickConstants.AUTHOR_PATH);
                 AccessControlUtils.denyAllToEveryone(session, SlickConstants.AUTHOR_PATH);

@@ -109,6 +109,8 @@ public final class SlickConstants {
     /** Slick Post Type */
     public static final String NODE_POST_TYPE = NODE_TYPE + ":page";
     
+    public static final String NODE_COMMENT_TYPE = NODE_TYPE + ":comment";
+    
     public static final String PAGINATION_QUERY_STRING = "page";
     
     public static final Long PAGINATION_SIZE = 5L;
