@@ -376,6 +376,11 @@ nav.page-nav {
             padding-left: $slick-gutter;
         }
 
+        .expand-item {
+            display: block;
+            line-height: 60px;
+        }
+
         .date {
             display: block;
             float: right;
@@ -1138,7 +1143,8 @@ input:-webkit-autofill {
 
 // Pagination
 .pagination {
-    padding: $slick-gutter 0;
+    padding: 0 $slick-gutter * 2;
+    line-height: 60px;
     clear: both;
     text-transform: uppercase;
 

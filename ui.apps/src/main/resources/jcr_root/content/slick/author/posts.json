@@ -3,6 +3,7 @@
 	"sling:resourceType": "slick/author/item/list",
 	"title": "Posts",
 	"description": "Published",
+	"enabled": true,
 	"menuOrder": 100,
 	"slickType": "posts",
 	"publishStatus": "publish",

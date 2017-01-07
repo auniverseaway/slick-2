@@ -61,12 +61,12 @@ public class ListComments {
     
     public NodeIterator getComments() {
         final Long offset = getOffset();
-        comments = commentService.getComments(session, offset, SlickConstants.PAGINATION_SIZE, SlickConstants.PAGINATION_SIZE, status);
+        comments = commentService.getComments(session, offset, SlickConstants.PAGINATION_SIZE, status);
         return comments;
     }
 
     public Long getTotalComments() {
-        totalComments = commentService.getNumberOfComments(session);
+        totalComments = commentService.getNumberOfComments(session, status);
         return totalComments;
     }
     

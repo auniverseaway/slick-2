@@ -3,6 +3,7 @@
 	"sling:resourceType": "slick/author/item/list",
 	"title": "Pages",
 	"description": "A list of pages",
+	"enabled": true,
 	"menuOrder": 200,
 	"slickType": "pages",
 	"item": {

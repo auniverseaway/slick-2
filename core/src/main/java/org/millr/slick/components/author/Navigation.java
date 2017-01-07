@@ -43,7 +43,7 @@ public class Navigation {
     }
     
     public Iterator<Page> getAdminHeader() {
-        String query = "SELECT * FROM [slick:page] AS s WHERE [title] IS NOT NULL and ISCHILDNODE(s,'" + SlickConstants.AUTHOR_PATH + "') ORDER BY [menuOrder] ASC";
+        String query = "SELECT * FROM [slick:page] AS s WHERE [title] IS NOT NULL and [enabled] = CAST('true' AS BOOLEAN) and ISCHILDNODE(s,'" + SlickConstants.AUTHOR_PATH + "') ORDER BY [menuOrder] ASC";
         Iterator<Resource> childs = resourceResolver.findResources(query, Query.JCR_SQL2);
         return ResourceUtil.adaptTo(childs,Page.class);
     }

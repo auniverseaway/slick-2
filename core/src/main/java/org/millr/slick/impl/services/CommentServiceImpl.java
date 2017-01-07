@@ -35,13 +35,6 @@ public class CommentServiceImpl implements CommentService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     
-    
-    // QUERY
-    // jcr:primaryType
-    // status
-    // Date
-    // SlickType
-    // Order by
     private static final String COMMENT_QUERY = 
     		  "SELECT * FROM [%s] AS s "
             + "WHERE CONTAINS(s.status, '%s') "
@@ -158,7 +151,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
 	@Override
-	public NodeIterator getComments(Session session, Long offset, Long limit, Long paginationSize, String status) {
+	public NodeIterator getComments(Session session, Long offset, Long limit, String status) {
 		
 		LOGGER.info("Getting Comments in Impl");
 		
@@ -203,11 +196,23 @@ public class CommentServiceImpl implements CommentService {
         commentsCount = nodes.getSize();
         return nodes;
 	}
+	
+	private NodeIterator getComments(Session session, String status) {
+        NodeIterator allPosts = getComments(session, null, null, status);
+        return allPosts;
+    }
+	
+	@Override
+	public long getTotalComments(Session session, String status, Long pageSize) {
+        long posts = getNumberOfComments(session, status);
+        long totalPages = (long)Math.ceil((double)posts / pageSize);
+        LOGGER.info("TOTAL PAGES: " + totalPages);
+        return totalPages;
+    }
 
 	@Override
-	public Long getNumberOfComments(Session session) {
-		// TODO Auto-generated method stub
-		return null;
+	public Long getNumberOfComments(Session session, String status) {
+	    return getComments(session, status).getSize();
 	}
 	
 	private String getToday() {

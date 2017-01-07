@@ -15,14 +15,30 @@
             </nav>
             <div>
                 <section class="author-section page-nav-section list-items" id="approved">
-                	<sly data-sly-use.list="${'org.millr.slick.components.common.ListComments' @ status = 'approved'}" data-sly-list.comment="${list.comments}">
+                	<sly data-sly-use.approvedList="${'org.millr.slick.components.common.ListComments' @ status = 'approved'}" data-sly-list.comment="${approvedList.comments}">
                     	<sly data-sly-resource="${comment.path @ resourceType='slick/author/comments/content'}"/>
                    	</sly>
+                   	<div class="Grid Fit-Small pagination" data-sly-use.pagination="${'org.millr.slick.components.common.CommentPagination' @ status = 'approved'}">
+                        <div class="Cell">
+                            <a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
+                        </div>
+                        <div class="Cell align-right">
+                            <a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
+                        </div>
+                    </div>
 			    </section>
                 <section class="author-section page-nav-section list-items" id="moderated">
-                    <sly data-sly-use.list="${'org.millr.slick.components.common.ListComments' @ status = 'moderated'}" data-sly-list.comment="${list.comments}">
+                    <sly data-sly-use.moderatedList="${'org.millr.slick.components.common.ListComments' @ status = 'moderated'}" data-sly-list.comment="${moderatedList.comments}">
                     	<sly data-sly-resource="${comment.path @ resourceType='slick/author/comments/content'}"/>
                    	</sly>
+                   	<div class="Grid Fit-Small pagination" data-sly-use.pagination="${'org.millr.slick.components.common.CommentPagination' @ status = 'moderated'}">
+		                <div class="Cell">
+		                    <a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
+		                </div>
+		                <div class="Cell align-right">
+		                    <a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
+		                </div>
+		            </div>
                 </section>
             </div>
         </div>

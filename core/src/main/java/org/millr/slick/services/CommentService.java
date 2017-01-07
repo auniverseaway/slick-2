@@ -12,9 +12,11 @@ public interface CommentService {
 
     public Iterator<Resource> getComments(Resource item);
     
-    public NodeIterator getComments(Session session, Long offset, Long limit, Long paginationSize, String status);
+    public NodeIterator getComments(Session session, Long offset, Long limit, String status);
     
-    public Long getNumberOfComments(Session session);
+    public long getTotalComments(Session session, String status, Long pageSize);
+    
+    public Long getNumberOfComments(Session session, String status);
 
     public Resource createComment(Resource item, Map<String,Object> properties);
 	

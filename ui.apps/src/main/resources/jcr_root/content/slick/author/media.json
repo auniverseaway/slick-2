@@ -3,6 +3,7 @@
 	"sling:resourceType": "slick/author/media/list",
 	"title": "Media",
 	"description": "Media",
+	"enabled": true,
 	"menuOrder": 300,
 	"slickType":"media"
 }
