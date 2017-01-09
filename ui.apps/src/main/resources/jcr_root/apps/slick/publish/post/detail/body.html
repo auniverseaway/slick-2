@@ -20,8 +20,8 @@
         <sly data-sly-use.lib="header.html" data-sly-call="${lib.header @ view=view, settings=settings}"/>
         <section id="content">
             <article itemscope itemtype="https://schema.org/BlogPosting" 
-                     data-sly-attribute.data-comments-count="true"
-                     data-sly-attribute.data-comments-list="true" 
+                     data-sly-attribute.data-comments-count="${settings.enableComments @ context = 'scriptToken'}"
+                     data-sly-attribute.data-comments-list="${settings.enableComments @ context = 'scriptToken'}" 
                      data-sly-attribute.data-resource-path="${view.external.resourcePath}">
                 <div class="Grid Fit-Mobile title">
                     <h1 class="Cell Medium-65" itemprop="headline" content="${view.page.title}"><a href="${view.external.url}">${view.page.title}</a></h1>
@@ -38,7 +38,7 @@
                         <sly data-sly-list.tag="${view.page.tags}"><span class="tag">${tag}</span></sly>
                     </div>
                     <div class="Grid Fit-Small comments-social-author">
-                        <div class="comment-count accent-background">
+                        <div data-sly-test="${settings.enableComments @ context = 'scriptToken'}" class="comment-count accent-background">
                         </div>
                         <div class="Cell social-icons">
                             <ul id="share">
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="comments-section" id="comments-section">
+                <div class="comments-section" id="comments-section" data-sly-test="${settings.enableComments @ context = 'scriptToken'}">
                     <div class="comments-list" id="comments-list"></div>
                     <form class="comment-form" id="comment-form" action="${view.external.resourcePath}.edit.comment.json" method="POST">
                         <input type="text" name="author" class="commentor-name" placeholder="name (optional)" />
