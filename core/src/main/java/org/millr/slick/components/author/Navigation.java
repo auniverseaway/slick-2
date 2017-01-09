@@ -15,7 +15,10 @@
  */
 package org.millr.slick.components.author;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 
 import javax.jcr.query.Query;
 
@@ -23,11 +26,17 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.millr.slick.SlickConstants;
 import org.millr.slick.models.Page;
+import org.millr.slick.services.SettingsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Model(adaptables = Resource.class)
 public class Navigation {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(Navigation.class);
     
     private final Resource resource;
     
@@ -37,15 +46,32 @@ public class Navigation {
     
     public Iterator<Page> adminHeader;
     
+    @OSGiService
+    private SettingsService settingsService;
+    
     public Navigation(final Resource resource) {
         resourceResolver = resource.getResourceResolver();
         this.resource = resourceResolver.getResource(SlickConstants.AUTHOR_PATH);
     }
     
     public Iterator<Page> getAdminHeader() {
-        String query = "SELECT * FROM [slick:page] AS s WHERE [title] IS NOT NULL and [enabled] = CAST('true' AS BOOLEAN) and ISCHILDNODE(s,'" + SlickConstants.AUTHOR_PATH + "') ORDER BY [menuOrder] ASC";
-        Iterator<Resource> childs = resourceResolver.findResources(query, Query.JCR_SQL2);
-        return ResourceUtil.adaptTo(childs,Page.class);
+        String query = "SELECT * FROM [slick:page] AS s WHERE [title] IS NOT NULL and ISCHILDNODE(s,'" + SlickConstants.AUTHOR_PATH + "') ORDER BY [menuOrder] ASC";
+        Iterator<Resource> navItems = resourceResolver.findResources(query, Query.JCR_SQL2);
+        List<Resource> enabledNavItemsList = new ArrayList<>();
+        while (navItems.hasNext()) {
+            Resource navItem = navItems.next();
+            if(Objects.equals("comments", new String(navItem.getName()))) {
+                boolean featureStatus = settingsService.checkFeatureStatus("comments");
+                if(featureStatus == true) {
+                    enabledNavItemsList.add(navItem);
+                }
+            } else {
+                enabledNavItemsList.add(navItem);
+            }
+            
+        }
+        Iterator<Resource> enabledNavItems = enabledNavItemsList.iterator();
+        return ResourceUtil.adaptTo(enabledNavItems,Page.class);
     }
     
     public String getLink() {

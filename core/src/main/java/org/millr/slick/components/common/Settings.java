@@ -56,6 +56,8 @@ public class Settings extends WCMUse {
 
     private boolean useDispatcher;
     
+    private boolean enableComments;
+    
     private int currentYear;
 
     @Override
@@ -72,6 +74,7 @@ public class Settings extends WCMUse {
             blogDescription = settingsService.getBlogDescription();
             analyticsScript = settingsService.getAnalyticsScript();
             useDispatcher = settingsService.getUseDispatcher();
+            enableComments = settingsService.getEnableComments();
             headerImage = settingsService.getDefaultHeaderImage();
             accentColor = settingsService.getAccentColor();
         }
@@ -132,6 +135,10 @@ public class Settings extends WCMUse {
 
     public boolean getUseDispatcher() {
         return useDispatcher;
+    }
+    
+    public boolean getEnableComments() {
+        return enableComments;
     }
     
     public int getCurrentDate() {

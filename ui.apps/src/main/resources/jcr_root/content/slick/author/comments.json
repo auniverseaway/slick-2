@@ -3,7 +3,6 @@
     "sling:resourceType": "slick/author/comments/list",
     "title": "Comments",
     "description": "A list of comments",
-    "enabled": true,
     "menuOrder": 500,
     "slickType": "comments",
     "comment": {

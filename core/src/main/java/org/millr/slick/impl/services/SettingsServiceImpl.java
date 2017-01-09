@@ -16,6 +16,8 @@
 package org.millr.slick.impl.services;
 
 import java.util.Map;
+import java.util.Objects;
+
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
@@ -66,7 +68,11 @@ import org.osgi.framework.Constants;
     @Property(name = SettingsServiceImpl.SYSTEM_USE_DISPATCHER,
               boolValue = SettingsServiceImpl.USE_DISPATCHER_DEFAULT_VALUE,
               label = "Use Dispatcher",
-              description = "Using a dispatcher will trigger an Apache cache flush on content modification.")
+              description = "Using a dispatcher will trigger an Apache cache flush on content modification."),
+    @Property(name = SettingsServiceImpl.SYSTEM_ENABLE_COMMENTS,
+              boolValue = SettingsServiceImpl.ENABLE_COMMENTS_DEFAULT_VALUE,
+              label = "Enable Comments",
+              description = "Enable public commenting on posts.")
 })
 public class SettingsServiceImpl implements SettingsService {
 
@@ -94,6 +100,9 @@ public class SettingsServiceImpl implements SettingsService {
 
     /** Default value for using a dispatcher. */
     public static final boolean USE_DISPATCHER_DEFAULT_VALUE = false;
+    
+    /** Default value enabling comments. */
+    public static final boolean ENABLE_COMMENTS_DEFAULT_VALUE = false;
 
     /** Activate Service */
     @Activate
@@ -147,9 +156,25 @@ public class SettingsServiceImpl implements SettingsService {
     public boolean setUseDispatcher(final boolean value) {
         return osgiService.setProperty(COMPONENT_PID, SYSTEM_USE_DISPATCHER, value);
     }
+    
+    public boolean getEnableComments() {
+        return osgiService.getBooleanProperty(COMPONENT_PID, SYSTEM_ENABLE_COMMENTS, ENABLE_COMMENTS_DEFAULT_VALUE);
+    }
+
+    public boolean setEnableComments(final boolean value) {
+        return osgiService.setProperty(COMPONENT_PID, SYSTEM_ENABLE_COMMENTS, value);
+    }
 
     public boolean setProperties(final Map<String, Object> properties) {
         return osgiService.setProperties(COMPONENT_PID, properties);
+    }
+    
+    public boolean checkFeatureStatus(String featureName) {
+        boolean featureStatus = false;
+        if(Objects.equals("comments", new String(featureName))) {
+            featureStatus = getEnableComments();
+        }
+        return featureStatus;
     }
 
 }

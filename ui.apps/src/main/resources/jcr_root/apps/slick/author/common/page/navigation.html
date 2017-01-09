@@ -3,6 +3,6 @@
         <sly data-sly-include="logo.html"/>
     </a>
     <ul data-sly-list.menuItem="${header.getAdminHeader}" class="menu">
-        <li><a href="${menuItem.link}" class="accent-background-hover">${menuItem.title}</a></li>
+        <li><a href="${menuItem.link}" class="accent-background-hover" data-sly-attribute.data-name="${menuItem.slickType}">${menuItem.title}</a></li>
     </ul>
 </nav>

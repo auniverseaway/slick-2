@@ -25,6 +25,8 @@ public interface SettingsService {
 
     String SYSTEM_USE_DISPATCHER = "system.useDispatcher";
     
+    String SYSTEM_ENABLE_COMMENTS = "system.enableComments";
+    
     public static final String SYSTEM_ANALYTICS_SCRIPT = "system.analyticsScript";
     
     public static final String SYSTEM_HEADER_IMAGE = "system.headerImage";
@@ -78,6 +80,10 @@ public interface SettingsService {
      */
     boolean setUseDispatcher(final boolean value);
     
+    boolean getEnableComments();
+    
+    boolean setEnableComments(final boolean value);
+    
     /**
      * Get the analytics script.
      *
@@ -100,5 +106,7 @@ public interface SettingsService {
     String getAccentColor();
     
     boolean setAccentColor(final String accentColor);
+
+    boolean checkFeatureStatus(String featureName);
     
 }

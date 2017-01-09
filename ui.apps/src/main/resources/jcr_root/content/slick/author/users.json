@@ -3,6 +3,5 @@
 	"sling:resourceType": "slick/author/user/edit",
 	"title": "Users",
 	"description": "Users",
-	"enabled": true,
 	"menuOrder": 400
 }
