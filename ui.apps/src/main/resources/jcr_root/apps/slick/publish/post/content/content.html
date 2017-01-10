@@ -1,5 +1,5 @@
 <article data-sly-use.page="org.millr.slick.models.Page" id="article-${page.name}" data-sly-use.settings="org.millr.slick.components.common.Settings"
-         data-sly-attribute.data-comments-count="${settings.enableComments @ context = 'scriptToken'}"
+         data-sly-attribute.data-comments-count="${page.enableComments @ context = 'scriptToken'}"
          data-sly-attribute.data-resource-path="${page.externalPath}">
 	<div data-sly-test="${page.image}" class="header-image">
 		<style scoped>
@@ -24,7 +24,7 @@
             <sly data-sly-list.tag="${page.tags}"><span class="tag">${tag}</span></sly>
         </div>
         <div class="Grid Fit-Small comments-social-author">
-            <a data-sly-test="${settings.enableComments @ context = 'scriptToken'}" href="${page.link}#comments-section" class="comment-count accent-background"></a>
+            <a data-sly-test="${page.enableComments}" href="${page.link}#comments-section" class="comment-count accent-background"></a>
             <div class="Cell social-icons"></div>
             <div class="Cell author" itemprop="author">
                 <span itemprop="name">${page.author.firstName} ${page.author.lastName}</span></span>

@@ -29,8 +29,10 @@ import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.millr.slick.SlickConstants;
 import org.millr.slick.services.CommentService;
+import org.millr.slick.services.SettingsService;
 import org.millr.slick.utils.TrimString;
 
 /**
@@ -72,6 +74,9 @@ public class Page
     @Inject @Optional
     private String publishStatus;
     
+    @Inject @Optional
+    private Boolean enableComments;
+    
     @Optional
     public String name;
     
@@ -88,6 +93,9 @@ public class Page
     
     @Inject
     private CommentService commentService;
+    
+    @OSGiService
+    private SettingsService settingsService;
     
     public Page(final Resource resource) {
         this.resource = resource;
@@ -191,6 +199,20 @@ public class Page
     {
         Iterator<Resource> childs = resource.getChildren().iterator();
         return ResourceUtil.adaptTo(childs,Page.class);
+    }
+    
+    public boolean getEnableComments() {
+        boolean enablePageComments = false;
+        boolean commentSettings = settingsService.getEnableComments();
+
+        // If settings comments are turned on, but we don't 
+        // have it enabled on a post, enable page comments.
+        if(commentSettings == true && enableComments == null) {
+            enablePageComments = true;
+        } else if (enableComments == false) {
+            enablePageComments = false;
+        }
+        return enablePageComments;
     }
     
     public Iterator<Resource> getComments()

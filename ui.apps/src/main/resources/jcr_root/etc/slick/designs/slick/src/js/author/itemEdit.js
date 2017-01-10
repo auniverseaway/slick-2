@@ -111,9 +111,9 @@ define(['handlebars'], function (handlebars) {
         });
 
         // Setup Publish Date
-        var element = document.querySelector('#publish-section');
-        if (element) {
-            window.rome(window.dateInput, {appendTo: element});
+        var dateContainer = document.querySelector('#date-container');
+        if (dateContainer) {
+            window.rome(window.dateInput, {appendTo: dateContainer});
         }
 
         // Toggle Calendar

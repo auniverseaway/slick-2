@@ -4,6 +4,7 @@
   display: none;
   padding: 10px;
   text-align: center;
+  width: 212px;
   height: 240px;
   overflow: hidden;
   font-size: .88889em;
@@ -11,8 +12,7 @@
 .rd-container-attachment {
     position: absolute;
     top: -240px !important;
-    left: auto !important;
-    right: 60px;
+    left: 0px !important;
 }
 .rd-month {
   display: inline-block;
