@@ -74,9 +74,6 @@ public class Page
     @Inject @Optional
     private String publishStatus;
     
-    @Inject @Optional
-    private Boolean enableComments;
-    
     @Optional
     public String name;
     
@@ -202,14 +199,25 @@ public class Page
     }
     
     public boolean getEnableComments() {
-        boolean enablePageComments = false;
+        // Site-level comment enablement;
         boolean commentSettings = settingsService.getEnableComments();
-
+        
+        // Page-level comment enablement. Nullable for backwards compatibility.
+        Boolean enableComments = properties.get("enableComments", Boolean.class);
+        
+        boolean enablePageComments = false;
+        
         // If settings comments are turned on, but we don't 
         // have it enabled on a post, enable page comments.
+        
+        // If we have both site-level and page level enabled, enable comments.
+        
+        // Otherwise we are false.
         if(commentSettings == true && enableComments == null) {
             enablePageComments = true;
-        } else if (enableComments == false) {
+        } else if (commentSettings == true && enableComments == true) { 
+            enablePageComments = true;
+        } else {
             enablePageComments = false;
         }
         return enablePageComments;

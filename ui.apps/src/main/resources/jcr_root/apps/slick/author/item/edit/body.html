@@ -88,7 +88,11 @@
                 </section>
                 <section class="publish accent-background-light" id="publish-section">
                     <div class="comment-status-container" data-sly-test="${settings.enableComments}">
-                        <input type="checkbox" name="enableComments" id="enableComments" value="true" data-sly-attribute.checked="${editBlog.post.enableComments}">
+                        
+                        <input type="checkbox" name="enableComments" id="enableComments" class="default-comments" value="true" 
+                               data-sly-test="${editBlog.post}" data-sly-attribute.checked="${editBlog.post.enableComments}"/>
+                        <input type="checkbox" name="enableComments" id="enableComments" class="saved-comments" value="true" 
+                               data-sly-test="${!editBlog.post}" data-sly-attribute.checked="${settings.enableComments}"/>
                         <label class="comment-status" for="enableComments">Enable Comments</label>
                     </div>
                     <button id="calendar-toggle">Publish Date</button>
