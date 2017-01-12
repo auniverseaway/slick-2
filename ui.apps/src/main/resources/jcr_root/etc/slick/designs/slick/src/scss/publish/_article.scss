@@ -27,7 +27,7 @@ article {
         line-height: 1.8em;
     }
     .video-frame {
-        width: 600px;
+        max-width: 600px;
         margin: $slick-gutter auto;
 
         .video-container {
