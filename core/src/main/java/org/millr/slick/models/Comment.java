@@ -8,6 +8,7 @@ import javax.inject.Named;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
+import org.millr.slick.SlickConstants;
 import org.millr.slick.utils.TrimString;
 
 @Model(adaptables = { Resource.class })
@@ -36,7 +37,12 @@ public class Comment {
 	}
 	
 	public String getPath() {
-		return resource.getPath();
+	    return resource.getPath();
+	}
+	
+	public String getExternalPath() {
+	String fullPath = getPath();
+	return fullPath.replace(SlickConstants.PUBLISH_PATH, "");
 	}
 	
 	public String getAuthor() {
@@ -48,7 +54,7 @@ public class Comment {
 	}
 	
 	public String getShortComment() {
-		TrimString ts = new TrimString(comment,50, true);
+		TrimString ts = new TrimString(comment, 50, true);
         return ts.trimmedString;
 	}
 	

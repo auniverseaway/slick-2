@@ -16,13 +16,13 @@
             <div class="remove">
                 <a href="#" class="icon delete">Delete</a>
                 <a href="#" class="delete-confirm" 
-                   data-resource-path="${comment.path}" 
+                   data-resource-path="${comment.externalPath}"
                    data-resource-name="${comment.name}">Confirm</a>
             </div>
         </div>
     </section>
     <section class="comment-detail">
-        <form class="Grid Fit-Medium" method="POST" action="${resource.path}">
+        <form class="Grid Fit-Medium" method="POST" action="${comment.externalPath}">
             <input type="hidden" name=":redirect" value="/author/comments.html"/>
             <div class="Cell Medium-50 comment-area">
                 <textarea name="comment">${comment.comment}</textarea>

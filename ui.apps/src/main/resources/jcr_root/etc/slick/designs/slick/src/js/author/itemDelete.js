@@ -27,7 +27,7 @@ define(['author/messaging'], function (messaging) {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     msg = JSON.parse(xhr.responseText);
-                    var deletedResource = document.querySelector('#' + resourceName);
+                    var deletedResource = document.getElementById(resourceName);
                     deletedResource.parentNode.removeChild(deletedResource);
                 } else {
                     msg = {responseCode: 'xhr.status', responseType: 'error', responseMessage: 'Something went wrong'};
