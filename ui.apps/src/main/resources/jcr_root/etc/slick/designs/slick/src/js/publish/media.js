@@ -11,8 +11,11 @@ define(function () {
     });
 
     // Lightbox - Hide
-    document.querySelector('#lightbox, #lightbox img').addEventListener('click', function(event){
-        event.preventDefault();
-        document.querySelector('#lightbox').classList.toggle('open');
-    });
+    var lightbox = document.querySelector('#lightbox, #lightbox img')
+    if(lightbox) {
+        lightbox.addEventListener('click', function(event){
+            event.preventDefault();
+            document.querySelector('#lightbox').classList.toggle('open');
+        });
+    }
 });

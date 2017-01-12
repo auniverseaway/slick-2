@@ -6,8 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>404 ${settings.blogName}</title>
         <link rel="apple-touch-icon" href="/etc/slick/designs/slick/img/apple-touch-icon.png">
-        <link rel="stylesheet" href="/etc/slick/designs/slick/css/publish.css" type="text/css">
-        ${settings.analyticsScript @ context="unsafe"}
+        <link rel="stylesheet" href="/etc/slick/designs/slick/dist/css/publish.css" type="text/css">
+        <sly data-sly-test="${settings.analyticsHeadScript}">${settings.analyticsHeadScript @ context="unsafe"}</sly>
     </head>
     <body>
         <header>
@@ -52,7 +52,8 @@
             <h1>Missing</h1>
             <h2>Looks like we cannot find the page you're looking for. Maybe try a search instead?</h2>
         </div>
-        <script src="/etc/slick/designs/slick/js/publish.js"></script>
-        <sly data-sly-use.analytics="partials/analytics.html" data-sly-call="${analytics.foot @ settings=settings}"/>
+        <script src="/etc/slick/designs/slick/libs/js/highlight.js"></script>
+        <script data-main="/etc/slick/designs/slick/dist/js/publish" src="/etc/slick/designs/slick/libs/js/require.js"></script>
+        <sly data-sly-test="${settings.analyticsFootScript}">${settings.analyticsFootScript @ context="unsafe"}</sly>
     </body>
 </html>
