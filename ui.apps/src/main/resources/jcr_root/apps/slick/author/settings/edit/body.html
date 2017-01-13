@@ -14,6 +14,9 @@
                     <li data-sly-test="${settings.useDispatcher}">
                         <a href="#dispatcher" id="title-dispatcher" class="page-nav-heading accent-border-bottom-hover" data-show-section="dispatcher">Dispatcher</a>
                     </li>
+                    <li data-sly-test="${settings.enableComments}">
+                        <a href="#comments" id="title-comments" class="page-nav-heading accent-border-bottom-hover" data-show-section="comments">Comments</a>
+                    </li>
                 </ul>
             </nav>
             <div>
@@ -99,6 +102,28 @@
                             <input type="submit" value="Flush UI" class="button accent-background"/>
                         </form>
                     </div>
+                </section>
+                <section data-sly-test="${settings.enableComments}" class="author-section page-nav-section" id="comments">
+                    <form action="settings.edit.json" method="POST" id="settings-form" class="ajax-form">
+                        <div>
+                            <label>Default Comment Status</label>
+                            <select name="defaultCommentStatus" class="settings-select">
+                                <option value="approved" selected="${settings.analyticsServiceName == ''}">Approved</option>
+                                <option value="moderated" selected="${settings.analyticsServiceName == 'adobeAnalytics'}">Moderated</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Google ReCaptcha Site Key</label>
+                            <input type="text" name="recaptchaSiteKey" value="" placeholder="Site Key"/>
+                        </div>
+                        <div>
+                            <label>Google ReCaptcha Secret Key</label>
+                            <input type="text" name="recaptchaSecretKey" value="" placeholder="Secret Key"/>
+                        </div>
+                        <div class="form-footer">
+                            <input type="submit" value="Save" class="button accent-background"/>
+                        </div>
+                    </form>
                 </section>
             </div>
         </div>

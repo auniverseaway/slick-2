@@ -53,6 +53,10 @@ public class Comment {
 		return comment;
 	}
 	
+	public String getParent() {
+	    return resource.getParent().getName();
+	}
+	
 	public String getShortComment() {
 		TrimString ts = new TrimString(comment, 50, true);
         return ts.trimmedString;
