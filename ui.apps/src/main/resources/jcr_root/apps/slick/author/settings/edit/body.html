@@ -11,6 +11,9 @@
                     <li>
                         <a href="#analytics" id="title-analytics" class="page-nav-heading accent-border-bottom-hover" data-show-section="analytics">Analytics</a>
                     </li>
+                    <li data-sly-test="${settings.enableComments}">
+                        <a href="#comments" id="title-comments" class="page-nav-heading accent-border-bottom-hover" data-show-section="comments">Comments</a>
+                    </li>
                     <li data-sly-test="${settings.useDispatcher}">
                         <a href="#dispatcher" id="title-dispatcher" class="page-nav-heading accent-border-bottom-hover" data-show-section="dispatcher">Dispatcher</a>
                     </li>
@@ -81,6 +84,28 @@
                         <div class="form-footer">
                             <input type="submit" value="Save" class="button accent-background"/>
                         </div>
+                    </form>
+                </section>
+                <section data-sly-test="${settings.enableComments}" class="author-section page-nav-section" id="comments">
+                    <form action="settings.edit.comments.json" method="POST" id="settings-form" class="ajax-form">
+	                    <div>
+		                    <label>Default Status</label>
+		                    <select name="commentDefaultStatus" class="settings-select toggle-enabled" data-toggle-name="analytics">
+		                        <option value="approved" selected="${settings.commentDefaultStatus == 'approved'}">Approved</option>
+		                        <option value="moderated" selected="${settings.commentDefaultStatus == 'moderated'}">Hold for moderation</option>
+		                    </select>
+	                    </div>
+	                    <div>
+	                        <label>reCAPTCHA Site Key</label>
+	                        <input type="text" name="commentSiteKey" value="${settings.commentSiteKey}" placeholder="Site Key"/>
+	                    </div>
+	                    <div>
+	                        <label>reCAPTCHA Secret Key</label>
+	                        <input type="text" name="commentSecretKey" value="${settings.commentSecretKey}" placeholder="Secret Key"/>
+	                    </div>
+	                    <div class="form-footer">
+	                        <input type="submit" value="Save" class="button accent-background"/>
+	                    </div>
                     </form>
                 </section>
                 <section data-sly-test="${settings.useDispatcher}" class="author-section page-nav-section" id="dispatcher">

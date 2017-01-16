@@ -21,6 +21,7 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.scripting.SlingScriptHelper;
 import org.millr.slick.services.SettingsService;
 import org.millr.slick.services.settings.AnalyticsService;
+import org.millr.slick.services.settings.CommentService;
 import org.millr.slick.utils.WCMUse;
 
 /**
@@ -50,6 +51,12 @@ public class Settings extends WCMUse {
     
     private String analyticsFacebookAppId;
     
+    private String commentDefaultStatus;
+    
+    private String commentSiteKey;
+    
+    private String commentSecretKey;
+    
     private String headerImage;
     
     private String accentColor;
@@ -68,6 +75,8 @@ public class Settings extends WCMUse {
         SettingsService settingsService = scriptHelper.getService(SettingsService.class);
         
         AnalyticsService analyticsService = scriptHelper.getService(AnalyticsService.class);
+        
+        CommentService commentService = scriptHelper.getService(CommentService.class);
 
         if (settingsService != null) {
             blogName = settingsService.getBlogName();
@@ -86,6 +95,12 @@ public class Settings extends WCMUse {
             analyticsReportSuite = analyticsService.getAnalyticsReportSuite();
             analyticsTwitterUsername = analyticsService.getAnalyticsTwitterUsername();
             analyticsFacebookAppId = analyticsService.getAnalyticsFacebookAppId();
+        }
+        
+        if(commentService != null) {
+            commentDefaultStatus = commentService.getCommentsDefaultStatus();
+            commentSiteKey = commentService.getCommentsReCapchtaSiteKey();
+            commentSecretKey = commentService.getCommentsReCapchtaSecretKey();
         }
     }
 
@@ -123,6 +138,18 @@ public class Settings extends WCMUse {
     
     public String getAnalyticsFacebookAppId() {
         return analyticsFacebookAppId;
+    }
+    
+    public String getCommentDefaultStatus() {
+        return commentDefaultStatus;
+    }
+    
+    public String getCommentSiteKey() {
+        return commentSiteKey;
+    }
+    
+    public String getCommentSecretKey() {
+        return commentSecretKey;
     }
     
     public String getHeaderImage() {
