@@ -86,6 +86,7 @@ public class Settings extends WCMUse {
             enableComments = settingsService.getEnableComments();
             headerImage = settingsService.getDefaultHeaderImage();
             accentColor = settingsService.getAccentColor();
+            enableComments = settingsService.getEnableComments();
         }
         
         if (analyticsService != null) {

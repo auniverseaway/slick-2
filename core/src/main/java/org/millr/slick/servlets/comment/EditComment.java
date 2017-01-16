@@ -135,8 +135,6 @@ public class EditComment extends SlingAllMethodsServlet {
         finally
         {
           LOGGER.info("*** FINALLY *** ");
-          // close the reader; this can throw an exception too, so
-          // wrap it in another try/catch block.
           if (reader != null)
           {
             try
