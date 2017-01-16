@@ -46,6 +46,6 @@
             }
         </style>
         <sly data-sly-use.analytics="partials/analytics.html" data-sly-call="${analytics.head @ settings=settings}"/>
-        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script data-sly-test="${view.page.enableComments}" src='https://www.google.com/recaptcha/api.js'></script>
     </head>
 </template>

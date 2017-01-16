@@ -13,6 +13,7 @@ import javax.jcr.Node;
 import javax.jcr.nodetype.NodeType;
 import javax.servlet.ServletException;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.JcrConstants;
@@ -49,6 +50,9 @@ public class EditComment extends SlingAllMethodsServlet {
     @Reference
     private CommentService commentService;
     
+    @Reference 
+    private org.millr.slick.services.settings.CommentService commentSettingsService;
+    
     @Reference
     DispatcherService dispatcherService;
     
@@ -67,12 +71,23 @@ public class EditComment extends SlingAllMethodsServlet {
         String responseMessage;
         JSONObject responseContent = new JSONObject();
         
-        if (captchaValid) {
+        String author = request.getParameter("author");
+        String comment = request.getParameter("comment");
+        
+        // Replace basic HTML. Will break if HTML is malformed.
+        comment = comment.replaceAll("<[^>]*>", "");
+        
+        if (captchaValid && StringUtils.isNotEmpty(comment)) {
             // Build our comment
             Map<String,Object> commentProperties = new HashMap<String,Object>();
-            commentProperties.put("comment", request.getParameter("comment"));
-            commentProperties.put("author", request.getParameter("author"));
-            commentProperties.put("status", "approved");
+            
+            if(StringUtils.isEmpty(author)) {
+                author = "anonymous";
+            }
+            
+            commentProperties.put("comment", comment);
+            commentProperties.put("author", author);
+            commentProperties.put("status", commentSettingsService.getCommentsDefaultStatus());
             commentProperties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:comment");
             
             // Create our comment
@@ -106,7 +121,7 @@ public class EditComment extends SlingAllMethodsServlet {
         HttpURLConnection urlConn = null;
         BufferedReader reader = null;
         String charset = "UTF-8";
-        String secret = "6LdTTiYTAAAAAOpum_TRxlqYXq6QTqhBUpWAQMiU";
+        String secret = commentSettingsService.getCommentsReCapchtaSecretKey();
         String query = String.format("secret=%s&response=%s", secret, captcha);
 
         try {

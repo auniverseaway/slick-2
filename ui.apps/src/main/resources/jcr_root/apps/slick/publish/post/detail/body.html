@@ -67,7 +67,7 @@
                         <div class="Grid Fit-Small">
                             <div class="Cell align-right">
                                 <input type="submit" class="button accent-background comment-submit" value="Submit"/>
-                                <div class="g-recaptcha" data-sitekey="6LdTTiYTAAAAAI4WUM99zwgkiVEsHlpM06YoJJCX"></div>
+                                <div class="g-recaptcha" data-sitekey="${settings.commentSiteKey}"></div>
                             </div>
                         </div>
                     </form>
@@ -76,7 +76,7 @@
         </section>
     </div>
     <div id="messages"></div>
-    <script id="comment-template" type="text/x-handlebars-template">
+    <script data-sly-test="${view.page.enableComments}" id="comment-template" type="text/x-handlebars-template">
         <div class="comment" id="{{content.name}}">
             <p>{{content.comment}}</p>
             <div class="Grid Fit-Small">
@@ -88,10 +88,10 @@
             </div>
         </div>
     </script>
-    <script id="comment-count-template" type="text/x-handlebars-template">
+    <script data-sly-test="${view.page.enableComments}" id="comment-count-template" type="text/x-handlebars-template">
         <div class="number">{{count}}</div>
     </script>
-    <script id="comment-list-template" type="text/x-handlebars-template">
+    <script data-sly-test="${view.page.enableComments}" id="comment-list-template" type="text/x-handlebars-template">
     {{#each comments}}
         <div class="comment" id="{{name}}">
             <p>{{comment}}</p>

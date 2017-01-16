@@ -41,6 +41,12 @@ public class CommentServiceImpl implements CommentService {
             + "AND ISDESCENDANTNODE(s,'/content/slick/publish/%s') "
             + "ORDER BY [%s] DESC";
     
+    private static final String ITEM_PUBLIC_COMMENT_QUERY = 
+            "SELECT * FROM [%s] AS s "
+          + "WHERE CONTAINS(s.status, '%s') "
+          + "AND ISDESCENDANTNODE(s,'%s') "
+          + "ORDER BY [%s] DESC";
+    
     @Reference 
     private ResourceResolverFactory resourceFactory;
     
@@ -155,16 +161,7 @@ public class CommentServiceImpl implements CommentService {
 		
 		LOGGER.info("Getting Comments in Impl");
 		
-		String today = getToday();
-        
-		// QUERY
-		// jcr:primaryType
-		// status
-		// Date
-		// SlickType
-		// Order by
-
-        String currentQuery = String.format(COMMENT_QUERY,
+		String currentQuery = String.format(COMMENT_QUERY,
                                             SlickConstants.NODE_COMMENT_TYPE,
                                             status,
                                             "comments",
@@ -209,24 +206,34 @@ public class CommentServiceImpl implements CommentService {
         LOGGER.info("TOTAL PAGES: " + totalPages);
         return totalPages;
     }
+	
+	@Override
+	public NodeIterator getItemPublicComments(Resource item, String status) {
+	    NodeIterator nodes = null;
+	    try {
+            ResourceResolver resolver = getResourceResolver();
+            Resource itemResource = getItemResource(resolver, item);
+            if (itemResource != null) {
+                String itemPath = itemResource.getPath();
+                String currentQuery = String.format(ITEM_PUBLIC_COMMENT_QUERY,
+                       SlickConstants.NODE_COMMENT_TYPE,
+                       status,
+                       itemPath,
+                       "jcr:created");
+                Session session = resolver.adaptTo(Session.class);
+                QueryManager queryManager = session.getWorkspace().getQueryManager();
+                Query query = queryManager.createQuery(currentQuery, Query.JCR_SQL2);
+                QueryResult result = query.execute();
+                nodes = result.getNodes();
+            }
+        } catch(Exception e){
+            LOGGER.info("There was an error getting comments: " + e.getMessage());
+        }
+	    return nodes;
+	}
 
 	@Override
 	public Long getNumberOfComments(Session session, String status) {
 	    return getComments(session, status).getSize();
 	}
-	
-	private String getToday() {
-        Calendar cal = Calendar.getInstance();
-        String today = null;
-        try {
-            today = ValueFactoryImpl.getInstance().createValue(cal).getString();
-        } catch (ValueFormatException e1) {
-            e1.printStackTrace();
-        } catch (IllegalStateException e1) {
-            e1.printStackTrace();
-        } catch (RepositoryException e1) {
-            e1.printStackTrace();
-        }
-        return today;
-    }
 }

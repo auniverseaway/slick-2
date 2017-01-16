@@ -14,6 +14,8 @@ public interface CommentService {
     
     public NodeIterator getComments(Session session, Long offset, Long limit, String status);
     
+    public NodeIterator getItemPublicComments(Resource item, String status);
+    
     public long getTotalComments(Session session, String status, Long pageSize);
     
     public Long getNumberOfComments(Session session, String status);
