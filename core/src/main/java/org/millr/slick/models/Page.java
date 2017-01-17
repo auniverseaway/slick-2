@@ -23,12 +23,16 @@ import javax.inject.Named;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceUtil;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.Optional;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.millr.slick.SlickConstants;
+import org.millr.slick.services.CommentService;
+import org.millr.slick.services.SettingsService;
 import org.millr.slick.utils.TrimString;
 
 /**
@@ -84,6 +88,12 @@ public class Page
     
     public Iterator<Page> children;
     
+    @Inject
+    private CommentService commentService;
+    
+    @OSGiService
+    private SettingsService settingsService;
+    
     public Page(final Resource resource) {
         this.resource = resource;
         this.author = resource.adaptTo(Author.class);
@@ -96,7 +106,17 @@ public class Page
     
     public String getPath() {
         return resource.getPath();
-    }    
+    }
+    
+    public String getExternalPath() {
+        // TODO: This desperately needs to be a sling filter.
+        String fullPath = resource.getPath();
+        // Replace /content/slick for all URLs.
+        String noContent = fullPath.replace("/content/slick", "");
+        // Replace /publish for all public URLs.
+        String noPublish = noContent.replace("/publish", "");
+        return noPublish;
+    }
     
     public String getLink() {
         // TODO: This desperately needs to be a sling filter.
@@ -176,5 +196,35 @@ public class Page
     {
         Iterator<Resource> childs = resource.getChildren().iterator();
         return ResourceUtil.adaptTo(childs,Page.class);
+    }
+    
+    public boolean getEnableComments() {
+        // Site-level comment enablement;
+        boolean commentSettings = settingsService.getEnableComments();
+        
+        // Page-level comment enablement. Nullable for backwards compatibility.
+        Boolean enableComments = properties.get("enableComments", Boolean.class);
+        
+        boolean enablePageComments = false;
+        
+        // If settings comments are turned on, but we don't 
+        // have it enabled on a post, enable page comments.
+        
+        // If we have both site-level and page level enabled, enable comments.
+        
+        // Otherwise we are false.
+        if(commentSettings == true && enableComments == null) {
+            enablePageComments = true;
+        } else if (commentSettings == true && enableComments == true) { 
+            enablePageComments = true;
+        } else {
+            enablePageComments = false;
+        }
+        return enablePageComments;
+    }
+    
+    public Iterator<Resource> getComments()
+    {
+        return commentService.getComments(resource);
     }
 }

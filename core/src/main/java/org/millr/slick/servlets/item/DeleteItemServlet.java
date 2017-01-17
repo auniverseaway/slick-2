@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
-import org.apache.commons.lang.CharEncoding;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -13,60 +12,61 @@ import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONObject;
+import org.millr.slick.SlickConstants;
 import org.millr.slick.services.DispatcherService;
+import org.millr.slick.services.UiMessagingService;
 import org.millr.slick.utils.Externalizer;
 
 @SlingServlet(
-    resourceTypes = "sling/servlet/default",
-    selectors = "delete",
-    extensions = "json",
-    methods = "POST"
-)
+        resourceTypes = "sling/servlet/default",
+        selectors = "delete",
+        extensions = "json",
+        methods = "POST"
+    )
 public class DeleteItemServlet extends SlingAllMethodsServlet {
     
-    /**
-     * The generated Serial Version UID
-     */
-    private static final long serialVersionUID = -6459681142830175945L;
-
+    private static final long serialVersionUID = -5413154193188924055L;
+    
     @Reference
-    private DispatcherService dispatcherService;
-
+    DispatcherService dispatcherService;
+    
+    @Reference
+    private UiMessagingService uiMessagingService;
+    
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
         
-        ResourceResolver resourceResolver = request.getResourceResolver();
-        final String resourceString = request.getParameter("resource");
-        Resource resource = resourceResolver.getResource(resourceString);
-        resourceResolver.delete(resource);
-        resourceResolver.commit();
+        Resource resource;
+        int responseCode;
+        String responseType;
+        String responseMessage;
+        JSONObject responseContent = new JSONObject();
         
-        flushDispatch(request);
-        
-        sendResponse(response, 200, "success", "Item has been deleted");
-    }
-    
-    protected void sendResponse(final SlingHttpServletResponse response, int responseCode, final String responseType, final String responseMessage) {
-        
-        JSONObject responseJSON = new JSONObject();
         try {
-            responseJSON.put("responseCode", responseCode);
-            responseJSON.put("responseType", responseType);
-            responseJSON.put("responseMessage", responseMessage);
+            ResourceResolver resourceResolver = request.getResourceResolver();
+            final String resourceString = request.getParameter("resource");
+            resource = resourceResolver.getResource(SlickConstants.PUBLISH_PATH + resourceString);
+            resourceResolver.delete(resource);
+            resourceResolver.commit();
+            
+            flushDispatch(request);
+            
+            responseCode = 200;
+            responseType = "success";
+            responseMessage = "success";
+            
+            responseContent.put("name", resource.getName());
+            responseContent.put("path", resource.getPath());
+            
         } catch(Exception e) {
+            
+            responseCode = 500;
+            responseType = "error";
+            responseMessage = "error - Could not delete item.";
+            
             e.printStackTrace();
-        }
-        
-        response.setCharacterEncoding(CharEncoding.UTF_8);
-        response.setContentType("application/json");
-        response.setStatus(responseCode);
-        
-        try {
-            response.getWriter().write(responseJSON.toString());
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        }        
+        uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
     }
     
     private void flushDispatch(SlingHttpServletRequest request) {
@@ -74,4 +74,5 @@ public class DeleteItemServlet extends SlingAllMethodsServlet {
         String currentDomain = external.getDomain();
         dispatcherService.flush(currentDomain, "flushContent");
     }
+    
 }

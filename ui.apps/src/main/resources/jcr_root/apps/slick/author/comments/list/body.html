@@ -1,0 +1,51 @@
+<body>
+    <sly data-sly-include="navigation.html"></sly>
+    <div class="author-wrap">
+    	<sly data-sly-include="subNavigation.html"></sly>
+        <div class="content">
+            <nav class="page-nav">
+                <ul class="group">
+                    <li>
+                        <a href="#approved" id="title-approved" class="page-nav-heading accent-border-bottom-hover" data-show-section="approved">Approved</a>
+                    </li>
+                    <li>
+                        <a href="#moderated" id="title-moderated" class="page-nav-heading accent-border-bottom-hover" data-show-section="moderated">Moderated</a>
+                    </li>
+                </ul>
+            </nav>
+            <div>
+                <section class="author-section page-nav-section list-items" id="approved">
+                	<sly data-sly-use.approvedList="${'org.millr.slick.components.common.ListComments' @ status = 'approved'}" data-sly-list.comment="${approvedList.comments}">
+                    	<sly data-sly-resource="${comment.path @ resourceType='slick/author/comments/content'}"/>
+                   	</sly>
+                   	<div class="Grid Fit-Small pagination" data-sly-use.pagination="${'org.millr.slick.components.common.CommentPagination' @ status = 'approved'}">
+                        <div class="Cell">
+                            <a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
+                        </div>
+                        <div class="Cell align-right">
+                            <a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
+                        </div>
+                    </div>
+			    </section>
+                <section class="author-section page-nav-section list-items" id="moderated">
+                    <sly data-sly-use.moderatedList="${'org.millr.slick.components.common.ListComments' @ status = 'moderated'}" data-sly-list.comment="${moderatedList.comments}">
+                    	<sly data-sly-resource="${comment.path @ resourceType='slick/author/comments/content'}"/>
+                   	</sly>
+                   	<div class="Grid Fit-Small pagination" data-sly-use.pagination="${'org.millr.slick.components.common.CommentPagination' @ status = 'moderated'}">
+		                <div class="Cell">
+		                    <a data-sly-test="${pagination.newerPosts}" href="${pagination.newerPosts}">Newer</a>
+		                </div>
+		                <div class="Cell align-right">
+		                    <a data-sly-test="${pagination.olderPosts}" href="${pagination.olderPosts}">Older</a>
+		                </div>
+		            </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div id="messages"></div>
+    <script id="message" type="text/x-handlebars-template">
+        <div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
+    </script>
+    <sly data-sly-include="scripts.html"/>
+</body>

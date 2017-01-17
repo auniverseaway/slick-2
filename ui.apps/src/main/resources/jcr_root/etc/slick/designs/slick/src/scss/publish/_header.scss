@@ -1,0 +1,79 @@
+header {
+    position: relative;
+    height: 320px;
+
+    #menu {
+        position: absolute;
+        left: -240px;
+        top: 0;
+        bottom: 0;
+        width: 240px;
+        background: rgba(255,255,255,.9);
+        transition: left .25s ease-in-out;
+
+        &.open {
+            left: 0px;
+        }
+    }
+    #logo {
+        position: absolute;
+        display: block;
+        float: left;
+        margin: 40px;
+        text-decoration: none;
+
+        #square {
+            width: 40px;
+            height: 40px;
+
+            float: left;
+        }
+
+        #blog-name {
+            font-size: .88889em;
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            padding: 0px 14px 0px 10px;
+            text-transform: uppercase;
+            color: #FFF;
+        }
+    }
+
+    nav {
+        ul {
+            list-style: none;
+            margin: 100px 0px 0px 40px;
+            padding: 0;
+
+            li {
+                a {
+                    line-height: 1.6em;
+                    font-size: 1em;
+                    color: $dark-gray;
+                }
+
+                form {
+
+                    input {
+                        background: transparent;
+                        border: none;
+                        margin: 0;
+                        padding: 0;
+                        font-family: 'LatoWebLight';
+                        font-size: 1em;
+                        line-height: 1.6em;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+// Small devices (Landscape phones, 544px)
+@media (min-width: 34em) {
+    header {
+        height: 480px;
+    }
+}

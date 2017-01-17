@@ -40,7 +40,12 @@
             a {
                 color: rgb(${settings.accentColor @ context='styleString'});
             }
+            .accent-background {
+                background-color: rgb(${settings.accentColor @ context='styleString'});
+                color: rgba(255,255,255,.80);
+            }
         </style>
         <sly data-sly-use.analytics="partials/analytics.html" data-sly-call="${analytics.head @ settings=settings}"/>
+        <script data-sly-test="${view.page.enableComments}" src='https://www.google.com/recaptcha/api.js'></script>
     </head>
 </template>

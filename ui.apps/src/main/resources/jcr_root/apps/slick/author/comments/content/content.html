@@ -1,0 +1,43 @@
+<article data-sly-use.comment="org.millr.slick.models.Comment" id="${comment.name}" class="comment">
+    <section class="Grid Fit-Medium Align-Center comment-title">
+        <div class="Cell Medium-50">
+            <a href="#" class="expand-item" data-sly-attribute.data-active-item="${comment.name}">${comment.shortComment}</a>
+        </div>
+        <div class="Cell">
+            <div class="align-left author-column">
+                <span>${comment.parent}</span>
+            </div>
+            <div class="align-right date" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=comment.created, dateFormat='MMM d h:mm aaa'}">
+                <span>${format.formattedValue}</span>
+            </div>
+        </div>
+        <div class="actions">
+            <a href="${comment.link}" class="icon view">View</a>
+            <div class="remove">
+                <a href="#" class="icon delete">Delete</a>
+                <a href="#" class="delete-confirm" 
+                   data-resource-path="${comment.externalPath}"
+                   data-resource-name="${comment.name}">Confirm</a>
+            </div>
+        </div>
+    </section>
+    <section class="comment-detail">
+        <form class="Grid Fit-Medium" method="POST" action="${comment.externalPath}">
+            <input type="hidden" name=":redirect" value="/author/comments.html"/>
+            <div class="Cell Medium-50 comment-area">
+                <textarea name="comment">${comment.comment}</textarea>
+            </div>
+            <div class="Cell">
+                <input type="text" name="author" value="${comment.author}" disabled/>
+                <select name="status">
+                    <option selected="${comment.status == 'approved'}" value="approved">Approved</option>
+                    <option selected="${comment.status == 'moderated'}" value="moderated">Moderated</option>
+                </select>
+                <input type="text" data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=comment.created, dateFormat='MMMM d h:mm aaa'}" value="${format.formattedValue}" disabled/>
+            </div>
+            <div class="comment-save">
+                <input type="submit" class="button accent-background-light" value="Save"/>
+            </div>
+        </form>
+    </section>
+</article>

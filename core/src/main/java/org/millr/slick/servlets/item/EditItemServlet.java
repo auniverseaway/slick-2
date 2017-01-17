@@ -96,6 +96,7 @@ public class EditItemServlet extends SlingAllMethodsServlet {
 		final String resourceType = slickType.substring(0, slickType.length()-1);
 		final String publishString = request.getParameter("publishDate");
 		final String publishStatus = request.getParameter("publishStatus");
+		final boolean enableComments = Boolean.parseBoolean(request.getParameter("enableComments"));
 		
 		// Upload our image
 		String image = uploadService.uploadFile(request, SlickConstants.MEDIA_PATH);
@@ -111,6 +112,7 @@ public class EditItemServlet extends SlingAllMethodsServlet {
 		properties.put("content", content);
 		properties.put("slickType", slickType);
 		properties.put("publishStatus", publishStatus);
+		properties.put("enableComments", enableComments);
 		
 		// Check to see if description is empty
 		if(!description.isEmpty()){

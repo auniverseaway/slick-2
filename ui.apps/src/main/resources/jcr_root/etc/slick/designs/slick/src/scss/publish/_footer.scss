@@ -1,0 +1,20 @@
+footer {
+    height: 60px;
+    background: $light-gray;
+    color: $dark-gray;
+
+    .container {
+        margin: 0 auto;
+        height: 60px;
+    }
+
+    h5 {
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 48em) {
+    .powered-by {
+        text-align: right;
+    }
+}

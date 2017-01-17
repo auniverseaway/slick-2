@@ -1,7 +1,9 @@
 define(['publish/ui',
         'publish/media',
         'publish/social',
-        'publish/syntax'], function(){
+        'publish/syntax',
+        'publish/comments/list',
+        'publish/comments/create'], function () {
 
     'use strict';
 

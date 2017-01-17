@@ -65,6 +65,8 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
     
     private static final String USE_DISPATCHER_PROPERTY = "useDispatcher";
     
+    private static final String ENABLE_COMMENTS_PROPERTY = "enableComments";
+    
     private static final String DEFAULT_HEADER_IMAGE = "defaultImage";
 
     @Override
@@ -82,6 +84,7 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
             final String blogDescription = request.getParameter(BLOG_DESCRIPTION_PROPERTY);
             final String accentColor = request.getParameter(ACCENT_COLOR_PROPERTY);
             final boolean useDispatcher = Boolean.parseBoolean(request.getParameter(USE_DISPATCHER_PROPERTY));
+            final boolean enableComments = Boolean.parseBoolean(request.getParameter(ENABLE_COMMENTS_PROPERTY));
             final String defaultHeaderImage = request.getParameter(DEFAULT_HEADER_IMAGE);
             
             final Map<String, Object> properties = new HashMap<String, Object>();
@@ -90,6 +93,7 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
             properties.put(SettingsService.SYSTEM_BLOG_DESCRIPTION, blogDescription);
             properties.put(SettingsService.SYSTEM_ACCENT_COLOR, accentColor);
             properties.put(SettingsService.SYSTEM_USE_DISPATCHER, useDispatcher);
+            properties.put(SettingsService.SYSTEM_ENABLE_COMMENTS, enableComments);
             properties.put(SettingsService.SYSTEM_HEADER_IMAGE, defaultHeaderImage);
             boolean result = settingsService.setProperties(properties);
             

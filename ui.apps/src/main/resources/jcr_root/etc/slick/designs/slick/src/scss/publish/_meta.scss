@@ -1,0 +1,96 @@
+.meta {
+    margin-bottom: $slick-gutter * 2;
+
+    .tags {
+        .tag {
+            display: inline-block;
+            padding: 0 10px 0 10px;
+            background: rgba(165, 226, 249, 0.92);
+            margin-right: $slick-gutter;
+            margin-bottom: 14px;
+            font-family: 'LatoWebLight';
+            text-transform: none;
+            line-height: 30px;
+            color: #000;
+        }
+    }
+
+    .comments-social-author {
+        min-height: 60px;
+        background: #f9f9f9;
+    }
+
+    .comment-count {
+        display: flex;
+        min-width: 60px;
+        min-height: 60px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 15px;
+
+        .number {
+            display: flex;
+            position: relative;
+            min-width: 30px;
+            height: 30px;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            background: #FFF;
+            color: #676767;
+            padding: 0 7px;
+
+            &::after {
+                content: "";
+                position: absolute;
+                right: 4px;
+                bottom: -8px;
+                width: 11px;
+                height: 8px;
+                display: block;
+                background: url('../img/btn-comment-arrow.svg') 100%;
+            }
+        }
+    }
+
+    .social-icons {
+        display: flex;
+        align-items: center;
+    }
+
+    #share {
+        list-style: none;
+        padding: 0 0 0 $slick-gutter;
+        margin: 0;
+        float: left;
+
+        li {
+            display: block;
+            margin-right: $slick-gutter;
+            float: left;
+            .social {
+                display: block;
+                width: 30px;
+                height: 30px;
+                text-indent: -1000px;
+                overflow: hidden;
+                &.linkedin {
+                    background: url('../img/btn-social-linkedin.svg') 100%;
+                }
+                &.twitter {
+                    background: url('../img/btn-social-twitter.svg') 100%;
+                }
+                &.facebook {
+                    background: url('../img/btn-social-facebook.svg') 100%;
+                }
+            }
+        }
+    }
+
+    .author {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: $slick-gutter * 2;
+    }
+}

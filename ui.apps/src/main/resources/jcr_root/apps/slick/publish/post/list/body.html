@@ -34,6 +34,9 @@
             </div>
         </div>
     </div>
+    <script id="comment-count-template" type="text/x-handlebars-template">
+        <div class="number">{{count}}</div>
+    </script>
     <sly data-sly-include="partials/lightbox.html"/>
     <sly data-sly-use.footer="footer.html" data-sly-call="${footer.footer @ view=view, settings=settings}"/>
     <sly data-sly-include="partials/footlibs.html"/>

@@ -31,7 +31,7 @@ define(['handlebars'], function (handlebars) {
         // Compile the template
         var compiledTemplate = handlebars.compile(messageTemplate);
 
-        // Render the data into the template (as a string!?)
+        // Render the data into the template
         var message = compiledTemplate(msg);
 
         // Insert the message into the DOM

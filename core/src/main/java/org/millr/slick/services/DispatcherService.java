@@ -29,4 +29,6 @@ public interface DispatcherService {
     
     JSONObject flushContent(String domain);
     
+    JSONObject flushContent(String domain, String path);
+    
 }

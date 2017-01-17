@@ -25,7 +25,9 @@ gulp.task('styles', function() {
 gulp.task('publish-scripts', function ()
 {
     return gulp.src(designs + '/src/js/**/*.js')
-        .pipe(amdOptimize('publish'))
+        .pipe(amdOptimize('publish', {
+            baseUrl : designs + '/src/js',
+            configFile : designs + '/src/js/config.js' }))
         .pipe(sourceMaps.init())
         .pipe(concat('publish.js'))
         .pipe(uglify())

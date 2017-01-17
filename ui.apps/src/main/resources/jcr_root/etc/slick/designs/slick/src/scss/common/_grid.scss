@@ -3,7 +3,7 @@
     .Cell {
         @for $i from 1 through 20 {
           &.#{$size}-#{$i*5} {
-            flex: 0 0 #{$i*5}%;
+            flex: 0 0 #{$i*5}#{'%'};
           }
         }
     }

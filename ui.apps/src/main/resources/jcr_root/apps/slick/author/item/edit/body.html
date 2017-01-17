@@ -1,4 +1,4 @@
-<body data-sly-use.editBlog="org.millr.slick.components.author.EditBlog" id="itemEdit">
+<body data-sly-use.editBlog="org.millr.slick.components.author.EditBlog" data-sly-use.settings="org.millr.slick.components.common.Settings" id="itemEdit">
     <sly data-sly-include="navigation.html"/>
     <div class="author-wrap">
         <sly data-sly-include="subNavigation.html"></sly>
@@ -86,14 +86,24 @@
                   </div>
                   <textarea name="content" id="editor" class="editor-area" rows="32" tabindex="2" placeholder="add content">${editBlog.post.content}</textarea>
                 </section>
-                <section class="publish" id="publish-section">
-                    <button id="calendar-toggle" class="accent-background-light">Publish Date</button>
-                    <input data-sly-test="${editBlog.post.publishDate}"
+                <section class="publish accent-background-light" id="publish-section">
+                    <div class="comment-status-container" data-sly-test="${settings.enableComments}">
+                        
+                        <input type="checkbox" name="enableComments" id="enableComments" class="default-comments" value="true" 
+                               data-sly-test="${editBlog.post}" data-sly-attribute.checked="${editBlog.post.enableComments}"/>
+                        <input type="checkbox" name="enableComments" id="enableComments" class="saved-comments" value="true" 
+                               data-sly-test="${!editBlog.post}" data-sly-attribute.checked="${settings.enableComments}"/>
+                        <label class="comment-status" for="enableComments">Enable Comments</label>
+                    </div>
+                    <button id="calendar-toggle">Publish Date</button>
+                    <div id="date-container">
+                        <input data-sly-test="${editBlog.post.publishDate}"
                            data-sly-use.publishDateUse="${'org.millr.slick.utils.FormatDate' @ date=editBlog.post.publishDate, dateFormat='yyyy-MM-dd HH:mm'}"
-                           type="text" id="dateInput" class="accent-background-light" name="publishDate"
+                           type="text" id="dateInput" name="publishDate"
                            value="${publishDateUse.formattedValue}" />
-                    <input data-sly-test="${!editBlog.post.publishDate}"
-                           type="text" id="dateInput" class="accent-background-light" name="publishDate"/>
+                        <input data-sly-test="${!editBlog.post.publishDate}"
+                               type="text" id="dateInput" class="accent-background-light" name="publishDate"/>
+                    </div>
                     <div class="item-status accent-background-light">
                         <select name="publishStatus">
                           <option value="publish" selected="${editBlog.post.publishStatus == 'publish'}">Publish</option>

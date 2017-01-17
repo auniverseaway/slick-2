@@ -48,7 +48,7 @@ public final class SlickConstants {
     /** Publish Path */
     public static final String PUBLISH_PATH = CONTENT_PATH + "/publish";
     
-    /** Publish Path */
+    /** Posts Path */
     public static final String POSTS_PATH = PUBLISH_PATH + "/posts";
     
     /** Pages Path */
@@ -59,6 +59,9 @@ public final class SlickConstants {
     
     /** Media Path */
     public static final String MEDIA_PATH = PUBLISH_PATH + "/media";
+    
+    /** Comments Path */
+    public static final String COMMENTS_PATH = PUBLISH_PATH + "/comments";
     
     /** Favicon Path */
     public static final String FAVICON_PATH = PUBLISH_PATH + "/favicon.ico";
@@ -105,6 +108,8 @@ public final class SlickConstants {
     
     /** Slick Post Type */
     public static final String NODE_POST_TYPE = NODE_TYPE + ":page";
+    
+    public static final String NODE_COMMENT_TYPE = NODE_TYPE + ":comment";
     
     public static final String PAGINATION_QUERY_STRING = "page";
     
