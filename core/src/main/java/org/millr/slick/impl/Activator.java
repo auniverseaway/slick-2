@@ -75,14 +75,14 @@ public class Activator implements BundleActivator {
     }
 
     private void createCommentorServiceUser(ResourceResolver resolver) {
-    	try {
-			Session session = resolver.adaptTo(Session.class);
-			UserManager userManager = ((JackrabbitSession) session).getUserManager();
+        try {
+            Session session = resolver.adaptTo(Session.class);
+            UserManager userManager = ((JackrabbitSession) session).getUserManager();
             ValueFactory valueFactory = session.getValueFactory();
             
             Authorizable commentsUser = userManager.getAuthorizable("commentor");
             if(commentsUser == null) {
-            	commentsUser = userManager.createUser("commentor", null, new SimplePrincipal("commentor"),"/home/users/system");
+                commentsUser = userManager.createUser("commentor", null, new SimplePrincipal("commentor"),"/home/users/system");
                 commentsUser.setProperty("firstName", valueFactory.createValue("Commentor"));
                 commentsUser.setProperty("lastName", valueFactory.createValue("System Service"));
                 AccessControlUtils.clear(session, commentsUser.getPath());
@@ -92,14 +92,13 @@ public class Activator implements BundleActivator {
                 
                 session.save();
             }
-			
-		} catch (Exception e) {
-			LOGGER.error("There was a problem creating the commentor system user.");
-			LOGGER.error(e.toString());
-		}		
-	}
+        } catch (Exception e) {
+            LOGGER.error("There was a problem creating the commentor system user.");
+            LOGGER.error(e.toString());
+        }       
+    }
 
-	@Override
+    @Override
     public void stop(BundleContext bundleContext) throws Exception {
         LOGGER.info(bundleContext.getBundle().getSymbolicName() + " stopped");
     }
