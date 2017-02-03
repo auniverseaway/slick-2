@@ -17,9 +17,13 @@ package org.millr.slick.utils;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.models.annotations.Model;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Model(adaptables=SlingHttpServletRequest.class)
 public class Externalizer {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(Externalizer.class);
     
     private SlingHttpServletRequest request;
 
@@ -56,7 +60,7 @@ public class Externalizer {
         // Build the Domain
         StringBuilder url = new StringBuilder();
         url.append(scheme).append("://").append(serverName);
-        if (serverPort != 80 && serverPort != 443) {
+        if (serverPort != 80 && serverPort != 443 & serverPort != -1) {
             url.append(":").append(serverPort);
         }
         this.domain = url.toString();
