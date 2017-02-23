@@ -44,7 +44,7 @@ public class FormatDate {
     public String formattedValue;
     
     /**
-     * Inits the.
+     * Inits the FormatDate Class.
      */
     @PostConstruct
     protected void init() {

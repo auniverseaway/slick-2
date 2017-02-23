@@ -15,8 +15,6 @@
  */
 package org.millr.slick.components.common;
 
-import java.util.Iterator;
-
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.millr.slick.models.Page;

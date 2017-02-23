@@ -32,8 +32,6 @@ public class TrimString {
     
     public TrimString(String input, int length, boolean soft) {
         
-        LOGGER.info(">>>> Trimming String");
-        
         // Replace basic HTML. Will break if HTML is malformed.
         String contentString = input.replaceAll("<[^>]*>", "");
         
