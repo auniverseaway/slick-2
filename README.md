@@ -21,6 +21,7 @@ It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common 
 * Analytics, SEO, and social integrations
 * Pagination
 * Basic Localization
+* Comment support with ReCAPTCHA
 
 #Requirements
 * [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
