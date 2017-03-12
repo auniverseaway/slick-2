@@ -57,6 +57,8 @@ public class Externalizer {
         this.pathInfo = request.getPathInfo();            // /a/b;c=123
         this.queryString = request.getQueryString();      // d=789
         
+        LOGGER.info(this.scheme);
+        
         // Build the Domain
         StringBuilder url = new StringBuilder();
         url.append(scheme).append("://").append(serverName);
