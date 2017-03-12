@@ -6,6 +6,7 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var amdOptimize = require('amd-optimize');
+var slang = require('gulp-slang');
 
 var designs = 'src/main/resources/jcr_root/etc/slick/designs/slick';
 
@@ -48,10 +49,14 @@ gulp.task('author-scripts', function ()
         .pipe(gulp.dest(designs + '/dist/js'));
 });
 
-//Watch task
+// Watch task
 gulp.task('default',function() {
-    gulp.watch('./**/scss/*.scss',['styles']);
+    gulp.watch('./**/scss/**/*.scss',['styles']);
     gulp.watch('./**/js/publish/*.js',['publish-scripts']);
+    gulp.watch('./**/js/author/*.js',['author-scripts']);
+    gulp.watch(designs + '/dist/**/*.*', function(e) {
+        return gulp.src(e.path).pipe(slang({ port: 8080 }));
+    });
 });
 
 gulp.task('build', ['styles','publish-scripts', 'author-scripts'], function() {});
