@@ -74,6 +74,10 @@ public class Activator implements BundleActivator {
         }
     }
 
+    /**
+     * Create our Commentor Service User
+     * @param resolver
+     */
     private void createCommentorServiceUser(ResourceResolver resolver) {
         try {
             Session session = resolver.adaptTo(Session.class);
@@ -82,14 +86,10 @@ public class Activator implements BundleActivator {
             
             Authorizable commentsUser = userManager.getAuthorizable("commentor");
             if(commentsUser == null) {
-                commentsUser = userManager.createUser("commentor", null, new SimplePrincipal("commentor"),"/home/users/system");
+                commentsUser = userManager.createSystemUser("commentor","/home/users/system");
                 commentsUser.setProperty("firstName", valueFactory.createValue("Commentor"));
                 commentsUser.setProperty("lastName", valueFactory.createValue("System Service"));
                 AccessControlUtils.clear(session, commentsUser.getPath());
-                
-                Node userNode = session.getNode(commentsUser.getPath());
-                userNode.setPrimaryType("rep:SystemUser");
-                
                 session.save();
             }
         } catch (Exception e) {

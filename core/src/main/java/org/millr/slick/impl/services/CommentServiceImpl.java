@@ -1,6 +1,20 @@
+/*
+ * Copyright 2016 Chris Millar
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.millr.slick.impl.services;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -9,7 +23,6 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -18,7 +31,6 @@ import javax.jcr.query.QueryResult;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
-import org.apache.jackrabbit.value.ValueFactoryImpl;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -54,6 +66,9 @@ public class CommentServiceImpl implements CommentService {
     
     private static Long commentsCount;
     
+    /**
+     * Get comments for a specific item.
+     */
     @Override
     public Iterator<Resource> getComments(Resource item) {
         LOGGER.info("Getting comments for: " + item.getName());
@@ -70,9 +85,11 @@ public class CommentServiceImpl implements CommentService {
         return itemComments;
     }
 
+    /**
+     * Create a comment.
+     */
     @Override
     public Resource createComment(Resource item, Map<String,Object> commentProperties) {
-        LOGGER.info("Creating a comment.");
         Resource commentResource = null;
         try{
             ResourceResolver resolver = getResourceResolver();
@@ -89,7 +106,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public ResourceResolver getResourceResolver() {
-        LOGGER.info("Getting the Resource Resolver.");
         ResourceResolver resolver = null;
         Map<String,Object> paramMap = new HashMap<String,Object>();
         paramMap.put(ResourceResolverFactory.SUBSERVICE, "commentService");
@@ -147,27 +163,17 @@ public class CommentServiceImpl implements CommentService {
         return itemResource;
     }
 
-    private void setMixin(Resource resource, String mixinName) {
-        try {
-            Node node = resource.adaptTo(Node.class);
-            node.addMixin(mixinName);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Get all comments
+     */
 	@Override
 	public NodeIterator getComments(Session session, Long offset, Long limit, String status) {
-		
-		LOGGER.info("Getting Comments in Impl");
 		
 		String currentQuery = String.format(COMMENT_QUERY,
                                             SlickConstants.NODE_COMMENT_TYPE,
                                             status,
                                             "comments",
                                             "jcr:created");
-        
-        LOGGER.info(currentQuery);
         
         NodeIterator nodes = null;
 
@@ -194,19 +200,30 @@ public class CommentServiceImpl implements CommentService {
         return nodes;
 	}
 	
+	/**
+	 * Get all site comments based on status.
+	 * @param session The current session.
+	 * @param status The desired status.
+	 * @return all of the given posts.
+	 */
 	private NodeIterator getComments(Session session, String status) {
         NodeIterator allPosts = getComments(session, null, null, status);
         return allPosts;
     }
 	
+	/**
+	 * Count all the comments for a given pagination size. Used for pagination.
+	 */
 	@Override
 	public long getTotalComments(Session session, String status, Long pageSize) {
         long posts = getNumberOfComments(session, status);
         long totalPages = (long)Math.ceil((double)posts / pageSize);
-        LOGGER.info("TOTAL PAGES: " + totalPages);
         return totalPages;
     }
 	
+	/**
+	 * Get the public comments for the item requested.
+	 */
 	@Override
 	public NodeIterator getItemPublicComments(Resource item, String status) {
 	    NodeIterator nodes = null;
@@ -232,8 +249,20 @@ public class CommentServiceImpl implements CommentService {
 	    return nodes;
 	}
 
+	/**
+	 * Get the number of all comments.
+	 */
 	@Override
 	public Long getNumberOfComments(Session session, String status) {
 	    return getComments(session, status).getSize();
 	}
+	
+	private void setMixin(Resource resource, String mixinName) {
+        try {
+            Node node = resource.adaptTo(Node.class);
+            node.addMixin(mixinName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,7 +1,7 @@
 #About
 Slick is a beautiful app to help create exceptional web content. It's highly optimized for blogging.
 
-It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common to Adobe Experience Manager.
+It's built on top of Sling, HTL, Oak, OSGi and many other frameworks common to Adobe Experience Manager.
 
 [![CircleCI](https://circleci.com/gh/auniverseaway/slick-2/tree/master.svg?style=svg&circle-token=bc0c04395e1bda10b66c1fa370c0425b5ab27784)](https://circleci.com/gh/auniverseaway/slick-2/tree/master)
 
@@ -21,6 +21,7 @@ It's built on top of Sling, Sightly, Oak, OSGi and many other frameworks common 
 * Analytics, SEO, and social integrations
 * Pagination
 * Basic Localization
+* Comment support with ReCAPTCHA
 
 #Requirements
 * [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
@@ -66,10 +67,10 @@ Located at [http://localhost:8080/author.html](http://localhost:8080/author.html
     RewriteRule ^/$ /content/slick/publish/posts.html [PT,L]
     
     # Rewrite Fav Icon
-    RewriteRule ^/favicon.ico$ /etc/slick/designs/slick/img/favicon.ico [PT,L]
+    RewriteRule ^/favicon.ico$ /etc/slick/designs/slick/dist/img/favicon.ico [PT,L]
     
     # Rewrite our Robots
-    RewriteRule ^/robots.txt$ /etc/slick/designs/slick/txt/robots.txt [PT,L]
+    RewriteRule ^/robots.txt$ /etc/slick/designs/slick/dist/txt/robots.txt [PT,L]
 
     # Rewrite our author 
     RewriteCond %{REQUEST_URI} !^/apps
@@ -103,14 +104,23 @@ Located at [http://localhost:8080/author.html](http://localhost:8080/author.html
 4. You can find a sample dispatch.any file at dispatcher/dispatcher.any
 
 #Back-End Development
+Applies to Java / HTL
+
 1. Open Eclipse
 2. Import Maven project
 3. Install the [org.apache.sling.tooling.support.install](http://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.tooling.support.install) bundle to your [Sling instance](http://localhost:8080/system/console/bundles).
 4. Setup new Sling Server in Eclipse.
-5. Start buidling great things.
-6. Change the password at {YOUR-WORKSPACE}/.metadata/.plugins/org.eclipse.wst.server.core/servers.xml
+5. Add your projects (core, ui.apps)
+6. Start buidling great things.
+7. Change the password at `{YOUR-WORKSPACE}/.metadata/.plugins/org.eclipse.wst.server.core/servers.xml` if needed.
 
 #Front-End Development
-1. HTML can be found in ui.apps/src/main/resources/jcr_root/apps
-2. SCSS, JS, images, and CSS can be found in ui.apps/src/main/resources/jcr_root/etc/slick/designs/slick
-3. All SCSS will be compiled during autoInstallBundle. You can also run gulp inside ui.apps.
+Applies to SCSS / JS / IMG / TXT
+
+During autoInstallBundle, all JS and SCSS are concatenated, minified, and installed. However, if you want to work without running maven for every change, you can run gulp to push changes to Sling automatically.
+
+1. Install `gulp` and `gulp-cli`.
+2. In `ui.apps`, install all additional front-end dependencies using `npm install`.
+3. In `ui.apps` run `gulp`.
+4. Start buidling great things in `ui.apps/src/main/resources/jcr_root/etc/slick/designs/...`
+5. You can also specify arguments when running gulp. Example: `$ gulp --slingHost='slick.millr.org' --slingPort=8181 --slingPass=MySuperPassword --slingUser=cmillar`

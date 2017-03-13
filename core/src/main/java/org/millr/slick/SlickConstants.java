@@ -21,7 +21,7 @@ package org.millr.slick;
  * never change, it is recommended that applications refer to the symbolic
  * constants instead of code the strings themselves.
  * <p>
- * This class is not intended to be extended or instantiated because it just
+ * This class is not intended to be extended or instantiated because
  * provides constants not intended to be overwritten.
  */
 public final class SlickConstants {
