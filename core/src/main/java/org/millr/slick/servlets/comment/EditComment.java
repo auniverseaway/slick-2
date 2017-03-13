@@ -69,7 +69,7 @@ public class EditComment extends SlingAllMethodsServlet {
         String postPath = request.getResource().getPath();
         
         // Detect a logged in user
-        String authorId = currentUserService.getId(request.getResourceResolver());
+        String authorId = currentUserService.getUserId(request.getResourceResolver());
         
         boolean captchaValid = false;
         if(authorId != "anonymous") {

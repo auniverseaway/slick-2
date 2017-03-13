@@ -14,6 +14,7 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
+import org.millr.slick.services.CurrentUserService;
 import org.millr.slick.services.UiMessagingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,9 @@ public class CurrentUserServlet extends SlingAllMethodsServlet {
     @Reference
     private UiMessagingService uiMessagingService;
     
+    @Reference
+    private CurrentUserService currentUserService;
+    
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) {
         
@@ -36,43 +40,24 @@ public class CurrentUserServlet extends SlingAllMethodsServlet {
         String responseMessage;
         JSONObject responseContent = new JSONObject();
         
-        ResourceResolver resolver = request.getResourceResolver();
-        Session session = resolver.adaptTo(Session.class);
-        JackrabbitSession jsSession = (JackrabbitSession) session;
+        ResourceResolver resourceResolver = request.getResourceResolver();
         
-        String displayName;
+        String currentUserId = currentUserService.getUserId(resourceResolver);
+        String displayName = currentUserService.getFullName(resourceResolver);
+    
         try {
-            final UserManager userManager = jsSession.getUserManager();
-            String currentUserId = session.getUserID();
-            final User user = (User) userManager.getAuthorizable(currentUserId);
-            boolean hasFirstName = user.hasProperty("firstName");
-            boolean hasLastName = user.hasProperty("lastName");
-            
-            if(hasFirstName && hasLastName) {
-                String firstName = user.getProperty("firstName")[0].getString();
-                String lastName = user.getProperty("lastName")[0].getString();
-                displayName = firstName + " " + lastName;
-            } else {
-                displayName = currentUserId;
-            }
-            responseCode = 200;
+        	responseCode = 200;
             responseType = "success";
             responseMessage = "success";
-            
-            try {
-                responseContent.put("userId", currentUserId);
-                responseContent.put("displayName", displayName);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            
-        } catch (RepositoryException repositoryException) {
-            LOGGER.debug("We had a problem getting the session or the user.");
-            repositoryException.printStackTrace();
-            responseCode = 500;
-            responseType = "error";
-            responseMessage = "error";
+            responseContent.put("userId", currentUserId);
+            responseContent.put("displayName", displayName);
+        } catch (JSONException e) {
+        	responseCode = 500;
+        	responseType = "error";
+        	responseMessage = "error";
+            e.printStackTrace();
         }
+            
         uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
         
     }
