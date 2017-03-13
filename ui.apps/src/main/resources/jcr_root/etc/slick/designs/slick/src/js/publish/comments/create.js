@@ -2,6 +2,8 @@
 define(['author/messaging', 'handlebars'], function (messaging, handlebars) {
     'use strict';
 
+    var getCurrentUserEndpoint = '/bin/slick/getCurrentUser';
+
     var sendXhr = function (action, method, formData, callback) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
@@ -34,6 +36,17 @@ define(['author/messaging', 'handlebars'], function (messaging, handlebars) {
 
     };
 
+    var detectUser = function (currentUserJson) {
+        console.log(currentUserJson);
+        if(currentUserJson.content.userId !== 'anonymous') {
+            var commentorNameInput = document.querySelector('.commentor-name');
+            commentorNameInput.value = currentUserJson.content.displayName;
+            commentorNameInput.readOnly = true;
+            var reCaptcha = document.querySelector('.g-recaptcha');
+            reCaptcha.parentElement.removeChild(reCaptcha);
+        }
+    }
+
     var handleResponse = function (json) {
         if (json.responseType === 'success') {
             showComment(json);
@@ -46,6 +59,11 @@ define(['author/messaging', 'handlebars'], function (messaging, handlebars) {
     };
 
     var setupCommentForm = function (element) {
+        
+        /** Detect Logged In User */
+        sendXhr(getCurrentUserEndpoint, 'GET', null, detectUser);
+
+        /** Handle Submit */
         element.addEventListener('submit', function (event) {
             event.preventDefault();
             var action = element.action;

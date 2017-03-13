@@ -53,8 +53,8 @@ gulp.task('styles', function() {
 
 gulp.task('default',function() {
     gulp.watch('./**/scss/**/*.scss',['styles']);
-    gulp.watch('./**/js/publish/*.js',['publish-scripts']);
-    gulp.watch('./**/js/author/*.js',['author-scripts']);
+    gulp.watch('./**/js/publish/**/*.js',['publish-scripts']);
+    gulp.watch('./**/js/author/**/*.js',['author-scripts']);
     
     gulp.watch(designs + '/dist/**/*.*', function(event) {
         return gulp.src(event.path).pipe(slang({ host: slingHost, port: slingPort, username: slingUser, password: slingPass }));

@@ -17,6 +17,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.JcrConstants;
+import org.apache.jackrabbit.api.security.user.User;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.PersistenceException;
@@ -26,6 +27,7 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONObject;
 import org.apache.tika.io.IOUtils;
 import org.millr.slick.services.CommentService;
+import org.millr.slick.services.CurrentUserService;
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.UiMessagingService;
 import org.millr.slick.utils.Externalizer;
@@ -43,6 +45,9 @@ public class EditComment extends SlingAllMethodsServlet {
     private static final long serialVersionUID = -1150092606771566762L;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EditComment.class);
+    
+    @Reference
+    private CurrentUserService currentUserService;
     
     @Reference
     private UiMessagingService uiMessagingService;
@@ -63,8 +68,17 @@ public class EditComment extends SlingAllMethodsServlet {
         Resource postResource = request.getResource();
         String postPath = request.getResource().getPath();
         
-        String remoteIp = request.getRemoteAddr();
-        Boolean captchaValid = validateCaptcha(request.getParameter("g-recaptcha-response"), remoteIp);
+        // Detect a logged in user
+        String authorId = currentUserService.getId(request.getResourceResolver());
+        
+        boolean captchaValid = false;
+        if(authorId != "anonymous") {
+            captchaValid = true;
+        } else {
+            String remoteIp = request.getRemoteAddr();
+            captchaValid = validateCaptcha(request.getParameter("g-recaptcha-response"), remoteIp);
+        }
+        
         
         int responseCode;
         String responseType;
@@ -73,6 +87,8 @@ public class EditComment extends SlingAllMethodsServlet {
         
         String author = request.getParameter("author");
         String comment = request.getParameter("comment");
+        
+        
         
         // Replace basic HTML. Will break if HTML is malformed.
         comment = comment.replaceAll("<[^>]*>", "");
@@ -87,7 +103,12 @@ public class EditComment extends SlingAllMethodsServlet {
             
             commentProperties.put("comment", comment);
             commentProperties.put("author", author);
-            commentProperties.put("status", commentSettingsService.getCommentsDefaultStatus());
+            if(authorId != "anonymous") {
+                commentProperties.put("authorId", authorId);
+                commentProperties.put("status", "approved");
+            } else {
+                commentProperties.put("status", commentSettingsService.getCommentsDefaultStatus());
+            }
             commentProperties.put(JcrConstants.JCR_PRIMARYTYPE, "slick:comment");
             
             // Create our comment
