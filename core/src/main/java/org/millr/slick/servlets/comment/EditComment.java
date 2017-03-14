@@ -70,9 +70,10 @@ public class EditComment extends SlingAllMethodsServlet {
         
         // Detect a logged in user
         String authorId = currentUserService.getUserId(request.getResourceResolver());
+        LOGGER.info("AUTHOR ID: " + authorId);
         
         boolean captchaValid = false;
-        if(authorId != "anonymous") {
+        if(!authorId.equals("anonymous")) {
             captchaValid = true;
         } else {
             String remoteIp = request.getRemoteAddr();
@@ -103,7 +104,7 @@ public class EditComment extends SlingAllMethodsServlet {
             
             commentProperties.put("comment", comment);
             commentProperties.put("author", author);
-            if(authorId != "anonymous") {
+            if(!authorId.equals("anonymous")) {
                 commentProperties.put("authorId", authorId);
                 commentProperties.put("status", "approved");
             } else {
@@ -124,6 +125,7 @@ public class EditComment extends SlingAllMethodsServlet {
                 responseContent.put("path", commentResource.getPath());
                 responseContent.put("comment", commentProperties.get("comment"));
                 responseContent.put("author", commentProperties.get("author"));
+                responseContent.put("status", commentProperties.get("status"));
             } catch(Exception e) {
                 e.printStackTrace();
             }

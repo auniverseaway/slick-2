@@ -82,9 +82,8 @@
                 <p>{{content.comment}}</p>
                 <div class="Grid Fit-Small">
                     <h5 class="Cell">{{content.author}}</h5>
-                    <h5 class="Cell align-right comment-date" 
-                        data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=comment.jcr:created, dateFormat='MMMM, d yyyy'}">
-                        <a href="#{{content.name}}">Now</a>
+                    <h5 class="Cell align-right comment-date">
+                        <a href="#{{content.name}}">{{content.status}} - Now</a>
                     </h5>
                 </div>
             </div>
