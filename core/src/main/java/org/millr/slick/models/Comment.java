@@ -41,8 +41,15 @@ public class Comment {
 	}
 	
 	public String getExternalPath() {
-	String fullPath = getPath();
-	return fullPath.replace(SlickConstants.PUBLISH_PATH, "");
+	    String fullPath = getPath();
+	    return fullPath.replace(SlickConstants.PUBLISH_PATH, "");
+	}
+	
+	public String getItemPath() {
+	    String fullPath = getPath();
+	    fullPath = fullPath.replace(SlickConstants.COMMENTS_PATH, "");
+	    fullPath = fullPath.replace("/" + resource.getName(), ".html");
+	    return fullPath;
 	}
 	
 	public String getAuthor() {
