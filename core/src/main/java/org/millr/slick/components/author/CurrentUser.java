@@ -39,11 +39,9 @@ public class CurrentUser {
     }
     
     public String getDisplayName() {
-        String displayName;
-        try {
-            displayName = currentUserService.getFirstName(resourceResolver);
-        } catch (Exception e) {
-            displayName = currentUserService.getId(resourceResolver);
+        displayName = currentUserService.getFirstName(resourceResolver);
+        if(displayName == null) {
+        	displayName = currentUserService.getUserId(resourceResolver);
         }
         return displayName;
     }

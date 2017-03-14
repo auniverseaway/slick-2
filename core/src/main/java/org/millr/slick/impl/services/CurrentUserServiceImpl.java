@@ -55,18 +55,11 @@ public class CurrentUserServiceImpl implements CurrentUserService {
     @Reference
     private SlingRepository repository;
     
-    /* (non-Javadoc)
-     * @see org.millr.slick.services.CurrentUserService#getSession(org.apache.sling.api.resource.ResourceResolver)
-     */
-    public void getSession(ResourceResolver resourceResolver) {
+    private void getSession(ResourceResolver resourceResolver) {
         jackrabbitSession = ((JackrabbitSession) resourceResolver.adaptTo(Session.class));
     }
     
-    /* (non-Javadoc)
-     * @see org.millr.slick.services.CurrentUserService#getUser(org.apache.sling.api.resource.ResourceResolver)
-     */
-    public void getUser(ResourceResolver resourceResolver) {
-        
+    private void getUser(ResourceResolver resourceResolver) {
         getSession(resourceResolver);
         try {
             user = (User) jackrabbitSession.getUserManager().getAuthorizable(jackrabbitSession.getUserID());
@@ -76,40 +69,60 @@ public class CurrentUserServiceImpl implements CurrentUserService {
     }
     
     /**
-     * Gets the first name.
+     * Gets user's first name if available.
      *
      * @param resourceResolver the resource resolver
      * @return the first name
      */
     public String getFirstName(ResourceResolver resourceResolver) {
-        
-        // Get the user
         getUser(resourceResolver);
-        String name = null;
-        
-        // Try to get the user's first name.
+        String firstName = null;
         try {
-            name = user.getProperty("firstName")[0].toString();
-        } catch (RepositoryException e) {
-            e.printStackTrace();
-        }
-                
-        return name;
+			boolean hasFirstName = user.hasProperty("firstName");
+			if(hasFirstName) {
+				firstName = user.getProperty("firstName")[0].toString();
+			}
+		} catch (RepositoryException e1) {
+			LOGGER.info("Could not get user's first name.");
+			e1.printStackTrace();
+		}       
+        return firstName;
     }
     
-    public String getId(ResourceResolver resourceResolver) {
-        
-        // Get the user
+    public String getLastName(ResourceResolver resourceResolver) {
         getUser(resourceResolver);
-        String id = null;
-        
+        String lastName = null;
         try {
-            id = user.getID();
+			boolean hasLastName = user.hasProperty("lastName");
+			if(hasLastName) {
+				lastName = user.getProperty("lastName")[0].toString();
+			}
+		} catch (RepositoryException e1) {
+			LOGGER.info("Could not get user's last name.");
+			e1.printStackTrace();
+		}       
+        return lastName;
+    }
+    
+    public String getFullName(ResourceResolver resourceResolver) {
+    	String lastName = getLastName(resourceResolver);
+    	String firstName = getFirstName(resourceResolver);
+    	if(lastName != null && firstName != null) {
+    		return firstName + " " + lastName;
+    	} else {
+    		return getUserId(resourceResolver);
+    	}
+    }
+    
+    public String getUserId(ResourceResolver resourceResolver) {
+        getUser(resourceResolver);
+        String userId = null;
+        try {
+        	userId = user.getID();
         } catch (RepositoryException e) {
             e.printStackTrace();
         }
-        
-        return id;
+        return userId;
     }
     
     /**
@@ -127,7 +140,6 @@ public class CurrentUserServiceImpl implements CurrentUserService {
         } catch (RepositoryException e) {
             LOGGER.error("Couldn't get authorization.", e);
         }
-        
         return authorable;
     }
 }

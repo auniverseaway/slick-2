@@ -15,17 +15,18 @@
  */
 package org.millr.slick.services;
 
+import org.apache.jackrabbit.api.security.user.User;
 import org.apache.sling.api.resource.ResourceResolver;
 
 public interface CurrentUserService {
 
-    void getUser(ResourceResolver resourceResolver);
-    
-    void getSession(ResourceResolver resourceResolver);
-    
     boolean getAuthorable(ResourceResolver resourceResolver);
+    
+    String getUserId(ResourceResolver resourceResolver);
+    
+    String getFullName(ResourceResolver resourceResolver);
     
     String getFirstName(ResourceResolver resourceResolver);
     
-    String getId(ResourceResolver resourceResolver);
+    String getLastName(ResourceResolver resourceResolver);
 }

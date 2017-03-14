@@ -76,34 +76,39 @@
         </section>
     </div>
     <div id="messages"></div>
-    <script data-sly-test="${view.page.enableComments}" id="comment-template" type="text/x-handlebars-template">
-        <div class="comment" id="{{content.name}}">
-            <p>{{content.comment}}</p>
-            <div class="Grid Fit-Small">
-                <h5 class="Cell">{{content.author}}</h5>
-                <h5 class="Cell align-right comment-date" 
-                    data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=comment.jcr:created, dateFormat='MMMM, d yyyy'}">
-                    <a href="#{{content.name}}">Now</a>
-                </h5>
+    <sly data-sly-test="${view.page.enableComments}">
+        <script id="comment-template" type="text/x-handlebars-template">
+            <div class="comment" id="{{content.name}}">
+                <p>{{content.comment}}</p>
+                <div class="Grid Fit-Small">
+                    <h5 class="Cell">{{content.author}}</h5>
+                    <h5 class="Cell align-right comment-date" 
+                        data-sly-use.format="${'org.millr.slick.utils.FormatDate' @ date=comment.jcr:created, dateFormat='MMMM, d yyyy'}">
+                        <a href="#{{content.name}}">Now</a>
+                    </h5>
+                </div>
             </div>
-        </div>
-    </script>
-    <script data-sly-test="${view.page.enableComments}" id="comment-count-template" type="text/x-handlebars-template">
-        <div class="number">{{count}}</div>
-    </script>
-    <script data-sly-test="${view.page.enableComments}" id="comment-list-template" type="text/x-handlebars-template">
-    {{#each comments}}
-        <div class="comment" id="{{name}}">
-            <p>{{comment}}</p>
-            <div class="Grid Fit-Small">
-                <h5 class="Cell">{{author}}</h5>
-                <h5 class="Cell align-right comment-date">
-                    <a href="#{{name}}">{{created}}</a>
-                </h5>
+        </script>
+        <script id="comment-is-author-template" type="text/x-handlebars-template">
+            <input type="checkbox" name="is-author" value="true" class="Hide-Always" checked />
+        </script>
+        <script id="comment-count-template" type="text/x-handlebars-template">
+            <div class="number">{{count}}</div>
+        </script>
+        <script id="comment-list-template" type="text/x-handlebars-template">
+        {{#each comments}}
+            <div class="comment" id="{{name}}">
+                <p>{{comment}}</p>
+                <div class="Grid Fit-Small">
+                    <h5 class="Cell">{{author}}</h5>
+                    <h5 class="Cell align-right comment-date">
+                        <a href="#{{name}}">{{created}}</a>
+                    </h5>
+                </div>
             </div>
-        </div>
-    {{/each}}
-    </script>
+        {{/each}}
+        </script>
+    </sly>
     <script id="message" type="text/x-handlebars-template">
         <div id="{{messageId}}" class="message {{responseType}} show"><strong>{{responseType}}</strong> {{responseMessage}}</div>
     </script>

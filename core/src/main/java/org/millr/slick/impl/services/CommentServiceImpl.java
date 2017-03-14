@@ -57,7 +57,7 @@ public class CommentServiceImpl implements CommentService {
             "SELECT * FROM [%s] AS s "
           + "WHERE CONTAINS(s.status, '%s') "
           + "AND ISDESCENDANTNODE(s,'%s') "
-          + "ORDER BY [%s] DESC";
+          + "ORDER BY [%s]";
     
     @Reference 
     private ResourceResolverFactory resourceFactory;
