@@ -44,22 +44,19 @@ public class CurrentUserServlet extends SlingAllMethodsServlet {
         
         String currentUserId = currentUserService.getUserId(resourceResolver);
         String displayName = currentUserService.getFullName(resourceResolver);
-    
+        
         try {
-        	responseCode = 200;
+            responseCode = 200;
             responseType = "success";
             responseMessage = "success";
             responseContent.put("userId", currentUserId);
             responseContent.put("displayName", displayName);
         } catch (JSONException e) {
-        	responseCode = 500;
-        	responseType = "error";
-        	responseMessage = "error";
+            responseCode = 500;
+            responseType = "error";
+            responseMessage = "error";
             e.printStackTrace();
         }
-            
         uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
-        
     }
-    
 }
