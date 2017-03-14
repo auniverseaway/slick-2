@@ -1,4 +1,4 @@
-#About
+# About
 Slick is a beautiful app to help create exceptional web content. It's highly optimized for blogging.
 
 It's built on top of Sling, HTL, Oak, OSGi and many other frameworks common to Adobe Experience Manager.
@@ -7,7 +7,7 @@ It's built on top of Sling, HTL, Oak, OSGi and many other frameworks common to A
 
 ![Sling and Slick](https://raw.githubusercontent.com/auniverseaway/slick2/master/ui.apps/src/main/resources/jcr_root/etc/slick/designs/slick/dist/img/sling-slick-logo.png)
 
-#Demo
+# Demo
 [slick.millr.org](http://slick.millr.org) | [experiencemanaged.com](http://experiencemanaged.com)
 
 #Features
@@ -23,37 +23,37 @@ It's built on top of Sling, HTL, Oak, OSGi and many other frameworks common to A
 * Basic Localization
 * Comment support with ReCAPTCHA
 
-#Requirements
+# Requirements
 * [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Sling 8](http://sling.apache.org/downloads.cgi)
 * [Maven 3+](http://maven.apache.org/download.cgi)
 
-#Installation
-##1. Run Sling
+# Installation
+## 1. Run Sling
 
     java -jar org.apache.sling.launchpad-8.jar
 
-##2. Install Slick
+## 2. Install Slick
 
     mvn clean install -PautoInstallBundle
 
-##3. Make things
+## 3. Make things
 
     http://localhost:8080
 
-#Advanced Installation
-##Debug Run
+# Advanced Installation
+## Debug Run
 
     java -Xmx1024M -agentlib:jdwp=transport=dt_socket,address=30303,server=y,suspend=n -jar org.apache.sling.launchpad-8.jar
 
-##Install With Options
+## Install With Options
 
     mvn clean install -PautoInstallBundle -Dsling.host=YOURHOST -Dsling.password=YOURPASSWORD -Dsling.port=YOURPORT
 
-#Authoring
+# Authoring
 Located at [http://localhost:8080/author.html](http://localhost:8080/author.html) (admin:admin)
 
-#Apache Configuration
+# Apache Configuration
     <VirtualHost *:80>
         ServerName slick.millr.org
         ProxyPreserveHost On
@@ -97,13 +97,13 @@ Located at [http://localhost:8080/author.html](http://localhost:8080/author.html
     RewriteRule ^/(.*)$ /content/slick/publish/$1 [PT,E,L]
     RewriteRule ^/content/slick/publish/(.*)$ /$1 [R=301,NC,L]
 
-#Dispatcher
+# Dispatcher
 1. In settings (author/settings.html) turn on dispatcher.
 2. Editing content or changing settings will automatically trigger a cache flush.
 3. If ui.apps has changed, you should flush the UI cache.
 4. You can find a sample dispatch.any file at dispatcher/dispatcher.any
 
-#Back-End Development
+# Back-End Development
 Applies to Java / HTL
 
 1. Open Eclipse
@@ -114,7 +114,7 @@ Applies to Java / HTL
 6. Start buidling great things.
 7. Change the password at `{YOUR-WORKSPACE}/.metadata/.plugins/org.eclipse.wst.server.core/servers.xml` if needed.
 
-#Front-End Development
+# Front-End Development
 Applies to SCSS / JS / IMG / TXT
 
 During autoInstallBundle, all JS and SCSS are concatenated, minified, and installed. However, if you want to work without running maven for every change, you can run gulp to push changes to Sling automatically.
