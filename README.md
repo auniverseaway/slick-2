@@ -10,7 +10,7 @@ It's built on top of Sling, HTL, Oak, OSGi and many other frameworks common to A
 # Demo
 [slick.millr.org](http://slick.millr.org) | [experiencemanaged.com](http://experiencemanaged.com)
 
-#Features
+# Features
 * Creating and editing posts, pages, and media
 * Post and Page Scheduling
 * WYSIWYG Editor
