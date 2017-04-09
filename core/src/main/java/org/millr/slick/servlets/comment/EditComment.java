@@ -62,39 +62,48 @@ public class EditComment extends SlingAllMethodsServlet {
     DispatcherService dispatcherService;
     
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException{
-        LOGGER.info(">>>> Entering doPost");
+        
+        // Detect a logged in user
+        String authorId = currentUserService.getUserId(request.getResourceResolver());
+        
+        String commentPath = request.getParameter("commentPath");
+        String author = request.getParameter("author");
+        String comment = request.getParameter("comment");
+        String captchaValue = request.getParameter("g-recaptcha-response");
+        
+        if(commentPath != null && !authorId.equals("anonymous")) {
+            editExistingComment(request, response, commentPath, comment, author, authorId);
+        } else {
+            createNewComment(request, response, comment, author, authorId, captchaValue);
+        }
+    }
+    
+    private void createNewComment(SlingHttpServletRequest request, SlingHttpServletResponse response, String comment,
+            String author, String authorId, String captchaValue) {
         
         // Get our parent resource
         Resource postResource = request.getResource();
         String postPath = request.getResource().getPath();
         
-        // Detect a logged in user
-        String authorId = currentUserService.getUserId(request.getResourceResolver());
-        LOGGER.info("AUTHOR ID: " + authorId);
-        
+        // Get our captcha response
         boolean captchaValid = false;
         if(!authorId.equals("anonymous")) {
             captchaValid = true;
         } else {
             String remoteIp = request.getRemoteAddr();
-            captchaValid = validateCaptcha(request.getParameter("g-recaptcha-response"), remoteIp);
+            captchaValid = validateCaptcha(captchaValue, remoteIp);
         }
-        
         
         int responseCode;
         String responseType;
         String responseMessage;
         JSONObject responseContent = new JSONObject();
         
-        String author = request.getParameter("author");
-        String comment = request.getParameter("comment");
-        
-        
-        
         // Replace basic HTML. Will break if HTML is malformed.
         comment = comment.replaceAll("<[^>]*>", "");
         
         if (captchaValid && StringUtils.isNotEmpty(comment)) {
+            
             // Build our comment
             Map<String,Object> commentProperties = new HashMap<String,Object>();
             
@@ -105,7 +114,10 @@ public class EditComment extends SlingAllMethodsServlet {
             commentProperties.put("comment", comment);
             commentProperties.put("author", author);
             if(!authorId.equals("anonymous")) {
+                // For every real author, we attach an authorId.
                 commentProperties.put("authorId", authorId);
+                
+                // For every real author, we set the status to approved.
                 commentProperties.put("status", "approved");
             } else {
                 commentProperties.put("status", commentSettingsService.getCommentsDefaultStatus());
@@ -135,8 +147,15 @@ public class EditComment extends SlingAllMethodsServlet {
             responseMessage = "error";
         }
         uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
+        
     }
-    
+
+    private void editExistingComment(SlingHttpServletRequest request, SlingHttpServletResponse response,
+        String commentPath, String comment, String author, String authorId) {
+        // TODO Auto-generated method stub
+        
+    }
+
     private Boolean validateCaptcha(String captcha, String remoteIp) {
         Boolean isValidCaptcha = false;
         
