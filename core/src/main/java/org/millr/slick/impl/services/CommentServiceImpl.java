@@ -41,33 +41,48 @@ import org.millr.slick.services.CommentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CommentServiceImpl.
+ * 
+ * This class allows the creation and listing of comments.
+ */
 @Service
 @Component
 public class CommentServiceImpl implements CommentService {
 
+    /** The logger. */
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-    
+
+    /** The Constant COMMENT_QUERY. */
     private static final String COMMENT_QUERY = 
-    		  "SELECT * FROM [%s] AS s "
+              "SELECT * FROM [%s] AS s "
             + "WHERE CONTAINS(s.status, '%s') "
             + "AND ISDESCENDANTNODE(s,'/content/slick/publish/%s') "
             + "ORDER BY [%s] DESC";
-    
+
+    /** The Constant ITEM_PUBLIC_COMMENT_QUERY. */
     private static final String ITEM_PUBLIC_COMMENT_QUERY = 
             "SELECT * FROM [%s] AS s "
           + "WHERE CONTAINS(s.status, '%s') "
           + "AND ISDESCENDANTNODE(s,'%s') "
           + "ORDER BY [%s]";
     
+    /** The resource factory. */
     @Reference 
     private ResourceResolverFactory resourceFactory;
-    
+
+    /** The comments resource. */
     Resource commentsResource;
-    
+
+    /** The comments count. */
     private static Long commentsCount;
     
     /**
      * Get comments for a specific item.
+     *
+     * @param item the item
+     * @return the comments
      */
     @Override
     public Iterator<Resource> getComments(Resource item) {
@@ -87,6 +102,10 @@ public class CommentServiceImpl implements CommentService {
 
     /**
      * Create a comment.
+     *
+     * @param item the item
+     * @param commentProperties the comment properties
+     * @return the resource
      */
     @Override
     public Resource createComment(Resource item, Map<String,Object> commentProperties) {
@@ -105,6 +124,10 @@ public class CommentServiceImpl implements CommentService {
         return commentResource;
     }
 
+    /**
+     * Get a resource resolver using the commentService System User.
+     * @return resourceResolver
+     */
     public ResourceResolver getResourceResolver() {
         ResourceResolver resolver = null;
         Map<String,Object> paramMap = new HashMap<String,Object>();
@@ -118,6 +141,13 @@ public class CommentServiceImpl implements CommentService {
         return resolver;
     }
 
+    /**
+     * Get our item to store our comment.
+     *
+     * @param resolver the resolver
+     * @param item the item
+     * @return the item resource
+     */
     private Resource getItemResource(ResourceResolver resolver, Resource item) {
         
         String itemName = item.getName();
@@ -146,7 +176,7 @@ public class CommentServiceImpl implements CommentService {
                 LOGGER.info("There was an error creating the slick type for the item." + e.getMessage());
             }
         }
-        // If we have an item, use it to store our comment.
+        // If we have an item, use it to store our comment. Otherwise, create it.
         itemResource = typeResource.getChild(itemName);
         if(itemResource == null) {
             try {
@@ -164,7 +194,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     /**
-     * Get all comments
+     * Get all comments.
+     *
+     * @param session the session
+     * @param offset the offset
+     * @param limit the limit
+     * @param status the status
+     * @return the comments
      */
 	@Override
 	public NodeIterator getComments(Session session, Long offset, Long limit, String status) {
@@ -213,6 +249,11 @@ public class CommentServiceImpl implements CommentService {
 	
 	/**
 	 * Count all the comments for a given pagination size. Used for pagination.
+	 *
+	 * @param session the session
+	 * @param status the status
+	 * @param pageSize the page size
+	 * @return the total comments
 	 */
 	@Override
 	public long getTotalComments(Session session, String status, Long pageSize) {
@@ -223,6 +264,10 @@ public class CommentServiceImpl implements CommentService {
 	
 	/**
 	 * Get the public comments for the item requested.
+	 *
+	 * @param item the item
+	 * @param status the status
+	 * @return the item public comments
 	 */
 	@Override
 	public NodeIterator getItemPublicComments(Resource item, String status) {
@@ -251,12 +296,22 @@ public class CommentServiceImpl implements CommentService {
 
 	/**
 	 * Get the number of all comments.
+	 *
+	 * @param session the session
+	 * @param status the status
+	 * @return the number of comments
 	 */
 	@Override
 	public Long getNumberOfComments(Session session, String status) {
 	    return getComments(session, status).getSize();
 	}
 	
+	/**
+	 * Sets the mixin.
+	 *
+	 * @param resource the resource
+	 * @param mixinName the mixin name
+	 */
 	private void setMixin(Resource resource, String mixinName) {
         try {
             Node node = resource.adaptTo(Node.class);

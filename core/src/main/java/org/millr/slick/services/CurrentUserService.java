@@ -15,7 +15,6 @@
  */
 package org.millr.slick.services;
 
-import org.apache.jackrabbit.api.security.user.User;
 import org.apache.sling.api.resource.ResourceResolver;
 
 public interface CurrentUserService {
