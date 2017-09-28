@@ -1,7 +1,7 @@
 package org.millr.slick.services;
 
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.commons.json.JSONObject;
+import javax.json.JsonObject;
 
 public interface UiMessagingService {
     
@@ -9,6 +9,6 @@ public interface UiMessagingService {
             int responseCode, 
             final String responseType, 
             final String responseMessage, 
-            final JSONObject content);
+            final JsonObject content);
     
 }

@@ -27,7 +27,11 @@ import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONObject;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import org.millr.slick.services.CurrentUserService;
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.SettingsService;
@@ -119,20 +123,18 @@ public class EditSettingsServlet extends SlingAllMethodsServlet {
     }
     
     protected void sendResponse(final SlingHttpServletResponse response, int responseCode, final String responseType, final String responseMessage) {
-        
-        JSONObject responseJSON = new JSONObject();
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
         try {
-            responseJSON.put("responseCode", responseCode);
-            responseJSON.put("responseType", responseType);
-            responseJSON.put("responseMessage", responseMessage);
+            jsonBuilder.add("responseCode", responseCode);
+            jsonBuilder.add("responseType", responseType);
+            jsonBuilder.add("responseMessage", responseMessage);
         } catch(Exception e) {
             e.printStackTrace();
         }
-        
         response.setCharacterEncoding(CharEncoding.UTF_8);
         response.setContentType("application/json");
         response.setStatus(responseCode);
-        
+        JsonObject responseJSON = jsonBuilder.build();
         try {
             response.getWriter().write(responseJSON.toString());
         } catch (IOException e) {

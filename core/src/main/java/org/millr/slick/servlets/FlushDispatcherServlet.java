@@ -25,8 +25,8 @@ import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONException;
-import org.apache.sling.commons.json.JSONObject;
+import javax.json.JsonException;
+import javax.json.JsonObject;
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.utils.Externalizer;
 import org.slf4j.Logger;
@@ -59,13 +59,13 @@ public class FlushDispatcherServlet extends SlingAllMethodsServlet {
         String flushType = request.getParameter("flushType");
         
         // Make our flush response
-        JSONObject flushResponse = dispatcherService.flush(currentDomain, flushType);
+        JsonObject flushResponse = dispatcherService.flush(currentDomain, flushType);
         
         // Grab our HTTP status
         int status;
         try {
             status = flushResponse.getInt("responseCode");
-        } catch (JSONException e) {
+        } catch (JsonException e) {
             LOGGER.debug("Could not get response code" + e.getMessage());
             status = 500;
         }
@@ -74,7 +74,6 @@ public class FlushDispatcherServlet extends SlingAllMethodsServlet {
         response.setContentType("application/json");
         response.setStatus(status);
         response.getWriter().write(flushResponse.toString());
-        
     }
     
 }

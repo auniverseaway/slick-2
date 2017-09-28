@@ -25,7 +25,11 @@ import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONObject;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import org.millr.slick.SlickConstants;
 import org.millr.slick.services.UploadService;
 import org.slf4j.Logger;
@@ -66,14 +70,14 @@ public class EditMediaServlet extends SlingAllMethodsServlet {
         LOGGER.debug(">>>> Entering Media doPost");
         
         String mediaUrl = uploadService.uploadFile(request, SlickConstants.MEDIA_PATH);
-        
-        JSONObject content = new JSONObject();
+        JsonObjectBuilder contentBuilder = Json.createObjectBuilder();
+        //JSONObject content = new JSONObject();
         try {
-            content.put("mediaUrl", mediaUrl);
+            contentBuilder.add("mediaUrl", mediaUrl);
         } catch(Exception e) {
             e.printStackTrace();
         }     
-        
+        JsonObject content = contentBuilder.build();
         sendResponse(response, SlingHttpServletResponse.SC_OK, "success", "Uploading media.", content);
         
     }
@@ -91,30 +95,27 @@ public class EditMediaServlet extends SlingAllMethodsServlet {
      * @param responseMessage the response message
      * @param content the response content
      */
-    protected void sendResponse(final SlingHttpServletResponse response, int responseCode, final String responseType, final String responseMessage, final JSONObject content) {
-        
-        JSONObject responseJSON = new JSONObject();
+    protected void sendResponse(final SlingHttpServletResponse response, int responseCode, final String responseType, final String responseMessage, final JsonObject content) {
+        JsonObjectBuilder responseBuilder = Json.createObjectBuilder();
         try {
-            responseJSON.put("responseCode", responseCode);
-            responseJSON.put("responseType", responseType);
-            responseJSON.put("responseMessage", responseMessage);
+            responseBuilder.add("responseCode", responseCode);
+            responseBuilder.add("responseType", responseType);
+            responseBuilder.add("responseMessage", responseMessage);
             
             if(content != null) {
-                responseJSON.put("content", content);
-            }            
-            
+                responseBuilder.add("content", content);
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
-        
+        JsonObject responseJson = responseBuilder.build();
         response.setCharacterEncoding(CharEncoding.UTF_8);
         response.setContentType("application/json");
         response.setStatus(responseCode);
         
         try {
-            response.getWriter().write(responseJSON.toString());
+            response.getWriter().write(responseJson.toString());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

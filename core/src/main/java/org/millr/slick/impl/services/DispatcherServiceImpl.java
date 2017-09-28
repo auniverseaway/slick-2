@@ -27,7 +27,11 @@ import org.apache.felix.scr.annotations.Properties;
 import org.apache.felix.scr.annotations.Property;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
-import org.apache.sling.commons.json.JSONObject;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.SettingsService;
 import org.osgi.framework.Constants;
@@ -59,9 +63,9 @@ public class DispatcherServiceImpl implements DispatcherService {
     private SettingsService settingsService;
     
     @Override
-    public JSONObject flush(String domain, String flushType) {
-        JSONObject response = new JSONObject();
-        
+    public JsonObject flush(String domain, String flushType) {
+        JsonObject response = Json.createObjectBuilder().build();
+
         if (canFlush()) {
             if (Objects.equals(flushType, new String("flushAll"))) {
                 LOGGER.info("FLUSH TYPE " + flushType);
@@ -76,9 +80,7 @@ public class DispatcherServiceImpl implements DispatcherService {
         } else {
             response = buildResponse(304, "error", "No dispatcher to flush");
         }
-        
         return response;
-        
     }
     
     @Override
@@ -87,35 +89,37 @@ public class DispatcherServiceImpl implements DispatcherService {
     }
 
     @Override
-    public JSONObject flushAll(String domain) {
-        JSONObject response = new JSONObject();
-        JSONObject uiResponse = doFlush(domain, "/etc");
-        JSONObject contentResponse = doFlush(domain, "/content");
+    public JsonObject flushAll(String domain) {
+        JsonObjectBuilder responseBuilder = Json.createObjectBuilder();
+
+        JsonObject uiResponse = doFlush(domain, "/etc");
+        JsonObject contentResponse = doFlush(domain, "/content");
         LOGGER.info(uiResponse.toString());
         try {
-            response.put("responseCode", 200);
-            response.put("responseType", "success");
-            response.put("responseMessage", "All cache successfully flushed.");
-            response.put("uiResponse", uiResponse);
-            response.put("contentResponse", contentResponse);
+            responseBuilder.add("responseCode", 200);
+            responseBuilder.add("responseType", "success");
+            responseBuilder.add("responseMessage", "All cache successfully flushed.");
+            responseBuilder.add("uiResponse", uiResponse);
+            responseBuilder.add("contentResponse", contentResponse);
         } catch(Exception e) {
             e.printStackTrace();
         }
+        JsonObject response = responseBuilder.build();
         return response;
     }
 
     @Override
-    public JSONObject flushUi(String domain) {
+    public JsonObject flushUi(String domain) {
         return doFlush(domain, "/etc");
     }
 
     @Override
-    public JSONObject flushContent(String domain) {
+    public JsonObject flushContent(String domain) {
         return doFlush(domain, "/content");
     }
     
     @Override
-    public JSONObject flushContent(String domain, String path) {
+    public JsonObject flushContent(String domain, String path) {
     	if(canFlush()) {
     		return doFlush(domain, path);
     	} else {
@@ -130,7 +134,7 @@ public class DispatcherServiceImpl implements DispatcherService {
      * @param path the path
      * @return the JSON object
      */
-    private JSONObject doFlush(String domain, String path) {
+    private JsonObject doFlush(String domain, String path) {
 
         HttpURLConnection urlConn = null;
         InputStream inStream = null;
@@ -174,9 +178,7 @@ public class DispatcherServiceImpl implements DispatcherService {
                 urlConn.disconnect();
             }
         }
-        
         return buildResponse(responseCode, responseType, responseMessage);
-
     }
     
     /**
@@ -187,15 +189,16 @@ public class DispatcherServiceImpl implements DispatcherService {
      * @param responseType the response type
      * @return the JSON object
      */
-    private JSONObject buildResponse(int responseCode, String responseType, String responseMessage) {
-        JSONObject json = new JSONObject();
+    private JsonObject buildResponse(int responseCode, String responseType, String responseMessage) {
+        JsonObjectBuilder jsonBuilder = Json.createObjectBuilder();
         try {
-            json.put("responseCode", responseCode);
-            json.put("responseType", responseType);
-            json.put("responseMessage", responseMessage);
+            jsonBuilder.add("responseCode", responseCode);
+            jsonBuilder.add("responseType", responseType);
+            jsonBuilder.add("responseMessage", responseMessage);
         } catch(Exception e) {
             e.printStackTrace();
         }
+        JsonObject json = jsonBuilder.build();
         return json;
     }
 

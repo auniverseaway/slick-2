@@ -11,7 +11,10 @@ import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONObject;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import org.millr.slick.SlickConstants;
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.UiMessagingService;
@@ -32,16 +35,18 @@ public class DeleteItemServlet extends SlingAllMethodsServlet {
     
     @Reference
     private UiMessagingService uiMessagingService;
-    
+
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-        
+
         Resource resource;
         int responseCode;
         String responseType;
         String responseMessage;
-        JSONObject responseContent = new JSONObject();
-        
+
+        JsonObjectBuilder responseContentBuilder = Json.createObjectBuilder();
+
+        //JSONObject responseContent = new JSONObject();
         try {
             ResourceResolver resourceResolver = request.getResourceResolver();
             final String resourceString = request.getParameter("resource");
@@ -55,9 +60,8 @@ public class DeleteItemServlet extends SlingAllMethodsServlet {
             responseType = "success";
             responseMessage = "success";
             
-            responseContent.put("name", resource.getName());
-            responseContent.put("path", resource.getPath());
-            
+            responseContentBuilder.add("name", resource.getName());
+            responseContentBuilder.add("path", resource.getPath());
         } catch(Exception e) {
             
             responseCode = 500;
@@ -65,7 +69,8 @@ public class DeleteItemServlet extends SlingAllMethodsServlet {
             responseMessage = "error - Could not delete item.";
             
             e.printStackTrace();
-        }        
+        }
+        JsonObject responseContent = responseContentBuilder.build();
         uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
     }
     

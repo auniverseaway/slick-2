@@ -4,27 +4,28 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.jcr.Node;
-import javax.jcr.nodetype.NodeType;
 import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.JcrConstants;
-import org.apache.jackrabbit.api.security.user.User;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONObject;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import javax.json.JsonReader;
+
 import org.apache.tika.io.IOUtils;
 import org.millr.slick.services.CommentService;
 import org.millr.slick.services.CurrentUserService;
@@ -84,7 +85,9 @@ public class EditComment extends SlingAllMethodsServlet {
         int responseCode;
         String responseType;
         String responseMessage;
-        JSONObject responseContent = new JSONObject();
+
+        JsonObjectBuilder responseContentBuilder = Json.createObjectBuilder();
+        // JSONObject responseContent = new JSONObject();
         
         String author = request.getParameter("author");
         String comment = request.getParameter("comment");
@@ -121,11 +124,11 @@ public class EditComment extends SlingAllMethodsServlet {
             responseType = "success";
             responseMessage = "success";
             try {
-                responseContent.put("name", commentResource.getName());
-                responseContent.put("path", commentResource.getPath());
-                responseContent.put("comment", commentProperties.get("comment"));
-                responseContent.put("author", commentProperties.get("author"));
-                responseContent.put("status", commentProperties.get("status"));
+                responseContentBuilder.add("name", commentResource.getName());
+                responseContentBuilder.add("path", commentResource.getPath());
+                responseContentBuilder.add("comment", commentProperties.get("comment").toString());
+                responseContentBuilder.add("author", commentProperties.get("author").toString());
+                responseContentBuilder.add("status", commentProperties.get("status").toString());
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -134,6 +137,7 @@ public class EditComment extends SlingAllMethodsServlet {
             responseType = "error";
             responseMessage = "error";
         }
+        JsonObject responseContent = responseContentBuilder.build();
         uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
     }
     
@@ -161,8 +165,10 @@ public class EditComment extends SlingAllMethodsServlet {
             LOGGER.info("*** RESPONSE MESSAGE *** ");
             String responseString = IOUtils.toString(response, charset);
             LOGGER.info(responseString);
-            JSONObject responseObject = new JSONObject(responseString);
-            isValidCaptcha = (Boolean) responseObject.get("success");
+            JsonReader jsonReader = Json.createReader(new StringReader(responseString));
+            
+            JsonObject responseObject = jsonReader.readObject();
+            isValidCaptcha = responseObject.getBoolean("success");
             IOUtils.closeQuietly(response);
         }
         catch (Exception e)

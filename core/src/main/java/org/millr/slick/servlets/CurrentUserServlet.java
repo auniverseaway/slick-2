@@ -12,8 +12,11 @@ import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONException;
-import org.apache.sling.commons.json.JSONObject;
+import javax.json.Json;
+import javax.json.JsonException;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import org.millr.slick.services.CurrentUserService;
 import org.millr.slick.services.UiMessagingService;
 import org.slf4j.Logger;
@@ -34,12 +37,11 @@ public class CurrentUserServlet extends SlingAllMethodsServlet {
     
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) {
-        
         int responseCode;
         String responseType;
         String responseMessage;
-        JSONObject responseContent = new JSONObject();
-        
+        JsonObjectBuilder responseBuilder = Json.createObjectBuilder();
+
         ResourceResolver resourceResolver = request.getResourceResolver();
         
         String currentUserId = currentUserService.getUserId(resourceResolver);
@@ -49,14 +51,14 @@ public class CurrentUserServlet extends SlingAllMethodsServlet {
             responseCode = 200;
             responseType = "success";
             responseMessage = "success";
-            responseContent.put("userId", currentUserId);
-            responseContent.put("displayName", displayName);
-        } catch (JSONException e) {
+            responseBuilder.add("userId", currentUserId);
+            responseBuilder.add("displayName", displayName);
+        } catch (JsonException e) {
             responseCode = 500;
             responseType = "error";
             responseMessage = "error";
-            e.printStackTrace();
         }
+        JsonObject responseContent = responseBuilder.build();
         uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
     }
 }

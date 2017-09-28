@@ -193,10 +193,10 @@ public class Page
     
     public Iterator<Page> getChildren()
     {
-        Iterator<Resource> childs = resource.getChildren().iterator();
-        return ResourceUtil.adaptTo(childs,Page.class);
+        Iterator<Resource> children = resource.getChildren().iterator();
+        return ResourceUtil.adaptTo(children, Page.class);
     }
-    
+
     public boolean getEnableComments() {
         // Site-level comment enablement;
         boolean commentSettings = settingsService.getEnableComments();

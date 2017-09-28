@@ -11,14 +11,16 @@ import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONObject;
+
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import org.millr.slick.services.CurrentUserService;
 import org.millr.slick.services.DispatcherService;
 import org.millr.slick.services.UiMessagingService;
 import org.millr.slick.services.settings.CommentService;
 import org.millr.slick.utils.Externalizer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @SlingServlet(
         resourceTypes = "sling/servlet/default",
@@ -28,8 +30,6 @@ import org.slf4j.LoggerFactory;
     )
 public class EditCommentsServlet extends SlingAllMethodsServlet {
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(EditCommentsServlet.class);
-
     private static final long serialVersionUID = 7084482438544318666L;
     
     @Reference
@@ -53,13 +53,11 @@ public class EditCommentsServlet extends SlingAllMethodsServlet {
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response)
             throws ServletException, IOException {
-        
-        LOGGER.info("IN DO POST");
-        
+
         int responseCode;
         String responseType;
         String responseMessage;
-        JSONObject responseContent = new JSONObject();
+        JsonObjectBuilder responseContentBuilder = Json.createObjectBuilder();
         
         final boolean allowWrite = userService.getAuthorable(request.getResourceResolver());
         
@@ -92,6 +90,7 @@ public class EditCommentsServlet extends SlingAllMethodsServlet {
             responseType = "error";
             responseMessage = "error";
         }
+        JsonObject responseContent = responseContentBuilder.build();
         uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
     }
     

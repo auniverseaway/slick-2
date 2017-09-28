@@ -3,7 +3,6 @@ package org.millr.slick.servlets.comment;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.TimeZone;
 
 import javax.jcr.Node;
@@ -17,15 +16,15 @@ import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
-import org.apache.sling.commons.json.JSONArray;
-import org.apache.sling.commons.json.JSONException;
-import org.apache.sling.commons.json.JSONObject;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonException;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+
 import org.millr.slick.services.CommentService;
 import org.millr.slick.services.UiMessagingService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @SlingServlet(
         resourceTypes = "sling/servlet/default",
@@ -36,8 +35,6 @@ import org.slf4j.LoggerFactory;
 public class ListCommentsServlet extends SlingAllMethodsServlet {
 
     private static final long serialVersionUID = -5513977995823147919L;
-    
-    private static final Logger LOGGER = LoggerFactory.getLogger(ListCommentsServlet.class);
     
     @Reference
     private UiMessagingService uiMessagingService;
@@ -54,14 +51,14 @@ public class ListCommentsServlet extends SlingAllMethodsServlet {
         int responseCode;
         String responseType;
         String responseMessage;
-        JSONObject responseContent = new JSONObject();
+        JsonObjectBuilder responseContentBuilder = Json.createObjectBuilder();
         
         responseCode = 200;
         responseType = "success";
         responseMessage = "success";
         
         NodeIterator comments = commentService.getItemPublicComments(postResource, "approved");
-        JSONArray commentsArray = new JSONArray();
+        JsonArrayBuilder commentsArrayBuilder = Json.createArrayBuilder();
         int commentsCount = 0;
         while (comments.hasNext()){
             commentsCount++;
@@ -77,28 +74,27 @@ public class ListCommentsServlet extends SlingAllMethodsServlet {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-            
-            JSONObject commentContent = new JSONObject();
+            JsonObjectBuilder commentBuilder = Json.createObjectBuilder();
             try {
-                commentContent.put("name", comment.getName());
-                commentContent.put("author", comment.getProperty("author").getString());
-                commentContent.put("comment", comment.getProperty("comment").getString());
-                commentContent.put("created", created);
-                commentsArray.put(commentContent);
+                commentBuilder.add("name", comment.getName());
+                commentBuilder.add("author", comment.getProperty("author").getString());
+                commentBuilder.add("comment", comment.getProperty("comment").getString());
+                commentBuilder.add("created", created);
+                JsonObject commentContent = commentBuilder.build();
+                commentsArrayBuilder.add(commentContent);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         
         try {
-            responseContent.put("count", commentsCount);
-            responseContent.put("comments", commentsArray);
-        } catch (JSONException e) {
+            responseContentBuilder.add("count", commentsCount);
+            responseContentBuilder.add("comments", commentsArrayBuilder.build());
+        } catch (JsonException e) {
             e.printStackTrace();
         }
-        
-        
-        uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
+
+        uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContentBuilder.build());
         
     }
     
