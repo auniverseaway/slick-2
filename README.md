@@ -125,7 +125,7 @@ During autoInstallBundle, all JS and SCSS are concatenated, minified, and instal
 4. Start buidling great things in `ui.apps/src/main/resources/jcr_root/etc/slick/designs/...`
 5. You can also specify arguments when running gulp. Example: `$ gulp --slingHost='slick.millr.org' --slingPort=8181 --slingPass=MySuperPassword --slingUser=cmillar`
 
-# international characters suppurt (UTF8 readyness)
+# international characters support (UTF8 readiness)
 blogposts, comments and commentor names can have international characters
 
 
