@@ -82,7 +82,10 @@ public class EditItemServlet extends SlingAllMethodsServlet {
 	
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-		LOGGER.debug(">>>> Entering doPost");
+	// response.setContentType("text/html; charset=UTF-8");
+	// response.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding("UTF-8");
+	LOGGER.debug(">>>> Entering doPost");
 		
 		resolver = request.getResourceResolver();
 		session = resolver.adaptTo(Session.class);
@@ -91,7 +94,7 @@ public class EditItemServlet extends SlingAllMethodsServlet {
 		final String name = request.getParameter("nodeName");
 		final String content = request.getParameter("content");
 		final String description = request.getParameter("description");
-		final String[] tags = request.getParameterValues("tags");
+		final String[] tags =  request.getParameterValues("tags");
 		final String slickType = request.getParameter("slickType");
 		final String resourceType = slickType.substring(0, slickType.length()-1);
 		final String publishString = request.getParameter("publishDate");
