@@ -14,6 +14,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.CharEncoding;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.JcrConstants;
@@ -33,6 +34,7 @@ import org.millr.slick.services.UiMessagingService;
 import org.millr.slick.utils.Externalizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.CharEncoding;
 
 @SlingServlet(
         resourceTypes = "sling/servlet/default",
@@ -62,9 +64,9 @@ public class EditComment extends SlingAllMethodsServlet {
     DispatcherService dispatcherService;
     
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException{
-		request.setCharacterEncoding("UTF-8");
+    	request.setCharacterEncoding(CharEncoding.UTF_8);
     		// response.setContentType("text/html; charset=UTF-8");
-    		response.setCharacterEncoding("UTF-8");
+    		response.setCharacterEncoding(CharEncoding.UTF_8);
     		LOGGER.info(">>>> Entering doPost");
         
         // Get our parent resource
@@ -90,7 +92,7 @@ public class EditComment extends SlingAllMethodsServlet {
         String responseMessage;
         JSONObject responseContent = new JSONObject();
         
-        String author  = request.getParameter("author");
+        String author = request.getParameter("author");
         String comment = request.getParameter("comment");
         
         

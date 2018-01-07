@@ -51,6 +51,7 @@ import org.millr.slick.services.UploadService;
 import org.millr.slick.utils.Externalizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.CharEncoding;
 
 @SlingServlet(
 	    resourceTypes = "sling/servlet/default",
@@ -84,7 +85,7 @@ public class EditItemServlet extends SlingAllMethodsServlet {
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
 	// response.setContentType("text/html; charset=UTF-8");
 	// response.setCharacterEncoding("UTF-8");
-	request.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding(CharEncoding.UTF_8);
 	LOGGER.debug(">>>> Entering doPost");
 		
 		resolver = request.getResourceResolver();
@@ -94,7 +95,7 @@ public class EditItemServlet extends SlingAllMethodsServlet {
 		final String name = request.getParameter("nodeName");
 		final String content = request.getParameter("content");
 		final String description = request.getParameter("description");
-		final String[] tags =  request.getParameterValues("tags");
+		final String[] tags = request.getParameterValues("tags");
 		final String slickType = request.getParameter("slickType");
 		final String resourceType = slickType.substring(0, slickType.length()-1);
 		final String publishString = request.getParameter("publishDate");
