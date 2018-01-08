@@ -33,6 +33,7 @@ import org.millr.slick.services.UiMessagingService;
 import org.millr.slick.utils.Externalizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.CharEncoding;
 
 @SlingServlet(
         resourceTypes = "sling/servlet/default",
@@ -62,7 +63,10 @@ public class EditComment extends SlingAllMethodsServlet {
     DispatcherService dispatcherService;
     
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException{
-        LOGGER.info(">>>> Entering doPost");
+    	request.setCharacterEncoding(CharEncoding.UTF_8);
+    		// response.setContentType("text/html; charset=UTF-8");
+    		response.setCharacterEncoding(CharEncoding.UTF_8);
+    		LOGGER.info(">>>> Entering doPost");
         
         // Get our parent resource
         Resource postResource = request.getResource();
@@ -77,6 +81,7 @@ public class EditComment extends SlingAllMethodsServlet {
             captchaValid = true;
         } else {
             String remoteIp = request.getRemoteAddr();
+            LOGGER.info(">>EditComment validateCaptcha " + remoteIp);
             captchaValid = validateCaptcha(request.getParameter("g-recaptcha-response"), remoteIp);
         }
         

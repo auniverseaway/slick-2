@@ -51,6 +51,7 @@ import org.millr.slick.services.UploadService;
 import org.millr.slick.utils.Externalizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.CharEncoding;
 
 @SlingServlet(
 	    resourceTypes = "sling/servlet/default",
@@ -82,7 +83,10 @@ public class EditItemServlet extends SlingAllMethodsServlet {
 	
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
-		LOGGER.debug(">>>> Entering doPost");
+	// response.setContentType("text/html; charset=UTF-8");
+	// response.setCharacterEncoding("UTF-8");
+	request.setCharacterEncoding(CharEncoding.UTF_8);
+	LOGGER.debug(">>>> Entering doPost");
 		
 		resolver = request.getResourceResolver();
 		session = resolver.adaptTo(Session.class);

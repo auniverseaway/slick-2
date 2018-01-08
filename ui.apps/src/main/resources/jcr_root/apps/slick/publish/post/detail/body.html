@@ -61,7 +61,8 @@
                 </div>
                 <div class="comments-section" id="comments-section" data-sly-test="${view.page.enableComments}">
                     <div class="comments-list" id="comments-list"></div>
-                    <form class="comment-form" id="comment-form" action="${view.external.resourcePath}.edit.comment.json" method="POST">
+                    <form class="comment-form" id="comment-form" action="${view.external.resourcePath}.edit.comment.json" method="POST" enctype="multipart/form-data; UTF-8">
+            <input type="hidden" name="_charset_" value="UTF-8"/>
                         <input type="text" name="author" class="commentor-name" placeholder="name (optional)" />
                         <textarea name="comment" class="commentor-comment" placeholder="comment (plaintext)"></textarea>
                         <div class="Grid Fit-Small">

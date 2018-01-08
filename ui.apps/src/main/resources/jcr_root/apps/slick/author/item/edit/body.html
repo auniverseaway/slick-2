@@ -4,6 +4,7 @@
         <sly data-sly-include="subNavigation.html"></sly>
         <div class="content">
             <form method="POST" action="item.edit.html" enctype="multipart/form-data">
+            <input type="hidden" name="_charset_" value="UTF-8"/>
                 <section id="title-section">
                     <input name="title" type="text" class="item-title" id="title" tabindex="1" placeholder="enter title" value="${editBlog.post.title}">
                     <div class="seo accent-background-light">

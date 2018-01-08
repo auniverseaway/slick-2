@@ -22,6 +22,7 @@ It's built on top of Sling, HTL, Oak, OSGi and many other frameworks common to A
 * Pagination
 * Basic Localization
 * Comment support with ReCAPTCHA
+* International Language Support (UTF-8 Readiness)
 
 # Requirements
 * [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
