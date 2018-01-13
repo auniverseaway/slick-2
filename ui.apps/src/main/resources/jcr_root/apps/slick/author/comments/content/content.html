@@ -22,7 +22,9 @@
         </div>
     </section>
     <section class="comment-detail">
-        <form class="Grid Fit-Medium" method="POST" action="${comment.externalPath}">
+        <form class="Grid Fit-Medium" method="POST" action="${comment.externalPath}" enctype="multipart/form-data; UTF-8">
+        <input type="hidden" name="_charset_" value="UTF-8"/>
+
             <input type="hidden" name=":redirect" value="/author/comments.html"/>
             <div class="Cell Medium-50 comment-area">
                 <textarea name="comment">${comment.comment}</textarea>
