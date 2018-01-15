@@ -2,30 +2,33 @@ package org.millr.slick.servlets.comment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+// import java.net.HttpURLConnection;
+import java.net.URLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.jcr.Node;
-import javax.jcr.nodetype.NodeType;
+// import javax.jcr.Node;
+// import javax.jcr.nodetype.NodeType;
 import javax.servlet.ServletException;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.jackrabbit.JcrConstants;
-import org.apache.jackrabbit.api.security.user.User;
+// import org.apache.jackrabbit.api.security.user.User;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.api.resource.PersistenceException;
+// import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
+// import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.commons.json.JSONObject;
-import org.apache.tika.io.IOUtils;
+// import org.apache.tika.io.IOUtils;
 import org.millr.slick.services.CommentService;
 import org.millr.slick.services.CurrentUserService;
 import org.millr.slick.services.DispatcherService;
@@ -142,33 +145,54 @@ public class EditComment extends SlingAllMethodsServlet {
         uiMessagingService.sendResponse(response, responseCode, responseType, responseMessage, responseContent);
     }
     
-    private Boolean validateCaptcha(String captcha, String remoteIp) {
+    private Boolean validateCaptcha(String captcha, String remoteIp) { // remoteIP is optional, not yet implemented
         Boolean isValidCaptcha = false;
         
         // Setup captcha request values
-        HttpURLConnection urlConn = null;
-        BufferedReader reader = null;
-        String charset = "UTF-8";
+        String charset = CharEncoding.UTF_8;
         String secret = commentSettingsService.getCommentsReCapchtaSecretKey();
         String query = String.format("secret=%s&response=%s", secret, captcha);
+        // check in logfile that captcha really is different in each call (needs caching bypass)
+        LOGGER.info("validateCaptcha: query " + query );
 
         try {
-            final URL url = new URL("https://www.google.com/recaptcha/api/siteverify");
-            urlConn = (HttpURLConnection) url.openConnection();
-            urlConn.setRequestMethod("POST");
-            urlConn.setDoOutput(true);
-            urlConn.setReadTimeout(15*1000);
-            
-            try (OutputStream output = urlConn.getOutputStream()) {
-                output.write(query.getBytes(charset));
+        	    URL url = new URL("https://www.google.com/recaptcha/api/siteverify");
+            URLConnection connection = url.openConnection();
+            connection.setDoOutput(true); // Triggers POST
+            connection.setReadTimeout(15*1000);
+            connection.setRequestProperty("Accept-Charset", charset);
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=" + charset);
+    	        OutputStreamWriter out = new OutputStreamWriter(
+                                             connection.getOutputStream());
+            out.write(query);
+            out.close();
+            BufferedReader in = new BufferedReader(
+                                        new InputStreamReader(
+                                        connection.getInputStream()));
+ // simple json response will look like this in case of *error*:
+ // {
+ //           "success": false,
+ //           "error-codes": [
+ //             "missing-input-response",
+ //             "missing-input-secret"
+ //           ]
+ // } // hence simple regex processing is sufficient
+            String decodedString;
+            Pattern p_success = Pattern.compile("\"success\": true");
+            Pattern p_error   = Pattern.compile("missing");
+            Matcher m_success; 
+            Matcher m_error; 
+
+            while ((decodedString = in.readLine()) != null) {
+            	  m_success = p_success.matcher(decodedString);
+            	  m_error   = p_error.matcher  (decodedString);
+            	  if ( m_success.find() ) { isValidCaptcha = true; }
+            	  if ( m_error.find() ) {
+                LOGGER.info("reCaptcha notValid response: " + decodedString );
+                }
             }
-            InputStream response = urlConn.getInputStream();
-            LOGGER.info("*** RESPONSE MESSAGE *** ");
-            String responseString = IOUtils.toString(response, charset);
-            LOGGER.info(responseString);
-            JSONObject responseObject = new JSONObject(responseString);
-            isValidCaptcha = (Boolean) responseObject.get("success");
-            IOUtils.closeQuietly(response);
+            in.close();
+            LOGGER.info("reCaptcha isValid executed - no exception!");
         }
         catch (Exception e)
         {
@@ -178,17 +202,6 @@ public class EditComment extends SlingAllMethodsServlet {
         finally
         {
           LOGGER.info("*** FINALLY *** ");
-          if (reader != null)
-          {
-            try
-            {
-              reader.close();
-            }
-            catch (IOException ioe)
-            {
-              ioe.printStackTrace();
-            }
-          }
         }
         return isValidCaptcha;
     }
